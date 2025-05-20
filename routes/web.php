@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AccueilController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/accueil', [AccueilController::class, 'index'])->name('route_accueil');
