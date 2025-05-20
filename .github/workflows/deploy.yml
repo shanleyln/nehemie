@@ -1,4 +1,4 @@
-name: Deploy to OVH via FTP
+name: Déploiement FTP - Néhémie
 
 on:
   push:
@@ -10,20 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout du code
+        uses: actions/checkout@v3
 
-    - name: Install dependencies
-      run: |
-        composer install --no-dev --optimize-autoloader
-        php artisan config:cache
-        php artisan route:cache
-        php artisan view:cache
-
-    - name: Deploy via FTP
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /www/ 
+      - name: Déploiement FTP (modifications uniquement)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /www/
+          exclude: |
+            **/.git*
+            **/.github/*
+            **/node_modules/*
+            **/vendor/*
+            **/tests/*
+            **/.env
+          log-level: minimal
+          protocol: ftps
