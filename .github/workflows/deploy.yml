@@ -1,31 +1,15 @@
-name: Déploiement FTP - Néhémie
-
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  ftp-deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout du code
-        uses: actions/checkout@v3
-
-      - name: Déploiement FTP (modifications uniquement)
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /www/
-          exclude: |
-            **/.git*
-            **/.github/*
-            **/node_modules/*
-            **/vendor/*
-            **/tests/*
-            **/.env
-          log-level: minimal
-          protocol: ftps
+- name: Déploiement FTP (modifications uniquement)
+  uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+  with:
+    server: ${{ secrets.FTP_SERVER }}
+    username: ${{ secrets.FTP_USERNAME }}
+    password: ${{ secrets.FTP_PASSWORD }}
+    server-dir: /www/
+    exclude: |
+      **/.git*
+      **/.github/*
+      **/node_modules/*
+      **/vendor/*
+      **/.env
+    log-level: minimal
+    protocol: ftp   
