@@ -23,7 +23,7 @@ jobs:
     - name: Deploy via FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
-        server: ${{ secrets.ftp.cluster023.hosting.ovh.net }}
-        username: ${{ secrets.nehemiescn }}
-        password: ${{ secrets.19J9V2Oj8t }}
+        server: ${{ ftp.cluster023.hosting.ovh.net }}
+        username: ${{ nehemiescn }}
+        password: ${{ 19J9V2Oj8t }}
         server-dir: /www/
