@@ -24,7 +24,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 
     <!-- Fichier CSS personnalisé -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/chatbot.css') }}">
     <!-- Ajout du CDN pour animations -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
@@ -40,55 +41,57 @@
 
 <!-- En-tête et navigation -->
 <header class="header" id="header">
-    <div class="container">
-        <div class="header-wrapper">
-            <div class="logo">
-                <a href="#accueil">
-                    <img src="{{ asset('images/logo2.png') }}" alt="Logo NÉHÉMIE International">
-                    <span>NÉHÉMIE International</span>
-                </a>
-            </div>
 
-            <nav class="main-nav">
-                <ul class="nav-list">
-                    <li><a href="#accueil" class="nav-link active">Accueil</a></li>
-                    <li class="dropdown">
-                        <a href="#qui-sommes-nous" class="nav-link">Qui sommes-nous <i
-                                class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#notre-histoire">Notre Histoire</a></li>
-                            <li><a href="#vision-mission">Vision & Mission</a></li>
-                            <li><a href="#nos-valeurs">Nos Valeurs</a></li>
-                            <li><a href="#notre-equipe">Notre Équipe</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#nos-programmes" class="nav-link">Nos programmes <i
-                                class="fas fa-chevron-down"></i></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#programme-timothee">TIMOTHÉE</a></li>
-                            <li><a href="#programme-philippe">PHILIPPE</a></li>
-                            <li><a href="#programme-dorcas">DORCAS</a></li>
-                            <li><a href="#programme-bethanie">BÉTHANIE</a></li>
-                            <li><a href="#programme-daniel">DANIEL</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#actualites" class="nav-link">Actualités</a></li>
-                    <li><a href="#temoignages" class="nav-link">Témoignages</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                </ul>
-            </nav>
+    <div class="header-wrapper">
+        <div class="logo">
+            <a href="#accueil">
+                <img src="{{ asset('images/logo2.png') }}" alt="Logo NÉHÉMIE International"
+                    style="height: 120px; width: auto;">
+                <span style="display: block; font-size: 0.9em; line-height: 1.2;">
+                    <span style="display: block;">NÉHÉMIE</span>
+                    <span style="display: block; font-size: 0.8em;">International</span>
+                </span>
+            </a>
+        </div>
 
-            <div class="header-actions">
-                <a href="#faire-un-don" class="btn btn-primary">Faire un don</a>
-                <button class="menu-toggle" aria-label="Menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
+        <nav class="main-nav" style="font-size: 0.9em;">
+            <ul class="nav-list">
+                <li><a href="#accueil" class="nav-link active">Accueil</a></li>
+                <li class="dropdown">
+                    <a href="#qui-sommes-nous" class="nav-link">Qui sommes-nous <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#notre-histoire">Notre Histoire</a></li>
+                        <li><a href="#vision-mission">Vision & Mission</a></li>
+                        <li><a href="#nos-valeurs">Nos Valeurs</a></li>
+                        <li><a href="#notre-equipe">Notre Équipe</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#nos-programmes" class="nav-link">Nos programmes <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#programme-timothee">TIMOTHÉE</a></li>
+                        <li><a href="#programme-philippe">PHILIPPE</a></li>
+                        <li><a href="#programme-dorcas">DORCAS</a></li>
+                        <li><a href="#programme-bethanie">BÉTHANIE</a></li>
+                        <li><a href="#programme-daniel">DANIEL</a></li>
+                    </ul>
+                </li>
+                <li><a href="#actualites" class="nav-link">Actualités</a></li>
+                <li><a href="#temoignages" class="nav-link">Témoignages</a></li>
+                <li><a href="" class="nav-link">Sos prière</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions" style="font-size: 0.85em;">
+            <a href="#faire-un-don" class="btn btn-primary" style="border: none; padding: 0.5em 1em;">Faire un don</a>
+            <button class="menu-toggle" aria-label="Menu" style="width: 36px; height: 36px;">
+                <span style="height: 2px; margin: 5px 0;"></span>
+                <span style="height: 2px; margin: 5px 0;"></span>
+                <span style="height: 2px; margin: 5px 0;"></span>
+            </button>
         </div>
     </div>
+
 </header>
 
 <!-- Menu mobile -->
@@ -107,7 +110,8 @@
                 </ul>
             </li>
             <li class="mobile-dropdown">
-                <a href="#nos-programmes" class="mobile-nav-link">Nos programmes <i class="fas fa-chevron-down"></i></a>
+                <a href="#nos-programmes" class="mobile-nav-link">Nos programmes <i
+                        class="fas fa-chevron-down"></i></a>
                 <ul class="mobile-dropdown-menu">
                     <li><a href="#programme-timothee">TIMOTHÉE</a></li>
                     <li><a href="#programme-philippe">PHILIPPE</a></li>
@@ -118,13 +122,12 @@
             </li>
             <li><a href="#actualites" class="mobile-nav-link">Actualités</a></li>
             <li><a href="#temoignages" class="mobile-nav-link">Témoignages</a></li>
-            <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+
+            <li><a href="#" class="mobile-nav-link">Sos prière</a></li>
             <li><a href="#faire-un-don" class="btn btn-primary mobile-btn">Faire un don</a></li>
         </ul>
     </div>
 </div>
-
-
 
 <body>
     <div style="padding-top: 65px;">
@@ -201,16 +204,17 @@
 
                 {{-- 🤖 Message d’accueil --}}
                 <div class="bot-message" style="display: flex; align-items: start; gap: 10px;">
-                    <img src="{{ asset('images/clement.jpg') }}" alt="Logo OGAR"
+                    <img src="{{ asset('images/gabriel.jpeg') }}" alt="Gabriel"
                         class="chat-logo  w-8 h-8 rounded-full" style="width: 32px; height: 32px;">
-                    <span>Bienvenue, je m'appelle Okoumé. Comment puis-je vous aider aujourd'hui ?</span>
+                    <span>Bienvenue, je suis Gabriel. Comment puis-je vous aider aujourd'hui ?</span>
                 </div>
                 <!-- Boutons rapides -->
                 <div id="quick-buttons" class="flex flex-wrap gap-2 mt-2 mb-2">
-                    <button class="quick-btn">Je veux souscrire une assurance 📝</button>
-                    <button class="quick-btn">J'ai besoin de souscrire à une assurance auto 🚗</button>
-                    <button class="quick-btn">Je veux modifier mon contrat 📋</button>
-                    <button class="quick-btn">J'ai une question sur mon devis 💬</button>
+                    <button class="quick-btn">Découvrir notre mission</button>
+                    <button class="quick-btn">Découvrir nos programmes</button>
+                    <button class="quick-btn">Actualités</button>
+                    <button class="quick-btn">Témoignages</button>
+                    <button class="quick-btn">Contact</button>
                 </div>
             </div>
 
@@ -227,7 +231,7 @@
         <!-- Bulle flottante -->
         <div id="chat-launcher" class="chat-bubble">
             <div class="chat-bubble-content">
-                <img id="chat-launcher-icon" src="{{ asset('images/clement.jpg') }}" alt="Clément"
+                <img id="chat-launcher-icon" src="{{ asset('images/gabriel.jpeg') }}" alt="Gabriel"
                     class="chat-icon-image">
             </div>
         </div>
@@ -306,8 +310,8 @@
                 }, 500);
 
                 // 🔄 Revenir à l’image de Clément
-                chatLauncherIcon.src = "{{ asset('images/clement.jpg') }}";
-                chatLauncherIcon.alt = "Clément";
+                chatLauncherIcon.src = "{{ asset('images/gabriel.jpeg') }}";
+                chatLauncherIcon.alt = "Gabriel";
             }
 
 
@@ -328,8 +332,8 @@
              <div class="row items-center">
               <div class="col-lg-3">
                   <div style="position: relative; display: inline-block;">
-                      <img src="{{ asset('images/clement.jpg') }}" 
-                          alt="Logo OGAR" 
+                      <img src="{{ asset('images/gabriel.jpeg') }}" 
+                          alt="Gabriel" 
                           class="chat-logo rounded-full" 
                           style="width: 48px; height: 48px; object-fit: cover; border: 2px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
 
@@ -390,8 +394,8 @@
                 const typingDiv = document.createElement("div");
                 typingDiv.className = "typing-indicator";
                 typingDiv.innerHTML = `
-               <img src="{{ asset('images/clement.jpg') }}" 
-                    alt="Logo OGAR" 
+               <img src="{{ asset('images/gabriel.jpeg') }}" 
+                    alt="Gabriel" 
                     class="chat-logo w-8 h-8 rounded-full" 
                     style="width: 32px; height: 32px;">
                <span class="typing-container">
@@ -420,7 +424,7 @@
                 async function sendWithRetry() {
                     try {
                         const res = await fetch(
-                            "https://yodn8n.app.n8n.cloud/webhook/bce52481-c326-432a-b1c2-3f17665d218d/chat", {
+                            "https://yodn8n.app.n8n.cloud/webhook/aef2708c-8929-4313-8c16-d383bbc828c3/chat", {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json"
@@ -456,7 +460,7 @@
                         botDiv.className = "bot-message";
                         botDiv.innerHTML = `
                             <div style="display: flex; align-items: start; gap: 10px;">
-                                <img src="{{ asset('images/clement.jpg') }}" alt="Okoumé" class="chat-logo w-8 h-8 rounded-full" style="width: 32px; height: 32px;">
+                                <img src="{{ asset('images/gabriel.jpg') }}" alt="Gabriel" class="chat-logo w-8 h-8 rounded-full" style="width: 32px; height: 32px;">
                                 <span>${sanitizeHTML(reponse)}</span>
                             </div>
                         `;
@@ -621,6 +625,7 @@
 
         });
     </script>
+
 
 
     {{-- script --}}

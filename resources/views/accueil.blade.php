@@ -12,7 +12,8 @@
                         <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">Une ONG chrétienne engagée
                             auprès des vulnérables</p>
                         <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
-                            <a href="#qui-sommes-nous" class="btn btn-primary">Découvrir notre mission</a>
+                            <a href="#qui-sommes-nous" class="btn btn-primary" style="border: none;">Découvrir notre
+                                mission</a>
                         </div>
                     </div>
                 </div>
@@ -24,7 +25,7 @@
                         <h1 class="hero-title">Donnez-leur vous-mêmes à manger</h1>
                         <p class="hero-subtitle">Campagne de levée de fonds - Juin 2025</p>
                         <div class="hero-buttons">
-                            <a href="#faire-un-don" class="btn btn-primary">Participez maintenant</a>
+                            <a href="#faire-un-don" class="btn btn-primary" style="border: none;">Participez maintenant</a>
                         </div>
                     </div>
                 </div>
@@ -36,7 +37,8 @@
                         <h1 class="hero-title">L'Évangélisation par les actes</h1>
                         <p class="hero-subtitle">Notre engagement pour la transformation sociale</p>
                         <div class="hero-buttons">
-                            <a href="#nos-programmes" class="btn btn-primary">Découvrir nos programmes</a>
+                            <a href="#nos-programmes" class="btn btn-primary" style="border: none;">Découvrir nos
+                                programmes</a>
                         </div>
                     </div>
                 </div>
@@ -58,8 +60,7 @@
         <div class="container">
             <div class="welcome-wrapper">
                 <div class="welcome-image" data-aos="fade-right">
-                    <img src="https://nehemie-international.com/wp-content/uploads/2024/01/President-Davy-NGUELENGOGO.jpg"
-                        alt="NGUEL'ENGOGO Davy, Président">
+                    <img src="{{ asset('images/dg.png') }}" alt="NGUEL'ENGOGO Davy, Président">
                     <div class="welcome-image-info">
                         <h3>NGUEL'ENGOGO Davy</h3>
                         <p>Président, NÉHÉMIE International</p>
