@@ -14,6 +14,6 @@ class AccueilController extends Controller
      */
     public function index()
     {
-        return View::make('accueil');
+        return view('accueil');
     }
 }
