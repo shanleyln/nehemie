@@ -11,7 +11,7 @@ use App\Http\Controllers\DonnezLeurVousMemesController;
 
 // Routes principales
 
-Route::get('/', [AccueilController::class, 'index'])->name('route_accueil');
+Route::get('/accueil', [AccueilController::class, 'index'])->name('route_accueil');
 Route::get('/qui-sommes-nous', [QuiSommesNousController::class, 'index'])->name('route_qui_sommes_nous');
 Route::get('/nos-programmes', [NosProgrammesController::class, 'index'])->name('route_nos_programmes');
 Route::get('/nos-actions-et-projets', [NosActionsEtProjetsController::class, 'index'])->name('route_nos_actions_et_projets');

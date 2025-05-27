@@ -263,8 +263,8 @@
                                 <p>Former et équiper des leaders de gouvernance éthique et sage, influencer les systèmes
                                     politiques avec des principes bibliques, et développer des systèmes éducatifs qui
                                     intègrent sagesse et connaissance pour transformer la société.</p>
-                                <a href="{{ route('route_nos_programmes') }}#programme-salomon"
-                                    class="btn btn-secondary">En savoir plus</a>
+                                <a href="{{ route('route_nos_programmes') }}#nos-programmes" class="btn btn-secondary">En
+                                    savoir plus</a>
                             </div>
                         </div>
                     </div>
@@ -277,22 +277,14 @@
                             </div>
                             <div class="program-details">
                                 <h3>Programme JOSEPH</h3>
-                                <p class="program-tagline">Sensibilisation et partage de valeurs</p>
-                                <p>Le programme JOSEPH se consacre à la sensibilisation et au partage des
-                                    valeurs
-                                    chrétiennes à travers des actions concrètes qui témoignent de notre foi par
-                                    les
-                                    actes.</p>
-                                <h4>Nos actions :</h4>
-                                <ul class="program-actions">
-                                    <li><i class="fas fa-check"></i> Campagnes de sensibilisation communautaire
-                                    </li>
-                                    <li><i class="fas fa-check"></i> Production de contenus inspirants</li>
-                                    <li><i class="fas fa-check"></i> Organisation d'événements thématiques</li>
-                                    <li><i class="fas fa-check"></i> Partage de témoignages transformateurs</li>
-                                </ul>
-                                <a href="{{ route('route_nos_programmes') }}#programme-joseph"
-                                    class="btn btn-secondary">En savoir plus</a>
+                                <p class="program-tagline">Économie/Affaires</p>
+                                <p>Transformer la sphère économique selon des principes bibliques,
+                                    former des entrepreneurs et dirigeants d'entreprise éthiques, développer des modèles
+                                    d'affaires durables et équitables, et utiliser les ressources économiques pour avoir un
+                                    impact social positif.</p>
+
+                                <a href="{{ route('route_nos_programmes') }}#nos-programmes" class="btn btn-secondary">En
+                                    savoir plus</a>
                             </div>
                         </div>
                     </div>
@@ -301,53 +293,18 @@
                         <div class="program-content-inner">
                             <div class="program-image">
                                 <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                                    alt="Programme DORCAS">
+                                    alt="Programme DAVID">
                             </div>
                             <div class="program-details">
-                                <h3>Programme DORCAS</h3>
-                                <p class="program-tagline">Action sociale et humanitaire</p>
-                                <p>Le programme DORCAS répond aux besoins essentiels des populations vulnérables à
-                                    travers des actions humanitaires et sociales qui témoignent de notre
-                                    compassion en
-                                    actes.</p>
-                                <h4>Nos actions :</h4>
-                                <ul class="program-actions">
-                                    <li><i class="fas fa-check"></i> Distribution de denrées alimentaires</li>
-                                    <li><i class="fas fa-check"></i> Fourniture de produits d'hygiène et de
-                                        première
-                                        nécessité</li>
-                                    <li><i class="fas fa-check"></i> Soutien aux familles en situation précaire
-                                    </li>
-                                    <li><i class="fas fa-check"></i> Visites aux personnes isolées</li>
-                                </ul>
-                                <a href="{{ route('route_nos_programmes') }}#programme-david"
-                                    class="btn btn-secondary">En savoir plus</a>
-                            </div>
-                        </div>
-                    </div>
+                                <h3>Programme DAVID</h3>
+                                <p class="program-tagline">Arts/Divertissement + Médias/Communications</p>
+                                <p>Former et promouvoir des artistes et communicateurs chrétiens
+                                    qui créent des œuvres d'excellence porteuses de sens, de beauté et de vérité. Influencer
+                                    les sphères des arts, du divertissement et des médias avec des contenus qui élèvent
+                                    l'esprit et reflètent les valeurs du Royaume.</p>
 
-                    <div class="program-content" id="program-priscille">
-                        <div class="program-content-inner">
-                            <div class="program-image">
-                                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                                    alt="Programme BÉTHANIE">
-                            </div>
-                            <div class="program-details">
-                                <h3>Programme BÉTHANIE</h3>
-                                <p class="program-tagline">Communion fraternelle et soutien communautaire</p>
-                                <p>Le programme BÉTHANIE crée des espaces de communion fraternelle et de soutien
-                                    mutuel,
-                                    favorisant les liens communautaires et l'entraide entre les personnes.</p>
-                                <h4>Nos actions :</h4>
-                                <ul class="program-actions">
-                                    <li><i class="fas fa-check"></i> Organisation de rencontres communautaires
-                                    </li>
-                                    <li><i class="fas fa-check"></i> Création de groupes de soutien</li>
-                                    <li><i class="fas fa-check"></i> Activités intergénérationnelles</li>
-                                    <li><i class="fas fa-check"></i> Projets collaboratifs locaux</li>
-                                </ul>
-                                <a href="{{ route('route_nos_programmes') }}#programme-priscille"
-                                    class="btn btn-secondary">En savoir plus</a>
+                                <a href="{{ route('route_nos_programmes') }}#nos-programmes" class="btn btn-secondary">En
+                                    savoir plus</a>
                             </div>
                         </div>
                     </div>
@@ -360,20 +317,40 @@
                             </div>
                             <div class="program-details">
                                 <h3>Programme DANIEL</h3>
-                                <p class="program-tagline">Soutien spirituel et accompagnement</p>
-                                <p>Le programme DANIEL offre un accompagnement spirituel et un soutien pastoral
-                                    aux
-                                    personnes en quête de sens, dans le respect de leur liberté de conscience.</p>
-                                <h4>Nos actions :</h4>
-                                <ul class="program-actions">
-                                    <li><i class="fas fa-check"></i> Accompagnement pastoral personnalisé</li>
-                                    <li><i class="fas fa-check"></i> Groupes de prière et de partage</li>
-                                    <li><i class="fas fa-check"></i> Conseil spirituel</li>
-                                    <li><i class="fas fa-check"></i> Ressources pour la croissance spirituelle
-                                    </li>
-                                </ul>
-                                <a href="{{ route('route_nos_programmes') }}#programme-daniel"
-                                    class="btn btn-secondary">En savoir plus</a>
+                                <p class="program-tagline">Religion/Spiritualité + Gouvernement (secondaire)</p>
+                                <p>Renforcer la montagne de la religion et de la spiritualité en
+                                    équipant les leaders religieux et les croyants pour un impact sociétal pertinent.
+                                    Former des individus capables d'opérer avec sagesse et intégrité dans des contextes
+                                    séculiers, en particulier gouvernementaux, tout en étant des témoins vivants de leur
+                                    foi.</p>
+
+
+                                <a href="{{ route('route_nos_programmes') }}#nos-programmes" class="btn btn-secondary">En
+                                    savoir plus</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="program-content" id="program-priscille">
+                        <div class="program-content-inner">
+                            <div class="program-image">
+                                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                    alt="Programme PRISCILLE & AQUILA">
+                            </div>
+                            <div class="program-details">
+                                <h3>Programme PRISCILLE & AQUILA</h3>
+                                <p class="program-tagline">Famille + Action Sociale Communautaire + Éducation (secondaire)
+                                </p>
+                                <p>Soutenir et renforcer les familles comme fondement de la société
+                                    et piliers de la communauté, en promouvant des modèles basés sur des principes
+                                    bibliques. Le programme vise à équiper les foyers pour être des centres d'influence
+                                    positive, de soin et d'éducation, s'étendant vers la communauté environnante par
+                                    l'hospitalité, le mentorat et des actions sociales concrètes de soutien aux personnes et
+                                    familles vulnérables.</p>
+
+
+                                <a href="{{ route('route_nos_programmes') }}#nos-programmes" class="btn btn-secondary">En
+                                    savoir plus</a>
                             </div>
                         </div>
                     </div>

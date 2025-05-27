@@ -65,58 +65,29 @@
                     $isNosProgrammes = $currentRoute === 'route_nos_programmes';
                     $isNosActions = $currentRoute === 'route_nos_actions_et_projets';
                     $isActualites = $currentRoute === 'route_actualites';
+                    $isAccueil = $currentRoute === 'route_accueil';
                 @endphp
 
-                <li><a href="{{ route('route_accueil') }}"
-                        class="nav-link {{ $currentRoute === 'route_accueil' ? 'active' : '' }}">Accueil</a></li>
-                <li><a href="{{ route('route_qui_sommes_nous') }}"
-                        class="nav-link {{ $isQuiSommesNous ? 'active' : '' }}">Qui sommes-nous</a></li>
-                {{-- <li class="dropdown">
-                    <a href="{{ route('route_qui_sommes_nous') }}"
-                        class="nav-link {{ $isQuiSommesNous ? 'active' : '' }}">Qui
-                        sommes-nous <i class="fas fa-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ route('route_qui_sommes_nous') }}#histoire"
-                                class="{{ $isQuiSommesNous && request()->is('*#histoire*') ? 'active' : '' }}">Notre
-                                Histoire</a></li>
-                        <li><a href="{{ route('route_qui_sommes_nous') }}#vision-mission"
-                                class="{{ $isQuiSommesNous && request()->is('*#vision-mission*') ? 'active' : '' }}">Vision
-                                & Mission</a></li>
-                        <li><a href="{{ route('route_qui_sommes_nous') }}#valeurs"
-                                class="{{ $isQuiSommesNous && request()->is('*#valeurs*') ? 'active' : '' }}">Nos
-                                Valeurs</a></li>
-                        <li><a href="{{ route('route_qui_sommes_nous') }}#equipe"
-                                class="{{ $isQuiSommesNous && request()->is('*#equipe*') ? 'active' : '' }}">Notre
-                                Équipe</a></li>
-                    </ul>
-                </li> --}}
-                <li class="dropdown">
-                    <a href="{{ route('route_nos_programmes') }}"
-                        class="nav-link {{ $isNosProgrammes ? 'active' : '' }}">Nos programmes <i
-                            class="fas fa-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-salomon"
-                                class="{{ $isNosProgrammes && request()->is('*#programme-salomon*') ? 'active' : '' }}">SALOMON</a>
-                        </li>
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-joseph"
-                                class="{{ $isNosProgrammes && request()->is('*#programme-joseph*') ? 'active' : '' }}">JOSEPH</a>
-                        </li>
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-david"
-                                class="{{ $isNosProgrammes && request()->is('*#programme-david*') ? 'active' : '' }}">DAVID</a>
-                        </li>
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-daniel"
-                                class="{{ $isNosProgrammes && request()->is('*#programme-daniel*') ? 'active' : '' }}">DANIEL</a>
-                        </li>
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-priscille"
-                                class="{{ $isNosProgrammes && request()->is('*#programme-priscille*') ? 'active' : '' }}">PRISCILLE
-                                & AQUILA</a>
-                        </li>
-                    </ul>
+                <li>
+                    <a href="{{ route('route_accueil') }}" class="nav-link {{ $isAccueil ? 'active' : '' }}">Accueil</a>
                 </li>
-                <li><a href="{{ route('route_nos_actions_et_projets') }}"
-                        class="nav-link {{ $isNosActions ? 'active' : '' }}">Nos actions et projets</a></li>
-                <li><a href="{{ route('route_actualites') }}"
-                        class="nav-link {{ $isActualites ? 'active' : '' }}">Actualités</a></li>
+                <li>
+                    <a href="{{ route('route_qui_sommes_nous') }}"
+                        class="nav-link {{ $isQuiSommesNous ? 'active' : '' }}">Qui sommes-nous</a>
+                </li>
+                <li>
+                    <a href="{{ route('route_nos_programmes') }}"
+                        class="nav-link {{ $isNosProgrammes ? 'active' : '' }}">Nos programmes</a>
+                </li>
+                <li>
+                    <a href="{{ route('route_nos_actions_et_projets') }}"
+                        class="nav-link {{ $isNosActions ? 'active' : '' }}">Nos actions et projets</a>
+                </li>
+
+                <li>
+                    <a href="{{ route('route_actualites') }}"
+                        class="nav-link {{ $isActualites ? 'active' : '' }}">Actualités</a>
+                </li>
                 <li class="dropdown">
                     <span class="nav-link" style="cursor: default;">SOS Prière <i
                             class="fas fa-chevron-down"></i></span>
@@ -168,7 +139,8 @@
                     </li>
                 </ul>
             </li> --}}
-            <li class="mobile-dropdown">
+            <li><a href="{{ route('route_nos_programmes') }}" class="mobile-nav-link">Nos programmes</a></li>
+            {{-- <li class="mobile-dropdown">
                 <a href="{{ route('route_nos_programmes') }}" class="mobile-nav-link" style="cursor: default;">Nos
                     programmes <i class="fas fa-chevron-down"></i></a>
                 <ul class="mobile-dropdown-menu">
@@ -178,7 +150,7 @@
                     <li><a href="{{ route('route_nos_programmes') }}#programme-daniel">DANIEL</a></li>
                     <li><a href="{{ route('route_nos_programmes') }}#programme-priscille">PRISCILLE & AQUILA</a></li>
                 </ul>
-            </li>
+            </li> --}}
             <li><a href="{{ route('route_actualites') }}" class="mobile-nav-link">Actualités</a></li>
             <li><a href="{{ route('route_nos_actions_et_projets') }}" class="mobile-nav-link">Nos actions et
                     projets</a></li>
@@ -202,7 +174,7 @@
                     </li>
                 </ul>
             </li>
-            <li><a href="#faire-un-don" class="btn btn-primary mobile-btn">Faire un don</a></li>
+            <li><a {{-- href="#faire-un-don"  --}} class="btn btn-primary mobile-btn">Faire un don</a></li>
         </ul>
     </div>
 </div>
@@ -292,7 +264,7 @@
                 <h3>NÉHÉMIE International</h3>
                 <p>"Levons-nous et bâtissons!"</p>
                 <!-- Section Carte -->
-                <section class="map-section" style="max-width: 800px; margin: 0 auto;">
+                <section class="map-section" style="max-width: 1000px; margin: 0 auto;">
                     <div class="map-container">
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.951512393891!2d9.484083!3d0.420667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMMKwMjUnMTQuNCJOIDnCsDI5JzAyLjciRQ!5e0!3m2!1sfr!2sfr!5m1!1s0x0%3A0x0!8m2!3d0.420667!4d9.484083!15sCjQwJzI1JzE0LjQiTiA5wrAyOScwMi43IkqIAQh0cmFuc2l0X3N0YXRpb26aASNDaFpEU1VoTk1HOW5TMFZKUTBGblNVTmhZbXhmVlRZNVJSQULgAQE!16s%2Fg%2F11b8v4z4x9!5m2!1sfr!2sfr&z=12"
@@ -305,47 +277,47 @@
                 </section>
             </div>
 
-            <div class="footer-links">
+            <div class="footer-links " style="margin-left: 120px;">
                 <div class="footer-links-column">
                     <h4>Navigation</h4>
                     <ul>
                         <li><a href="{{ route('route_accueil') }}">Accueil</a></li>
                         <li><a href="{{ route('route_qui_sommes_nous') }}">Qui sommes-nous</a></li>
-
+                        <li><a href="{{ route('route_nos_programmes') }}">Nos programmes</a></li>
                         <li><a href="{{ route('route_nos_actions_et_projets') }}"
                                 class="{{ request()->routeIs('route_nos_actions_et_projets') ? 'active' : '' }}">Nos
                                 actions et projets</a></li>
                         <li><a href="{{ route('route_actualites') }}"
                                 class="{{ request()->routeIs('route_actualites') ? 'active' : '' }}">Actualités</a>
                         </li>
-
-
                     </ul>
                 </div>
-
                 <div class="footer-links-column">
                     <h4>Nos programmes</h4>
                     <ul>
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-salomon">SALOMON</a></li>
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-joseph">JOSEPH</a></li>
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-david">DAVID</a></li>
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-daniel">DANIEL</a></li>
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-priscille">PRISCILLE & AQUILA</a>
+                        <li><a href="{{ route('route_nos_programmes') }}#nos-programmes">salomon</a>
+                        </li>
+                        <li><a href="{{ route('route_nos_programmes') }}#nos-programmes">joseph</a>
+                        </li>
+                        <li><a href="{{ route('route_nos_programmes') }}#nos-programmes">david</a>
+                        </li>
+                        <li><a href="{{ route('route_nos_programmes') }}#nos-programmes">daniel</a>
+                        </li>
+                        <li><a href="{{ route('route_nos_programmes') }}#nos-programmes">priscille</a>
                         </li>
                     </ul>
                 </div>
-                {{-- 
-                <div class="footer-links-column">
+
+                {{-- <div class="footer-links-column">
                     <h4>Légal</h4>
                     <ul>
-
-                        <li><a href="{{ route('route_politique_de_confidentialite') }}">Politique de
-                                confidentialité</a>
-                        </li>
-                        <li><a href="{{ route('route_conditions_dutilisation') }}">Conditions d'utilisation</a></li>
+                       
+                        <li><a href="#">Politique de confidentialité</a></li>
+                        <li><a href="#">Conditions d'utilisation</a></li>
                     </ul>
                 </div> --}}
             </div>
+
         </div>
 
         <div class="footer-bottom">
@@ -362,5 +334,10 @@
         </div>
     </div>
 </footer>
+
+
+
+
+
 
 </html>
