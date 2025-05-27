@@ -336,28 +336,36 @@
                     <div class="videos-grid">
                         <div class="video-item">
                             <div class="video-wrapper">
-                                <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0"
-                                    allowfullscreen></iframe>
+                                <iframe width="560" height="315"
+                                    src="https://www.youtube.com/embed/LQ-IQJfyYKg?si=N0Eg9aEs21D7uDQQ"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             </div>
-                            <h4>Présentation du Programme TIMOTHÉE</h4>
-                            <p>Découvrez comment nous aidons les jeunes entrepreneurs à concrétiser leurs projets.
-                            </p>
+                            <h4>Néhémie International Consécration de l'année 2025</h4>
+                            <p>Une réunion avec les dirigeants et les bénévoles pour célébrer l'année 2025.</p>
                         </div>
                         <div class="video-item">
                             <div class="video-wrapper">
-                                <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0"
-                                    allowfullscreen></iframe>
+                                <iframe width="560" height="315"
+                                    src="https://www.youtube.com/embed/83OM-xm7MWM?si=BuNVtSpZGUn5Rve3"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             </div>
-                            <h4>Témoignages du Programme DANIEL</h4>
-                            <p>Des bénéficiaires partagent leur expérience et leur transformation personnelle.</p>
+                            <h4>La minute du Bâtisseur</h4>
+                            <p>Appel aux bénévoles; Construisons ensemble l'avenir de la veuve Mboumba</p>
                         </div>
                         <div class="video-item">
                             <div class="video-wrapper">
-                                <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" frameborder="0"
-                                    allowfullscreen></iframe>
+                                <iframe width="560" height="315"
+                                    src="https://www.youtube.com/embed/II4s03zenqk?si=48NeYxWXmSkmqlvR"
+                                    title="YouTube video player" frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                             </div>
-                            <h4>Impact 2023 - Bilan Annuel</h4>
-                            <p>Revivez les moments forts de nos actions et réalisations cette année.</p>
+                            <h4>Urgent!!! Appel à l'action</h4>
+                            <p>Aidons la veuve et sa famille à couvrir leur maison!</p>
                         </div>
                     </div>
                 </div>
