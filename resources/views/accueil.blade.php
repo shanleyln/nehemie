@@ -254,8 +254,7 @@
                     <div class="program-content active" id="program-salomon">
                         <div class="program-content-inner">
                             <div class="program-image">
-                                <img src="https://images.unsplash.com/photo-1522661067900-ab829854a57f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                                    alt="Programme SALOMON">
+                                <img src="{{ asset('images/programme/salomon.png') }}" alt="Programme SALOMON">
                             </div>
                             <div class="program-details">
                                 <h3>Programme SALOMON</h3>
@@ -272,8 +271,7 @@
                     <div class="program-content" id="program-joseph">
                         <div class="program-content-inner">
                             <div class="program-image">
-                                <img src="https://images.unsplash.com/photo-1531545514256-b1400bc00f31?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                                    alt="Programme JOSEPH">
+                                <img src="{{ asset('images/programme/joseph.png') }}" alt="Programme JOSEPH">
                             </div>
                             <div class="program-details">
                                 <h3>Programme JOSEPH</h3>
@@ -292,8 +290,7 @@
                     <div class="program-content" id="program-david">
                         <div class="program-content-inner">
                             <div class="program-image">
-                                <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                                    alt="Programme DAVID">
+                                <img src="{{ asset('images/programme/david.png') }}" alt="Programme DAVID">
                             </div>
                             <div class="program-details">
                                 <h3>Programme DAVID</h3>
@@ -312,8 +309,7 @@
                     <div class="program-content" id="program-daniel">
                         <div class="program-content-inner">
                             <div class="program-image">
-                                <img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                                    alt="Programme DANIEL">
+                                <img src="{{ asset('images/programme/daniel.png') }}" alt="Programme DANIEL">
                             </div>
                             <div class="program-details">
                                 <h3>Programme DANIEL</h3>
@@ -334,7 +330,7 @@
                     <div class="program-content" id="program-priscille">
                         <div class="program-content-inner">
                             <div class="program-image">
-                                <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                <img src="{{ asset('images/programme/priscille.png') }}"
                                     alt="Programme PRISCILLE & AQUILA">
                             </div>
                             <div class="program-details">

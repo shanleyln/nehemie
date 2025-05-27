@@ -591,7 +591,7 @@ button {
     height: 100vh;
     min-height: 600px;
     overflow: hidden;
-    margin-top: 80px;
+    margin-top: 0px;
 }
 
 .hero-slider {
@@ -974,7 +974,7 @@ button {
 /* ===== PROGRAMS SECTION ===== */
 .programs-section {
     padding: var(--spacing-xxl) 0;
-    background-color: var(--color-light);
+    /* background-color: var(--color-light); */
 }
 
 .programs-tabs {
@@ -1050,8 +1050,8 @@ button {
 
 .program-image img {
     width: 100%;
-    height: 250px;
-    object-fit: cover;
+    height: 100%;
+    object-fit: contain;
 }
 
 .program-details {

@@ -81,7 +81,7 @@
                 </li>
                 <li>
                     <a href="{{ route('route_nos_actions_et_projets') }}"
-                        class="nav-link {{ $isNosActions ? 'active' : '' }}">Nos actions et projets</a>
+                        class="nav-link {{ $isNosActions ? 'active' : '' }}">Nos actions</a>
                 </li>
 
                 <li>
@@ -152,8 +152,7 @@
                 </ul>
             </li> --}}
             <li><a href="{{ route('route_actualites') }}" class="mobile-nav-link">Actualités</a></li>
-            <li><a href="{{ route('route_nos_actions_et_projets') }}" class="mobile-nav-link">Nos actions et
-                    projets</a></li>
+            <li><a href="{{ route('route_nos_actions_et_projets') }}" class="mobile-nav-link">Nos actions</a></li>
 
             <!-- Menu déroulant SOS Prière -->
             <li class="mobile-dropdown">
@@ -287,7 +286,7 @@
                         <li><a href="{{ route('route_nos_programmes') }}">Nos programmes</a></li>
                         <li><a href="{{ route('route_nos_actions_et_projets') }}"
                                 class="{{ request()->routeIs('route_nos_actions_et_projets') ? 'active' : '' }}">Nos
-                                actions et projets</a></li>
+                                actions</a></li>
                         <li><a href="{{ route('route_actualites') }}"
                                 class="{{ request()->routeIs('route_actualites') ? 'active' : '' }}">Actualités</a>
                         </li>

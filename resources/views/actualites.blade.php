@@ -1,11 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
+    {{-- Hero Section --}}
+    <section class="position-relative overflow-hidden" style="height: 50vh;">
+        <!-- Image de fond -->
+        <img src="{{ asset('images/notre-histoire.jpg') }}" alt="Actualités & Événements"
+            class="w-100 h-100 object-fit-cover position-absolute top-0 start-0" style="z-index: 1;">
+
+        <!-- Filtre sombre sur toute l’image -->
+        <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-75" style="z-index: 2;"></div>
+
+        <!-- Titre centré -->
+        <div class="position-absolute top-50 start-50 translate-middle text-white text-center" style="z-index: 3;">
+            <h1 class="display-5 fw-bold text-center text-white">Actualités & Événements</h1>
+        </div>
+    </section>
+
     <!-- Section Actualités -->
     <section id="actualites" class="news-section">
         <div class="container">
             <div class="section-heading text-center" data-aos="fade-up">
-                <h2>Actualités & Événements</h2>
+
                 <div class="heading-line center"></div>
                 <p class="section-subtitle">Restez informé de nos dernières actions et des événements à venir</p>
             </div>

@@ -82,7 +82,7 @@
                         </div>
                     </a>
 
-                    <a href="tel:+241XXXXXXXX" class="contact-option text-decoration-none p-3">
+                    <a href="tel:+24166609668" class="contact-option text-decoration-none p-3">
                         <div class="d-flex align-items-center">
                             <div class="icon-wrapper me-3">
                                 <i class="fas fa-phone text-marron"></i>
