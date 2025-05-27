@@ -35,6 +35,12 @@
     <link rel="stylesheet" href="<?= asset('css/styles.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/chatbot.css') ?>">
 
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
     <!-- Bibliothèques tierces -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         integrity="sha512-c42qXSf5l7l5W0kY8J1J3xXqT0B8h+EeJxJ5U2qyJ3OzX3VqLLh4Lh5kjJ53X1qQ==" crossorigin="anonymous"
@@ -110,11 +116,6 @@
         <div class="header-actions" style="font-size: 0.85em;">
             <a href="#" class="btn btn-primary" style="border: none; padding: 0.5em 1em;" data-bs-toggle="modal"
                 data-bs-target="#donModal">Faire un don</a>
-            <button class="menu-toggle" aria-label="Menu" style="width: 36px; height: 36px;">
-                <span style="height: 2px; margin: 5px 0;"></span>
-                <span style="height: 2px; margin: 5px 0;"></span>
-                <span style="height: 2px; margin: 5px 0;"></span>
-            </button>
         </div>
     </div>
 

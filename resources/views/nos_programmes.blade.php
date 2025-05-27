@@ -21,16 +21,8 @@
 
 
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Les 5 Programmes Stratégiques de l'ONG pour influencer les 7 Montagnes</title>
-        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-        <link rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+      
+
         <style>
             body {
                 font-family: 'Inter', sans-serif;
@@ -194,7 +186,6 @@
                 background: var(--color-primary);
             }
         </style>
-    </head>
 
     <body class="bg-gray-100">
         <div class="section-heading text-center mt-5" data-aos="fade-up">

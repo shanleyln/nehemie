@@ -1,69 +1,74 @@
-<!-- Modale de Don -->
+<!-- Modale de Don (compacte avec bouton marron et popup Mobile Money) -->
 <div class="modal fade" id="donModal" tabindex="-1" aria-labelledby="donModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-md modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="donModalLabel">
-                    <i class="fas fa-hands-helping me-2"></i>S'impliquer & Faire un Don
-                </h5>
+            <div class="modal-header bg-secondary text-white py-2">
+                <h6 class="modal-title mb-0 text-white" id="donModalLabel">
+                    <i class="fas fa-hands-helping me-2 small text-white"></i> Soutenir notre mission
+                </h6>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                     aria-label="Fermer"></button>
             </div>
-            <div class="modal-body">
-                <div class="donation-wrapper">
-                    <div class="donation-options">
-                        <h3 class="text-center mb-4">Faire un Don</h3>
-                        <p class="text-center mb-4">Chaque contribution, petite ou grande, fait une différence
-                            significative dans la vie des personnes que nous servons.</p>
+            <div class="modal-body py-3 px-4">
+                <div class="donation-options">
+                    <h6 class="text-center mb-2">Faire un Don</h6>
+                    <p class="text-center mb-3 small">
+                        Même un petit geste peut changer des vies.
+                    </p>
 
-                        <div class="donation-method mb-4 p-3 border rounded">
-                            <div class="d-flex align-items-center">
-                                <div class="method-icon me-3">
-                                    <i class="fas fa-university fa-2x text-primary"></i>
-                                </div>
-                                <div class="method-details">
-                                    <h4>Virement Bancaire</h4>
-                                    <p class="mb-1"><strong>Banque :</strong> BGFI Bank Gabon</p>
-                                    <p class="mb-1"><strong>Titulaire :</strong> ONG NEHEMIE INTERNATIONAL</p>
-                                    <p class="mb-1"><strong>N° Compte :</strong> XXXXXXXXXXXX</p>
-                                    <p class="mb-0"><strong>Code SWIFT/BIC :</strong> BGFXXXXX</p>
-                                </div>
+                    <!-- Virement Bancaire -->
+                    <div class="donation-method mb-3 p-3 border rounded small">
+                        <div class="d-flex align-items-start">
+                            <div class="me-2 mt-1">
+                                <i class="fas fa-university text-primary"></i>
                             </div>
-                        </div>
-
-                        <div class="donation-method mb-4 p-3 border rounded">
-                            <div class="d-flex align-items-center">
-                                <div class="method-icon me-3">
-                                    <i class="fas fa-mobile-alt fa-2x text-primary"></i>
-                                </div>
-                                <div class="method-details">
-                                    <h4>Mobile Money</h4>
-                                    <p class="mb-1"><strong>Airtel Money :</strong> +241 XX XX XX XX</p>
-                                    <p class="mb-0"><strong>Moov Money :</strong> +241 XX XX XX XX</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="donation-method p-3 border rounded">
-                            <div class="d-flex align-items-center">
-                                <div class="method-icon me-3">
-                                    <i class="fas fa-credit-card fa-2x text-primary"></i>
-                                </div>
-                                <div class="method-details w-100">
-                                    <h4>Carte Bancaire</h4>
-                                    <p class="mb-3">Faites un don sécurisé en ligne via notre plateforme de paiement.
-                                    </p>
-                                    <a href="#" class="btn btn-primary w-100">
-                                        <i class="fas fa-credit-card me-2"></i>Donner maintenant
-                                    </a>
-                                </div>
+                            <div>
+                                <strong>Virement Bancaire</strong><br>
+                                Banque : BGFI Bank Gabon<br>
+                                Titulaire : ONG NEHEMIE INTERNATIONAL<br>
+                                N° Compte : XXXXXXXXXXXX<br>
+                                SWIFT/BIC : BGFXXXXX
                             </div>
                         </div>
                     </div>
 
+                    <!-- Mobile Money avec popup -->
+                    <div class="donation-method p-3 border rounded small">
+                        <div class="d-flex align-items-start">
+                            <div class="me-2 mt-1">
+                                <i class="fas fa-mobile-alt text-primary"></i>
+                            </div>
+                            <div class="w-100">
+                                <strong>Mobile Money</strong><br>
+                                <button onclick="openMobileMoneyPopup()" class="btn btn-sm w-100 text-white"
+                                    style="background-color: #795548; border: none;">
+                                    <i class="fas fa-mobile-alt me-1"></i>Faire un don
+                                </button>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    function openMobileMoneyPopup() {
+        const url = "{{ route('index') }}";
+        const width = 450;
+        const height = 550;
+
+        // Calcul de la position centrée
+        const left = (window.screen.width / 2) - (width / 2);
+        const top = (window.screen.height / 2) - (height / 2);
+
+        // Ouverture de la fenêtre centrée
+        window.open(
+            url,
+            'mobileMoneyPopup',
+            `width=${width},height=${height},top=${top},left=${left},scrollbars=yes,resizable=no`
+        );
+    }
+</script>
