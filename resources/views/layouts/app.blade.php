@@ -174,7 +174,8 @@
                     </li>
                 </ul>
             </li>
-            <li><a {{-- href="#faire-un-don"  --}} class="btn btn-primary mobile-btn">Faire un don</a></li>
+            <a href="#" class="btn btn-primary" style="border: none; padding: 0.5em 1em;"
+                data-bs-toggle="modal" data-bs-target="#donModal">Faire un don</a>
         </ul>
     </div>
 </div>
