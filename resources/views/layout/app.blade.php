@@ -17,9 +17,9 @@
     <!-- header starts -->
     <header class="main-header">
         <div class="custom-container">
-            <div class="header-panel">
+            <div class="header-panel d-flex justify-content-between align-items-center">
                 @if (!request()->routeIs('index'))
-                    <a onclick="history.back();">
+                    <a onclick="history.back();" class="me-3">
                         <i class="iconsax icon-btn" data-icon="chevron-left"></i>
                     </a>
                 @else
@@ -28,11 +28,21 @@
                         <img src="{{ asset('images/logo2.png') }}" alt="Logo" class="logo" style="width: 60px;">
                     </div>
                 @endif
-                <h1 class="fw-bold" style="margin-left: -70px;">@yield('title2')</h1>
-                <div class=""></div>
+
+                <h1 class="fw-bold mb-0 flex-grow-1 text-center" style="margin-left: -70px;">
+                    @yield('title2')
+                </h1>
+
+                <a href="#" class="text-decoration-none ms-3" title="Retour au site"
+                    onclick="returnToMainSite();">
+                    <i class="fas fa-home icon-btn text-black"></i>
+                </a>
+
+
             </div>
         </div>
     </header>
+
     <!-- header end -->
     <!-- Main content -->
     @yield('content')
@@ -43,6 +53,19 @@
     <script src="{{ asset('src/assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('src/assets/js/template-setting.js') }}"></script>
     <script src="{{ asset('src/assets/js/script.js') }}"></script>
+    <script>
+        function returnToMainSite() {
+            if (window.opener && !window.opener.closed) {
+                window.opener.location.href = "{{ route('route_accueil') }}"; // Redirige l'onglet principal
+                window.close(); // Ferme cette fenêtre popup
+            } else {
+                window.location.href = "{{ route('route_accueil') }}"; // Fallback si ouvert dans l’onglet principal
+            }
+        }
+    </script>
+
+
+
 </body>
 
 </html>
