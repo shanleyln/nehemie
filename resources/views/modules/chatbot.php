@@ -100,10 +100,7 @@ initializeEvents();
     </div>
 
 
-    <!-- Bouton de remontée -->
-    <button type="button" class="btn-scroll-top" id="scrollToTop">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+
 </div>
 <audio id="sound-open" src="<?= asset('sounds/open.mp3') ?>"></audio>
 <audio id="sound-close" src="<?= asset('sounds/close.mp3') ?>"></audio>

@@ -4,241 +4,6 @@
 
 @section('content')
 
-    <style>
-        .accordion-button:not(.collapsed) {
-            background-color: #f8f9fa;
-            box-shadow: none;
-        }
-
-        .accordion-button:focus {
-            box-shadow: none;
-            border-color: transparent;
-        }
-
-        .accordion-button::after {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%238B4513'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-        }
-
-        .bg-icon {
-            transition: all 0.3s ease;
-        }
-
-        .accordion-button:not(.collapsed) .bg-icon {
-            transform: scale(1.1);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .accordion-button:not(.collapsed) .fa-heart {
-            animation: pulse 1.5s infinite;
-        }
-
-        .accordion-button:not(.collapsed) .fa-hands-helping {
-            animation: bounce 1s infinite;
-        }
-
-        .accordion-button:not(.collapsed) .fa-hand-holding-heart {
-            animation: pulse 1.2s infinite;
-        }
-
-        .accordion-button:not(.collapsed) .fa-shield-alt {
-            animation: spin 2s infinite linear;
-        }
-
-        .accordion-button:not(.collapsed) .fa-handshake {
-            animation: swing 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.2);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        @keyframes bounce {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-5px);
-            }
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotateY(0);
-            }
-
-            100% {
-                transform: rotateY(360deg);
-            }
-        }
-
-        @keyframes swing {
-
-            0%,
-            100% {
-                transform: rotate(-10deg);
-            }
-
-            50% {
-                transform: rotate(10deg);
-            }
-        }
-
-        .card {
-            transition: transform 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-2px);
-        }
-
-        .icon-marron {
-            color: #8B4513;
-        }
-
-        .bg-icon {
-            background-color: #FFF8F0;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Style personnalisé pour la barre de défilement */
-        .values-container::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .values-container::-webkit-scrollbar-track {
-            background: #f8f9fa;
-            border-radius: 10px;
-        }
-
-        .values-container::-webkit-scrollbar-thumb {
-            background: #8B4513;
-            border-radius: 10px;
-        }
-
-        .values-container::-webkit-scrollbar-thumb:hover {
-            background: #6d3600;
-        }
-
-        /* Pour Firefox */
-        .values-container {
-            scrollbar-width: thin;
-            scrollbar-color: #8B4513 #f8f9fa;
-        }
-
-        .section-heading {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-
-        .heading-line {
-            width: 80px;
-            height: 3px;
-            background-color: #8B4513;
-            margin: 1rem auto;
-        }
-
-        .bg-icon {
-            background-color: rgba(139, 69, 19, 0.1);
-            color: #8B4513;
-        }
-
-        .mission-card {
-            background: #fff;
-            border-radius: 10px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-            height: 100%;
-        }
-
-        .mission-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .mission-card-icon {
-            font-size: 2.5rem;
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .team-member img {
-            width: 200px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 5px solid #fff;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .team-member img:hover {
-            transform: scale(1.05);
-        }
-
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            text-align: center;
-            padding-top: 50px;
-        }
-
-        .lightbox-content {
-            max-width: 80%;
-            max-height: 80vh;
-            margin: 0 auto;
-            display: block;
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .accordion-button:not(.collapsed) {
-            background-color: #f8f9fa;
-            color: #8B4513;
-            box-shadow: none;
-        }
-
-        .accordion-button:focus {
-            box-shadow: none;
-            border-color: rgba(0, 0, 0, .125);
-        }
-
-        .accordion-button:not(.collapsed)::after {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%238B4513'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-        }
-    </style>
 
     {{-- Hero Section --}}
     <section class="position-relative overflow-hidden" style="height: 50vh;">
@@ -578,6 +343,241 @@
     </section>
 
     @push('styles')
+        <style>
+            .accordion-button:not(.collapsed) {
+                background-color: #f8f9fa;
+                box-shadow: none;
+            }
+
+            .accordion-button:focus {
+                box-shadow: none;
+                border-color: transparent;
+            }
+
+            .accordion-button::after {
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%238B4513'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+            }
+
+            .bg-icon {
+                transition: all 0.3s ease;
+            }
+
+            .accordion-button:not(.collapsed) .bg-icon {
+                transform: scale(1.1);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .accordion-button:not(.collapsed) .fa-heart {
+                animation: pulse 1.5s infinite;
+            }
+
+            .accordion-button:not(.collapsed) .fa-hands-helping {
+                animation: bounce 1s infinite;
+            }
+
+            .accordion-button:not(.collapsed) .fa-hand-holding-heart {
+                animation: pulse 1.2s infinite;
+            }
+
+            .accordion-button:not(.collapsed) .fa-shield-alt {
+                animation: spin 2s infinite linear;
+            }
+
+            .accordion-button:not(.collapsed) .fa-handshake {
+                animation: swing 1.5s infinite;
+            }
+
+            @keyframes pulse {
+                0% {
+                    transform: scale(1);
+                }
+
+                50% {
+                    transform: scale(1.2);
+                }
+
+                100% {
+                    transform: scale(1);
+                }
+            }
+
+            @keyframes bounce {
+
+                0%,
+                100% {
+                    transform: translateY(0);
+                }
+
+                50% {
+                    transform: translateY(-5px);
+                }
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotateY(0);
+                }
+
+                100% {
+                    transform: rotateY(360deg);
+                }
+            }
+
+            @keyframes swing {
+
+                0%,
+                100% {
+                    transform: rotate(-10deg);
+                }
+
+                50% {
+                    transform: rotate(10deg);
+                }
+            }
+
+            .card {
+                transition: transform 0.2s;
+            }
+
+            .card:hover {
+                transform: translateY(-2px);
+            }
+
+            .icon-marron {
+                color: #8B4513;
+            }
+
+            .bg-icon {
+                background-color: #FFF8F0;
+                width: 36px;
+                height: 36px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Style personnalisé pour la barre de défilement */
+            .values-container::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            .values-container::-webkit-scrollbar-track {
+                background: #f8f9fa;
+                border-radius: 10px;
+            }
+
+            .values-container::-webkit-scrollbar-thumb {
+                background: #8B4513;
+                border-radius: 10px;
+            }
+
+            .values-container::-webkit-scrollbar-thumb:hover {
+                background: #6d3600;
+            }
+
+            /* Pour Firefox */
+            .values-container {
+                scrollbar-width: thin;
+                scrollbar-color: #8B4513 #f8f9fa;
+            }
+
+            .section-heading {
+                position: relative;
+                margin-bottom: 2rem;
+            }
+
+            .heading-line {
+                width: 80px;
+                height: 3px;
+                background-color: #8B4513;
+                margin: 1rem auto;
+            }
+
+            .bg-icon {
+                background-color: rgba(139, 69, 19, 0.1);
+                color: #8B4513;
+            }
+
+            .mission-card {
+                background: #fff;
+                border-radius: 10px;
+                padding: 2rem;
+                text-align: center;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+                height: 100%;
+            }
+
+            .mission-card:hover {
+                transform: translateY(-5px);
+            }
+
+            .mission-card-icon {
+                font-size: 2.5rem;
+                color: white;
+                margin-bottom: 1rem;
+            }
+
+            .team-member img {
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+                border-radius: 50%;
+                border: 5px solid #fff;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            }
+
+            .team-member img:hover {
+                transform: scale(1.05);
+            }
+
+            .lightbox {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.9);
+                text-align: center;
+                padding-top: 50px;
+            }
+
+            .lightbox-content {
+                max-width: 80%;
+                max-height: 80vh;
+                margin: 0 auto;
+                display: block;
+            }
+
+            .lightbox-close {
+                position: absolute;
+                top: 15px;
+                right: 35px;
+                color: #f1f1f1;
+                font-size: 40px;
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .accordion-button:not(.collapsed) {
+                background-color: #f8f9fa;
+                color: #8B4513;
+                box-shadow: none;
+            }
+
+            .accordion-button:focus {
+                box-shadow: none;
+                border-color: rgba(0, 0, 0, .125);
+            }
+
+            .accordion-button:not(.collapsed)::after {
+                background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%238B4513'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+            }
+        </style>
         <style>
             /* Team Member Cards */
             .team-member {

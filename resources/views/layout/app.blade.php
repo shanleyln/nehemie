@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>@yield('title', 'YodiPay')</title>
+    <title>@yield('title', 'Nehemie')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <!-- Icône du site -->
+    <link rel="icon" href="{{ asset('images/logo2.png') }}" type="image/x-icon">
     <!-- Assets -->
     <link rel="stylesheet" href="{{ asset('src/assets/css/vendors/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('src/assets/css/vendors/iconsax.css') }}">

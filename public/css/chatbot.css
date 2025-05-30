@@ -277,7 +277,7 @@
 
 #chat-floating-container {
     position: fixed;
-    bottom: 50px;
+    bottom: 100px;
     right: 25px;
     z-index: 9999;
     display: flex;
