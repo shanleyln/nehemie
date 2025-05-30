@@ -29,7 +29,7 @@
                     </div>
                 @endif
 
-                <h1 class="fw-bold mb-0 flex-grow-1 text-center" style="margin-left: -70px;">
+                <h1 class="fw-bold mb-0 flex-grow-1 text-center" style="margin-left: -50px;">
                     @yield('title2')
                 </h1>
 
