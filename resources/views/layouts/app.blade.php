@@ -119,7 +119,7 @@
             <a href="#" onclick="openMobileMoneyPopup()" class="btn btn-primary"
                 style="border: none; padding: 0.5em 1em;">Faire un
                 don</a>
-            <button class="menu-toggle my-5" aria-label="Menu">
+            <button class="menu-toggle mx-5" aria-label="Menu">
                 <span></span>
                 <span></span>
                 <span></span>
