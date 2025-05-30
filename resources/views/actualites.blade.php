@@ -1,128 +1,146 @@
 @extends('layouts.app')
 
+@push('styles')
+    <style>
+        .error-modal .modal-header {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .error-modal .modal-title {
+            font-weight: 600;
+        }
+
+        .error-modal .modal-body {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .error-modal .modal-body i {
+            font-size: 3rem;
+            color: #dc3545;
+            margin-bottom: 1rem;
+        }
+    </style>
+@endpush
+
 @section('content')
+
     {{-- Hero Section --}}
     <section class="position-relative overflow-hidden" style="height: 50vh;">
-        <!-- Image de fond -->
         <img src="{{ asset('images/notre-histoire.jpg') }}" alt="Actualités & Événements"
             class="w-100 h-100 object-fit-cover position-absolute top-0 start-0" style="z-index: 1;">
-
-        <!-- Filtre sombre sur toute l’image -->
         <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-75" style="z-index: 2;"></div>
-
-        <!-- Titre centré -->
         <div class="position-absolute top-50 start-50 translate-middle text-white text-center" style="z-index: 3;">
             <h1 class="display-5 fw-bold text-center text-white">Actualités & Événements</h1>
         </div>
     </section>
 
-    <!-- Section Actualités -->
-    <section id="actualites" class="news-section">
-        <div class="container">
-            <div class="section-heading text-center" data-aos="fade-up">
+    {{-- À la une --}}
+    @if (isset($featured) && $featured)
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <img src="{{ $featured['fichier_cover'] }}" alt="{{ $featured['texte_publication'] }}"
+                            class="img-fluid rounded shadow" style="max-height: 400px; width: 100%; object-fit: cover;">
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="p-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <span class="badge bg-primary me-2">Nouveau</span>
+                                <span class="text-muted">{{ $featured['date_formatted'] }}</span>
+                            </div>
+                            <h3 class="h2 mb-4">
+                                {{ \Illuminate\Support\Str::limit($featured['texte_publication'], 100, '...') }}</h3>
+                            <p class="lead">
+                                {{ \Illuminate\Support\Str::limit($featured['texte_publication'], 250, '...') }}</p>
+                            <a href="#" class="btn btn-outline-primary mt-auto align-self-start read-more">
+                                Lire la suite <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
 
+    {{-- Toutes les actualités --}}
+    <section id="actualites" class="py-5">
+        <div class="container">
+            <div class="section-heading text-center mb-5" data-aos="fade-up">
                 <div class="heading-line center"></div>
+                <h2 class="section-title">Toutes les actualités</h2>
                 <p class="section-subtitle">Restez informé de nos dernières actions et des événements à venir</p>
             </div>
 
-            <div class="news-grid" data-aos="fade-up">
-                <div class="news-card">
-                    <div class="news-image">
-                        <img src="<?= asset('images/evenement/club-anglais.png') ?>" alt="Lancement du Club d'Anglais">
-                        <div class="news-date">
-                            <span class="day">15</span>
-                            <span class="month">Mai</span>
-                        </div>
-                    </div>
-                    <div class="news-content">
-                        <h3>Lancement du Club d'Anglais pour les jeunes</h3>
-                        <p>NÉHÉMIE International a inauguré son club d'anglais visant à renforcer les compétences
-                            linguistiques des jeunes...</p>
-                        <a href="#" class="news-link">Lire la suite <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
+            <div class="row g-4" data-aos="fade-up">
+                @php $publications = $publications ?? []; @endphp
 
-                <div class="news-card">
-                    <div class="news-image">
-                        <img src="<?= asset('images/evenement/distribution-dorcas.png') ?>" alt="Distribution alimentaire">
-                        <div class="news-date">
-                            <span class="day">22</span>
-                            <span class="month">Avr</span>
-                        </div>
-                    </div>
-                    <div class="news-content">
-                        <h3>Grande distribution alimentaire à Akébé</h3>
-                        <p>Dans le cadre du programme DORCAS, une importante distribution de vivres a eu lieu dans
-                            le
-                            quartier Akébé...</p>
-                        <a href="#" class="news-link">Lire la suite <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
+                @if (count($publications) > 0)
+                    @foreach ($publications as $publication)
+                        @php
+                            $date = \Carbon\Carbon::parse($publication['date_publication']);
+                            $formattedDate = $date->format('d M Y');
+                        @endphp
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 shadow-sm">
+                                <div class="position-relative">
+                                    <img src="{{ $publication['fichier_cover'] }}" class="card-img-top"
+                                        alt="{{ $publication['texte_publication'] }}"
+                                        style="height: 200px; object-fit: cover;">
+                                    <div class="position-absolute top-0 end-0 text-white p-2"
+                                        style="background-color: #C78A44;">
+                                        {{ $formattedDate }}
+                                    </div>
+                                </div>
+                                <div class="card-body d-flex flex-column">
+                                    <p class="card-text flex-grow-1">
+                                        {{ \Illuminate\Support\Str::limit($publication['texte_publication'], 150, '...') }}
+                                    </p>
+                                    <a href="#" class="btn btn-outline-primary mt-auto align-self-start read-more">
+                                        Lire la suite <i class="fas fa-arrow-right ms-1"></i>
+                                    </a>
 
-                <div class="news-card">
-                    <div class="news-image">
-                        <img src="<?= asset('images/evenement/visite-terrain-nzeng-ayong.png') ?>" alt="Visite de terrain">
-                        <div class="news-date">
-                            <span class="day">10</span>
-                            <span class="month">Fév</span>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="col-12 text-center py-5">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Aucune actualité disponible pour le moment.
                         </div>
                     </div>
-                    <div class="news-content">
-                        <h3>Visite de terrain et évaluation des besoins</h3>
-                        <p>L'équipe de NÉHÉMIE s'est rendue à Nzeng-Ayong pour une évaluation des besoins des
-                            familles
-                            vulnérables...</p>
-                        <a href="#" class="news-link">Lire la suite <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
+                @endif
             </div>
-
-            {{-- <div class="news-events-wrapper" data-aos="fade-up">
-                      <div class="upcoming-events">
-                          <h3>Prochains Événements</h3>
-
-                          <div class="event-item">
-                              <div class="event-date">
-                                  <span class="event-day">10</span>
-                                  <span class="event-month">JUIN</span>
-                              </div>
-                              <div class="event-details">
-                                  <h4>Lancement campagne "Donnez-leur..."</h4>
-                                  <p><i class="fas fa-map-marker-alt"></i> Centre communautaire, Libreville</p>
-                                  <p><i class="fas fa-clock"></i> 18h00</p>
-                              </div>
-                          </div>
-
-                          <div class="event-item">
-                              <div class="event-date">
-                                  <span class="event-day">15</span>
-                                  <span class="event-month">JUIN</span>
-                              </div>
-                              <div class="event-details">
-                                  <h4>Atelier Formation Club d'Anglais</h4>
-                                  <p><i class="fas fa-map-marker-alt"></i> Local NÉHÉMIE</p>
-                                  <p><i class="fas fa-clock"></i> 14h00 - 16h00</p>
-                              </div>
-                          </div>
-                      </div>
-
-                       <div class="newsletter-signup">
-                          <h3>Rejoignez notre newsletter</h3>
-                          <p>Recevez nos actualités et restez informé de nos actions sur le terrain.</p>
-
-                          <form class="newsletter-form">
-                              <div class="form-group">
-                                  <label for="name">Nom</label>
-                                  <input type="text" id="name" placeholder="Votre nom">
-                              </div>
-                              <div class="form-group">
-                                  <label for="email">Email</label>
-                                  <input type="email" id="email" placeholder="Votre email">
-                              </div>
-                              <button type="submit" class="btn btn-primary">S'abonner</button>
-                          </form>
-                      </div> -
-                  </div> --}}
         </div>
     </section>
+
+
+
+
+    {{-- Modale d’erreur --}}
+    <div class="modal fade error-modal" id="errorModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Erreur</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p id="errorMessage"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 @endsection

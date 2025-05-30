@@ -24,10 +24,11 @@
                     </a>
                 @else
                     <div>
-
+                        {{-- LOGO --}}
+                        <img src="{{ asset('images/logo2.png') }}" alt="Logo" class="logo" style="width: 60px;">
                     </div>
                 @endif
-                <h1 class="fw-bold">@yield('title2')</h1>
+                <h1 class="fw-bold" style="margin-left: -70px;">@yield('title2')</h1>
                 <div class=""></div>
             </div>
         </div>

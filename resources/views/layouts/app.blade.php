@@ -6,46 +6,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="n8n-session-id" content="<?= \Illuminate\Support\Facades\Session::getId() ?>">
+    <meta name="n8n-session-id" content="{{ session()->getId() }}">
     <title>@yield('title')</title>
 
-    <!-- icone du site -->
-    <link rel="icon" href="<?= asset('images/logo2.png') ?>" type="image/x-icon">
-
-    <!-- FontAwesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
-    <script src="https://cdn.plyr.io/3.6.8/plyr.polyfilled.js"></script>
+    <!-- Icône du site -->
+    <link rel="icon" href="{{ asset('images/logo2.png') }}" type="image/x-icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Open+Sans:wght@300;400;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Open+Sans:wght@300;400;600&family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 
-    <!-- Fichiers CSS personnalisés -->
-    <link rel="stylesheet" href="<?= asset('css/styles.css') ?>">
-    <link rel="stylesheet" href="<?= asset('css/chatbot.css') ?>">
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+
+    <!-- Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Bibliothèques tierces -->
+    <!-- Plyr -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
+    <script src="https://cdn.plyr.io/3.6.8/plyr.polyfilled.js"></script>
+
+    <!-- Animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-        integrity="sha512-c42qXSf5l7l5W0kY8J1J3xXqT0B8h+EeJxJ5U2qyJ3OzX3VqLLh4Lh5kjJ53X1qQ==" crossorigin="anonymous"
-        referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- n8n chat -->
     <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+    <!-- Lightbox2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
+
+
+    <!-- CSS personnalisés -->
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/chatbot.css') }}">
 </head>
 
 <!-- En-tête et navigation -->
@@ -114,8 +116,14 @@
         </nav>
 
         <div class="header-actions" style="font-size: 0.85em;">
-            <a href="#" class="btn btn-primary" style="border: none; padding: 0.5em 1em;" data-bs-toggle="modal"
-                data-bs-target="#donModal">Faire un don</a>
+            <a href="#" onclick="openMobileMoneyPopup()" class="btn btn-primary"
+                style="border: none; padding: 0.5em 1em;">Faire un
+                don</a>
+            <button class="menu-toggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </div>
 
@@ -127,31 +135,9 @@
         <ul class="mobile-nav-list mt-5">
             <li><a href="{{ route('route_accueil') }}" class="mobile-nav-link">Accueil</a></li>
             <li><a href="{{ route('route_qui_sommes_nous') }}" class="mobile-nav-link">Qui sommes-nous</a></li>
-            {{-- <li class="mobile-dropdown">
-                <a href="{{ route('route_qui_sommes_nous') }}" class="mobile-nav-link" style="cursor: default;">Qui
-                    sommes-nous <i class="fas fa-chevron-down"></i></a>
-                <ul class="mobile-dropdown-menu">
-                    <li><a href="{{ route('route_qui_sommes_nous') }}#histoire">Notre
-                            Histoire</a></li>
-                    <li><a href="{{ route('route_qui_sommes_nous') }}#vision-mission">Vision & Mission</a></li>
-                    <li><a href="{{ route('route_qui_sommes_nous') }}#valeurs">Nos Valeurs</a>
-                    </li>
-                    <li><a href="{{ route('route_qui_sommes_nous') }}#equipe">Notre Équipe</a>
-                    </li>
-                </ul>
-            </li> --}}
+
             <li><a href="{{ route('route_nos_programmes') }}" class="mobile-nav-link">Nos programmes</a></li>
-            {{-- <li class="mobile-dropdown">
-                <a href="{{ route('route_nos_programmes') }}" class="mobile-nav-link" style="cursor: default;">Nos
-                    programmes <i class="fas fa-chevron-down"></i></a>
-                <ul class="mobile-dropdown-menu">
-                    <li><a href="{{ route('route_nos_programmes') }}#programme-salomon">SALOMON</a></li>
-                    <li><a href="{{ route('route_nos_programmes') }}#programme-joseph">JOSEPH</a></li>
-                    <li><a href="{{ route('route_nos_programmes') }}#programme-david">DAVID</a></li>
-                    <li><a href="{{ route('route_nos_programmes') }}#programme-daniel">DANIEL</a></li>
-                    <li><a href="{{ route('route_nos_programmes') }}#programme-priscille">PRISCILLE & AQUILA</a></li>
-                </ul>
-            </li> --}}
+
             <li><a href="{{ route('route_actualites') }}" class="mobile-nav-link">Actualités</a></li>
             <li><a href="{{ route('route_nos_actions_et_projets') }}" class="mobile-nav-link">Nos actions</a></li>
 
@@ -174,8 +160,8 @@
                     </li>
                 </ul>
             </li>
-            <a href="#" class="btn btn-primary" style="border: none; padding: 0.5em 1em;"
-                data-bs-toggle="modal" data-bs-target="#donModal">Faire un don</a>
+            <a href="#" onclick="openMobileMoneyPopup()" class="btn btn-primary mt-4"
+                style="border: none; padding: 0.5em 1em;">Faire un don</a>
         </ul>
     </div>
 </div>
@@ -189,7 +175,7 @@
     @include('modules/bouton_retour')
     @include('modales.modale_priere')
     @include('modales.modale_appel')
-    @include('modales.modale_don')
+
 
     <!-- Scripts -->
     <!-- jQuery (important avant Bootstrap JS) -->
@@ -200,7 +186,8 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <!-- Plyr -->
     <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-
+    <!-- Lightbox2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
     <!-- Script pour le menu déroulant mobile -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -241,6 +228,26 @@
     <!-- Scripts personnalisés -->
     <script src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/priere.js') }}"></script>
+
+    {{-- Script pour le popup mobile money --}}
+    <script>
+        function openMobileMoneyPopup() {
+            const url = "{{ route('index') }}";
+            const width = 450;
+            const height = 550;
+
+            // Calcul de la position centrée
+            const left = (window.screen.width / 2) - (width / 2);
+            const top = (window.screen.height / 2) - (height / 2);
+
+            // Ouverture de la fenêtre centrée
+            window.open(
+                url,
+                'mobileMoneyPopup',
+                `width=${width},height=${height},top=${top},left=${left},scrollbars=yes,resizable=no`
+            );
+        }
+    </script>
 
     <!-- Initialisation de Plyr -->
     <script>
