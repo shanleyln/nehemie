@@ -26,8 +26,10 @@
             <div class="row g-4">
                 <div class="col-md-12">
                     <div class="text-center mb-5">
-                        <h2 class="section-heading mb-4">Notre Histoire</h2>
-                        <div class="heading-line center mx-auto mb-4"></div>
+                        <div class="section-heading text-center" data-aos="fade-up">
+                            <h2>Notre Histoire</h2>
+                            <div class="heading-line center"></div>
+                        </div>
 
                         <div class="row justify-content-center">
                             <div class="col-lg-10">
@@ -141,8 +143,10 @@
     <section id="valeurs" class="bg-light" style="padding: 70px;">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="section-heading">Nos Valeurs Fondamentales</h2>
-                <div class="heading-line center mx-auto"></div>
+                <div class="section-heading text-center" data-aos="fade-up">
+                    <h2>Nos Valeurs Fondamentales</h2>
+                    <div class="heading-line center"></div>
+                </div>
             </div>
             <div class="values-container">
                 <div class="accordion" id="valeursAccordion">
@@ -258,8 +262,10 @@
     <section id="equipe" class="py-5">
         <div class="container">
             <div class="text-center mb-5">
-                <h2 class="section-heading">Notre Équipe</h2>
-                <div class="heading-line center mx-auto"></div>
+                <div class="section-heading text-center" data-aos="fade-up">
+                    <h2>Notre Équipe</h2>
+                    <div class="heading-line center"></div>
+                </div>
                 <p class="lead text-muted mt-3">Direction et Administration</p>
             </div>
 

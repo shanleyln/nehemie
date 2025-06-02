@@ -276,6 +276,7 @@
 }
 
 #chat-floating-container {
+     
     position: fixed;
     bottom: 100px;
     right: 25px;
