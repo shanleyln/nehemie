@@ -39,3 +39,9 @@ Route::get('/confirmer/{token}', [PaiementController::class, 'confirmer'])->name
 
 Route::get('/paiement/finaliser/{ref}', [PaiementController::class, 'finaliser'])->name('paiement.confirme.finaliser');
 Route::get('/paiement/echouer/{ref}', [PaiementController::class, 'echouer'])->name('paiement.echouer');
+
+
+Route::get('/telecharger-pdf', function () {
+    $path = public_path('pdf/plaquette.pdf');
+    return response()->download($path, 'plaquette.pdf');
+});

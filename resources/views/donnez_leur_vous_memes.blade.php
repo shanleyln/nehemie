@@ -33,8 +33,7 @@
 
             <!-- Bouton de téléchargement PDF -->
             <div class="text-center mb-5">
-                <a href="{{ asset('pdf/plaquette.pdf') }}" class="btn btn-primary btn-lg shadow-sm" target="_blank"
-                    download>
+                <a href="{{ url('/telecharger-pdf') }}" class="btn btn-primary btn-lg shadow-sm">
                     <i class="fas fa-file-pdf me-2"></i> Télécharger le PDF complet
                 </a>
             </div>
