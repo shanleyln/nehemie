@@ -33,9 +33,10 @@
 
             <!-- Bouton de téléchargement PDF -->
             <div class="text-center mb-5">
-                <a href="{{ url('/telecharger-pdf') }}" class="btn btn-primary btn-lg shadow-sm">
+                <a href="{{ asset('pdf/Plaquette.pdf') }}" class="btn btn-primary btn-lg shadow-sm" download>
                     <i class="fas fa-file-pdf me-2"></i> Télécharger le PDF complet
                 </a>
+
             </div>
 
             <!-- Double page interactive avec zoom visuel -->
