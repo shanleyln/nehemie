@@ -48,6 +48,7 @@
     <!-- CSS personnalisés -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('css/chatbot.css') }}">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
 </head>
 
 <!-- En-tête et navigation -->
@@ -261,6 +262,8 @@
             });
         });
     </script>
+
+    <script src="{{ asset('js/pwa.js') }}"></script>
 
 </body>
 
