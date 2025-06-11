@@ -1,10 +1,10 @@
 {
   "name": "Nehemie International",
   "short_name": "Nehemie International",
-  "start_url": "{{ route('route_accueil') }}",
+  "start_url": "https://nehemie-international.com/accueil",
   "display": "standalone",
-  "background_color": "#0134d4",
-  "theme_color": "#0134d4",
+  "background_color": "#fff",
+  "theme_color": "#fff",
   "categories": ["mobile", "pwa"],
   "orientation": "portrait",
   "description": "Nehemie International",
