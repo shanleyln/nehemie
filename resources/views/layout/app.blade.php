@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('src/assets/css/vendors/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('src/assets/css/vendors/iconsax.css') }}">
     <link rel="stylesheet" href="{{ asset('src/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/toast_pwa.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
