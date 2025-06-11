@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="n8n-session-id" content="{{ session()->getId() }}">
+    <meta name="theme-color" content="#0077cc">
     <title>@yield('title')</title>
 
     <!-- Icône du site -->
@@ -48,7 +49,9 @@
     <!-- CSS personnalisés -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('css/chatbot.css') }}">
-    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <link rel="manifest" href="manifest.json">
+
+
 </head>
 
 <!-- En-tête et navigation -->
@@ -168,20 +171,7 @@
 </div>
 
 <body>
-    <!-- Welcome Toast -->
-    <div class="toast toast-autohide custom-toast-1 toast-secondary home-page-toast shadow" role="alert"
-        aria-live="assertive" aria-atomic="true" data-bs-delay="60000" data-bs-autohide="true" id="installWrap">
-        <div class="toast-body p-4">
-            <div class="toast-text me-2">
-                <h6>Bienvenue sur Nehemie International!</h6>
-                <span class="d-block mb-3">Cliquez sur le bouton <strong>Installer Maintenant</strong> et
-                    profitez-en comme une application.</span>
-                <button id="installAffan" class="btn btn-sm btn-warning">Installer Maintenant </button>
-            </div>
-        </div>
-        <button class="btn btn-close position-absolute p-2" type="button" data-bs-dismiss="toast"
-            aria-label="Close"></button>
-    </div>
+
     <div id="main-content">
 
         @yield('content')
@@ -277,8 +267,40 @@
             });
         });
     </script>
+    {{-- Script pour le service worker popup d'intallation --}}
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
 
-    <script src="{{ asset('js/pwa.js') }}"></script>
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+
+            const btn = document.createElement('button');
+            btn.textContent = '📲 Installer cette application';
+            btn.style.position = 'fixed';
+            btn.style.bottom = '20px';
+            btn.style.left = '20px';
+            btn.style.padding = '10px 20px';
+            btn.style.background = '#0077cc';
+            btn.style.color = 'white';
+            btn.style.border = 'none';
+            btn.style.borderRadius = '8px';
+            document.body.appendChild(btn);
+
+            btn.addEventListener('click', () => {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then(choice => {
+                    if (choice.outcome === 'accepted') {
+                        btn.remove();
+                    }
+                });
+            });
+        });
+    </script>
+
 
 </body>
 
