@@ -168,22 +168,22 @@
 </div>
 
 <body>
-    <div id="main-content">
-        <!-- Welcome Toast -->
-        <div class="toast toast-autohide custom-toast-1 toast-secondary home-page-toast shadow" role="alert"
-            aria-live="assertive" aria-atomic="true" data-bs-delay="60000" data-bs-autohide="true"
-            id="installWrap">
-            <div class="toast-body p-4">
-                <div class="toast-text me-2">
-                    <h6>Bienvenue sur Nehemie International!</h6>
-                    <span class="d-block mb-3">Cliquez sur le bouton <strong>Installer Maintenant</strong> et
-                        profitez-en comme une application.</span>
-                    <button id="installAffan" class="btn btn-sm btn-warning">Installer Maintenant </button>
-                </div>
+    <!-- Welcome Toast -->
+    <div class="toast toast-autohide custom-toast-1 toast-secondary home-page-toast shadow" role="alert"
+        aria-live="assertive" aria-atomic="true" data-bs-delay="60000" data-bs-autohide="true" id="installWrap">
+        <div class="toast-body p-4">
+            <div class="toast-text me-2">
+                <h6>Bienvenue sur Nehemie International!</h6>
+                <span class="d-block mb-3">Cliquez sur le bouton <strong>Installer Maintenant</strong> et
+                    profitez-en comme une application.</span>
+                <button id="installAffan" class="btn btn-sm btn-warning">Installer Maintenant </button>
             </div>
-            <button class="btn btn-close position-absolute p-2" type="button" data-bs-dismiss="toast"
-                aria-label="Close"></button>
         </div>
+        <button class="btn btn-close position-absolute p-2" type="button" data-bs-dismiss="toast"
+            aria-label="Close"></button>
+    </div>
+    <div id="main-content">
+
         @yield('content')
     </div>
 
