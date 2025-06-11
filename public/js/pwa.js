@@ -26,26 +26,26 @@ document.addEventListener("DOMContentLoaded", function () {
     if (installButton && installWrap) {
         function updateInstallButton() {
             if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
-                installButton.textContent = 'Installed';
+                installButton.textContent = 'Installe';
                 installWrap.style.display = 'none';
             } else {
-                installButton.textContent = 'Install Now';
+                installButton.textContent = 'Installer maintenant';
                 installWrap.style.display = 'block';
             }
         }
 
         installButton.addEventListener('click', async () => {
-            if (installButton.textContent === 'Installed') return;
+            if (installButton.textContent === 'Installe') return;
 
             if (deferredPrompt) {
                 deferredPrompt.prompt();
                 const { outcome } = await deferredPrompt.userChoice;
 
                 if (outcome === 'accepted') {
-                    installButton.textContent = 'Installed';
+                    installButton.textContent = 'Installe';
                     installWrap.style.display = 'none';
                 } else {
-                    installButton.textContent = 'Install Now';
+                    installButton.textContent = 'Installer maintenant';
                 }
                 deferredPrompt = null;
             }
