@@ -50,7 +50,7 @@
 
             if (isAvailable) {
                 statusElement.innerHTML =
-                    '<i class="fas fa-check-circle text-success me-1"></i> Disponible maintenant';
+                    '<i class="fas fa-check-circle text-success me-1"></i>  Disponible maintenant';
             } else {
                 // Si c'est en dehors des heures d'ouverture
                 statusElement.innerHTML = '<i class="fas fa-clock text-muted me-1"></i> Hors service';
