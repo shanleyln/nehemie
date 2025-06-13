@@ -289,8 +289,7 @@
                         </div>
                         <h5 class="mb-1">Davy NGUEL'ENGOGO</h5>
                         <p class="text-muted mb-3">Président</p>
-                        <p class="small text-muted mb-0">Dirige visionnaire à la tête de notre organisation, guidant
-                            nos actions avec détermination et engagement.</p>
+
                     </div>
                 </div>
 
@@ -306,8 +305,7 @@
                         </div>
                         <h5 class="mb-1">Patrick MEVIANE BLAMPAIN</h5>
                         <p class="text-muted mb-3">Secrétaire Général</p>
-                        <p class="small text-muted mb-0">Garant de la bonne coordination et du suivi des activités de
-                            l'association.</p>
+
                     </div>
                 </div>
 
@@ -323,8 +321,7 @@
                         </div>
                         <h5 class="mb-1">Arsène BOUYOU NENDJO</h5>
                         <p class="text-muted mb-3">Secrétaire Général Adjoint</p>
-                        <p class="small text-muted mb-0">Appui au secrétariat général et coordination des activités
-                            opérationnelles.</p>
+
                     </div>
                 </div>
 
@@ -340,8 +337,7 @@
                         </div>
                         <h5 class="mb-1">ROGOULA Kassandra</h5>
                         <p class="text-muted mb-3">Assistance de Direction</p>
-                        <p class="small text-muted mb-0">Soutien administratif et logistique à la direction de
-                            l'organisation.</p>
+
                     </div>
                 </div>
             </div>

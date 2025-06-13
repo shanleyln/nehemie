@@ -66,22 +66,6 @@
             </div>
             <div class="modal-body p-4 pt-2">
                 <div class="d-grid gap-3">
-                    <a href="mailto:info@nehemie-internationale.com?subject=Demande%20d%27information%20pour%20devenir%20b%C3%A9n%C3%A9vole"
-                        class="contact-option text-decoration-none p-3">
-                        <div class="d-flex align-items-center">
-                            <div class="icon-wrapper me-3">
-                                <i class="fas fa-envelope text-marron"></i>
-                            </div>
-                            <div>
-                                <span class="d-block fw-medium text-primary">Envoyer un email</span>
-                                <small class="text-muted">info@nehemie-internationale.com</small>
-                            </div>
-                            <div class="ms-auto">
-                                <i class="fas fa-chevron-right text-muted"></i>
-                            </div>
-                        </div>
-                    </a>
-
                     <a href="tel:+24166609668" class="contact-option text-decoration-none p-3">
                         <div class="d-flex align-items-center">
                             <div class="icon-wrapper me-3">

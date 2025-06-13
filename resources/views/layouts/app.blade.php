@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="n8n-session-id" content="{{ session()->getId() }}">
     <meta name="theme-color" content="#fff">
@@ -105,7 +106,7 @@
                             class="fas fa-chevron-down"></i></span>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#priereModal">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#prayerModal">
                                 <i class="fas fa-praying-hands me-2"></i>Demande de prière
                             </a>
                         </li>
@@ -151,8 +152,7 @@
                         class="fas fa-chevron-down"></i></span>
                 <ul class="mobile-dropdown-menu">
                     <li>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#priereModal"
-                            data-bs-dismiss="offcanvas">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#prayerModal">
                             Demande de prière
                         </a>
                     </li>
@@ -181,6 +181,7 @@
     @include('modules/bouton_retour')
     @include('modales.modale_priere')
     @include('modales.modale_appel')
+    @include('modales.modale_prayer-form')
 
 
     <!-- Scripts -->

@@ -9,6 +9,7 @@ use App\Http\Controllers\NosActionsEtProjetsController;
 use App\Http\Controllers\ActualitesController;
 use App\Http\Controllers\DonnezLeurVousMemesController;
 use App\Http\Controllers\PaiementController;
+use App\Http\Controllers\PrayerRequestController;
 use Illuminate\Http\Request;
 
 // Routes principales
@@ -39,3 +40,11 @@ Route::get('/confirmer/{token}', [PaiementController::class, 'confirmer'])->name
 
 Route::get('/paiement/finaliser/{ref}', [PaiementController::class, 'finaliser'])->name('paiement.confirme.finaliser');
 Route::get('/paiement/echouer/{ref}', [PaiementController::class, 'echouer'])->name('paiement.echouer');
+
+
+
+// Cette route affiche le formulaire quand on va sur l'URL /demande-de-priere
+Route::get('/demande-de-priere', [PrayerRequestController::class, 'create'])->name('prayer.create');
+
+// Cette route traite les données quand le formulaire est envoyé
+Route::post('/demande-de-priere', [PrayerRequestController::class, 'store'])->name('prayer.store');
