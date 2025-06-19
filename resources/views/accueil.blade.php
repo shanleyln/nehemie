@@ -6,7 +6,8 @@
     <!-- Section Héro avec slider -->
     <section id="accueil" class="hero-section">
         <div class="hero-slider">
-            <div class="hero-slide active" style="background-image: url('{{ asset('images/slider/slide1.png') }}')">
+            <div class="hero-slide active"
+                style="background-image: url('{{ asset('images/slider/levons_nous_et_batissons.png') }}')">
                 <div class="container">
                     <div class="hero-content">
                         <h1 class="hero-title" data-aos="fade-up">"Levons-nous et bâtissons!"</h1>
@@ -21,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            <div class="hero-slide" style="background-image: url('{{ asset('images/slider/slide2.png') }}')">
+            <div class="hero-slide" style="background-image: url('{{ asset('images/slider/donnez_leur.jpg') }}')">
                 <div class="container">
                     <div class="hero-content">
                         <h1 class="hero-title">Donnez-leur vous-mêmes à manger</h1>
@@ -33,7 +34,7 @@
                     </div>
                 </div>
             </div>
-            <div class="hero-slide" style="background-image: url('{{ asset('images/slider/slide3.png') }}')">
+            <div class="hero-slide" style="background-image: url('{{ asset('images/slider/evangelisation.jpg') }}')">
                 <div class="container">
                     <div class="hero-content">
                         <h1 class="hero-title">L'Évangélisation par les actes</h1>
