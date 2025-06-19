@@ -315,18 +315,7 @@
                                                     <li>Établir des ponts entre les sphères politique et éducative.</li>
                                                 </ul>
                                             </div>
-                                            <div>
-                                                <h4 class="text-xl font-semibold mb-3 text-burgundy-700">KPIs Généraux</h4>
-                                                <ul class="list-disc list-inside pl-2 space-y-2 text-gray-700">
-                                                    <li>Nombre de leaders formés occupant des postes d'influence.</li>
-                                                    <li>Politiques publiques élaborées ou influencées par le programme.</li>
-                                                    <li>Nombre d'institutions éducatives adoptant les modèles développés.
-                                                    </li>
-                                                    <li>Amélioration des indicateurs de gouvernance dans les communautés
-                                                        ciblées.</li>
-                                                    <li>Évaluations d'impact sur les systèmes éducatifs.</li>
-                                                </ul>
-                                            </div>
+
                                         </div>
 
                                         <h4 class="text-xl font-semibold mb-4 text-burgundy-700">Projets Potentiels à
@@ -560,18 +549,7 @@
                                                     <li>Influencer les tendances culturelles et médiatiques.</li>
                                                 </ul>
                                             </div>
-                                            <div>
-                                                <h4 class="text-xl font-semibold mb-3 text-burgundy-700">KPIs Généraux</h4>
-                                                <ul class="list-disc list-inside pl-2 space-y-2 text-gray-700">
-                                                    <li>Nombre d'artistes/communicateurs formés ou soutenus.</li>
-                                                    <li>Portée et engagement des contenus produits (vues, partages, etc.).
-                                                    </li>
-                                                    <li>Nombre d'événements artistiques ou médiatiques organisés/impactés.
-                                                    </li>
-                                                    <li>Mentions ou reconnaissances dans les médias grand public.</li>
-                                                    <li>Sondages sur la perception de l'influence culturelle.</li>
-                                                </ul>
-                                            </div>
+
                                         </div>
                                         <h4 class="text-xl font-semibold mb-4 text-burgundy-700">Projets Potentiels à
                                             Développer</h4>
@@ -674,17 +652,7 @@
                                                         appliquée.</li>
                                                 </ul>
                                             </div>
-                                            <div>
-                                                <h4 class="text-xl font-semibold mb-3 text-burgundy-700">KPIs Généraux</h4>
-                                                <ul class="list-disc list-inside pl-2 space-y-2 text-gray-700">
-                                                    <li>Nombre de leaders religieux formés/impactés.</li>
-                                                    <li>Initiatives de dialogue interconfessionnel lancées.</li>
-                                                    <li>Nombre de croyants équipés pour un témoignage public.</li>
-                                                    <li>Opportunités de conseil obtenues auprès d'institutions séculières.
-                                                    </li>
-                                                    <li>Diffusion des ressources théologiques développées.</li>
-                                                </ul>
-                                            </div>
+
                                         </div>
                                         <h4 class="text-xl font-semibold mb-4 text-burgundy-700">Projets Potentiels à
                                             Développer</h4>
@@ -806,23 +774,7 @@
                                                     <li>Soutenir le mentorat et la transmission de compétences.</li>
                                                 </ul>
                                             </div>
-                                            <div>
-                                                <h4 class="text-xl font-semibold mb-3 text-burgundy-700">KPIs Généraux</h4>
-                                                <ul class="list-disc list-inside pl-2 space-y-2 text-gray-700">
-                                                    <li>Nombre de familles ayant participé aux programmes de renforcement.
-                                                    </li>
-                                                    <li>Nombre d'actions d'hospitalité ou d'entraide documentées.</li>
-                                                    <li><strong class="text-burgundy-800">Nombre de personnes/familles
-                                                            vulnérables ayant
-                                                            bénéficié d'une aide concrète.</strong></li>
-                                                    <li><strong class="text-burgundy-800">Nombre de bénévoles engagés dans
-                                                            des actions sociales
-                                                            via le programme.</strong></li>
-                                                    <li>Évaluations de l'impact sur le bien-être familial et communautaire.
-                                                    </li>
-                                                    <li>Nombre de relations de mentorat établies.</li>
-                                                </ul>
-                                            </div>
+
                                         </div>
                                         <h4 class="text-xl font-semibold mb-4 text-burgundy-700">Projets Potentiels à
                                             Développer</h4>

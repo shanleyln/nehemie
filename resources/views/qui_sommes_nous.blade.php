@@ -6,17 +6,15 @@
 
 
     {{-- Hero Section --}}
-    <section class="position-relative overflow-hidden" style="height: 50vh;">
+    <section class="position-relative overflow-hidden" style="height: 80vh;">
         <!-- Image de fond -->
-        <img src="{{ asset('images/notre-histoire.jpg') }}" alt="Qui sommes-nous"
+        <img src="{{ asset('images/slider/evangelisation.jpg') }}" alt="Qui sommes-nous"
             class="w-100 h-100 object-fit-cover position-absolute top-0 start-0" style="z-index: 1;">
 
-        <!-- Filtre sombre sur toute l’image -->
-        <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-75" style="z-index: 2;"></div>
-
-        <!-- Titre centré -->
-        <div class="position-absolute top-50 start-50 translate-middle text-white text-center" style="z-index: 3;">
-            <h1 class="display-5 fw-bold text-center text-white">Qui sommes-nous ?</h1>
+        <!-- Titre centré avec ombre portée pour meilleure lisibilité -->
+        <div class="position-absolute top-50 start-50 translate-middle text-center"
+            style="z-index: 3; text-shadow: 2px 2px 4px rgb(0, 0, 0);">
+            <h1 class="display-5 fw-bold text-white">Qui sommes-nous ?</h1>
         </div>
     </section>
 

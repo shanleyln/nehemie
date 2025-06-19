@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            <div class="hero-slide" style="background-image: url('{{ asset('images/slider/donnez_leur.jpg') }}')">
+            {{-- <div class="hero-slide" style="background-image: url('{{ asset('images/slider/donnez_leur.jpg') }}')">
                 <div class="container">
                     <div class="hero-content">
                         <h1 class="hero-title">Donnez-leur vous-mêmes à manger</h1>
@@ -34,8 +34,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="hero-slide" style="background-image: url('{{ asset('images/slider/evangelisation.jpg') }}')">
+            </div> --}}
+            {{-- <div class="hero-slide" style="background-image: url('{{ asset('images/slider/evangelisation.jpg') }}')">
                 <div class="container">
                     <div class="hero-content">
                         <h1 class="hero-title">L'Évangélisation par les actes</h1>
@@ -48,9 +48,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
-        <div class="hero-controls">
+        {{-- <div class="hero-controls">
             <button class="hero-control prev" aria-label="Slide précédent"><i class="fas fa-chevron-left"></i></button>
             <div class="hero-dots">
                 <button class="hero-dot active" aria-label="Slide 1"></button>
@@ -58,7 +58,7 @@
                 <button class="hero-dot" aria-label="Slide 3"></button>
             </div>
             <button class="hero-control next" aria-label="Slide suivant"><i class="fas fa-chevron-right"></i></button>
-        </div>
+        </div> --}}
     </section>
 
     <!-- Section Message de bienvenue -->
