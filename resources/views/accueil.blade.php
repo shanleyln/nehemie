@@ -26,6 +26,7 @@
                 <div class="container">
                     <div class="hero-content">
                         <h1 class="hero-title">Donnez-leur vous-mêmes à manger</h1>
+
                         <p class="hero-subtitle">chaque don compte</p>
                         <div class="hero-buttons">
                             <a href="#faire-un-don" class="btn btn-primary" style="border: none;">Participez
