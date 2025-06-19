@@ -4,17 +4,15 @@
 @section('content')
 
     {{-- Hero Section --}}
-    <section class="position-relative overflow-hidden" style="height: 50vh;">
+    <section class="position-relative overflow-hidden" style="height: 70vh;">
         <!-- Image de fond -->
-        <img src="{{ asset('images/notre-histoire.jpg') }}" alt="Nos Programmes"
+        <img src="{{ asset('images/slider/formation.jpg') }}" alt="Nos Programmes"
             class="w-100 h-100 object-fit-cover position-absolute top-0 start-0" style="z-index: 1;">
 
-        <!-- Filtre sombre sur toute l’image -->
-        <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-75" style="z-index: 2;"></div>
-
-        <!-- Titre centré -->
-        <div class="position-absolute top-50 start-50 translate-middle text-white text-center" style="z-index: 3;">
-            <h1 class="display-5 fw-bold text-center text-white">Nos Programmes</h1>
+        <!-- Titre centré avec ombre portée pour meilleure lisibilité -->
+        <div class="position-absolute top-50 start-50 translate-middle text-center"
+            style="z-index: 3; text-shadow: 2px 2px 4px rgb(0, 0, 0);">
+            <h1 class="display-5 fw-bold text-white">Nos Programmes</h1>
         </div>
     </section>
 
@@ -429,17 +427,7 @@
                                                         éthique.</li>
                                                 </ul>
                                             </div>
-                                            <div>
-                                                <h4 class="text-xl font-semibold mb-3 text-burgundy-700">KPIs Généraux</h4>
-                                                <ul class="list-disc list-inside pl-2 space-y-2 text-gray-700">
-                                                    <li>Nombre d'entreprises créées/accompagnées.</li>
-                                                    <li>Croissance du chiffre d'affaires des entreprises partenaires.</li>
-                                                    <li>Indice de satisfaction des employés dans les entreprises
-                                                        partenaires.</li>
-                                                    <li>Montant des investissements éthiques facilités.</li>
-                                                    <li>Nombre d'emplois créés par les entreprises du programme.</li>
-                                                </ul>
-                                            </div>
+
                                         </div>
 
                                         <h4 class="text-xl font-semibold mb-4 text-burgundy-700">Projets Potentiels à
