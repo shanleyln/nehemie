@@ -5,7 +5,7 @@
     {{-- Hero Section --}}
     <section class="position-relative overflow-hidden" style="height: 70vh;">
         <!-- Image de fond -->
-        <img src="{{ asset('images/slider/projet.jpg') }}" alt="Nos Actions et Projets"
+        <img src="{{ asset('images/slider/projets.jpg') }}" alt="Nos Actions et Projets"
             class="w-100 h-100 object-fit-cover position-absolute top-0 start-0" style="z-index: 1;">
 
         <!-- Titre centré avec ombre portée pour meilleure lisibilité -->
