@@ -14,7 +14,7 @@
         <!-- Titre centré avec ombre portée pour meilleure lisibilité -->
         <div class="position-absolute top-50 start-50 translate-middle text-center"
             style="z-index: 3; text-shadow: 2px 2px 4px rgb(0, 0, 0);">
-            <h1 class="display-5 fw-bold text-white">Qui sommes-nous ?</h1>
+            <h1 class="display-5 fw-bold text-white">Qui sommes-nous ? </h1>
         </div>
     </section>
 
