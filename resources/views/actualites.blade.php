@@ -28,7 +28,7 @@
 
     {{-- Hero Section --}}
     <section class="position-relative overflow-hidden" style="height: 70vh;">
-        <img src="{{ asset('images/slider/evenement.jpg') }}" alt="Actualités & Événements"
+        <img src="{{ asset('images/slider/Evenement.jpg') }}" alt="Actualités & Événements"
             class="w-100 h-100 object-fit-cover position-absolute top-0 start-0" style="z-index: 1;">
         <!-- Titre centré avec ombre portée pour meilleure lisibilité -->
         <div class="position-absolute top-50 start-50 translate-middle text-center"

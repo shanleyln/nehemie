@@ -7,7 +7,7 @@
     <section id="accueil" class="hero-section">
         <div class="hero-slider">
             <div class="hero-slide active"
-                style="background-image: url('{{ asset('images/slider/levons_nous_et_batissons.png') }}')">
+                style="background-image: url('{{ asset('images/slider/Levons_nous_et_batissons.png') }}')">
                 <div class="container">
                     <div class="hero-content">
                         <h1 class="hero-title" data-aos="fade-up">"Levons-nous et bâtissons!"</h1>
@@ -160,8 +160,8 @@
                         <li><i class="fas fa-check-circle"></i> Logistique</li>
                     </ul>
 
-                    <a href="#" class="btn btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#rejoindreModal">Nous rejoindre</a>
+                    <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#rejoindreModal">Nous
+                        rejoindre</a>
                 </div>
             </div>
         </div>

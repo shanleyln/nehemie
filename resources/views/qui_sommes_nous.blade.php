@@ -8,7 +8,7 @@
     {{-- Hero Section --}}
     <section class="position-relative overflow-hidden" style="height: 70vh;">
         <!-- Image de fond -->
-        <img src="{{ asset('images/slider/evangelisation.jpg') }}" alt="Qui sommes-nous"
+        <img src="{{ asset('images/slider/Evangelisation.jpg') }}" alt="Qui sommes-nous"
             class="w-100 h-100 object-fit-cover position-absolute top-0 start-0" style="z-index: 1;">
 
         <!-- Titre centré avec ombre portée pour meilleure lisibilité -->
