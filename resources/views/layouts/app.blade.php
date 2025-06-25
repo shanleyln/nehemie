@@ -46,9 +46,6 @@
     <!-- Lightbox2 CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
 
-    <!-- Fichiers CSS requis -->
-    <link rel="stylesheet" href="httpsa://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
     <!-- CSS personnalisé pour le chat (vous devrez créer ce fichier) -->
     <link rel="stylesheet" href="{{ asset('assets/css/dreamschat-custom.css') }}">
@@ -203,6 +200,42 @@
     <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
     <!-- Lightbox2 JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+
+
+    <!-- jQuery -->
+    <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="assets/js/jquery-3.7.1.min.js" type="975494c0d05ce29815c81f40-text/javascript"></script>
+
+    <!-- Bootstrap Core JS -->
+    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}" type="975494c0d05ce29815c81f40-text/javascript"></script>
+
+    <!-- Slimscroll JS -->
+    <script src="{{ asset('assets/plugins/slimscroll/jquery.slimscroll.min.js') }}" type="975494c0d05ce29815c81f40-text/javascript"></script>
+
+    <!-- Swiper JS -->
+    <script src="{{ asset('assets/plugins/swiper/swiper.min.js') }}" type="975494c0d05ce29815c81f40-text/javascript"></script>
+
+    <!-- FancyBox JS -->
+    <script src="{{ asset('assets/plugins/fancybox/jquery.fancybox.min.js') }}" type="975494c0d05ce29815c81f40-text/javascript"></script>
+
+    <!-- Select JS -->
+    <script src="{{ asset('assets/plugins/select2/js/select2.min.js') }}" type="975494c0d05ce29815c81f40-text/javascript"></script>
+
+    <!-- Datetimepicker JS -->
+    <script src="{{ asset('assets/js/moment.min.js') }}" type="975494c0d05ce29815c81f40-text/javascript"></script>
+    <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}" type="975494c0d05ce29815c81f40-text/javascript"></script>
+
+    <!-- Custom JS -->
+    <script src="{{ asset('assets/js/script.js') }}" type="975494c0d05ce29815c81f40-text/javascript"></script>
+
+    <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
+        data-cf-settings="975494c0d05ce29815c81f40-|49" defer></script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+        integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+        data-cf-beacon='{"rayId":"954c67261d95cc00","version":"2025.6.2","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"token":"3ca157e612a14eccbb30cf6db6691c29","b":1}'
+        crossorigin="anonymous"></script>
+
+
     <!-- Script pour le menu déroulant mobile -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
