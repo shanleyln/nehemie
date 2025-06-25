@@ -46,10 +46,18 @@
     <!-- Lightbox2 CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
 
+    <!-- Fichiers CSS requis -->
+    <link rel="stylesheet" href="httpsa://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <!-- CSS personnalisé pour le chat (vous devrez créer ce fichier) -->
+    <link rel="stylesheet" href="{{ asset('assets/css/dreamschat-custom.css') }}">
+
 
     <!-- CSS personnalisés -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('css/chatbot.css') }}">
+
     <link rel="manifest" href="manifest.json">
 
 
@@ -61,7 +69,7 @@
     <div class="header-wrapper">
         <div class="logo">
             <a href="{{ route('route_accueil') }}">
-                <img src="<?= asset('images/logo2.png') ?>" alt="Logo NÉHÉMIE International"
+                <img src="{{ asset('images/logo2.png') }}" alt="Logo NÉHÉMIE International"
                     style="height: 75px; width: auto;">
                 <span style="display: block; font-size: 0.9em; line-height: 1.2;">
                     <span style="display: block;">NÉHÉMIE</span>
