@@ -17,11 +17,27 @@ class ActualitesController extends Controller
     public function index()
     {
         try {
-            // Appel API pour récupérer les publications
-            $response = Http::withHeaders([
-                'X-API-KEY' => 'AOoEQWP9T5L1CAmeQxFbn8oxiC2ES9EB',
+            $apiUrl = 'https://api3.yodingenierie.com/api_nehemie/liste_publication';
+            $apiKey = 'AOoEQWP9T5L1CAmeQxFbn8oxiC2ES9EB';
+
+            // Vérifier si cURL est disponible
+            if (!extension_loaded('curl')) {
+                \Log::error('cURL n\'est pas installé sur le serveur');
+                return view('actualites', ['error' => 'Configuration serveur incomplète. Veuillez contacter l\'administrateur.']);
+            }
+
+            // Vérifier la configuration SSL
+            $sslVerify = config('app.env') === 'production' ? true : false;
+
+            $response = Http::withOptions([
+                'verify' => $sslVerify,
+                'debug' => config('app.debug') ? fopen('php://stderr', 'w') : false,
+            ])->withHeaders([
+                'X-API-KEY' => $apiKey,
+                'Accept' => 'application/json',
                 'Content-Type' => 'application/json'
-            ])->get('https://api3.yodingenierie.com/api_nehemie/liste_publication');
+            ])->timeout(30)
+              ->get($apiUrl);
 
             // Vérifie si l'appel est un succès
             if ($response->successful()) {
@@ -51,8 +67,27 @@ class ActualitesController extends Controller
                 }
             } else {
                 // En cas d'erreur de l'API
-                $errorMessage = 'Échec de récupération des actualités. Veuillez réessayer plus tard.';
-                return view('actualites', ['error' => $errorMessage]);
+                $statusCode = $response->status();
+                $errorBody = $response->body();
+
+                \Log::error("Erreur API Actualités - Status: $statusCode - Réponse: $errorBody");
+
+                $errorMessage = 'Échec de récupération des actualités. ';
+                if ($statusCode === 401) {
+                    $errorMessage .= 'Erreur d\'authentification API.';
+                } elseif ($statusCode >= 500) {
+                    $errorMessage .= 'Le serveur distant rencontre des difficultés.';
+                } else {
+                    $errorMessage .= 'Veuillez réessayer plus tard.';
+                }
+
+                return view('actualites', [
+                    'error' => $errorMessage,
+                    'debug' => config('app.debug') ? [
+                        'status' => $statusCode,
+                        'response' => $errorBody
+                    ] : null
+                ]);
             }
         } catch (\Exception $e) {
             // En cas d'exception inattendue
