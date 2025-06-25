@@ -422,16 +422,11 @@
                 <div class="footer-links-column">
                     <h4>Nos programmes</h4>
                     <ul>
-                        <li><a href="{{ route('route_nos_programmes') }}#nos-programmes">salomon</a>
-                        </li>
-                        <li><a href="{{ route('route_nos_programmes') }}#nos-programmes">joseph</a>
-                        </li>
-                        <li><a href="{{ route('route_nos_programmes') }}#nos-programmes">david</a>
-                        </li>
-                        <li><a href="{{ route('route_nos_programmes') }}#nos-programmes">daniel</a>
-                        </li>
-                        <li><a href="{{ route('route_nos_programmes') }}#nos-programmes">priscille</a>
-                        </li>
+                        <li><a href="{{ route('route_nos_programmes') }}#programme-salomon">Salomon</a></li>
+                        <li><a href="{{ route('route_nos_programmes') }}#programme-joseph">Joseph</a></li>
+                        <li><a href="{{ route('route_nos_programmes') }}#programme-david">David</a></li>
+                        <li><a href="{{ route('route_nos_programmes') }}#programme-daniel">Daniel</a></li>
+                        <li><a href="{{ route('route_nos_programmes') }}#programme-priscille">Priscille</a></li>
                     </ul>
                 </div>
 

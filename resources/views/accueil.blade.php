@@ -263,7 +263,7 @@
                                 <p>Former et équiper des leaders de gouvernance éthique et sage, influencer les systèmes
                                     politiques avec des principes bibliques, et développer des systèmes éducatifs qui
                                     intègrent sagesse et connaissance pour transformer la société.</p>
-                                <a href="{{ route('route_nos_programmes') }}#nos-programmes" class="btn btn-secondary">En
+                                <a href="{{ route('route_nos_programmes') }}#programme-salomon" class="btn btn-secondary">En
                                     savoir plus</a>
                             </div>
                         </div>
@@ -282,7 +282,7 @@
                                     d'affaires durables et équitables, et utiliser les ressources économiques pour avoir un
                                     impact social positif.</p>
 
-                                <a href="{{ route('route_nos_programmes') }}#nos-programmes" class="btn btn-secondary">En
+                                <a href="{{ route('route_nos_programmes') }}#programme-joseph" class="btn btn-secondary">En
                                     savoir plus</a>
                             </div>
                         </div>
@@ -301,7 +301,7 @@
                                     les sphères des arts, du divertissement et des médias avec des contenus qui élèvent
                                     l'esprit et reflètent les valeurs du Royaume.</p>
 
-                                <a href="{{ route('route_nos_programmes') }}#nos-programmes" class="btn btn-secondary">En
+                                <a href="{{ route('route_nos_programmes') }}#programme-david" class="btn btn-secondary">En
                                     savoir plus</a>
                             </div>
                         </div>
@@ -321,8 +321,7 @@
                                     séculiers, en particulier gouvernementaux, tout en étant des témoins vivants de leur
                                     foi.</p>
 
-
-                                <a href="{{ route('route_nos_programmes') }}#nos-programmes" class="btn btn-secondary">En
+                                <a href="{{ route('route_nos_programmes') }}#programme-daniel" class="btn btn-secondary">En
                                     savoir plus</a>
                             </div>
                         </div>
@@ -345,8 +344,7 @@
                                     l'hospitalité, le mentorat et des actions sociales concrètes de soutien aux personnes et
                                     familles vulnérables.</p>
 
-
-                                <a href="{{ route('route_nos_programmes') }}#nos-programmes" class="btn btn-secondary">En
+                                <a href="{{ route('route_nos_programmes') }}#programme-priscille" class="btn btn-secondary">En
                                     savoir plus</a>
                             </div>
                         </div>

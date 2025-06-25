@@ -2,7 +2,6 @@
 
 @section('title', 'Nos Programmes')
 @section('content')
-
     {{-- Hero Section --}}
     <section class="position-relative overflow-hidden" style="height: 70vh;">
         <!-- Image de fond -->
@@ -245,7 +244,7 @@
                             {{-- Programme salomon --}}
                             <div class="program-content active" id="program-salomon">
                                 <!-- Programme SALOMON -->
-                                <section id="programme-salomon" class="mb-16 bg-white rounded-xl  overflow-hidden">
+                                <section id="programme-salomon" class="mb-16 bg-white rounded-xl overflow-hidden">
                                     <div class="bg-secondary text-white p-8">
                                         <h2 class="text-3xl font-bold flex items-center text-white">
                                             <i class="fas fa-crown fa-fw mr-4 text-burgundy-300 text-4xl"></i>
@@ -357,7 +356,7 @@
                             {{-- Programme joseph --}}
                             <div class="program-content" id="program-joseph">
                                 <!-- Programme JOSEPH -->
-                                <section id="programme-joseph" class="mb-16 bg-white rounded-xl  overflow-hidden">
+                                <section id="programme-joseph" class="mb-16 bg-white rounded-xl overflow-hidden">
                                     <div class="bg-secondary text-white p-8">
                                         <h2 class="text-3xl font-bold flex items-center text-white">
                                             <i class="fas fa-seedling fa-fw mr-4 text-burgundy-300 text-4xl "></i>
@@ -827,19 +826,85 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> <!-- Fin de .programs-tabs-content -->
+                </div> <!-- Fin de .programs-tabs -->
+                </div> <!-- Fin de .container -->
             </section>
-
-
-
-
-
         </main>
 
-
         <script>
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            document.addEventListener('DOMContentLoaded', function() {
+                // Fonction pour activer un onglet spécifique
+                function activateTab(programId) {
+                    console.log('Activation de l\'onglet:', programId);
+                    // Désactiver tous les onglets
+                    document.querySelectorAll('.program-tab').forEach(tab => {
+                        tab.classList.remove('active');
+                    });
+                    document.querySelectorAll('.program-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+
+                    // Activer l'onglet et le contenu correspondants
+                    const tab = document.querySelector(`.program-tab[data-program="${programId}"]`);
+                    const content = document.getElementById(`program-${programId}`);
+
+                    if (tab && content) {
+                        tab.classList.add('active');
+                        content.classList.add('active');
+
+                        // Faire défiler jusqu'à la section
+                        content.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+
+
+                // Gestion du clic sur les onglets
+                document.querySelectorAll('.program-tab').forEach(tab => {
+                    tab.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const programId = this.getAttribute('data-program');
+                        // Mettre à jour l'URL sans recharger la page
+                        history.pushState(null, null, `#programme-${programId}`);
+                        activateTab(programId);
+                    });
+                });
+
+                // Gestion du chargement de la page avec une ancre
+                if (window.location.hash) {
+                    const hash = window.location.hash.substring(1); // Enlever le #
+                    // Vérifier si le hash correspond à un programme
+                    const programMatch = hash.match(/^programme-(salomon|joseph|david|daniel|priscille)$/);
+                    if (programMatch) {
+                        const programId = programMatch[1];
+                        // Petit délai pour s'assurer que le DOM est complètement chargé
+                        setTimeout(() => activateTab(programId), 100);
+                    }
+                } else {
+                    // Si pas de hash, activer le premier onglet
+                    setTimeout(() => activateTab('salomon'), 100);
+                }
+
+                // Gestion du bouton de retour
+                window.addEventListener('popstate', function() {
+                    if (window.location.hash) {
+                        const hash = window.location.hash.substring(1);
+                        const programMatch = hash.match(/^programme-(salomon|joseph|david|daniel|priscille)$/);
+                        if (programMatch) {
+                            const programId = programMatch[1];
+                            activateTab(programId);
+                        }
+                    } else {
+                        // Si pas de hash, activer le premier onglet
+                        activateTab('salomon');
+                    }
+                });
+            });
         </script>
+
 
     </body>
 
