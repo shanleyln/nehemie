@@ -1,3 +1,5 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
 /* =============================================
    dreamschat-custom.css
    Styles adaptés du template DreamsChat pour le widget flottant
@@ -52,8 +54,8 @@
     position: fixed;
     bottom: 100px;
     right: 25px;
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     border: 5px solid var(--border-color);
     background-color: var(--body-bg);
     border-radius: 100%;
@@ -342,7 +344,6 @@
     opacity: 0;
 }
 
-/* ... dans votre fichier dreamschat-custom.css ... */
 
 /* Pour la responsivité sur mobile */
 @media (max-width: 767px) {

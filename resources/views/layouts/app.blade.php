@@ -47,8 +47,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <!-- CSS personnalisé pour le chat (vous devrez créer ce fichier) -->
-    <link rel="stylesheet" href="{{ asset('assets/css/dreamschat-custom.css') }}">
+
 
 
     <!-- CSS personnalisés -->
@@ -176,17 +175,17 @@
 </div>
 
 <body>
-
-    <div id="main-content">
-
-        @yield('content')
-    </div>
-
     @include('modules/chatbot')
     @include('modules/bouton_retour')
     @include('modales.modale_priere')
     @include('modales.modale_appel')
     @include('modales.modale_prayer-form')
+    <div id="main-content">
+
+        @yield('content')
+    </div>
+
+
 
 
     <!-- Scripts -->
