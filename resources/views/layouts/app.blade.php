@@ -52,7 +52,7 @@
 
     <!-- CSS personnalisés -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/chatbot.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/chatbot.css') }}">
 
     <link rel="manifest" href="manifest.json">
 
