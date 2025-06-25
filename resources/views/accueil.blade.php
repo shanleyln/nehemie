@@ -11,9 +11,8 @@
                 <div class="container">
                     <div class="hero-content">
                         <h1 class="hero-title" data-aos="fade-up">"Levons-nous et bâtissons!"</h1>
-                        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">Une ONG chrétienne
-                            engagée
-                            auprès des vulnérables</p>
+                        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">Une ONG chrétienne animée par la
+                            foi, au service des plus vulnérables.</p>
                         <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
                             <a href="{{ route('route_qui_sommes_nous') }}#vision-mission" class="btn btn-primary"
                                 style="border: none;">Découvrir
