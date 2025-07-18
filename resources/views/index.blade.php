@@ -95,12 +95,13 @@
 
                                 <!-- Texte structuré -->
                                 <div>
-                                    <h6 class="fw-bold mb-2" style="color: #F57C00;">Virement Bancaire</h6>
+                                    <h6 class="fw-bold mb-1" style="color: #F57C00;">Virement Bancaire</h6>
                                     <ul class="list-unstyled mb-0">
-                                        <li><strong>Banque :</strong> BGFI Bank Gabon</li>
-                                        <li><strong>Titulaire :</strong> ONG NEHEMIE INTERNATIONAL</li>
-                                        <li><strong>N° Compte :</strong> XXXXXXXXXXXX</li>
-                                        <li><strong>SWIFT/BIC :</strong> BGFXXXXX</li>
+                                        <li><strong>Banque :</strong> Orabank Gabon</li>
+                                        <li><strong>Titulaire :</strong> ONG NEHEMIE</li>
+                                        <li><strong>N° Compte :</strong> 01005 - 24133400901 - 96</li>
+                                        <li><strong>Device :</strong>XAF FCFA</li> <br>
+                                        <li><strong>SWIFT :</strong> ORBKGALI</li>
                                     </ul>
                                 </div>
                             </div>
@@ -151,19 +152,21 @@
                                 }
                             }
                         @endphp
-
+                        {{-- indisponible pour le moment --}}
+                        <div class="alert alert-danger mt-3" style="font-size: 13px">
+                            indisponible pour le moment
+                        </div>
                         <!-- ✅ Formulaire de paiement -->
-                        <form class="auth-form mt-4 shadow" method="POST" action="{{ route('paiement.valider') }}">
+                        {{-- <form class="auth-form mt-4 shadow" method="POST" action="{{ route('paiement.valider') }}">
                             @csrf
 
                             <div class="form-group">
                                 <label class="form-label mb-2" for="InputMontant">Montant à payer (FCFA)</label>
                                 <div class="form-input">
                                     <input type="text" id="montant_affiche" class="form-control shadow-sm ps-5"
-                                        {{-- ps-5 = padding left pour l’icône --}} placeholder="Ex : 10 000" oninput="formatMontant(this)"
+                                      placeholder="Ex : 10 000" oninput="formatMontant(this)"
                                         inputmode="numeric" value="{{ $montant ?? null }}" autocomplete="off" required>
 
-                                    <!-- 📤 Champ réel soumis au backend -->
                                     <input type="hidden" name="montant" id="montant" value="{{ $montant ?? null }}"
                                         required>
                                 </div>
@@ -174,7 +177,7 @@
                                 style="font-weight: bold; border-radius: 8px; padding: 10px 0; font-size: 16px;">
                                 Payer maintenant
                             </button>
-                        </form>
+                        </form> --}}
                         <script>
                             function formatMontant(input) {
                                 let valeur = input.value.replace(/\s/g, '').replace(/\D/g, '');

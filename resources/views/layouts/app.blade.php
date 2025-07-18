@@ -125,9 +125,9 @@
         </nav>
 
         <div class="header-actions" style="font-size: 0.85em;">
-            {{-- <a href="#" onclick="openMobileMoneyPopup()" class="btn btn-primary"
+            <a href="#" onclick="openMobileMoneyPopup()" class="btn btn-primary"
                 style="border: none; padding: 0.5em 1em;">Faire un
-                don</a> --}}
+                don</a>
             <button class="menu-toggle mx-2" aria-label="Menu">
                 <span></span>
                 <span></span>
@@ -168,8 +168,8 @@
                     </li>
                 </ul>
             </li>
-            {{-- <a href="#" onclick="openMobileMoneyPopup()" class="btn btn-primary mt-4"
-                style="border: none; padding: 0.5em 1em;">Faire un don</a> --}}
+            <a href="#" onclick="openMobileMoneyPopup()" class="btn btn-primary mt-4"
+                style="border: none; padding: 0.5em 1em;">Faire un don</a>
         </ul>
     </div>
 </div>
