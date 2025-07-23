@@ -223,42 +223,6 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(impactSection);
     }
 
-    // Bouton retour en haut
-    const backToTopBtn = document.getElementById('backToTop');
-    
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 500) {
-            backToTopBtn.classList.add('active');
-        } else {
-            backToTopBtn.classList.remove('active');
-        }
-    });
-    
-    backToTopBtn.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
-    // Animation au défilement
-    const animatedElements = document.querySelectorAll('[data-aos]');
-    
-    function checkScroll() {
-        const triggerBottom = window.innerHeight * 0.8;
-        
-        animatedElements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            
-            if (elementTop < triggerBottom) {
-                element.classList.add('aos-animate');
-            }
-        });
-    }
-    
-    window.addEventListener('scroll', checkScroll);
-    checkScroll(); // Vérifier au chargement initial
-
     // Validation du formulaire de contact
     const contactForm = document.getElementById('contactForm');
     

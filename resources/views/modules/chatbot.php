@@ -1,3 +1,13 @@
+<!-- pour les images il faut le dossier public/imageschatbot -->
+<!-- il y a deja le bouton retour pour scroll est deja dedans -->
+
+<!-- =================================================================
+     NOUVELLE STRUCTURE HTML POUR LE BOUTON RETOUR EN HAUT
+     ================================================================= -->
+<button id="backToTop" aria-label="Retour en haut">
+    <i class="fas fa-chevron-up"></i>
+</button>
+
 <!-- =================================================================
      NOUVELLE STRUCTURE HTML POUR LE CHATBOT
      ================================================================= -->
@@ -15,12 +25,13 @@
                 <!-- Message d’accueil -->
                 <div class="chats">
                     <div class="chat-avatar">
-                        <img src="<?= asset('images/gabriel.jpeg') ?>" class="rounded-circle" alt="Gabriel">
+                        <img src="<?= asset('imageschatbot/gabriel.jpeg') ?>" class="rounded-circle" alt="Gabriel">
                     </div>
                     <div class="chat-content">
                         <div class="chat-profile-name">
                             <h6>Gabriel<i class="ti ti-circle-filled fs-7 mx-2"></i><span
-                                    class="chat-time">Maintenant</span></h6>
+                                    class="chat-time">Maintenant</span>
+                            </h6>
                         </div>
                         <div class="chat-info">
                             <div class="message-content">
@@ -45,7 +56,8 @@
         <div class="chat-footer">
             <div class="chat-footer-wrap">
                 <div class="form-wrap">
-                    <input id="user-message" type="text" class="form-control" placeholder="Tapez votre message...">
+                    <textarea id="user-message" class="form-control auto-expand" placeholder="Tapez votre message..."
+                        rows="1" data-min-rows="1" data-max-rows="4"></textarea>
                 </div>
                 <div class="form-btn">
                     <button id="send-btn" class="btn btn-primary" type="button">
@@ -59,7 +71,7 @@
     <!-- Bulle flottante (Launcher) -->
     <div id="chat-launcher" class="chat-bubble">
         <div class="chat-bubble-content">
-            <img id="chat-launcher-icon" src="<?= asset('images/gabriel.jpeg') ?>" alt="Gabriel"
+            <img id="chat-launcher-icon" src="<?= asset('imageschatbot/gabriel.jpeg') ?>" alt="Gabriel"
                 class="chat-icon-image">
         </div>
     </div>
@@ -83,10 +95,12 @@ let historyArr = []; // Renommé pour éviter conflit avec window.history
 let currentUrl = window.location.pathname;
 async function loadPage(url) {
     /* ... Votre code inchangé ... */
+    console.log(url);
 }
 
 function initializeEvents() {
     /* ... Votre code inchangé ... */
+    console.log('Events initialized');
 }
 initializeEvents();
 
@@ -155,10 +169,10 @@ document.addEventListener('DOMContentLoaded', function() {
         chatHeader.innerHTML = `
         <div class="user-details">
             <div class="avatar avatar-lg online flex-shrink-0">
-                <img src="<?= asset('images/gabriel.jpeg') ?>" class="rounded-circle" alt="Gabriel">
+                <img src="<?= asset('imageschatbot/gabriel.jpeg') ?>" class="rounded-circle" alt="Okoumé">
             </div>
             <div class="ms-2 overflow-hidden">
-                <h6>Gabriel</h6>
+                <h6>Okoumé</h6>
                 <span class="last-seen">En ligne</span>
             </div>
         </div>
@@ -223,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
             <div class="chat-avatar">
-                <img src="<?= asset('images/user.png') ?>" class="rounded-circle" alt="Utilisateur">
+                <img src="<?= asset('imageschatbot/user.png') ?>" class="rounded-circle" alt="Utilisateur">
             </div>
         `;
         chatMessagesContainer.appendChild(userMsgDiv);
@@ -238,7 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
         typingDiv.id = "typing-indicator"; // Pour le retrouver facilement
         typingDiv.innerHTML = `
             <div class="chat-avatar">
-                <img src="<?= asset('images/gabriel.jpeg') ?>" class="rounded-circle" alt="Gabriel">
+                <img src="<?= asset('imageschatbot/gabriel.jpeg') ?>" class="rounded-circle" alt="Okoumé">
             </div>
             <div class="chat-content">
                  <div class="chat-info">
@@ -267,41 +281,105 @@ document.addEventListener('DOMContentLoaded', function() {
 
         async function sendWithRetry() {
             try {
+                console.log('1. Préparation de la requête avec les données:', requestData);
+
+                // Vérifier si la session ID est présente
+                const sessionId = document.querySelector('meta[name="n8n-session-id"]')?.content;
+                console.log('2. Session ID récupéré:', sessionId || 'non trouvé');
+
+                // Vérifier la connectivité réseau
+                console.log('3. Vérification de la connectivité réseau...');
+                const isOnline = await checkConnectivity();
+                if (!isOnline) {
+                    throw new Error('Aucune connexion Internet détectée');
+                }
+
+                console.log('4. Tentative de connexion au serveur...');
+                const startTime = Date.now();
+
+                // Essayer avec différentes options de requête
+                const fetchOptions = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify(requestData),
+                    mode: 'cors',
+                    credentials: 'same-origin',
+                    cache: 'no-cache',
+                    redirect: 'follow',
+                    referrerPolicy: 'no-referrer'
+                };
+
+                console.log('Options de la requête:', fetchOptions);
+
+                //*** */=========                    =========***
+                //*** */========= LIEN DE LA REQUETE ==========**
+                //*** */=========                    =========***
+
                 const res = await fetch(
-                    "https://yodn8n.app.n8n.cloud/webhook/aef2708c-8929-4313-8c16-d383bbc828c3/chat", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(requestData)
-                    }
-                );
+                    "LIEN_N8N_CHATBOT",
+                    fetchOptions,
+                ).catch(error => {
+                    const endTime = Date.now();
+                    console.error(`5. Erreur de connexion après ${endTime - startTime}ms:`,
+                        error);
+                    console.error('Détails de l\'erreur:', {
+                        name: error.name,
+                        message: error.message,
+                        stack: error.stack,
+                        type: error.type,
+                        code: error.code
+                    });
+                    throw error;
+                });
+
+                console.log('Response status:', res.status);
 
                 if (!res.ok) {
+                    console.error(`5. Réponse du serveur non valide (${res.status}):`, res.statusText);
+                    console.log('6. En-têtes de la réponse:', Object.fromEntries([...res.headers
+                        .entries()
+                    ]));
+
                     if (attempt < maxAttempts) {
                         attempt++;
+                        console.log(
+                            `7. Tentative ${attempt}/${maxAttempts} dans ${attempt} secondes...`);
                         await new Promise(resolve => setTimeout(resolve, attempt * 1000));
                         return sendWithRetry();
                     } else {
-                        throw new Error(`Erreur réseau (${res.status})`);
+                        const errorText = await res.text().catch(() =>
+                            'Impossible de lire le corps de la réponse');
+                        console.error('8. Dernière tentative échouée. Réponse complète:', errorText);
+                        throw new Error(`Erreur serveur (${res.status}): ${res.statusText}`);
                     }
                 }
 
                 document.getElementById('typing-indicator')?.remove();
 
-                let reponse = await res.text();
-                reponse = reponse.trim() || "Désolé, une erreur est survenue. Veuillez réessayer.";
+                let reponse = '';
+                try {
+                    reponse = await res.text();
+                    console.log('Raw response:', reponse);
+                    reponse = reponse.trim() ||
+                        "Désolé, je n'ai pas pu obtenir de réponse. Veuillez réessayer.";
+                } catch (error) {
+                    console.error('Error parsing response:', error);
+                    reponse = "Désolé, une erreur est survenue lors du traitement de la réponse.";
+                }
 
                 // 4. Afficher la réponse du bot avec le nouveau design
                 const botDiv = document.createElement("div");
                 botDiv.className = "chats";
                 botDiv.innerHTML = `
                     <div class="chat-avatar">
-                        <img src="<?= asset('images/gabriel.jpeg') ?>" class="rounded-circle" alt="Gabriel">
+                        <img src="<?= asset('imageschatbot/gabriel.jpeg') ?>" class="rounded-circle" alt="Okoumé">
                     </div>
                     <div class="chat-content">
                         <div class="chat-profile-name">
-                            <h6>Gabriel<i class="ti ti-circle-filled fs-7 mx-2"></i><span class="chat-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span></h6>
+                            <h6>Okoumé<i class="ti ti-circle-filled fs-7 mx-2"></i><span class="chat-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span></h6>
                         </div>
                         <div class="chat-info">
                             <div class="message-content">
@@ -326,7 +404,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="chat-content">
                         <div class="chat-info error-message">
                             <i class="ti ti-alert-triangle me-2"></i>
-                            Une erreur est survenue. Veuillez réessayer plus tard.
+                            Désolé, le service de chat est temporairement indisponible. Notre équipe technique a été notifiée. Veuillez réessayer ultérieurement.
                         </div>
                     </div>
                 `;
@@ -340,17 +418,39 @@ document.addEventListener('DOMContentLoaded', function() {
         sendWithRetry();
     }
 
+    // Vérifie la connectivité réseau
+    async function checkConnectivity() {
+        try {
+            // Essayer de récupérer une ressource connue
+            const response = await fetch('https://httpbin.org/get', {
+                method: 'HEAD',
+                cache: 'no-store',
+                mode: 'no-cors'
+            });
+            return true;
+        } catch (error) {
+            console.error('Erreur de connectivité:', error);
+            return false;
+        }
+    }
+
     function sanitizeHTML(str) {
+        if (!str) return '';
         const temp = document.createElement('div');
         temp.textContent = str;
         return temp.innerHTML.replace(/\n/g, '<br>'); // Convertit les sauts de ligne en <br>
     }
 
-    // --- GESTION DES ÉVÉNEMENTS (inchangé) ---
-    userMessage.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter' && !userMessage.disabled) {
-            sendMessage();
+    // --- GESTION DES ÉVÉNEMENTS ---
+    userMessage.addEventListener('keydown', function(e) {
+        // Envoyer le message uniquement avec Ctrl+Entrée ou Cmd+Entrée
+        if (e.key === 'Enter' && !e.shiftKey) {
+            if ((e.ctrlKey || e.metaKey) && !userMessage.disabled) {
+                e.preventDefault();
+                sendMessage();
+            }
         }
+        // Laisser le comportement par défaut pour Shift+Entrée (nouvelle ligne)
     });
 
     sendBtn.addEventListener('click', function() {
@@ -359,9 +459,47 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Fonction d'auto-ajustement du textarea
+    const autoExpand = (field) => {
+        // Réinitialiser la hauteur pour obtenir la hauteur de défilement correcte
+        field.style.height = 'auto';
+
+        // Obtenir les valeurs min et max de lignes
+        const minRows = parseInt(field.getAttribute('data-min-rows') || '1', 10);
+        const maxRows = parseInt(field.getAttribute('data-max-rows') || '4', 10);
+
+        // Calculer la hauteur
+        const lineHeight = parseInt(window.getComputedStyle(field).lineHeight, 10);
+        const paddingTop = parseInt(window.getComputedStyle(field).paddingTop, 10);
+        const paddingBottom = parseInt(window.getComputedStyle(field).paddingBottom, 10);
+
+        // Calculer les hauteurs min et max
+        const minHeight = minRows * lineHeight + paddingTop + paddingBottom;
+        const maxHeight = maxRows * lineHeight + paddingTop + paddingBottom;
+
+        // Ajuster la hauteur
+        field.style.overflowY = 'hidden';
+        field.style.height = Math.min(Math.max(field.scrollHeight, minHeight), maxHeight) + 'px';
+
+        // Activer le défilement si nécessaire
+        field.style.overflowY = field.scrollHeight > maxHeight ? 'auto' : 'hidden';
+    };
+
+    // Appliquer l'auto-ajustement au textarea du chat
+    if (userMessage) {
+        // Appliquer l'ajustement lors de la frappe
+        userMessage.addEventListener('input', function() {
+            autoExpand(this);
+        });
+
+        // Appliquer l'ajustement au chargement initial
+        autoExpand(userMessage);
+    }
+
     document.querySelectorAll('.quick-btn').forEach(button => {
         button.addEventListener('click', () => {
             userMessage.value = button.textContent;
+            autoExpand(userMessage); // Ajuster la hauteur après avoir défini la valeur
             sendMessage();
             if (quickButtons) quickButtons.style.display = 'none';
         });
@@ -449,4 +587,41 @@ document.addEventListener('DOMContentLoaded', function() {
         resetInactivityTimer));
     resetInactivityTimer();
 });
+
+//debut Bouton retour en haut
+const backToTopBtn = document.getElementById('backToTop');
+
+window.addEventListener('scroll', function() {
+    if (window.scrollY > 500) {
+        backToTopBtn.classList.add('active');
+    } else {
+        backToTopBtn.classList.remove('active');
+    }
+});
+
+backToTopBtn.addEventListener('click', function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+    });
+});
+
+// Animation au défilement
+const animatedElements = document.querySelectorAll('[data-aos]');
+
+function checkScroll() {
+    const triggerBottom = window.innerHeight * 0.8;
+
+    animatedElements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+
+        if (elementTop < triggerBottom) {
+            element.classList.add('aos-animate');
+        }
+    });
+}
+
+window.addEventListener('scroll', checkScroll);
+checkScroll(); // Vérifier au chargement initial
+//fin bouton retour en haut
 </script>

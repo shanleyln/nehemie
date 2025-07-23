@@ -1,11 +1,19 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css');
 /* =============================================
    dreamschat-custom.css
    Styles adaptés du template DreamsChat pour le widget flottant
    ============================================= */
 
-/* Variables de couleur (vous pouvez les ajuster à votre charte) */
+   /*le lien des icones :
+   {{-- icone pour le chatbot --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+   */
+
+
+/* =====  VARIABLES DE COULEUR ===== */
+
 :root {
     --primary-color: #5d4037; /* Marron */
     --secondary-color: #c78a44; /* Marron clair */
@@ -16,6 +24,64 @@
     --chat-bg: #ffffff;
     --chat-right-bg: var(--primary-color);
     --chat-right-color: #ffffff;
+}
+
+
+/* ===== BOUTON RETOUR EN HAUT ===== */
+#backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px; /* Ajusté pour ne pas être sur le bouton du chat */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background-color: var(--primary-color);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 999;
+    cursor: pointer;
+}
+
+#backToTop.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#backToTop:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+
+
+/* Styles pour le textarea auto-ajustable */
+.auto-expand {
+    resize: none;
+    overflow-y: hidden;
+    min-height: 40px;
+    max-height: 120px; /* 4 lignes max (30px par ligne) */
+    line-height: 1.5;
+    transition: height 0.2s ease;
+    padding: 8px 12px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Style pour le conteneur du textarea */
+.form-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
 }
 
 /* Base du Chat */
@@ -81,8 +147,8 @@
     border-radius: 100%;
 }
 #chat-launcher.open .chat-icon-image {
-    width: 50%;
-    height: 50%;
+    width: 100%;
+    height: 100%;
 }
 
 

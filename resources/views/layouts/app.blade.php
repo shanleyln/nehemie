@@ -175,8 +175,8 @@
 </div>
 
 <body>
-    {{-- @include('modules/chatbot') --}}
-    @include('modules/bouton_retour')
+    @include('modules/chatbot')
+   
     @include('modales.modale_priere')
     @include('modales.modale_appel')
     @include('modales.modale_prayer-form')
@@ -370,7 +370,7 @@
                 deferredPrompt.userChoice.then(choice => {
                     if (choice.outcome === 'accepted') {
                         btn.remove();
-                        console.log("✅ L'application YODI Ingénierie a été installée !");
+                        console.log("✅ L'application NÉHÉMIE International a été installée !");
                     } else {
                         console.log("❌ Installation refusée.");
                     }
