@@ -21,7 +21,7 @@
         <div class="container">
 
             <!-- Titre de section -->
-            <div class="section-heading text-center" data-aos="fade-up">
+            <div class="section-heading text-center">
                 <div class="heading-line center"></div>
                 <h2 class="fw-bold mb-2">Notre Plaquette de Présentation</h2>
                 <p class="section-subtitle">

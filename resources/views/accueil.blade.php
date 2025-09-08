@@ -10,10 +10,10 @@
                 style="background-image: url('{{ asset('images/slider/Levons_nous_et_batissons.png') }}')">
                 <div class="container">
                     <div class="hero-content">
-                        <h1 class="hero-title" data-aos="fade-up">"Levons-nous et bâtissons!"</h1>
-                        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">Une ONG chrétienne animée par la
+                        <h1 class="hero-title">"Levons-nous et bâtissons!"</h1>
+                        <p class="hero-subtitle" data-aos-delay="200">Une ONG chrétienne animée par la
                             foi, au service des plus vulnérables.</p>
-                        <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
+                        <div class="hero-buttons" data-aos-delay="400">
                             <a href="{{ route('route_qui_sommes_nous') }}#vision-mission" class="btn btn-primary"
                                 style="border: none;">Découvrir
                                 notre mission</a>
@@ -64,14 +64,14 @@
     <section class="welcome-section">
         <div class="container">
             <div class="welcome-wrapper">
-                <div class="welcome-image" data-aos="fade-right">
+                <div class="welcome-image">
                     <img src="{{ asset('images/team/dg.png') }}" alt="NGUEL'ENGOGO Davy, Président">
                     <div class="welcome-image-info">
                         <h3>NGUEL'ENGOGO Davy</h3>
                         <p>Président, NÉHÉMIE International</p>
                     </div>
                 </div>
-                <div class="welcome-content" data-aos="fade-left">
+                <div class="welcome-content">
                     <div class="section-heading">
                         <h2>Message de bienvenue</h2>
                         <div class="heading-line"></div>
@@ -100,10 +100,10 @@
     <section class="campaign-section">
         <div class="container">
             <div class="campaign-wrapper">
-                <div class="campaign-image" data-aos="fade-right">
+                <div class="campaign-image">
                     <img src="{{ asset('images/campagne.jpg') }}" alt="Campagne Donnez-leur vous-mêmes à manger">
                 </div>
-                <div class="campaign-content" data-aos="fade-left">
+                <div class="campaign-content">
                     <div class="campaign-badge">Campagne en cours</div>
                     <h2>Donnez-leur vous-mêmes à manger</h2>
                     <p>Durant tout le mois de juin, NÉHÉMIE International vous invite à faire partie d'un miracle
@@ -132,15 +132,15 @@
     <!-- Section Faire un Don -->
     <section id="faire-un-don" class="donation-section">
         <div class="container">
-            <div class="section-heading text-center" data-aos="fade-up">
+            <div class="section-heading text-center">
                 <h2>S'impliquer</h2>
                 <div class="heading-line center"></div>
                 <p class="section-subtitle">Votre soutien est précieux pour continuer notre mission</p>
             </div>
 
-            <div class="donation-wrapper" data-aos="fade-up">
+            <div class="donation-wrapper">
                 {{-- bloc image --}}
-                <div class="col-md-6" data-aos="fade-right">
+                <div class="col-md-6">
                     <img src="{{ asset('images/rejoindre.jpg') }}" alt="Campagne Donnez-leur vous-mêmes à manger"
                         class="rounded" style="width: 100%; height: auto;">
                 </div>
@@ -190,13 +190,13 @@
     <!-- Section Impact -->
     {{-- <section class="impact-section">
         <div class="container">
-            <div class="section-heading text-center" data-aos="fade-up">
+            <div class="section-heading text-center" >
                 <h2>Notre impact</h2>
                 <div class="heading-line center"></div>
                 <p class="section-subtitle">Les chiffres qui témoignent de notre action depuis 2020</p>
             </div>
 
-            <div class="impact-counters" data-aos="fade-up">
+            <div class="impact-counters" >
                 <div class="impact-counter">
                     <div class="counter-value" data-count="1250">0</div>
                     <div class="counter-label">Familles soutenues</div>
@@ -220,14 +220,14 @@
     <!-- Section Nos Programmes -->
     <section id="nos-programmes" class="programs-section">
         <div class="container">
-            <div class="section-heading text-center" data-aos="fade-up">
+            <div class="section-heading text-center">
                 <h2>Nos programmes</h2>
                 <div class="heading-line center"></div>
                 <p class="section-subtitle">Découvrez nos cinq programmes fondamentaux, chacun répondant à une
                     dimension spécifique de notre mission globale.</p>
             </div>
 
-            <div class="programs-tabs" data-aos="fade-up">
+            <div class="programs-tabs">
                 <div class="programs-tabs-nav">
                     <button class="program-tab active" data-program="salomon">
                         <i class="fas fa-graduation-cap"></i>
@@ -282,7 +282,8 @@
                                     d'affaires durables et équitables, et utiliser les ressources économiques pour avoir un
                                     impact social positif.</p>
 
-                                <a href="{{ route('route_nos_programmes') }}#programme-joseph" class="btn btn-secondary">En
+                                <a href="{{ route('route_nos_programmes') }}#programme-joseph"
+                                    class="btn btn-secondary">En
                                     savoir plus</a>
                             </div>
                         </div>
@@ -301,7 +302,8 @@
                                     les sphères des arts, du divertissement et des médias avec des contenus qui élèvent
                                     l'esprit et reflètent les valeurs du Royaume.</p>
 
-                                <a href="{{ route('route_nos_programmes') }}#programme-david" class="btn btn-secondary">En
+                                <a href="{{ route('route_nos_programmes') }}#programme-david"
+                                    class="btn btn-secondary">En
                                     savoir plus</a>
                             </div>
                         </div>
@@ -321,7 +323,8 @@
                                     séculiers, en particulier gouvernementaux, tout en étant des témoins vivants de leur
                                     foi.</p>
 
-                                <a href="{{ route('route_nos_programmes') }}#programme-daniel" class="btn btn-secondary">En
+                                <a href="{{ route('route_nos_programmes') }}#programme-daniel"
+                                    class="btn btn-secondary">En
                                     savoir plus</a>
                             </div>
                         </div>
@@ -344,7 +347,8 @@
                                     l'hospitalité, le mentorat et des actions sociales concrètes de soutien aux personnes et
                                     familles vulnérables.</p>
 
-                                <a href="{{ route('route_nos_programmes') }}#programme-priscille" class="btn btn-secondary">En
+                                <a href="{{ route('route_nos_programmes') }}#programme-priscille"
+                                    class="btn btn-secondary">En
                                     savoir plus</a>
                             </div>
                         </div>

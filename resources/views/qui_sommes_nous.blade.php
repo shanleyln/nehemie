@@ -24,7 +24,7 @@
             <div class="row g-4">
                 <div class="col-md-12">
                     <div class="text-center mb-5">
-                        <div class="section-heading text-center" data-aos="fade-up">
+                        <div class="section-heading text-center">
                             <h2>Notre Histoire</h2>
                             <div class="heading-line center"></div>
                         </div>
@@ -81,8 +81,9 @@
 
     <!-- Section Notre vision & mission -->
     <section id="vision-mission" class="mission-section">
+
         <div class="container">
-            <div class="section-heading text-center" data-aos="fade-up">
+            <div class="section-heading text-center">
                 <h2>Notre vision & mission</h2>
                 <div class="heading-line center"></div>
                 <p class="section-subtitle">NÉHÉMIE International existe pour exprimer sa foi par son engagement
@@ -92,21 +93,21 @@
             </div>
 
             <div class="mission-cards">
-                <div class="mission-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="mission-card" data-aos-delay="100">
                     <div class="mission-card-icon">
                         <i class="fas fa-hands-helping"></i>
                     </div>
                     <h3>Aide & Soutien</h3>
                     <p>Répondre aux besoins essentiels des populations les plus défavorisées.</p>
                 </div>
-                <div class="mission-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="mission-card" data-aos-delay="200">
                     <div class="mission-card-icon">
                         <i class="fas fa-chalkboard-teacher"></i>
                     </div>
                     <h3>Formation</h3>
                     <p>Former et accompagner les personnes vers l'autonomie économique et sociale.</p>
                 </div>
-                <div class="mission-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="mission-card" data-aos-delay="300">
                     <div class="mission-card-icon">
                         <i class="fas fa-pray"></i>
                     </div>
@@ -115,7 +116,7 @@
                 </div>
             </div>
 
-            <div class="mission-approach" data-aos="fade-up">
+            <div class="mission-approach">
                 <div class="section-heading text-center">
                     <h3>Notre approche : L'évangélisation par les actes</h3>
                     <div class="heading-line center"></div>
@@ -141,7 +142,7 @@
     <section id="valeurs" class="bg-light" style="padding: 70px;">
         <div class="container">
             <div class="text-center mb-5">
-                <div class="section-heading text-center" data-aos="fade-up">
+                <div class="section-heading text-center">
                     <h2>Nos Valeurs Fondamentales</h2>
                     <div class="heading-line center"></div>
                 </div>
@@ -260,7 +261,7 @@
     <section id="equipe" class="py-5">
         <div class="container">
             <div class="text-center mb-5">
-                <div class="section-heading text-center" data-aos="fade-up">
+                <div class="section-heading text-center">
                     <h2>Notre Équipe</h2>
                     <div class="heading-line center"></div>
                 </div>
@@ -484,6 +485,7 @@
             .section-heading {
                 position: relative;
                 margin-bottom: 2rem;
+
             }
 
             .heading-line {

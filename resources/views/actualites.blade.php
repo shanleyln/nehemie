@@ -69,13 +69,13 @@
     {{-- Toutes les actualités --}}
     <section id="actualites" class="py-5">
         <div class="container">
-            <div class="section-heading text-center mb-5" data-aos="fade-up">
+            <div class="section-heading text-center mb-5">
                 <div class="heading-line center"></div>
                 <h2 class="section-title">Toutes les actualités</h2>
                 <p class="section-subtitle">Restez informé de nos dernières actions et des événements à venir</p>
             </div>
 
-            <div class="row g-4" data-aos="fade-up">
+            <div class="row g-4">
                 @php $publications = $publications ?? []; @endphp
 
                 @if (count($publications) > 0)

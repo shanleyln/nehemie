@@ -176,7 +176,7 @@
 
 <body>
     @include('modules/chatbot')
-   
+
     @include('modales.modale_priere')
     @include('modales.modale_appel')
     @include('modales.modale_prayer-form')

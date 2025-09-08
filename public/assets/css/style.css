@@ -791,12 +791,13 @@ ul .btn-primary:not(:disabled):not(.disabled):active:focus, ul .btn-primary:not(
   display: block;
   cursor: pointer;
   user-select: none;
+  -webkit-user-select: none;
   position: relative;
   padding-left: 25px;
 }
 .checkboxs input {
   position: absolute;
-  opacity: 0;
+  opacity: 1;
   cursor: pointer;
   height: 0;
   width: 0;
@@ -825,7 +826,7 @@ ul .btn-primary:not(:disabled):not(.disabled):active:focus, ul .btn-primary:not(
 .checkboxs .checkmarks::after {
   content: "";
   position: absolute;
-  display: none;
+  
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -971,7 +972,7 @@ ul .btn-primary:not(:disabled):not(.disabled):active:focus, ul .btn-primary:not(
 }
 @media (max-width: 767.98px) {
   .sidebar-menu .logo {
-    display: none;
+    
   }
 }
 .sidebar-menu .menu-wrap {
@@ -1068,7 +1069,7 @@ ul .btn-primary:not(:disabled):not(.disabled):active:focus, ul .btn-primary:not(
   border-radius: 8px;
   color: #141B27;
   font-size: 22px;
-  display: none;
+  
 }
 @media (max-width: 767.98px) {
   .sidebar-menu .profile-menu ul li a.dark-mode-toggle {
@@ -3507,7 +3508,7 @@ button:focus {
   position: absolute;
   top: 50%;
   right: -100px;
-  opacity: 0;
+  opacity: 1;
   transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
@@ -3526,7 +3527,7 @@ button:focus {
   right: 290px;
 }
 .main-chat-blk .emoj-group-list-foot {
-  display: none;
+  
   position: absolute;
   top: -50px;
   left: -90px;
@@ -3967,7 +3968,7 @@ button:focus {
   top: 5px;
 }
 .main-chat-blk .chat .chat-body .messages .file-download .file-details ul li:last-child::before {
-  display: none;
+  
 }
 .main-chat-blk .chat .chat-body .messages .file-download .file-details ul li a {
   color: #6338F6;
@@ -3977,6 +3978,7 @@ button:focus {
 }
 .main-chat-blk .chat .chat-body.no-message {
   user-select: none;
+  -webkit-user-select: none;
 }
 .main-chat-blk .chat .chat-footer {
   position: relative;
@@ -4124,8 +4126,8 @@ button:focus {
   transition: ease all 0.5s;
   -webkit-transition: ease all 0.5s;
   -ms-transition: ease all 0.5s;
-  opacity: 0;
-  visibility: hidden;
+  opacity: 1;
+  visibility: visible;
 }
 .main-chat-blk .chat-search input[type=text] {
   padding: 8px 8px 8px 35px;
@@ -4169,8 +4171,8 @@ button:focus {
   transition: ease all 0.5s;
   -webkit-transition: ease all 0.5s;
   -ms-transition: ease all 0.5s;
-  opacity: 0;
-  visibility: hidden;
+  opacity: 1;
+  visibility: visible;
 }
 .main-chat-blk .user-chat-search input[type=text] {
   padding: 8px 8px 8px 35px;
@@ -4764,7 +4766,7 @@ button:focus {
 .main-chat-blk .checkmark:after {
   content: "";
   position: absolute;
-  display: none;
+  
 }
 .main-chat-blk .right-sidebar-profile > .avatar {
   background: rgba(66, 11, 161, 0.1);
@@ -4928,7 +4930,7 @@ button:focus {
   top: 5px;
 }
 .main-chat-blk .document-detail ul li:last-child::before {
-  display: none;
+  
 }
 .main-chat-blk .document-detail ul li + li {
   padding-left: 15px;
@@ -5259,7 +5261,7 @@ button:focus {
   --bs-tooltip-bg: $primary;
 }
 .main-chat-blk .tooltip .arrow {
-  display: none;
+  
   background-color: #6338F6;
 }
 .main-chat-blk .tooltip .tooltip-inner {
@@ -5307,7 +5309,7 @@ button:focus {
   }
 }
 .main-chat-blk .main-wrapper .content .sidebar-group .sidebar:not(.active) {
-  display: none;
+  
 }
 .main-chat-blk .chat-header ul {
   margin-bottom: 0;
@@ -5392,7 +5394,7 @@ button:focus {
   color: #FFC107;
 }
 .main-chat-blk .emoj-group-list {
-  display: none;
+  
   position: absolute;
   top: -50px;
   left: -90px;
@@ -5438,7 +5440,7 @@ button:focus {
 }
 
 .chat-page .footer {
-  display: none;
+  
 }
 
 .chat-search .input-group .input-group-prepend {
@@ -5529,7 +5531,7 @@ button:focus {
   overflow-y: auto;
 }
 .chat-cont-right .msg_head .back-user-list {
-  display: none;
+  
   margin: 0 0 0 -10px;
   padding: 0 10px;
 }
@@ -5654,7 +5656,7 @@ button:focus {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  opacity: 0;
+  opacity: 1;
   -webkit-transition: all 0.4s;
   -ms-transition: all 0.4s;
   transition: all 0.4s;
@@ -5804,7 +5806,7 @@ button:focus {
   -webkit-transition: all 0.4s;
   -ms-transition: all 0.4s;
   transition: all 0.4s;
-  opacity: 0;
+  opacity: 1;
   color: #FFF;
   width: 32px;
   line-height: 32px;
@@ -5861,8 +5863,8 @@ button:focus {
   .chat-cont-right {
     position: absolute;
     right: -100px;
-    opacity: 0;
-    visibility: hidden;
+    opacity: 1;
+    visibility: visible;
     z-index: 99;
   }
   .chat-cont-right .msg_head .back-user-list {
@@ -6137,6 +6139,7 @@ button:focus {
 .dropdown-menu.dropmenu-light-primary {
   background-color: rgba(96, 203, 255, 0.1);
   backdrop-filter: blur(2rem);
+  -webkit-backdrop-filter: blur(2rem);
 }
 .dropdown-menu.dropmenu-light-primary .dropdown-item:hover, .dropdown-menu.dropmenu-light-primary .dropdown-item:focus, .dropdown-menu.dropmenu-light-primary .dropdown-item:active, .dropdown-menu.dropmenu-light-primary .dropdown-item.active {
   color: #FFF;
@@ -6145,6 +6148,7 @@ button:focus {
 .dropdown-menu.dropmenu-light-secondary {
   background-color: rgba(96, 203, 255, 0.1);
   backdrop-filter: blur(2rem);
+  -webkit-backdrop-filter: blur(2rem);
 }
 .dropdown-menu.dropmenu-light-secondary .dropdown-item:hover, .dropdown-menu.dropmenu-light-secondary .dropdown-item:focus, .dropdown-menu.dropmenu-light-secondary .dropdown-item:active, .dropdown-menu.dropmenu-light-secondary .dropdown-item.active {
   color: #FFF;
@@ -6153,6 +6157,7 @@ button:focus {
 .dropdown-menu.dropmenu-light-info {
   background-color: rgba(27, 132, 255, 0.1);
   backdrop-filter: blur(2rem);
+  -webkit-backdrop-filter: blur(2rem);
 }
 .dropdown-menu.dropmenu-light-info .dropdown-item:hover, .dropdown-menu.dropmenu-light-info .dropdown-item:focus, .dropdown-menu.dropmenu-light-info .dropdown-item:active, .dropdown-menu.dropmenu-light-info .dropdown-item.active {
   color: #FFF;
@@ -6161,6 +6166,7 @@ button:focus {
 .dropdown-menu.dropmenu-light-warning {
   background-color: rgba(255, 193, 7, 0.1);
   backdrop-filter: blur(2rem);
+  -webkit-backdrop-filter: blur(2rem);
 }
 .dropdown-menu.dropmenu-light-warning .dropdown-item:hover, .dropdown-menu.dropmenu-light-warning .dropdown-item:focus, .dropdown-menu.dropmenu-light-warning .dropdown-item:active, .dropdown-menu.dropmenu-light-warning .dropdown-item.active {
   color: #FFF;
@@ -6169,6 +6175,7 @@ button:focus {
 .dropdown-menu.dropmenu-light-success {
   background-color: rgba(12, 198, 140, 0.1);
   backdrop-filter: blur(2rem);
+  -webkit-backdrop-filter: blur(2rem);
 }
 .dropdown-menu.dropmenu-light-success .dropdown-item:hover, .dropdown-menu.dropmenu-light-success .dropdown-item:focus, .dropdown-menu.dropmenu-light-success .dropdown-item:active, .dropdown-menu.dropmenu-light-success .dropdown-item.active {
   color: #FFF;
@@ -6177,6 +6184,7 @@ button:focus {
 .dropdown-menu.dropmenu-light-danger {
   background-color: rgba(253, 58, 85, 0.1);
   backdrop-filter: blur(2rem);
+  -webkit-backdrop-filter: blur(2rem);
 }
 .dropdown-menu.dropmenu-light-danger .dropdown-item:hover, .dropdown-menu.dropmenu-light-danger .dropdown-item:focus, .dropdown-menu.dropmenu-light-danger .dropdown-item:active, .dropdown-menu.dropmenu-light-danger .dropdown-item.active {
   color: #FFF;
@@ -8880,6 +8888,7 @@ Form help
   text-decoration: none;
   cursor: pointer;
   user-select: none;
+  -webkit-user-select: none;
   background: #60CBFF;
   border-radius: 4px;
 }
@@ -8935,7 +8944,7 @@ Form help
 }
 .custom-radio input {
   position: absolute;
-  opacity: 0;
+  opacity: 1;
   cursor: pointer;
   height: 0;
   width: 0;
@@ -8966,8 +8975,8 @@ Form help
   width: 8px;
   height: 8px;
   background-color: #FFF;
-  opacity: 0;
-  visibility: hidden;
+  opacity: 1;
+  visibility: visible;
   border-radius: 50%;
   -webkit-transition: all 0.3s;
   -ms-transition: all 0.3s;
@@ -8992,8 +9001,8 @@ Form help
   padding: 0;
   width: 0;
   height: 0;
-  visibility: hidden;
-  opacity: 0;
+  visibility: visible;
+  opacity: 1;
   pointer-events: none;
   position: absolute;
 }
@@ -9174,7 +9183,7 @@ Form help
   margin-bottom: 0;
 }
 .form-wrap-checkbox .check input {
-  display: none;
+  
 }
 .form-wrap-checkbox .check input:checked + .box {
   background: #60CBFF;
@@ -9603,7 +9612,7 @@ Form help
 }
 
 .accordion.accordionicon-none .accordion-button:after {
-  display: none;
+  
 }
 
 .accordion.accordionicon-left .accordion-button {
@@ -9759,7 +9768,7 @@ Form help
 
 .breadcrumb-separatorless .breadcrumb-item + .breadcrumb-item::before {
   content: "";
-  display: none;
+  
 }
 
 .breadcrumb-colored {
@@ -10092,13 +10101,13 @@ Form help
   content: "";
 }
 .card .collapse-close {
-  display: none;
+  
 }
 .card.card .collapsed .collapse-close {
   display: block;
 }
 .card.card .collapsed .collapse-open {
-  display: none;
+  
 }
 .card.card-fullscreen {
   position: fixed;
@@ -11125,7 +11134,7 @@ Form help
 }
 .modal.effect-scale .modal-dialog {
   transform: scale(0.7);
-  opacity: 0;
+  opacity: 1;
   transition: all 0.3s;
 }
 .modal.effect-scale.show .modal-dialog {
@@ -11134,7 +11143,7 @@ Form help
 }
 .modal.effect-slide-in-right .modal-dialog {
   transform: translateX(20%);
-  opacity: 0;
+  opacity: 1;
   transition: all 0.3s cubic-bezier(0.25, 0.5, 0.5, 0.9);
 }
 .modal.effect-slide-in-right.show .modal-dialog {
@@ -11143,7 +11152,7 @@ Form help
 }
 .modal.effect-slide-in-bottom .modal-dialog {
   transform: translateY(20%);
-  opacity: 0;
+  opacity: 1;
   transition: all 0.3s;
 }
 .modal.effect-slide-in-bottom.show .modal-dialog {
@@ -11152,7 +11161,7 @@ Form help
 }
 .modal.effect-newspaper .modal-dialog {
   transform: scale(0) rotate(720deg);
-  opacity: 0;
+  opacity: 1;
 }
 .modal.effect-newspaper.show ~ .modal-backdrop, .modal.effect-newspaper .modal-dialog {
   transition: all 0.5s;
@@ -11170,7 +11179,7 @@ Form help
   -moz-transform-style: preserve-3d;
   transform-style: preserve-3d;
   transform: translateZ(600px) rotateX(20deg);
-  opacity: 0;
+  opacity: 1;
 }
 .modal.effect-fall.show .modal-dialog {
   transition: all 0.3s ease-in;
@@ -11185,7 +11194,7 @@ Form help
   transform-style: preserve-3d;
   transform: rotateY(-70deg);
   transition: all 0.3s;
-  opacity: 0;
+  opacity: 1;
 }
 .modal.effect-flip-horizontal.show .modal-dialog {
   transform: rotateY(0deg);
@@ -11199,7 +11208,7 @@ Form help
   transform-style: preserve-3d;
   transform: rotateX(-70deg);
   transition: all 0.3s;
-  opacity: 0;
+  opacity: 1;
 }
 .modal.effect-flip-vertical.show .modal-dialog {
   transform: rotateX(0deg);
@@ -11207,7 +11216,7 @@ Form help
 }
 .modal.effect-super-scaled .modal-dialog {
   transform: scale(2);
-  opacity: 0;
+  opacity: 1;
   transition: all 0.3s;
 }
 .modal.effect-super-scaled.show .modal-dialog {
@@ -11222,7 +11231,7 @@ Form help
   transform-style: preserve-3d;
   transform: rotateX(-60deg);
   transform-origin: 50% 0;
-  opacity: 0;
+  opacity: 1;
   transition: all 0.3s;
 }
 .modal.effect-sign.show .modal-dialog {
@@ -11237,7 +11246,7 @@ Form help
   transform-style: preserve-3d;
   transform: translateY(100%) rotateX(90deg);
   transform-origin: 0 100%;
-  opacity: 0;
+  opacity: 1;
   transition: all 0.3s ease-out;
 }
 .modal.effect-rotate-bottom.show .modal-dialog {
@@ -11252,7 +11261,7 @@ Form help
   transform-style: preserve-3d;
   transform: translateZ(100px) translateX(-30%) rotateY(90deg);
   transform-origin: 0 100%;
-  opacity: 0;
+  opacity: 1;
   transition: all 0.3s;
 }
 .modal.effect-rotate-left.show .modal-dialog {
@@ -11330,7 +11339,7 @@ Form help
   position: absolute;
   right: 20px;
   bottom: 20px;
-  display: none;
+  
 }
 .chat-users-wrap .chat-list .chat-dropdown > a {
   color: #72767D;
@@ -11481,7 +11490,7 @@ Form help
 }
 @media (max-width: 1199.98px) {
   .welcome-content {
-    display: none !important;
+    /* Removed display: none to keep content visible */
   }
 }
 
@@ -11565,8 +11574,8 @@ Form help
   -webkit-transition: ease all 0.5s;
   -ms-transition: ease all 0.5s;
   transition: ease all 0.5s;
-  opacity: 0;
-  visibility: hidden;
+  opacity: 1;
+  visibility: visible;
   padding: 16px;
 }
 .chat-search.visible-chat {
@@ -11621,7 +11630,7 @@ Form help
   display: flex;
   display: -webkit-flex;
   overflow: hidden;
-  visibility: hidden;
+  visibility: visible;
 }
 
 .main_content {
@@ -11694,7 +11703,7 @@ Form help
     bottom: 0;
     height: 100vh;
     width: 100vw;
-    visibility: hidden;
+    visibility: visible;
     transform: translateX(100%);
     transition: visibility 0.4s ease, transform 0.4s ease;
     order: 3;
@@ -12238,7 +12247,7 @@ Form help
   position: absolute;
   top: 50%;
   right: -100px;
-  opacity: 0;
+  opacity: 1;
   -webkit-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
   transition: all 0.5s ease;
@@ -12267,7 +12276,7 @@ Form help
 
 .emoj-group-list,
 .emoj-group-list-foot {
-  display: none;
+  
   position: absolute;
   top: -50px;
   left: -90px;
@@ -12353,8 +12362,8 @@ Form help
   justify-content: center;
   align-items: center;
   gap: 12px;
-  opacity: 0;
-  visibility: hidden;
+  opacity: 1;
+  visibility: visible;
   transform: scale(1.2);
   -webkit-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
@@ -12407,7 +12416,7 @@ Form help
   position: absolute;
   top: 50%;
   right: -100px;
-  opacity: 0;
+  opacity: 1;
   transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
@@ -12470,7 +12479,7 @@ Form help
   max-width: 100%;
   padding: 16px;
   margin-bottom: 0;
-  display: none;
+  
 }
 .chat .chat-footer .footer-form .chat-footer-wrap .form-wrap .chats .message-content {
   padding: 0;
@@ -12529,7 +12538,7 @@ Form help
   color: #72767D;
   background: #F8F9FB;
   border: none;
-  display: none;
+  
 }
 .chat-offcanvas.offcanvas.show {
   min-width: 400px;
@@ -12872,7 +12881,7 @@ Form help
 
 .open-file {
   width: 28px;
-  opacity: 0;
+  opacity: 1;
 }
 
 .chat-body .dropdown-item.active {
@@ -12909,11 +12918,11 @@ Form help
   max-width: 100%;
   padding: 10px;
   margin-bottom: 0;
-  display: none;
+  
 }
 
 .d-none {
-  display: none;
+  
 }
 
 .d-flex {
@@ -13082,7 +13091,7 @@ Form help
 }
 
 .dz-clickable .dz-message {
-  display: none;
+  
 }
 
 .modal .footer-form {
@@ -13381,8 +13390,8 @@ Form help
   justify-content: center;
   align-items: center;
   gap: 12px;
-  opacity: 0;
-  visibility: hidden;
+  opacity: 1;
+  visibility: visible;
   transform: scale(1.2);
   -webkit-transition: all 0.5s ease;
   -ms-transition: all 0.5s ease;
@@ -13471,7 +13480,7 @@ Form help
   }
 }
 .mini-video-view .default-profile {
-  display: none;
+  
   width: 80px;
   height: 80px;
 }
@@ -13487,7 +13496,7 @@ Form help
   display: flex;
 }
 .mini-video-view.no-video img {
-  display: none;
+  
 }
 
 .video-call-view > img {
@@ -13604,8 +13613,8 @@ Form help
 }
 
 .messages .incoming .overlay {
-  display: none;
-  visibility: hidden;
+  
+  visibility: visible;
   transform: translateX(-20px);
 }
 .messages .incoming:hover .overlay {
@@ -13624,7 +13633,7 @@ Form help
   border-color: #E8E8E9;
   bottom: 0;
   right: 16px;
-  display: none;
+  
 }
 .call-details-popup.show {
   display: block;

@@ -48,61 +48,100 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Slider héro
-    const heroSlides = document.querySelectorAll('.hero-slide');
-    const heroDots = document.querySelectorAll('.hero-dot');
-    const prevHeroBtn = document.querySelector('.hero-control.prev');
-    const nextHeroBtn = document.querySelector('.hero-control.next');
-    let currentHeroSlide = 0;
-    
-    function showHeroSlide(index) {
-        // Masquer tous les slides
-        heroSlides.forEach(slide => {
-            slide.classList.remove('active');
-        });
+    // Slider héro - Initialisation sécurisée
+    function initHeroSlider() {
+        const heroSlides = document.querySelectorAll('.hero-slide');
+        const heroDots = document.querySelectorAll('.hero-dot');
+        const prevHeroBtn = document.querySelector('.hero-control.prev');
+        const nextHeroBtn = document.querySelector('.hero-control.next');
         
-        // Désactiver tous les points
-        heroDots.forEach(dot => {
-            dot.classList.remove('active');
-        });
+        // Vérifier si le slider existe sur la page
+        if (heroSlides.length === 0) return;
         
-        // Afficher le slide actif
-        heroSlides[index].classList.add('active');
-        heroDots[index].classList.add('active');
-    }
-    
-    function nextHeroSlide() {
-        currentHeroSlide++;
-        if (currentHeroSlide >= heroSlides.length) {
-            currentHeroSlide = 0;
-        }
-        showHeroSlide(currentHeroSlide);
-    }
-    
-    function prevHeroSlide() {
-        currentHeroSlide--;
-        if (currentHeroSlide < 0) {
-            currentHeroSlide = heroSlides.length - 1;
-        }
-        showHeroSlide(currentHeroSlide);
-    }
-    
-    // Événements pour les boutons du slider héro
-    if (prevHeroBtn && nextHeroBtn) {
-        prevHeroBtn.addEventListener('click', prevHeroSlide);
-        nextHeroBtn.addEventListener('click', nextHeroSlide);
-    }
-    
-    // Événements pour les points du slider héro
-    heroDots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
+        let currentHeroSlide = 0;
+        let slideInterval;
+        
+        function showHeroSlide(index) {
+            // S'assurer que l'index est valide
+            if (index < 0 || index >= heroSlides.length) return;
+            
             currentHeroSlide = index;
-            showHeroSlide(currentHeroSlide);
+            
+            // Masquer tous les slides
+            heroSlides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Désactiver tous les points
+            heroDots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            // Afficher le slide actif
+            if (heroSlides[index]) heroSlides[index].classList.add('active');
+            if (heroDots[index]) heroDots[index].classList.add('active');
+        }
+        
+        function nextHeroSlide() {
+            const nextSlide = (currentHeroSlide + 1) % heroSlides.length;
+            showHeroSlide(nextSlide);
+        }
+        
+        function prevHeroSlide() {
+            const prevSlide = (currentHeroSlide - 1 + heroSlides.length) % heroSlides.length;
+            showHeroSlide(prevSlide);
+        }
+        
+        // Initialisation du slider
+        function startSlider() {
+            // Arrêter l'intervalle existant s'il y en a un
+            if (slideInterval) clearInterval(slideInterval);
+            
+            // Démarrer le slider
+            showHeroSlide(0);
+            
+            // Démarrer la rotation automatique
+            slideInterval = setInterval(nextHeroSlide, 5000);
+            
+            // Arrêter la rotation automatique au survol
+            const sliderContainer = document.querySelector('.hero-slider');
+            if (sliderContainer) {
+                sliderContainer.addEventListener('mouseenter', () => {
+                    if (slideInterval) clearInterval(slideInterval);
+                });
+                
+                sliderContainer.addEventListener('mouseleave', () => {
+                    if (slideInterval) clearInterval(slideInterval);
+                    slideInterval = setInterval(nextHeroSlide, 5000);
+                });
+            }
+        }
+        
+        // Initialiser les événements
+        if (prevHeroBtn) {
+            prevHeroBtn.addEventListener('click', prevHeroSlide);
+        }
+        
+        if (nextHeroBtn) {
+            nextHeroBtn.addEventListener('click', nextHeroSlide);
+        }
+        
+        // Événements pour les points du slider
+        heroDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showHeroSlide(index));
         });
-    });
+        
+        // Démarrer le slider
+        startSlider();
+        
+        // Nettoyer l'intervalle lors du déchargement de la page
+        window.addEventListener('beforeunload', () => {
+            if (slideInterval) clearInterval(slideInterval);
+        });
+    }
     
-    // Rotation automatique du slider héro
-    setInterval(nextHeroSlide, 5000);
+    // Initialiser le slider héro
+    initHeroSlider();
 
     // Onglets des programmes
     const programTabs = document.querySelectorAll('.program-tab');

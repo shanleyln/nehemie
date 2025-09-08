@@ -185,7 +185,7 @@
     </style>
 
     <body class="bg-gray-100">
-        <div class="section-heading text-center mt-5" data-aos="fade-up">
+        <div class="section-heading text-center mt-5">
 
             <div class="heading-line center"></div>
 
@@ -216,7 +216,7 @@
                 <div>
 
 
-                    <div class="programs-tabs" data-aos="fade-up">
+                    <div class="programs-tabs">
                         <div class="programs-tabs-nav">
                             <button class="program-tab active" data-program="salomon">
                                 <i class="fas fa-graduation-cap"></i>

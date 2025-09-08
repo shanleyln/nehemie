@@ -273,7 +273,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const requestData = {
             sessionId: document.querySelector('meta[name="n8n-session-id"]').content,
             action: "sendMessage",
-            chatInput: message
+            chatInput: message,
+            siteIdentifier: "site_alpha",
         };
 
         const maxAttempts = 3;
