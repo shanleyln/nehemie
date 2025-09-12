@@ -71,4 +71,3 @@ Route::post('/admin/pvit/renew-secret', [PvitController::class, 'renewSecretProx
 
 // Réception externe (appelée par MyPVit) — PAS de CSRF
 Route::post('/api/pvit/receive-secret', [PvitController::class, 'receiveSecret'])
-    ->withoutMiddleware([VerifyCsrfToken::class]);
