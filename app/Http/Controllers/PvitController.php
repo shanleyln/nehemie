@@ -43,7 +43,7 @@ class PvitController extends Controller
         if (Storage::disk('local')->exists('pvit/secret.json')) {
             $meta = json_decode(Storage::disk('local')->get('pvit/secret.json'), true);
         }
-        return view('pvit.secret', [
+        return view('admin.pvit.secret', [
             'secret' => $secret,
             'meta'   => $meta,
             'info'   => [
@@ -56,6 +56,8 @@ class PvitController extends Controller
             'renew_ok'  => session('renew_ok'),
             'renew_resp' => session('renew_response'),
         ]);
+
+
     }
 
     /** ACTION : déclenche le renew-secret (x-www-form-urlencoded) */
