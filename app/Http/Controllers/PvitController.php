@@ -199,6 +199,8 @@ class PvitController extends Controller
             return response()->json(['error' => 'INVALID_PAYLOAD', 'fields' => $errors], 422);
         }
 
+        dd($opCode, $secretKey, $expiresIn);
+
         // 2) (Optionnel) Filtrage IP — active en mettant PVIT_CALLBACK_IPS="1.2.3.4,5.6.7.8" dans .env
         $allowIps = array_filter(array_map('trim', explode(',', (string) env('PVIT_CALLBACK_IPS'))));
         if (!empty($allowIps) && !in_array($request->ip(), $allowIps, true)) {
