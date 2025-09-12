@@ -17,27 +17,65 @@ class PvitController extends Controller
     private const RECEPTION_CODE   = 'GH8CQ';              // URL: /api/pvit/receive-secret
 
     /** Stocke la clé côté serveur (pas dans .env) */
-    private function storeSecret(string $secret, ?int $expiresIn = null): void
+    // --- 1) CONFIG FICHIER ---
+    private const SECRET_FILE = 'pvit/secret.v1.enc';   // contenu chiffré
+    private const SECRET_BAK  = 'pvit/secret.bak';      // dernière version chiffrée
+
+    private function ensureDir(): void
     {
-        Storage::disk('local')->put('pvit/secret.json', json_encode([
-            'secret'      => trim($secret),
-            'expires_in'  => $expiresIn,
-            'received_at' => now()->toDateTimeString(),
-        ], JSON_PRETTY_PRINT));
+        if (!Storage::disk('local')->exists('pvit')) {
+            Storage::disk('local')->makeDirectory('pvit');
+        }
     }
 
-    /** Lit la clé stockée */
+    // --- 2) ÉCRITURE SÉCURISÉE (chiffrée + backup) ---
+    private function storeSecret(string $secret, ?int $expiresIn = null, ?string $sourceIp = null): void
+    {
+        $this->ensureDir();
+
+        // Métadonnées utiles (date d’expiration approximative)
+        $data = [
+            'secret'      => trim($secret),
+            'expires_in'  => $expiresIn,
+            'expires_at'  => $expiresIn ? now()->addSeconds((int)$expiresIn)->toDateTimeString() : null,
+            'received_at' => now()->toDateTimeString(),
+            'source_ip'   => $sourceIp,
+            'version'     => 1,
+        ];
+
+        // Chiffré avec APP_KEY (envoyer/consommer via encrypt/decrypt)
+        $encrypted = encrypt(json_encode($data, JSON_UNESCAPED_SLASHES));
+
+        // Backup de l’ancienne version si présente
+        if (Storage::disk('local')->exists(self::SECRET_FILE)) {
+            Storage::disk('local')->copy(self::SECRET_FILE, self::SECRET_BAK);
+        }
+
+        // Écriture atomique (temp puis move)
+        $tmp = self::SECRET_FILE.'.tmp';
+        Storage::disk('local')->put($tmp, $encrypted);
+        Storage::disk('local')->move($tmp, self::SECRET_FILE);
+    }
+
+    // --- 3) LECTURE ROBUSTE (déchiffre ; rétro-compat plain JSON) ---
     private function getSecret(): string
     {
-        $file = 'pvit/secret.json';
         try {
-            if (Storage::disk('local')->exists($file)) {
-                return (string) (json_decode(Storage::disk('local')->get($file), true)['secret'] ?? '');
+            if (!Storage::disk('local')->exists(self::SECRET_FILE)) {
+                // rétro-compat: ancien fichier JSON non chiffré ?
+                if (Storage::disk('local')->exists('pvit/secret.json')) {
+                    $legacy = json_decode(Storage::disk('local')->get('pvit/secret.json'), true);
+                    return (string)($legacy['secret'] ?? '');
+                }
+                return '';
             }
+            $payload = Storage::disk('local')->get(self::SECRET_FILE);
+            $decoded = json_decode(decrypt($payload), true);
+            return (string)($decoded['secret'] ?? '');
         } catch (\Throwable $e) {
-            Log::error('PVIT read secret error', ['err' => $e->getMessage()]);
+            Log::error('PVIT getSecret error', ['err' => $e->getMessage()]);
+            return '';
         }
-        return '';
     }
 
     /** PAGE : formulaire pour générer la clé + affichage de la clé courante */
@@ -135,43 +173,57 @@ class PvitController extends Controller
     }
 
 
-    /** ENDPOINT : réception de la nouvelle clé (appelé par MyPVit) */
+
+    /** ENDPOINT : réception de la nouvelle clé (appel MyPVit) */
     public function receiveSecret(Request $request)
     {
         Log::info('PVIT RECEIVE-SECRET payload', $request->all());
 
-        // Validation API (JSON ou form — on supporte les deux)
-        $v = Validator::make($request->all(), [
-            'operation_account_code' => 'required|string',
-            'secret_key'             => 'required|string|min:10',
-            'expires_in'             => 'nullable|integer|min:60',
-        ]);
+        // 0) Normaliser les noms de champs (JSON ou form, snake_case ou camelCase)
+        $opCode    = $request->input('operation_account_code', $request->input('operationAccountCode'));
+        $secretKey = $request->input('secret_key', $request->input('secretKey'));
+        $expiresIn = $request->input('expires_in', $request->input('expiresIn'));
 
-        if ($v->fails()) {
-            return response()->json([
-                'error'  => 'INVALID_PAYLOAD',
-                'fields' => $v->errors(),
-            ], 422);
+        // 1) Validation "à la main" (pour accepter les deux notations)
+        $errors = [];
+        if (!$opCode || !is_string($opCode)) {
+            $errors['operation_account_code'][] = 'required';
+        }
+        if (!$secretKey || !is_string($secretKey) || strlen($secretKey) < 10) {
+            $errors['secret_key'][] = 'invalid';
+        }
+        if ($expiresIn !== null && (!is_numeric($expiresIn) || (int)$expiresIn < 60)) {
+            $errors['expires_in'][] = 'min:60';
+        }
+        if ($errors) {
+            return response()->json(['error' => 'INVALID_PAYLOAD', 'fields' => $errors], 422);
         }
 
-        // Contrôle du compte d’opération
-        if ($request->input('operation_account_code') !== self::ACCOUNT_CODE) {
+        // 2) (Optionnel) Filtrage IP — active en mettant PVIT_CALLBACK_IPS="1.2.3.4,5.6.7.8" dans .env
+        $allowIps = array_filter(array_map('trim', explode(',', (string) env('PVIT_CALLBACK_IPS'))));
+        if (!empty($allowIps) && !in_array($request->ip(), $allowIps, true)) {
+            Log::warning('PVIT RECEIVE-SECRET ip not allowed', ['ip' => $request->ip(), 'allow' => $allowIps]);
+            return response()->json(['error' => 'IP_NOT_ALLOWED'], 403);
+        }
+
+        // 3) Contrôle du compte d’opération
+        if ($opCode !== self::ACCOUNT_CODE) {
             Log::warning('PVIT RECEIVE-SECRET account mismatch', [
-                'expected' => self::ACCOUNT_CODE,
-                'got'      => $request->input('operation_account_code'),
+                'expected' => self::ACCOUNT_CODE, 'got' => $opCode,
             ]);
             return response()->json(['error' => 'ACCOUNT_MISMATCH'], 400);
         }
 
-        $secret = (string) $request->input('secret_key', '');
+        // 4) Stockage sécurisé (chiffré + backup)
         try {
-            $this->storeSecret($secret, $request->integer('expires_in'));
+            $this->storeSecret((string)$secretKey, $expiresIn !== null ? (int)$expiresIn : null, $request->ip());
         } catch (\Throwable $e) {
             Log::error('PVIT store secret error', ['err' => $e->getMessage()]);
             return response()->json(['error' => 'STORE_FAILED', 'message' => $e->getMessage()], 500);
         }
 
-        // accusé de réception pour MyPVit
+        // 5) Accusé de réception OK (attendu par MyPVit)
         return response()->json(['ok' => true]);
     }
+
 }
