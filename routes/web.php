@@ -63,11 +63,11 @@ Route::post('/demande-de-priere', [PrayerRequestController::class, 'store'])->na
 
 // Page admin (afficher/générer la clé)
 Route::get('/admin/pvit/secret', [PvitController::class, 'secretPage'])
-    ->name('pvit.secret'); // ->middleware('auth');
+    ->name('pvit.secret');
 
 // Bouton "Générer la clé" (POST du form de la page)
 Route::post('/admin/pvit/renew-secret', [PvitController::class, 'renewSecretProxy'])
-    ->name('pvit.renew');  // ->middleware('auth');
+    ->name('pvit.renew');
 
 // Réception externe (appelée par MyPVit) — PAS de CSRF
 Route::post('/api/pvit/receive-secret', [PvitController::class, 'receiveSecret'])

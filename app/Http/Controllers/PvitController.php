@@ -74,6 +74,9 @@ class PvitController extends Controller
     {
         $password = (string) $request->input('password');
         if ($password === '') {
+            if ($request->wantsJson() || $request->ajax()) {
+                return response()->json(['ok' => false, 'error' => 'PASSWORD_REQUIRED'], 422);
+            }
             return back()->withErrors(['password' => 'Mot de passe requis'])->withInput();
         }
 
@@ -85,49 +88,52 @@ class PvitController extends Controller
         ];
 
         try {
-            // Timeout raisonnable + accept JSON ; body en x-www-form-urlencoded (exigé par la doc)
-            $resp = Http::asForm()
-                ->acceptJson()
-                ->timeout(20)
-                ->post($url, $payload);
+            $resp = Http::asForm()->acceptJson()->timeout(20)->post($url, $payload);
         } catch (\Throwable $e) {
             Log::error('PVIT renew-secret HTTP error', ['err' => $e->getMessage()]);
-            return back()
-                ->withErrors(['global' => "Impossible de joindre MyPVit : ".$e->getMessage()])
-                ->withInput();
+            if ($request->wantsJson() || $request->ajax()) {
+                return response()->json([
+                    'ok' => false,
+                    'error' => 'NETWORK_ERROR',
+                    'message' => $e->getMessage(),
+                ], 502);
+            }
+            return back()->withErrors(['global' => "Impossible de joindre MyPVit : ".$e->getMessage()])->withInput();
         }
 
-        // Gestion fine des codes HTTP
-        if ($resp->failed()) {
-            $status = $resp->status();
-            $body   = $resp->json() ?? $resp->body();
-            Log::warning('PVIT renew-secret failed', ['status' => $status, 'body' => $body]);
-
-            $msg = "Échec du renouvellement (HTTP $status).";
-            if ($status === 401) {
-                $msg = "Authentification échouée (401). Vérifie mot de passe marchand.";
-            }
-            if ($status === 415) {
-                $msg = "Format invalide (415). Réessaye en x-www-form-urlencoded.";
-            }
-            if ($status === 429) {
-                $msg = "Trop de requêtes (429). Réessaye dans quelques instants.";
-            }
-
-            return back()
-                ->withErrors([
-                    'global' => $msg,
-                    'detail' => is_array($body) ? json_encode($body, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) : (string) $body,
-                ])
-                ->withInput();
+        $json = $resp->json();
+        if (!is_array($json)) {
+            $json = ['raw' => $resp->body()];
         }
 
-        // Succès : on informe la page, la clé arrivera via /api/pvit/receive-secret
+        // Si la requête attend du JSON (fetch/AJAX) -> on renvoie JSON
+        if ($request->wantsJson() || $request->ajax()) {
+            $msg = null;
+            if ($resp->status() === 401) {
+                $msg = "Authentification échouée (401). Vérifie le mot de passe marchand.";
+            }
+            if ($resp->status() === 415) {
+                $msg = "Format invalide (415). L’API attend x-www-form-urlencoded.";
+            }
+            if ($resp->status() === 429) {
+                $msg = "Trop de requêtes (429). Réessaye plus tard.";
+            }
+
+            return response()->json([
+                'ok'       => $resp->successful(),
+                'status'   => $resp->status(),
+                'message'  => $msg,
+                'response' => $json
+            ], $resp->status());
+        }
+
+        // Fallback "classique" : redirect + flash (si submit non-AJAX)
         return redirect()
             ->route('pvit.secret')
-            ->with('renew_ok', true)
-            ->with('renew_response', $resp->json());
+            ->with('renew_ok', $resp->successful())
+            ->with('renew_response', $json);
     }
+
 
     /** ENDPOINT : réception de la nouvelle clé (appelé par MyPVit) */
     public function receiveSecret(Request $request)
