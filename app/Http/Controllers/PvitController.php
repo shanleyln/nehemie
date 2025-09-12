@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator; // + validation API
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use App\Models\PvitSecret;
 
 class PvitController extends Controller
 {
@@ -24,39 +25,30 @@ class PvitController extends Controller
         $account = self::ACCOUNT_CODE;
         $now = now();
 
-        // calcule version (n+1 si existe)
-        $current = DB::table('pvit_secrets')->where('account_code', $account)->first();
-        $version = ($current->version ?? 0) + 1;
+        // récupère (ou crée) l’enregistrement pour ce compte
+        $row = PvitSecret::firstOrNew(['account_code' => $account]);
 
-        $payload = [
-            'account_code'     => $account,
-            'secret_encrypted' => encrypt(trim($secret)),
-            'expires_in'       => $expiresIn,
-            'expires_at'       => $expiresIn ? $now->copy()->addSeconds((int)$expiresIn) : null,
-            'received_at'      => $now,
-            'source_ip'        => $sourceIp,
-            'version'          => $version,
-            'updated_at'       => $now,
-        ];
+        // incrémente la version
+        $row->version     = ($row->exists ? (int)$row->version + 1 : 1);
+        $row->received_at = $now;
+        $row->expires_in  = $expiresIn;
+        $row->expires_at  = $expiresIn ? $now->copy()->addSeconds((int)$expiresIn) : null;
+        $row->source_ip   = $sourceIp;
 
-        if ($current) {
-            DB::table('pvit_secrets')->where('account_code', $account)->update($payload);
-        } else {
-            $payload['created_at'] = $now;
-            DB::table('pvit_secrets')->insert($payload);
-        }
+        // attribut virtuel : chiffre vers secret_encrypted
+        $row->secret = $secret;
+
+        $row->save();
     }
+
     // --- lire juste la clé depuis la DB (décryptée) ---
     private function getSecret(): ?string
     {
         try {
-            $row = DB::table('pvit_secrets')
-                ->where('account_code', self::ACCOUNT_CODE)
-                ->first();
-
-            return $row ? decrypt($row->secret_encrypted) : null;
+            $row = PvitSecret::account(self::ACCOUNT_CODE)->first();
+            return $row?->secret;
         } catch (\Throwable $e) {
-            Log::error('PVIT getSecret DB error', ['err' => $e->getMessage()]);
+            \Log::error('PVIT getSecret model error', ['err' => $e->getMessage()]);
             return null;
         }
     }
@@ -65,26 +57,24 @@ class PvitController extends Controller
     private function getSecretMeta(): ?array
     {
         try {
-            $row = DB::table('pvit_secrets')
-                ->where('account_code', self::ACCOUNT_CODE)
-                ->first();
-
+            $row = PvitSecret::account(self::ACCOUNT_CODE)->first();
             if (!$row) {
                 return null;
             }
 
             return [
-                'received_at' => $row->received_at ? Carbon::parse($row->received_at)->toDateTimeString() : null,
+                'received_at' => optional($row->received_at)->toDateTimeString(),
                 'expires_in'  => $row->expires_in,
-                'expires_at'  => $row->expires_at ? Carbon::parse($row->expires_at)->toDateTimeString() : null,
+                'expires_at'  => optional($row->expires_at)->toDateTimeString(),
                 'source_ip'   => $row->source_ip,
                 'version'     => (int)$row->version,
             ];
         } catch (\Throwable $e) {
-            Log::error('PVIT getSecretMeta DB error', ['err' => $e->getMessage()]);
+            \Log::error('PVIT getSecretMeta model error', ['err' => $e->getMessage()]);
             return null;
         }
     }
+
 
 
     /** PAGE : formulaire pour générer la clé + affichage de la clé courante */
@@ -219,7 +209,7 @@ class PvitController extends Controller
         // Stockage DB (chiffré) + versioning
         try {
             $this->storeSecret((string)$secretKey, $expiresIn !== null ? (int)$expiresIn : null, $request->ip());
-            
+
             // Si la requête vient d'un navigateur, on redirige vers le formulaire
             if ($request->wantsJson() || $request->ajax()) {
                 return response()->json([
@@ -227,21 +217,21 @@ class PvitController extends Controller
                     'redirect' => route('pvit.secret')
                 ]);
             }
-            
+
             return redirect()
                 ->route('pvit.secret')
                 ->with('success', 'La clé secrète a été mise à jour avec succès');
-                
+
         } catch (\Throwable $e) {
             Log::error('PVIT store secret DB error', ['err' => $e->getMessage()]);
-            
+
             if ($request->wantsJson() || $request->ajax()) {
                 return response()->json([
-                    'error' => 'STORE_FAILED', 
+                    'error' => 'STORE_FAILED',
                     'message' => $e->getMessage()
                 ], 500);
             }
-            
+
             return redirect()
                 ->route('pvit.secret')
                 ->with('error', 'Erreur lors de la mise à jour de la clé: ' . $e->getMessage());

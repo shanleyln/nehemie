@@ -146,9 +146,14 @@
                 const data = await res.json().catch(() => ({}));
 
                 if (res.ok && data.ok) {
+                    if (data.redirect) {
+                        // Rediriger vers l'URL fournie
+                        window.location.href = data.redirect;
+                        return false;
+                    }
                     target.innerHTML =
                         '<div class="alert alert-success"><b>Renew-secret OK.</b><br>' +
-                        '<small>La nouvelle clé a été envoyée à /api/pvit/receive-secret. Cliquez sur "Actualiser" pour l’afficher.</small>' +
+                        '<small>La nouvelle clé a été envoyée à /api/pvit/receive-secret. Cliquez sur "Actualiser" pour l\'afficher.</small>' +
                         (data.response ? '<pre class="mt-2 mb-0 small">' + escapeHtml(JSON.stringify(data.response,
                             null, 2)) + '</pre>' : '') +
                         '</div>';
