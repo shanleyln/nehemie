@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator; // + validation API
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class PvitController extends Controller
 {
@@ -45,33 +46,39 @@ class PvitController extends Controller
             DB::table('pvit_secrets')->insert($payload);
         }
     }
-
-    // --- Lire juste la clé (déchiffrée) ---
-    private function getSecret(): string
+    // --- lire juste la clé depuis la DB (décryptée) ---
+    private function getSecret(): ?string
     {
         try {
-            $row = DB::table('pvit_secrets')->where('account_code', self::ACCOUNT_CODE)->first();
-            return $row ? decrypt($row->secret_encrypted) : '';
+            $row = DB::table('pvit_secrets')
+                ->where('account_code', self::ACCOUNT_CODE)
+                ->first();
+
+            return $row ? decrypt($row->secret_encrypted) : null;
         } catch (\Throwable $e) {
             Log::error('PVIT getSecret DB error', ['err' => $e->getMessage()]);
-            return '';
+            return null;
         }
     }
 
-    // --- Lire les métadonnées (pour la page) ---
+    // --- lire les métadonnées pour l’affichage ---
     private function getSecretMeta(): ?array
     {
         try {
-            $row = DB::table('pvit_secrets')->where('account_code', self::ACCOUNT_CODE)->first();
+            $row = DB::table('pvit_secrets')
+                ->where('account_code', self::ACCOUNT_CODE)
+                ->first();
+
             if (!$row) {
                 return null;
             }
+
             return [
-                'received_at' => (string)$row->received_at,
+                'received_at' => $row->received_at ? Carbon::parse($row->received_at)->toDateTimeString() : null,
                 'expires_in'  => $row->expires_in,
-                'expires_at'  => $row->expires_at ? (string)$row->expires_at : null,
+                'expires_at'  => $row->expires_at ? Carbon::parse($row->expires_at)->toDateTimeString() : null,
                 'source_ip'   => $row->source_ip,
-                'version'     => $row->version,
+                'version'     => (int)$row->version,
             ];
         } catch (\Throwable $e) {
             Log::error('PVIT getSecretMeta DB error', ['err' => $e->getMessage()]);
@@ -79,34 +86,28 @@ class PvitController extends Controller
         }
     }
 
+
     /** PAGE : formulaire pour générer la clé + affichage de la clé courante */
     public function secretPage()
     {
-        $secret = $this->getSecret();
-        $meta = null;
-        try {
-            if (Storage::disk('local')->exists('pvit/secret.json')) {
-                $meta = json_decode(Storage::disk('local')->get('pvit/secret.json'), true);
-            }
-        } catch (\Throwable $e) {
-            // On remonte l’info à l’UI via la session
-            return back()->withErrors(['global' => "Impossible de lire le fichier de clé: ".$e->getMessage()]);
-        }
+        $secret = $this->getSecret();     // <- vient de la DB
+        $meta   = $this->getSecretMeta(); // <- vient de la DB
 
         return view('admin.pvit.secret', [
-            'secret'      => $secret,
-            'meta'        => $meta,
-            'info'        => [
-                'base'       => self::PVIT_BASE,
-                'codeurl'    => self::RENEW_CODEURL,
-                'account'    => self::ACCOUNT_CODE,
-                'reception'  => self::RECEPTION_CODE,
-                'endpoint'   => self::PVIT_BASE.'/'.self::RENEW_CODEURL.'/renew-secret',
+            'secret' => $secret,
+            'meta'   => $meta,
+            'info'   => [
+                'base'      => self::PVIT_BASE,
+                'codeurl'   => self::RENEW_CODEURL,
+                'account'   => self::ACCOUNT_CODE,
+                'reception' => self::RECEPTION_CODE,
+                'endpoint'  => self::PVIT_BASE.'/'.self::RENEW_CODEURL.'/renew-secret',
             ],
-            'renew_ok'    => session('renew_ok'),
-            'renew_resp'  => session('renew_response'),
+            'renew_ok'   => session('renew_ok'),
+            'renew_resp' => session('renew_response'),
         ]);
     }
+
 
     /** ACTION : déclenche le renew-secret (x-www-form-urlencoded) */
     public function renewSecretProxy(Request $request)
