@@ -56,12 +56,12 @@
 
     <link rel="manifest" href="manifest.json">
 
-
+    @livewireStyles
 </head>
 
 <!-- En-tête et navigation -->
 <header class="header" id="header">
-    @include('modules.overlay')
+    {{-- @include('modules.overlay') --}}
     <div class="header-wrapper">
         <div class="logo">
             <a href="{{ route('route_accueil') }}">
@@ -86,24 +86,25 @@
                 @endphp
 
                 <li>
-                    <a href="{{ route('route_accueil') }}" class="nav-link {{ $isAccueil ? 'active' : '' }}">Accueil</a>
+                    <a href="{{ route('route_accueil') }}" wire:navigate
+                        class="nav-link {{ $isAccueil ? 'active' : '' }}">Accueil</a>
                 </li>
                 <li>
-                    <a href="{{ route('route_qui_sommes_nous') }}"
+                    <a href="{{ route('route_qui_sommes_nous') }}" wire:navigate
                         class="nav-link {{ $isQuiSommesNous ? 'active' : '' }}">Qui sommes-nous</a>
                 </li>
                 <li>
                     <a href="{{ route('route_nos_programmes') }}"
-                        class="nav-link {{ $isNosProgrammes ? 'active' : '' }}">Nos programmes</a>
+                        class="nav-link {{ $isNosProgrammes ? 'active' : '' }}" wire:navigate>Nos programmes</a>
                 </li>
                 <li>
                     <a href="{{ route('route_nos_actions_et_projets') }}"
-                        class="nav-link {{ $isNosActions ? 'active' : '' }}">Nos actions</a>
+                        class="nav-link {{ $isNosActions ? 'active' : '' }}" wire:navigate>Nos actions</a>
                 </li>
 
                 <li>
-                    <a href="{{ route('route_actualites') }}"
-                        class="nav-link {{ $isActualites ? 'active' : '' }}">Actualités</a>
+                    <a href="{{ route('route_actualites') }}" class="nav-link {{ $isActualites ? 'active' : '' }}"
+                        wire:navigate>Actualités</a>
                 </li>
                 <li class="dropdown">
                     <span class="nav-link" style="cursor: default;">SOS Prière <i
@@ -142,13 +143,17 @@
 <div class="mobile-menu">
     <div class="container">
         <ul class="mobile-nav-list mt-5">
-            <li><a href="{{ route('route_accueil') }}" class="mobile-nav-link">Accueil</a></li>
-            <li><a href="{{ route('route_qui_sommes_nous') }}" class="mobile-nav-link">Qui sommes-nous</a></li>
+            <li><a href="{{ route('route_accueil') }}" wire:navigate class="mobile-nav-link">Accueil</a></li>
+            <li><a href="{{ route('route_qui_sommes_nous') }}" wire:navigate class="mobile-nav-link">Qui
+                    sommes-nous</a></li>
 
-            <li><a href="{{ route('route_nos_programmes') }}" class="mobile-nav-link">Nos programmes</a></li>
+            <li><a href="{{ route('route_nos_programmes') }}" wire:navigate class="mobile-nav-link">Nos
+                    programmes</a></li>
 
-            <li><a href="{{ route('route_actualites') }}" class="mobile-nav-link">Actualités</a></li>
-            <li><a href="{{ route('route_nos_actions_et_projets') }}" class="mobile-nav-link">Nos actions</a></li>
+            <li><a href="{{ route('route_actualites') }}" wire:navigate class="mobile-nav-link">Actualités</a></li>
+            <li><a href="{{ route('route_nos_actions_et_projets') }}" wire:navigate class="mobile-nav-link">Nos
+                    actions</a>
+            </li>
 
             <!-- Menu déroulant SOS Prière -->
             <li class="mobile-dropdown">
@@ -181,8 +186,7 @@
     @include('modales.modale_appel')
     @include('modales.modale_prayer-form')
     <div id="main-content">
-
-        @yield('content')
+        {{ $slot }}
     </div>
 
 
@@ -202,8 +206,7 @@
 
 
     <!-- jQuery -->
-    <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script src="assets/js/jquery-3.7.1.min.js" type="975494c0d05ce29815c81f40-text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <!-- Bootstrap Core JS -->
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}" type="975494c0d05ce29815c81f40-text/javascript"></script>
@@ -225,12 +228,7 @@
     <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}" type="975494c0d05ce29815c81f40-text/javascript"></script>
 
     <!-- Custom JS -->
-    <script src="{{ asset('assets/js/script.js') }}" type="975494c0d05ce29815c81f40-text/javascript"></script>
-
-    <script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
-        data-cf-settings="975494c0d05ce29815c81f40-|49" defer></script>
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
-        integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+    <script src="{{ asset('js/script.js') }}"
         data-cf-beacon='{"rayId":"954c67261d95cc00","version":"2025.6.2","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"token":"3ca157e612a14eccbb30cf6db6691c29","b":1}'
         crossorigin="anonymous"></script>
 
@@ -271,12 +269,17 @@
             });
         });
     </script>
-
+    
+    <!-- Scripts Livewire -->
+    @livewireScripts
+    
     <!-- Scripts personnalisés -->
-    <script src="{{ asset('js/main.js') }}"></script>
-    <script src="{{ asset('js/priere.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}" defer></script>
+    @if(file_exists(public_path('js/priere.js')))
+    <script src="{{ asset('js/priere.js') }}" defer></script>
+    @endif
 
-    {{-- Script pour le popup mobile money --}}
+    <!-- Script pour le popup mobile money -->
     <script>
         function openMobileMoneyPopup() {
             const url = "{{ route('index') }}";
@@ -408,13 +411,13 @@
                 <div class="footer-links-column">
                     <h4>Navigation</h4>
                     <ul>
-                        <li><a href="{{ route('route_accueil') }}">Accueil</a></li>
-                        <li><a href="{{ route('route_qui_sommes_nous') }}">Qui sommes-nous</a></li>
-                        <li><a href="{{ route('route_nos_programmes') }}">Nos programmes</a></li>
-                        <li><a href="{{ route('route_nos_actions_et_projets') }}"
+                        <li><a href="{{ route('route_accueil') }}" wire:navigate>Accueil</a></li>
+                        <li><a href="{{ route('route_qui_sommes_nous') }}" wire:navigate>Qui sommes-nous</a></li>
+                        <li><a href="{{ route('route_nos_programmes') }}" wire:navigate>Nos programmes</a></li>
+                        <li><a href="{{ route('route_nos_actions_et_projets') }}" wire:navigate
                                 class="{{ request()->routeIs('route_nos_actions_et_projets') ? 'active' : '' }}">Nos
                                 actions</a></li>
-                        <li><a href="{{ route('route_actualites') }}"
+                        <li><a href="{{ route('route_actualites') }}" wire:navigate
                                 class="{{ request()->routeIs('route_actualites') ? 'active' : '' }}">Actualités</a>
                         </li>
                     </ul>
@@ -422,11 +425,16 @@
                 <div class="footer-links-column">
                     <h4>Nos programmes</h4>
                     <ul>
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-salomon">Salomon</a></li>
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-joseph">Joseph</a></li>
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-david">David</a></li>
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-daniel">Daniel</a></li>
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-priscille">Priscille</a></li>
+                        <li><a href="{{ route('route_nos_programmes') }}#programme-salomon" wire:navigate>Salomon</a>
+                        </li>
+                        <li><a href="{{ route('route_nos_programmes') }}#programme-joseph" wire:navigate>Joseph</a>
+                        </li>
+                        <li><a href="{{ route('route_nos_programmes') }}#programme-david" wire:navigate>David</a></li>
+                        <li><a href="{{ route('route_nos_programmes') }}#programme-daniel" wire:navigate>Daniel</a>
+                        </li>
+                        <li><a href="{{ route('route_nos_programmes') }}#programme-priscille"
+                                wire:navigate>Priscille</a>
+                        </li>
                     </ul>
                 </div>
 
@@ -456,10 +464,6 @@
         </div>
     </div>
 </footer>
-
-
-
-
 
 
 </html>

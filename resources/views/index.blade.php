@@ -114,11 +114,11 @@
                 <div class="tab-pane fade show active" id="morale-pane" role="tabpanel" aria-labelledby="morale-tab">
                     <div id="moralTableBodyContainer">
 
-                        {{-- <!-- ✅ Titre et message -->
+                        <!-- ✅ Titre et message -->
                         <div class="auth-title text-center">
                             <p class="text-muted" style="font-size: 15px">Veuillez entrer le montant que vous souhaitez
                                 régler.</p>
-                        </div> --}}
+                        </div>
 
                         <!-- ✅ Message de succès -->
                         @if (session('success'))
@@ -153,19 +153,19 @@
                             }
                         @endphp
                         {{-- indisponible pour le moment --}}
-                        <div class="alert alert-danger mt-3" style="font-size: 13px">
+                        {{-- <div class="alert alert-danger mt-3" style="font-size: 13px">
                             indisponible pour le moment
-                        </div>
+                        </div> --}}
                         <!-- ✅ Formulaire de paiement -->
-                        {{-- <form class="auth-form mt-4 shadow" method="POST" action="{{ route('paiement.valider') }}">
+                        <form class="auth-form mt-4 shadow" method="POST" action="{{ route('paiement.valider') }}">
                             @csrf
 
                             <div class="form-group">
                                 <label class="form-label mb-2" for="InputMontant">Montant à payer (FCFA)</label>
                                 <div class="form-input">
                                     <input type="text" id="montant_affiche" class="form-control shadow-sm ps-5"
-                                      placeholder="Ex : 10 000" oninput="formatMontant(this)"
-                                        inputmode="numeric" value="{{ $montant ?? null }}" autocomplete="off" required>
+                                        placeholder="Ex : 10 000" oninput="formatMontant(this)" inputmode="numeric"
+                                        value="{{ $montant ?? null }}" autocomplete="off" required>
 
                                     <input type="hidden" name="montant" id="montant" value="{{ $montant ?? null }}"
                                         required>
@@ -177,7 +177,7 @@
                                 style="font-weight: bold; border-radius: 8px; padding: 10px 0; font-size: 16px;">
                                 Payer maintenant
                             </button>
-                        </form> --}}
+                        </form>
                         <script>
                             function formatMontant(input) {
                                 let valeur = input.value.replace(/\s/g, '').replace(/\D/g, '');

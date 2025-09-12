@@ -1,7 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Nos Programmes')
-@section('content')
+<div>
     {{-- Hero Section --}}
     <section class="position-relative overflow-hidden" style="height: 70vh;">
         <!-- Image de fond -->
@@ -195,15 +192,18 @@
             <section class=" bg-white rounded-xl  p-6 sm:p-8 ">
                 <h3 class="text-2xl
             font-bold mb-3 text-gray-800">Notre Approche Stratégique</h3>
-                <p class="mb-6 text-lg text-gray-700">Pour optimiser notre impact, nous avons développé une structure de 5
+                <p class="mb-6 text-lg text-gray-700">Pour optimiser notre impact, nous avons développé une structure de
+                    5
                     programmes stratégiques qui couvrent efficacement les 7 montagnes d'influence. Chaque programme est
                     nommé d'après une figure biblique exemplaire qui incarne les valeurs et la mission du programme.</p>
 
                 <div class="bg-burgundy-50 p-6 rounded-lg border-l-4 border-burgundy-500 mt-6 shadow-sm">
                     <p class="text-md italic text-burgundy-800">
                         <i class="fas fa-quote-left text-burgundy-400 mr-2 fa-lg"></i>
-                        Notre vision est de développer 5 programmes bibliquement fondés qui, ensemble, transforment les 7
-                        sphères d'influence de la société, chaque programme étant dirigé par les principes incarnés par les
+                        Notre vision est de développer 5 programmes bibliquement fondés qui, ensemble, transforment les
+                        7
+                        sphères d'influence de la société, chaque programme étant dirigé par les principes incarnés par
+                        les
                         figures bibliques correspondantes.
                         <i class="fas fa-quote-right text-burgundy-400 ml-2 fa-lg"></i>
                     </p>
@@ -254,7 +254,8 @@
                                     </div>
 
                                     <div class="p-6 sm:p-8">
-                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Justification du Nom</h3>
+                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Justification du Nom
+                                        </h3>
                                         <div
                                             class="bg-burgundy-50 p-5 rounded-lg border-l-4 border-burgundy-400 mb-6 shadow-sm">
                                             <p class="text-md text-burgundy-800">
@@ -267,9 +268,11 @@
                                         </div>
 
                                         <p class="mb-4 text-gray-700">
-                                            <strong>Fondement biblique :</strong> Salomon est reconnu comme le roi le plus
+                                            <strong>Fondement biblique :</strong> Salomon est reconnu comme le roi le
+                                            plus
                                             sage de l'histoire
-                                            d'Israël. Lors de son accession au trône, il demanda à Dieu de lui accorder "un
+                                            d'Israël. Lors de son accession au trône, il demanda à Dieu de lui accorder
+                                            "un
                                             cœur intelligent
                                             pour juger ton peuple, pour discerner le bien et le mal" (1 Rois 3:9).
                                         </p>
@@ -277,36 +280,44 @@
                                         <p class="mb-6 text-gray-700">
                                             Cette sagesse divine lui permit de gouverner avec justice et discernement,
                                             faisant de son règne une
-                                            période de paix et de prospérité sans précédent. Sa renommée était telle que des
+                                            période de paix et de prospérité sans précédent. Sa renommée était telle que
+                                            des
                                             dirigeants comme la
-                                            reine de Saba venaient de loin pour apprendre de lui. Avec ses 3000 proverbes et
+                                            reine de Saba venaient de loin pour apprendre de lui. Avec ses 3000
+                                            proverbes et
                                             1005 cantiques, il
                                             fut également un grand éducateur de son temps.
                                         </p>
 
-                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Essence du Programme</h3>
+                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Essence du Programme
+                                        </h3>
                                         <p class="mb-6 text-gray-700">
                                             Former et équiper des leaders de gouvernance éthique et sage, influencer les
                                             systèmes politiques
-                                            avec des principes bibliques, et développer des systèmes éducatifs qui intègrent
+                                            avec des principes bibliques, et développer des systèmes éducatifs qui
+                                            intègrent
                                             sagesse et
                                             connaissance pour transformer la société.
                                         </p>
 
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                                             <div>
-                                                <h4 class="text-xl font-semibold mb-3 text-burgundy-700">Objectifs Généraux
+                                                <h4 class="text-xl font-semibold mb-3 text-burgundy-700">Objectifs
+                                                    Généraux
                                                 </h4>
                                                 <ul class="list-disc list-inside pl-2 space-y-2 text-gray-700">
                                                     <li>Former des leaders politiques et gouvernementaux fondés sur des
                                                         principes bibliques.
                                                     </li>
-                                                    <li>Développer et promouvoir des politiques publiques justes et sages.
+                                                    <li>Développer et promouvoir des politiques publiques justes et
+                                                        sages.
                                                     </li>
-                                                    <li>Créer des modèles éducatifs qui intègrent connaissance académique et
+                                                    <li>Créer des modèles éducatifs qui intègrent connaissance
+                                                        académique et
                                                         sagesse pratique.
                                                     </li>
-                                                    <li>Influencer les systèmes éducatifs pour qu'ils valorisent l'intégrité
+                                                    <li>Influencer les systèmes éducatifs pour qu'ils valorisent
+                                                        l'intégrité
                                                         et l'excellence.
                                                     </li>
                                                     <li>Établir des ponts entre les sphères politique et éducative.</li>
@@ -330,13 +341,15 @@
                                                 class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
                                                 <h5 class="font-bold text-lg text-secondary mb-1">Think Tank "Sagesse en
                                                     Action"</h5>
-                                                <p class="text-sm text-gray-600">Élaboration de politiques publiques basées
+                                                <p class="text-sm text-gray-600">Élaboration de politiques publiques
+                                                    basées
                                                     sur des principes
                                                     bibliques.</p>
                                             </div>
                                             <div
                                                 class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                                                <h5 class="font-bold text-lg text-secondary mb-1">École Modèle d'Excellence
+                                                <h5 class="font-bold text-lg text-secondary mb-1">École Modèle
+                                                    d'Excellence
                                                 </h5>
                                                 <p class="text-sm text-gray-600">Établissement pilote démontrant
                                                     l'intégration
@@ -346,7 +359,8 @@
                                                 class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
                                                 <h5 class="font-bold text-lg text-secondary mb-1">Forum "Gouvernance &
                                                     Éducation"</h5>
-                                                <p class="text-sm text-gray-600">Événements connectant décideurs politiques
+                                                <p class="text-sm text-gray-600">Événements connectant décideurs
+                                                    politiques
                                                     et éducateurs.</p>
                                             </div>
                                         </div>
@@ -366,7 +380,8 @@
                                     </div>
 
                                     <div class="p-6 sm:p-8">
-                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Justification du Nom</h3>
+                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Justification du Nom
+                                        </h3>
                                         <div
                                             class="bg-burgundy-50 p-5 rounded-lg border-l-4 border-burgundy-400 mb-6 shadow-sm">
                                             <p class="text-md text-burgundy-800">
@@ -381,9 +396,11 @@
                                         </div>
 
                                         <p class="mb-4 text-gray-700">
-                                            <strong>Fondement biblique :</strong> Joseph, fils de Jacob, s'éleva d'esclave à
+                                            <strong>Fondement biblique :</strong> Joseph, fils de Jacob, s'éleva
+                                            d'esclave à
                                             premier ministre
-                                            d'Égypte grâce à son intégrité, sa sagesse et ses compétences exceptionnelles en
+                                            d'Égypte grâce à son intégrité, sa sagesse et ses compétences
+                                            exceptionnelles en
                                             gestion. Il
                                             interpréta prophétiquement les rêves de Pharaon concernant sept années
                                             d'abondance suivies de sept
@@ -391,9 +408,11 @@
                                         </p>
 
                                         <p class="mb-6 text-gray-700">
-                                            Sa gestion stratégique des ressources pendant les années d'abondance permit non
+                                            Sa gestion stratégique des ressources pendant les années d'abondance permit
+                                            non
                                             seulement à l'Égypte
-                                            de survivre à la famine, mais aussi de devenir la puissance économique dominant
+                                            de survivre à la famine, mais aussi de devenir la puissance économique
+                                            dominant
                                             toute la région. Son
                                             modèle d'administration visionnaire illustre comment les principes divins
                                             peuvent transformer
@@ -401,18 +420,21 @@
                                             l'influence.
                                         </p>
 
-                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Essence du Programme</h3>
+                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Essence du Programme
+                                        </h3>
                                         <p class="mb-6 text-gray-700">
                                             Transformer la sphère économique selon des principes bibliques, former des
                                             entrepreneurs et
-                                            dirigeants d'entreprise éthiques, développer des modèles d'affaires durables et
+                                            dirigeants d'entreprise éthiques, développer des modèles d'affaires durables
+                                            et
                                             équitables, et
                                             utiliser les ressources économiques pour avoir un impact social positif.
                                         </p>
 
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                                             <div>
-                                                <h4 class="text-xl font-semibold mb-3 text-burgundy-700">Objectifs Généraux
+                                                <h4 class="text-xl font-semibold mb-3 text-burgundy-700">Objectifs
+                                                    Généraux
                                                 </h4>
                                                 <ul class="list-disc list-inside pl-2 space-y-2 text-gray-700">
                                                     <li>Former une nouvelle génération d'entrepreneurs et dirigeants
@@ -442,9 +464,11 @@
                                             </div>
                                             <div
                                                 class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                                                <h5 class="font-bold text-lg text-burgundy-600 mb-1">Fonds d'Investissement
+                                                <h5 class="font-bold text-lg text-burgundy-600 mb-1">Fonds
+                                                    d'Investissement
                                                     Éthique</h5>
-                                                <p class="text-sm text-gray-600">Financement pour projets alignés sur les
+                                                <p class="text-sm text-gray-600">Financement pour projets alignés sur
+                                                    les
                                                     valeurs du Royaume.
                                                 </p>
                                             </div>
@@ -452,13 +476,15 @@
                                                 class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
                                                 <h5 class="font-bold text-lg text-burgundy-600 mb-1">Réseau d'Affaires
                                                     "Prospérité Partagée"</h5>
-                                                <p class="text-sm text-gray-600">Plateforme de collaboration et de partage
+                                                <p class="text-sm text-gray-600">Plateforme de collaboration et de
+                                                    partage
                                                     de bonnes pratiques.
                                                 </p>
                                             </div>
                                             <div
                                                 class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                                                <h5 class="font-bold text-lg text-burgundy-600 mb-1">Programme de Formation
+                                                <h5 class="font-bold text-lg text-burgundy-600 mb-1">Programme de
+                                                    Formation
                                                     en
                                                     Gestion Intègre
                                                 </h5>
@@ -487,19 +513,22 @@
                                     </div>
                                     <div class="p-6 sm:p-8">
                                         <!-- Contenu spécifique au Programme DAVID ici -->
-                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Justification du Nom</h3>
+                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Justification du Nom
+                                        </h3>
                                         <div
                                             class="bg-burgundy-50 p-5 rounded-lg border-l-4 border-burgundy-400 mb-6 shadow-sm">
                                             <p class="text-md text-burgundy-800">
                                                 <i class="fas fa-quote-left text-burgundy-300 mr-2 fa-lg"></i>
-                                                David, le roi-poète et musicien, symbolise la puissance de l'art et de la
+                                                David, le roi-poète et musicien, symbolise la puissance de l'art et de
+                                                la
                                                 communication pour
                                                 toucher les cœurs, exprimer la foi et influencer la culture.
                                                 <i class="fas fa-quote-right text-burgundy-300 ml-2 fa-lg"></i>
                                             </p>
                                         </div>
                                         <p class="mb-6 text-gray-700">
-                                            <strong>Fondement biblique :</strong> Le roi David était non seulement un leader
+                                            <strong>Fondement biblique :</strong> Le roi David était non seulement un
+                                            leader
                                             politique et
                                             militaire, mais aussi un artiste accompli, auteur de nombreux Psaumes. Sa
                                             musique apaisait l'âme
@@ -509,21 +538,25 @@
                                             humaines et transmettre
                                             des vérités spirituelles.
                                         </p>
-                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Essence du Programme</h3>
+                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Essence du Programme
+                                        </h3>
                                         <p class="mb-6 text-gray-700">
                                             Former et promouvoir des artistes et communicateurs chrétiens qui créent des
                                             œuvres d'excellence
-                                            porteuses de sens, de beauté et de vérité. Influencer les sphères des arts, du
+                                            porteuses de sens, de beauté et de vérité. Influencer les sphères des arts,
+                                            du
                                             divertissement et des
                                             médias avec des contenus qui élèvent l'esprit et reflètent les valeurs du
                                             Royaume.
                                         </p>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                                             <div>
-                                                <h4 class="text-xl font-semibold mb-3 text-burgundy-700">Objectifs Généraux
+                                                <h4 class="text-xl font-semibold mb-3 text-burgundy-700">Objectifs
+                                                    Généraux
                                                 </h4>
                                                 <ul class="list-disc list-inside pl-2 space-y-2 text-gray-700">
-                                                    <li>Identifier, former et soutenir les talents chrétiens dans les arts
+                                                    <li>Identifier, former et soutenir les talents chrétiens dans les
+                                                        arts
                                                         et les médias.</li>
                                                     <li>Produire et diffuser des contenus culturels et médiatiques
                                                         inspirants et pertinents.
@@ -551,15 +584,18 @@
                                             </div>
                                             <div
                                                 class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                                                <h5 class="font-bold text-lg text-burgundy-600 mb-1">Plateforme Média "Echo
+                                                <h5 class="font-bold text-lg text-burgundy-600 mb-1">Plateforme Média
+                                                    "Echo
                                                     du Royaume"</h5>
-                                                <p class="text-sm text-gray-600">Diffusion de contenus, blog, magazine en
+                                                <p class="text-sm text-gray-600">Diffusion de contenus, blog, magazine
+                                                    en
                                                     ligne, réseau social.
                                                 </p>
                                             </div>
                                             <div
                                                 class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                                                <h5 class="font-bold text-lg text-burgundy-600 mb-1">Ateliers "Art et Sens"
+                                                <h5 class="font-bold text-lg text-burgundy-600 mb-1">Ateliers "Art et
+                                                    Sens"
                                                 </h5>
                                                 <p class="text-sm text-gray-600">Formation et coaching pour artistes
                                                     chrétiens.</p>
@@ -568,7 +604,8 @@
                                                 class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
                                                 <h5 class="font-bold text-lg text-burgundy-600 mb-1">Festival Culturel
                                                     "Harmonie Divine"</h5>
-                                                <p class="text-sm text-gray-600">Événements mettant en valeur l'art et la
+                                                <p class="text-sm text-gray-600">Événements mettant en valeur l'art et
+                                                    la
                                                     musique inspirés.</p>
                                             </div>
                                         </div>
@@ -591,12 +628,14 @@
                                     </div>
                                     <div class="p-6 sm:p-8">
                                         <!-- Contenu spécifique au Programme DANIEL ici -->
-                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Justification du Nom</h3>
+                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Justification du Nom
+                                        </h3>
                                         <div
                                             class="bg-burgundy-50 p-5 rounded-lg border-l-4 border-burgundy-400 mb-6 shadow-sm">
                                             <p class="text-md text-burgundy-800">
                                                 <i class="fas fa-quote-left text-burgundy-300 mr-2 fa-lg"></i>
-                                                Daniel incarne l'intégrité inébranlable, la sagesse divine et l'influence
+                                                Daniel incarne l'intégrité inébranlable, la sagesse divine et
+                                                l'influence
                                                 spirituelle au sein
                                                 même des plus hautes sphères du pouvoir séculier, tout en maintenant une
                                                 dévotion profonde.
@@ -612,30 +651,37 @@
                                             valu le respect et lui
                                             ont permis d'influencer positivement les décisions des empires.
                                         </p>
-                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Essence du Programme</h3>
+                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Essence du Programme
+                                        </h3>
                                         <p class="mb-6 text-gray-700">
                                             Renforcer la montagne de la religion et de la spiritualité en équipant les
                                             leaders religieux et les
                                             croyants pour un impact sociétal pertinent. Former des individus capables
                                             d'opérer avec sagesse et
-                                            intégrité dans des contextes séculiers, en particulier gouvernementaux, tout en
+                                            intégrité dans des contextes séculiers, en particulier gouvernementaux, tout
+                                            en
                                             étant des témoins
                                             vivants de leur foi.
                                         </p>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                                             <div>
-                                                <h4 class="text-xl font-semibold mb-3 text-burgundy-700">Objectifs Généraux
+                                                <h4 class="text-xl font-semibold mb-3 text-burgundy-700">Objectifs
+                                                    Généraux
                                                 </h4>
                                                 <ul class="list-disc list-inside pl-2 space-y-2 text-gray-700">
-                                                    <li>Équiper les leaders religieux pour une influence éthique et sociale.
+                                                    <li>Équiper les leaders religieux pour une influence éthique et
+                                                        sociale.
                                                     </li>
-                                                    <li>Promouvoir le dialogue interconfessionnel et la liberté religieuse.
+                                                    <li>Promouvoir le dialogue interconfessionnel et la liberté
+                                                        religieuse.
                                                     </li>
-                                                    <li>Former les croyants à intégrer leur foi dans tous les domaines de
+                                                    <li>Former les croyants à intégrer leur foi dans tous les domaines
+                                                        de
                                                         leur vie.</li>
                                                     <li>Servir de conseillers spirituels et éthiques dans les sphères de
                                                         décision.</li>
-                                                    <li>Développer des ressources pour l'éducation théologique et biblique
+                                                    <li>Développer des ressources pour l'éducation théologique et
+                                                        biblique
                                                         appliquée.</li>
                                                 </ul>
                                             </div>
@@ -648,7 +694,8 @@
                                                 class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
                                                 <h5 class="font-bold text-lg text-burgundy-600 mb-1">Institut Daniel de
                                                     Sagesse Appliquée</h5>
-                                                <p class="text-sm text-gray-600">Formation pour croyants dans des sphères
+                                                <p class="text-sm text-gray-600">Formation pour croyants dans des
+                                                    sphères
                                                     non religieuses
                                                     (politique, administration).</p>
                                             </div>
@@ -656,13 +703,15 @@
                                                 class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
                                                 <h5 class="font-bold text-lg text-burgundy-600 mb-1">Plateforme "Foi &
                                                     Société"</h5>
-                                                <p class="text-sm text-gray-600">Espace de dialogue, de ressources et de
+                                                <p class="text-sm text-gray-600">Espace de dialogue, de ressources et
+                                                    de
                                                     mise en réseau pour
                                                     l'engagement public.</p>
                                             </div>
                                             <div
                                                 class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                                                <h5 class="font-bold text-lg text-burgundy-600 mb-1">Programme de Mentorat
+                                                <h5 class="font-bold text-lg text-burgundy-600 mb-1">Programme de
+                                                    Mentorat
                                                     Spirituel</h5>
                                                 <p class="text-sm text-gray-600">Accompagnement d'individus dans leur
                                                     croissance et leur
@@ -670,10 +719,12 @@
                                             </div>
                                             <div
                                                 class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                                                <h5 class="font-bold text-lg text-burgundy-600 mb-1">Conférences "Éthique
+                                                <h5 class="font-bold text-lg text-burgundy-600 mb-1">Conférences
+                                                    "Éthique
                                                     et
                                                     Foi"</h5>
-                                                <p class="text-sm text-gray-600">Événements abordant les défis sociétaux
+                                                <p class="text-sm text-gray-600">Événements abordant les défis
+                                                    sociétaux
                                                     sous un angle
                                                     biblique.</p>
                                             </div>
@@ -693,22 +744,26 @@
                                             <i class="fas fa-users fa-fw mr-4 text-burgundy-300 text-4xl"></i>
                                             Programme PRISCILLE & AQUILA
                                         </h2>
-                                        <p class="text-secondary-100 text-lg mt-1">Famille + Action Sociale Communautaire +
+                                        <p class="text-secondary-100 text-lg mt-1">Famille + Action Sociale
+                                            Communautaire +
                                             Éducation
                                             (secondaire)</p>
                                     </div>
                                     <div class="p-6 sm:p-8">
-                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Justification du Nom</h3>
+                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Justification du Nom
+                                        </h3>
                                         <div
                                             class="bg-burgundy-50 p-5 rounded-lg border-l-4 border-burgundy-400 mb-6 shadow-sm">
                                             <p class="text-md text-burgundy-800">
                                                 <i class="fas fa-quote-left text-burgundy-300 mr-2 fa-lg"></i>
-                                                Priscille et Aquila représentent le partenariat conjugal dans le ministère,
+                                                Priscille et Aquila représentent le partenariat conjugal dans le
+                                                ministère,
                                                 l'hospitalité, le
-                                                mentorat et l'impact économique au service de l'Évangile. Leur maison était
+                                                mentorat et l'impact économique au service de l'Évangile. Leur maison
+                                                était
                                                 un centre vivant de
-                                                foi, d'éducation et de soutien, incarnant une vie de famille solide <strong
-                                                    class="text-burgundy-800">qui déborde vers le service et l'aide
+                                                foi, d'éducation et de soutien, incarnant une vie de famille solide
+                                                <strong class="text-burgundy-800">qui déborde vers le service et l'aide
                                                     concrète à autrui et à la
                                                     communauté</strong>.
                                                 <i class="fas fa-quote-right text-burgundy-300 ml-2 fa-lg"></i>
@@ -717,23 +772,30 @@
                                         <p class="mb-6 text-gray-700">
                                             <strong>Fondement biblique :</strong> Ce couple du Nouveau Testament est un
                                             exemple de collaboration
-                                            dans la vie, le travail (fabricants de tentes) et le ministère. Ils ont ouvert
+                                            dans la vie, le travail (fabricants de tentes) et le ministère. Ils ont
+                                            ouvert
                                             leur maison pour
                                             l'église, ont voyagé avec l'apôtre Paul, et ont instruit Apollos plus
                                             précisément dans la voie de
-                                            Dieu. Leur vie illustre l'importance de la famille comme base pour l'éducation,
+                                            Dieu. Leur vie illustre l'importance de la famille comme base pour
+                                            l'éducation,
                                             le service et
-                                            l'influence, montrant comment un foyer peut devenir une source de bénédiction et
+                                            l'influence, montrant comment un foyer peut devenir une source de
+                                            bénédiction et
                                             d'action sociale
                                             pour son entourage.
                                         </p>
-                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Essence du Programme</h3>
+                                        <h3 class="text-2xl font-semibold mb-4 text-burgundy-700">Essence du Programme
+                                        </h3>
                                         <p class="mb-6 text-gray-700">
-                                            Soutenir et renforcer les familles comme fondement de la société et piliers de
+                                            Soutenir et renforcer les familles comme fondement de la société et piliers
+                                            de
                                             la communauté, en
-                                            promouvant des modèles basés sur des principes bibliques. Le programme vise à
+                                            promouvant des modèles basés sur des principes bibliques. Le programme vise
+                                            à
                                             équiper les foyers
-                                            pour être des centres d'influence positive, de soin et d'éducation, s'étendant
+                                            pour être des centres d'influence positive, de soin et d'éducation,
+                                            s'étendant
                                             vers la communauté
                                             environnante par l'hospitalité, le mentorat <strong
                                                 class="text-burgundy-800">et
@@ -743,14 +805,17 @@
                                         </p>
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                                             <div>
-                                                <h4 class="text-xl font-semibold mb-3 text-burgundy-700">Objectifs Généraux
+                                                <h4 class="text-xl font-semibold mb-3 text-burgundy-700">Objectifs
+                                                    Généraux
                                                 </h4>
                                                 <ul class="list-disc list-inside pl-2 space-y-2 text-gray-700">
                                                     <li>Renforcer les liens familiaux et conjugaux selon les principes
                                                         bibliques.</li>
-                                                    <li>Équiper les parents pour l'éducation et le développement de leurs
+                                                    <li>Équiper les parents pour l'éducation et le développement de
+                                                        leurs
                                                         enfants.</li>
-                                                    <li>Promouvoir l'hospitalité et l'entraide au sein des communautés.</li>
+                                                    <li>Promouvoir l'hospitalité et l'entraide au sein des communautés.
+                                                    </li>
                                                     <li><strong class="text-burgundy-800">Développer des programmes
                                                             d'action sociale ciblés
                                                             pour les familles et individus vulnérables (aide,
@@ -770,13 +835,15 @@
                                                 class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
                                                 <h5 class="font-bold text-lg text-burgundy-600 mb-1">Ateliers "Famille
                                                     Solide"</h5>
-                                                <p class="text-sm text-gray-600">Formation sur le mariage, la parentalité,
+                                                <p class="text-sm text-gray-600">Formation sur le mariage, la
+                                                    parentalité,
                                                     la communication.
                                                 </p>
                                             </div>
                                             <div
                                                 class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                                                <h5 class="font-bold text-lg text-burgundy-600 mb-1">Réseau d'Hospitalité
+                                                <h5 class="font-bold text-lg text-burgundy-600 mb-1">Réseau
+                                                    d'Hospitalité
                                                     et d'Entraide</h5>
                                                 <p class="text-sm text-gray-600">Mise en relation pour le partage, le
                                                     soutien mutuel,
@@ -787,7 +854,8 @@
                                                 <h5 class="font-bold text-lg text-burgundy-600 mb-1"><strong
                                                         class="text-burgundy-800">Programme de Soutien aux Familles
                                                         Vulnérables</strong></h5>
-                                                <p class="text-sm text-gray-600"><strong class="text-burgundy-800">Aide
+                                                <p class="text-sm text-gray-600"><strong
+                                                        class="text-burgundy-800">Aide
                                                         alimentaire,
                                                         vestimentaire, accompagnement administratif, conseil
                                                         budgétaire.</strong></p>
@@ -804,7 +872,8 @@
                                             </div>
                                             <div
                                                 class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                                                <h5 class="font-bold text-lg text-burgundy-600 mb-1">Programme de Mentorat
+                                                <h5 class="font-bold text-lg text-burgundy-600 mb-1">Programme de
+                                                    Mentorat
                                                     Transgénérationnel
                                                 </h5>
                                                 <p class="text-sm text-gray-600">Connexion entre générations pour la
@@ -813,10 +882,12 @@
                                             </div>
                                             <div
                                                 class="bg-gray-50 p-5 rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-                                                <h5 class="font-bold text-lg text-burgundy-600 mb-1">Groupe de Support pour
+                                                <h5 class="font-bold text-lg text-burgundy-600 mb-1">Groupe de Support
+                                                    pour
                                                     Parents Isolé(e)s
                                                 </h5>
-                                                <p class="text-sm text-gray-600">Espace d'écoute, de partage et de soutien
+                                                <p class="text-sm text-gray-600">Espace d'écoute, de partage et de
+                                                    soutien
                                                     pratique pour
                                                     parents seuls.</p>
                                             </div>
@@ -827,86 +898,84 @@
                         </div>
                     </div>
                 </div> <!-- Fin de .programs-tabs-content -->
-                </div> <!-- Fin de .programs-tabs -->
-                </div> <!-- Fin de .container -->
-            </section>
-        </main>
+</div> <!-- Fin de .programs-tabs -->
+</div> <!-- Fin de .container -->
+</section>
+</main>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Fonction pour activer un onglet spécifique
-                function activateTab(programId) {
-                    console.log('Activation de l\'onglet:', programId);
-                    // Désactiver tous les onglets
-                    document.querySelectorAll('.program-tab').forEach(tab => {
-                        tab.classList.remove('active');
-                    });
-                    document.querySelectorAll('.program-content').forEach(content => {
-                        content.classList.remove('active');
-                    });
-
-                    // Activer l'onglet et le contenu correspondants
-                    const tab = document.querySelector(`.program-tab[data-program="${programId}"]`);
-                    const content = document.getElementById(`program-${programId}`);
-
-                    if (tab && content) {
-                        tab.classList.add('active');
-                        content.classList.add('active');
-
-                        // Faire défiler jusqu'à la section
-                        content.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                }
-
-
-                // Gestion du clic sur les onglets
-                document.querySelectorAll('.program-tab').forEach(tab => {
-                    tab.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        const programId = this.getAttribute('data-program');
-                        // Mettre à jour l'URL sans recharger la page
-                        history.pushState(null, null, `#programme-${programId}`);
-                        activateTab(programId);
-                    });
-                });
-
-                // Gestion du chargement de la page avec une ancre
-                if (window.location.hash) {
-                    const hash = window.location.hash.substring(1); // Enlever le #
-                    // Vérifier si le hash correspond à un programme
-                    const programMatch = hash.match(/^programme-(salomon|joseph|david|daniel|priscille)$/);
-                    if (programMatch) {
-                        const programId = programMatch[1];
-                        // Petit délai pour s'assurer que le DOM est complètement chargé
-                        setTimeout(() => activateTab(programId), 100);
-                    }
-                } else {
-                    // Si pas de hash, activer le premier onglet
-                    setTimeout(() => activateTab('salomon'), 100);
-                }
-
-                // Gestion du bouton de retour
-                window.addEventListener('popstate', function() {
-                    if (window.location.hash) {
-                        const hash = window.location.hash.substring(1);
-                        const programMatch = hash.match(/^programme-(salomon|joseph|david|daniel|priscille)$/);
-                        if (programMatch) {
-                            const programId = programMatch[1];
-                            activateTab(programId);
-                        }
-                    } else {
-                        // Si pas de hash, activer le premier onglet
-                        activateTab('salomon');
-                    }
-                });
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Fonction pour activer un onglet spécifique
+        function activateTab(programId) {
+            console.log('Activation de l\'onglet:', programId);
+            // Désactiver tous les onglets
+            document.querySelectorAll('.program-tab').forEach(tab => {
+                tab.classList.remove('active');
             });
-        </script>
+            document.querySelectorAll('.program-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Activer l'onglet et le contenu correspondants
+            const tab = document.querySelector(`.program-tab[data-program="${programId}"]`);
+            const content = document.getElementById(`program-${programId}`);
+
+            if (tab && content) {
+                tab.classList.add('active');
+                content.classList.add('active');
+
+                // Faire défiler jusqu'à la section
+                content.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
 
 
-    </body>
+        // Gestion du clic sur les onglets
+        document.querySelectorAll('.program-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                const programId = this.getAttribute('data-program');
+                // Mettre à jour l'URL sans recharger la page
+                history.pushState(null, null, `#programme-${programId}`);
+                activateTab(programId);
+            });
+        });
+
+        // Gestion du chargement de la page avec une ancre
+        if (window.location.hash) {
+            const hash = window.location.hash.substring(1); // Enlever le #
+            // Vérifier si le hash correspond à un programme
+            const programMatch = hash.match(/^programme-(salomon|joseph|david|daniel|priscille)$/);
+            if (programMatch) {
+                const programId = programMatch[1];
+                // Petit délai pour s'assurer que le DOM est complètement chargé
+                setTimeout(() => activateTab(programId), 100);
+            }
+        } else {
+            // Si pas de hash, activer le premier onglet
+            setTimeout(() => activateTab('salomon'), 100);
+        }
+
+        // Gestion du bouton de retour
+        window.addEventListener('popstate', function() {
+            if (window.location.hash) {
+                const hash = window.location.hash.substring(1);
+                const programMatch = hash.match(/^programme-(salomon|joseph|david|daniel|priscille)$/);
+                if (programMatch) {
+                    const programId = programMatch[1];
+                    activateTab(programId);
+                }
+            } else {
+                // Si pas de hash, activer le premier onglet
+                activateTab('salomon');
+            }
+        });
+    });
+</script>
 
 
-@endsection
+</body>
+</div>

@@ -1,7 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Accueil')
-@section('content')
+<div>
 
     <!-- Section Héro avec slider -->
     <section id="accueil" class="hero-section">
@@ -78,15 +75,20 @@
                     </div>
                     <div class="welcome-text">
                         <p>"Bienvenue sur le site de NÉHÉMIE International. Si vous êtes ici, c’est sans doute que vous
-                            partagez, comme nous, le désir de voir les choses changer concrètement. NÉHÉMIE est née d’une
-                            conviction simple mais forte : notre foi ne peut pas rester théorique. Elle prend tout son sens
-                            lorsqu’elle se traduit par des gestes d’amour, de solidarité, et des actions qui redonnent de la
+                            partagez, comme nous, le désir de voir les choses changer concrètement. NÉHÉMIE est née
+                            d’une
+                            conviction simple mais forte : notre foi ne peut pas rester théorique. Elle prend tout son
+                            sens
+                            lorsqu’elle se traduit par des gestes d’amour, de solidarité, et des actions qui redonnent
+                            de la
                             valeur à chaque être humain."</p>
-                        <p>"Le Gabon traverse aujourd’hui des temps difficiles. Mais nous croyons qu’en mettant en avant des
+                        <p>"Le Gabon traverse aujourd’hui des temps difficiles. Mais nous croyons qu’en mettant en avant
+                            des
                             valeurs vraies – la compassion, le sens du service, l’honnêteté – on peut poser ensemble les
                             bases d’un avenir plus juste et durable."</p>
                         <p>"Je vous invite à faire un bout de chemin avec nous. Explorez notre mission, découvrez nos
-                            actions, et si cela vous parle, rejoignez-nous dans ce bel engagement pour reconstruire, espérer
+                            actions, et si cela vous parle, rejoignez-nous dans ce bel engagement pour reconstruire,
+                            espérer
                             et agir."</p>
                     </div>
                 </div>
@@ -159,7 +161,8 @@
                         <li><i class="fas fa-check-circle"></i> Logistique</li>
                     </ul>
 
-                    <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#rejoindreModal">Nous
+                    <a href="#" class="btn btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#rejoindreModal">Nous
                         rejoindre</a>
                 </div>
             </div>
@@ -263,7 +266,8 @@
                                 <p>Former et équiper des leaders de gouvernance éthique et sage, influencer les systèmes
                                     politiques avec des principes bibliques, et développer des systèmes éducatifs qui
                                     intègrent sagesse et connaissance pour transformer la société.</p>
-                                <a href="{{ route('route_nos_programmes') }}#programme-salomon" class="btn btn-secondary">En
+                                <a href="{{ route('route_nos_programmes') }}#programme-salomon"
+                                    class="btn btn-secondary">En
                                     savoir plus</a>
                             </div>
                         </div>
@@ -279,7 +283,8 @@
                                 <p class="program-tagline">Économie/Affaires</p>
                                 <p>Transformer la sphère économique selon des principes bibliques,
                                     former des entrepreneurs et dirigeants d'entreprise éthiques, développer des modèles
-                                    d'affaires durables et équitables, et utiliser les ressources économiques pour avoir un
+                                    d'affaires durables et équitables, et utiliser les ressources économiques pour avoir
+                                    un
                                     impact social positif.</p>
 
                                 <a href="{{ route('route_nos_programmes') }}#programme-joseph"
@@ -298,7 +303,8 @@
                                 <h3>Programme DAVID</h3>
                                 <p class="program-tagline">Arts/Divertissement + Médias/Communications</p>
                                 <p>Former et promouvoir des artistes et communicateurs chrétiens
-                                    qui créent des œuvres d'excellence porteuses de sens, de beauté et de vérité. Influencer
+                                    qui créent des œuvres d'excellence porteuses de sens, de beauté et de vérité.
+                                    Influencer
                                     les sphères des arts, du divertissement et des médias avec des contenus qui élèvent
                                     l'esprit et reflètent les valeurs du Royaume.</p>
 
@@ -338,13 +344,15 @@
                             </div>
                             <div class="program-details">
                                 <h3>Programme PRISCILLE & AQUILA</h3>
-                                <p class="program-tagline">Famille + Action Sociale Communautaire + Éducation (secondaire)
+                                <p class="program-tagline">Famille + Action Sociale Communautaire + Éducation
+                                    (secondaire)
                                 </p>
                                 <p>Soutenir et renforcer les familles comme fondement de la société
                                     et piliers de la communauté, en promouvant des modèles basés sur des principes
                                     bibliques. Le programme vise à équiper les foyers pour être des centres d'influence
                                     positive, de soin et d'éducation, s'étendant vers la communauté environnante par
-                                    l'hospitalité, le mentorat et des actions sociales concrètes de soutien aux personnes et
+                                    l'hospitalité, le mentorat et des actions sociales concrètes de soutien aux
+                                    personnes et
                                     familles vulnérables.</p>
 
                                 <a href="{{ route('route_nos_programmes') }}#programme-priscille"
@@ -358,4 +366,4 @@
         </div>
     </section>
 
-@endsection
+</div>

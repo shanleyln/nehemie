@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<div>
     {{-- Hero Section --}}
     <section class="position-relative overflow-hidden" style="height: 70vh;">
         <!-- Image de fond -->
@@ -58,9 +56,11 @@
                                 <figcaption class="mt-3 text-muted">
                                     <strong>Page {{ $num }} :</strong>
                                     @if ($num === 1)
-                                        Une introduction à notre mission, nos engagements et les fondations de notre action.
+                                        Une introduction à notre mission, nos engagements et les fondations de notre
+                                        action.
                                     @else
-                                        Aperçu de nos projets phares, de notre vision future et de nos axes stratégiques.
+                                        Aperçu de nos projets phares, de notre vision future et de nos axes
+                                        stratégiques.
                                     @endif
                                 </figcaption>
                             </figure>
@@ -94,4 +94,4 @@
             opacity: 1;
         }
     </style>
-@endsection
+</div>

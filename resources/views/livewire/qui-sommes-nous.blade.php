@@ -1,8 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Qui sommes-nous')
-
-@section('content')
+<div>
 
 
     {{-- Hero Section --}}
@@ -192,8 +188,9 @@
 
                     <div class="accordion-item border-0 mb-2">
                         <h3 class="accordion-header">
-                            <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#compassion" aria-expanded="false" aria-controls="compassion">
+                            <button class="accordion-button collapsed bg-light" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#compassion" aria-expanded="false"
+                                aria-controls="compassion">
                                 <div class="d-flex align-items-center w-100">
                                     <div class="bg-icon p-2 rounded-circle me-3">
                                         <i class="fas fa-hand-holding-heart icon-marron"></i>
@@ -213,8 +210,9 @@
 
                     <div class="accordion-item border-0 mb-2">
                         <h3 class="accordion-header">
-                            <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#integrite" aria-expanded="false" aria-controls="integrite">
+                            <button class="accordion-button collapsed bg-light" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#integrite" aria-expanded="false"
+                                aria-controls="integrite">
                                 <div class="d-flex align-items-center w-100">
                                     <div class="bg-icon p-2 rounded-circle me-3">
                                         <i class="fas fa-shield-alt icon-marron"></i>
@@ -233,8 +231,9 @@
 
                     <div class="accordion-item border-0">
                         <h3 class="accordion-header">
-                            <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#respect" aria-expanded="false" aria-controls="respect">
+                            <button class="accordion-button collapsed bg-light" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#respect" aria-expanded="false"
+                                aria-controls="respect">
                                 <div class="d-flex align-items-center w-100">
                                     <div class="bg-icon p-2 rounded-circle me-3">
                                         <i class="fas fa-handshake icon-marron"></i>
@@ -296,7 +295,8 @@
                 <div class="col-lg-6">
                     <div class="team-member text-center p-4 rounded-3" style="background-color: #FFF8F0;">
                         <div class="mb-3">
-                            <img src="{{ asset('images/team/secretaire-general.jpg') }}" alt="Patrick MEVIANE BLAMPAIN"
+                            <img src="{{ asset('images/team/secretaire-general.jpg') }}"
+                                alt="Patrick MEVIANE BLAMPAIN"
                                 class="img-fluid rounded-circle mb-3 mx-auto d-block team-photo"
                                 style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #E8D9C5; cursor: pointer;"
                                 data-src="{{ asset('images/team/secretaire-general.jpg') }}"
@@ -765,5 +765,4 @@
         </script>
     @endpush
 
-
-@endsection
+</div>

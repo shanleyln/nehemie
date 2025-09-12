@@ -1,27 +1,36 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AccueilController;
+use App\Livewire\Accueil;
+use App\Livewire\QuiSommesNous;
+use App\Livewire\NosProgrammes;
+use App\Livewire\NosActionsEtProjets;
+use App\Livewire\Actualites;
+use App\Livewire\DonnezLeurVousMemes;
 use App\Http\Controllers\PriereController;
-use App\Http\Controllers\QuiSommesNousController;
-use App\Http\Controllers\NosProgrammesController;
-use App\Http\Controllers\NosActionsEtProjetsController;
-use App\Http\Controllers\ActualitesController;
-use App\Http\Controllers\DonnezLeurVousMemesController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\PrayerRequestController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 // Routes principales
+Route::get('/accueil', Accueil::class)->name('route_accueil');
+Route::get('/qui-sommes-nous', QuiSommesNous::class)->name('route_qui_sommes_nous');
+Route::get('/nos-programmes', NosProgrammes::class)->name('route_nos_programmes');
+Route::get('/nos-actions-et-projets', NosActionsEtProjets::class)->name('route_nos_actions_et_projets');
+Route::get('/actualites', Actualites::class)->name('route_actualites');
 
-Route::get('/accueil', [AccueilController::class, 'index'])->name('route_accueil');
-Route::get('/qui-sommes-nous', [QuiSommesNousController::class, 'index'])->name('route_qui_sommes_nous');
-Route::get('/nos-programmes', [NosProgrammesController::class, 'index'])->name('route_nos_programmes');
-Route::get('/nos-actions-et-projets', [NosActionsEtProjetsController::class, 'index'])->name('route_nos_actions_et_projets');
-Route::get('/actualites', [ActualitesController::class, 'index'])->name('route_actualites');
-Route::get('/politique-de-confidentialite', [AccueilController::class, 'politiqueDeConfidentialite'])->name('route_politique_de_confidentialite');
-Route::get('/conditions-dutilisation', [AccueilController::class, 'conditionsDutilisation'])->name('route_conditions_dutilisation');
-Route::get('/donnez-leur-vous-memes-a-manger', [DonnezLeurVousMemesController::class, 'index'])->name('route_donnez_leur_vous_memes');
+Route::get('/donnez-leur-vous-memes-a-manger', DonnezLeurVousMemes::class)->name('route_donnez_leur_vous_memes');
+// Ces routes seront implémentées plus tard
+Route::get('/politique-de-confidentialite', function () {
+    return redirect()->route('route_accueil');
+})->name('route_politique_de_confidentialite');
+
+Route::get('/conditions-dutilisation', function () {
+    return redirect()->route('route_accueil');
+})->name('route_conditions_dutilisation');
+
 
 //routes de paiement
 Route::get('/Paiement', function () {
@@ -48,3 +57,8 @@ Route::get('/demande-de-priere', [PrayerRequestController::class, 'create'])->na
 
 // Cette route traite les données quand le formulaire est envoyé
 Route::post('/demande-de-priere', [PrayerRequestController::class, 'store'])->name('prayer.store');
+
+
+
+Route::post('/api/pvit/receive-secret', [PvitController::class, 'receiveSecret'])
+    ->withoutMiddleware([VerifyCsrfToken::class]); // appel MyPVit externe => pas de CSRF
