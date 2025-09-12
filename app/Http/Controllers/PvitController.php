@@ -219,12 +219,33 @@ class PvitController extends Controller
         // Stockage DB (chiffré) + versioning
         try {
             $this->storeSecret((string)$secretKey, $expiresIn !== null ? (int)$expiresIn : null, $request->ip());
+            
+            // Si la requête vient d'un navigateur, on redirige vers le formulaire
+            if ($request->wantsJson() || $request->ajax()) {
+                return response()->json([
+                    'ok' => true,
+                    'redirect' => route('pvit.secret')
+                ]);
+            }
+            
+            return redirect()
+                ->route('pvit.secret')
+                ->with('success', 'La clé secrète a été mise à jour avec succès');
+                
         } catch (\Throwable $e) {
             Log::error('PVIT store secret DB error', ['err' => $e->getMessage()]);
-            return response()->json(['error' => 'STORE_FAILED', 'message' => $e->getMessage()], 500);
+            
+            if ($request->wantsJson() || $request->ajax()) {
+                return response()->json([
+                    'error' => 'STORE_FAILED', 
+                    'message' => $e->getMessage()
+                ], 500);
+            }
+            
+            return redirect()
+                ->route('pvit.secret')
+                ->with('error', 'Erreur lors de la mise à jour de la clé: ' . $e->getMessage());
         }
-
-        return response()->json(['ok' => true]);
     }
 
 }
