@@ -25,20 +25,53 @@ class PvitController extends Controller
         $account = self::ACCOUNT_CODE;
         $now = now();
 
-        // récupère (ou crée) l’enregistrement pour ce compte
-        $row = PvitSecret::firstOrNew(['account_code' => $account]);
+        \Log::info('storeSecret called', [
+            'account' => $account,
+            'secret_length' => strlen($secret),
+            'expires_in' => $expiresIn,
+            'source_ip' => $sourceIp
+        ]);
 
-        // incrémente la version
-        $row->version     = ($row->exists ? (int)$row->version + 1 : 1);
-        $row->received_at = $now;
-        $row->expires_in  = $expiresIn;
-        $row->expires_at  = $expiresIn ? $now->copy()->addSeconds((int)$expiresIn) : null;
-        $row->source_ip   = $sourceIp;
+        try {
+            // récupère (ou crée) l’enregistrement pour ce compte
+            $row = PvitSecret::firstOrNew(['account_code' => $account]);
 
-        // attribut virtuel : chiffre vers secret_encrypted
-        $row->secret = $secret;
+            // incrémente la version
+            $version = ($row->exists ? (int)$row->version + 1 : 1);
 
-        $row->save();
+            \Log::info('Updating secret row', [
+                'exists' => $row->exists,
+                'current_version' => $row->version,
+                'new_version' => $version
+            ]);
+
+            $row->version     = $version;
+            $row->received_at = $now;
+            $row->expires_in  = $expiresIn;
+            $row->expires_at  = $expiresIn ? $now->copy()->addSeconds((int)$expiresIn) : null;
+            $row->source_ip   = $sourceIp;
+
+            // attribut virtuel : chiffre vers secret_encrypted
+            $row->secret = $secret;
+
+            $saved = $row->save();
+
+            if ($saved) {
+                \Log::info('Secret saved successfully', [
+                    'id' => $row->id,
+                    'version' => $version
+                ]);
+            } else {
+                \Log::error('Failed to save secret');
+            }
+
+        } catch (\Exception $e) {
+            \Log::error('Error in storeSecret', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            throw $e;
+        }
     }
 
     // --- lire juste la clé depuis la DB (décryptée) ---
