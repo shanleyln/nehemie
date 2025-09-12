@@ -39,6 +39,37 @@ class PvitSecret extends Model
         }
     }
 
+    // Vérifie si le modèle est valide
+    public function isValid(): bool
+    {
+        try {
+            $this->validate();
+            return true;
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            \Log::error('PvitSecret validation failed', [
+                'errors' => $e->errors(),
+                'attributes' => $this->attributes
+            ]);
+            return false;
+        }
+    }
+
+    // Valide les attributs du modèle
+    protected function validate()
+    {
+        $validator = \Validator::make($this->attributes, [
+            'account_code' => 'required|string|max:50',
+            'secret_encrypted' => 'required|string',
+            'expires_in' => 'nullable|integer|min:0',
+            'version' => 'required|integer|min:1',
+            'received_at' => 'required|date',
+        ]);
+
+        if ($validator->fails()) {
+            throw new \Illuminate\Validation\ValidationException($validator);
+        }
+    }
+
     // Scope pratique
     public function scopeAccount($q, string $account)
     {

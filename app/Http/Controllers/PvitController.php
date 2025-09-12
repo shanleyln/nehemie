@@ -202,6 +202,17 @@ class PvitController extends Controller
     /** ENDPOINT : réception de la nouvelle clé (appel MyPVit) */
     public function receiveSecret(Request $request)
     {
+        dd($request->json());
+        // Debug: Log the request
+        \Log::info('PVIT RECEIVE-SECRET Endpoint Hit', [
+            'method' => $request->method(),
+            'full_url' => $request->fullUrl(),
+            'ip' => $request->ip(),
+            'user_agent' => $request->userAgent(),
+            'content_type' => $request->header('Content-Type'),
+            'all_headers' => $request->headers->all()
+        ]);
+
         Log::info('PVIT RECEIVE-SECRET payload', $request->all());
 
         // Normaliser noms des champs (JSON ou form)
@@ -241,33 +252,68 @@ class PvitController extends Controller
 
         // Stockage DB (chiffré) + versioning
         try {
+            // Debug: Vérifier si le modèle est valide
+            $debugModel = new PvitSecret();
+            $debugModel->account_code = self::ACCOUNT_CODE;
+            $debugModel->secret = $secretKey;
+            $debugModel->expires_in = $expiresIn;
+            $debugModel->received_at = now();
+
+            Log::info('Debug Model Validation', [
+                'isValid' => $debugModel->isValid(),
+                'attributes' => $debugModel->getAttributes(),
+                'fillable' => $debugModel->getFillable(),
+                'table' => $debugModel->getTable()
+            ]);
+
             $this->storeSecret((string)$secretKey, $expiresIn !== null ? (int)$expiresIn : null, $request->ip());
+
+            // Vérifier si la clé a été sauvegardée
+            $savedSecret = PvitSecret::where('account_code', self::ACCOUNT_CODE)->first();
+            Log::info('After storeSecret - Database Check', [
+                'exists' => $savedSecret !== null,
+                'id' => $savedSecret ? $savedSecret->id : null,
+                'version' => $savedSecret ? $savedSecret->version : null
+            ]);
 
             // Si la requête vient d'un navigateur, on redirige vers le formulaire
             if ($request->wantsJson() || $request->ajax()) {
                 return response()->json([
                     'ok' => true,
+                    'debug' => [
+                        'saved' => $savedSecret !== null,
+                        'version' => $savedSecret ? $savedSecret->version : null
+                    ],
                     'redirect' => route('pvit.secret')
                 ]);
             }
 
             return redirect()
                 ->route('pvit.secret')
-                ->with('success', 'La clé secrète a été mise à jour avec succès');
+                ->with('success', 'La clé secrète a été mise à jour avec succès')
+                ->with('debug', [
+                    'saved' => $savedSecret !== null,
+                    'version' => $savedSecret ? $savedSecret->version : null
+                ]);
 
         } catch (\Throwable $e) {
-            Log::error('PVIT store secret DB error', ['err' => $e->getMessage()]);
+            Log::error('PVIT store secret DB error', [
+                'err' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
 
             if ($request->wantsJson() || $request->ajax()) {
                 return response()->json([
                     'error' => 'STORE_FAILED',
-                    'message' => $e->getMessage()
+                    'message' => $e->getMessage(),
+                    'trace' => config('app.debug') ? $e->getTraceAsString() : null
                 ], 500);
             }
 
             return redirect()
                 ->route('pvit.secret')
-                ->with('error', 'Erreur lors de la mise à jour de la clé: ' . $e->getMessage());
+                ->with('error', 'Erreur lors de la mise à jour de la clé: ' . $e->getMessage())
+                ->with('error_details', config('app.debug') ? $e->getMessage() : null);
         }
     }
 
