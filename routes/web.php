@@ -10,6 +10,7 @@ use App\Livewire\DonnezLeurVousMemes;
 use App\Http\Controllers\PriereController;
 use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\PrayerRequestController;
+use App\Http\Controllers\PvitController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
