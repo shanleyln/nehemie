@@ -60,5 +60,4 @@ Route::post('/demande-de-priere', [PrayerRequestController::class, 'store'])->na
 
 
 
-Route::post('/api/pvit/receive-secret', [PvitController::class, 'receiveSecret'])
-    ->withoutMiddleware([VerifyCsrfToken::class]); // appel MyPVit externe => pas de CSRF
+Route::post('/api/pvit/receive-secret', [PvitController::class, 'receiveSecret']); // appel MyPVit externe => pas de CSRF
