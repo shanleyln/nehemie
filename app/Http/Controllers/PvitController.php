@@ -202,7 +202,7 @@ class PvitController extends Controller
     /** ENDPOINT : réception de la nouvelle clé (appel MyPVit) */
     public function receiveSecret(Request $request)
     {
-        dd($request->json());
+
         // Debug: Log the request
         \Log::info('PVIT RECEIVE-SECRET Endpoint Hit', [
             'method' => $request->method(),
@@ -276,25 +276,29 @@ class PvitController extends Controller
                 'version' => $savedSecret ? $savedSecret->version : null
             ]);
 
-            // Si la requête vient d'un navigateur, on redirige vers le formulaire
+            // Préparer les données de réponse
+            $responseData = [
+                'operation_account_code' => self::ACCOUNT_CODE,
+                'secret_key' => $secretKey, // Attention: À utiliser avec précaution en production
+                'expires_in' => (int)$expiresIn,
+                'expires_at' => $expiresIn ? now()->addSeconds((int)$expiresIn)->toDateTimeString() : null,
+                'received_at' => now()->toDateTimeString(),
+                'version' => $savedSecret ? $savedSecret->version : null
+            ];
+
+            // Si la requête vient d'une API (JSON)
             if ($request->wantsJson() || $request->ajax()) {
                 return response()->json([
                     'ok' => true,
-                    'debug' => [
-                        'saved' => $savedSecret !== null,
-                        'version' => $savedSecret ? $savedSecret->version : null
-                    ],
-                    'redirect' => route('pvit.secret')
+                    'data' => $responseData
                 ]);
             }
 
+            // Pour les requêtes navigateur standard
             return redirect()
                 ->route('pvit.secret')
                 ->with('success', 'La clé secrète a été mise à jour avec succès')
-                ->with('debug', [
-                    'saved' => $savedSecret !== null,
-                    'version' => $savedSecret ? $savedSecret->version : null
-                ]);
+                ->with('data', $responseData);
 
         } catch (\Throwable $e) {
             Log::error('PVIT store secret DB error', [
