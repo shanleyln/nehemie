@@ -18,3 +18,7 @@ use App\Http\Controllers\PvitController;
 // Route pour la réception des clés secrètes
 Route::post('/pvit/receive-secret', [PvitController::class, 'receiveSecret'])
     ->name('api.pvit.receive-secret');
+
+Route::get('/test', function () {
+    return response()->json(['message' => 'API is working']);
+});
