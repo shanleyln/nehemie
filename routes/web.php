@@ -68,7 +68,3 @@ Route::get('/admin/pvit/secret', [PvitController::class, 'secretPage'])
 // Bouton "Générer la clé" (POST du form de la page)
 Route::post('/admin/pvit/renew-secret', [PvitController::class, 'renewSecretProxy'])
     ->name('pvit.renew');
-
-// // Réception externe (appelée par MyPVit) — PAS de CSRF contourne le csrf
-
-Route::post('/api/pvit/receive-secret', [PvitController::class, 'receiveSecret'])->name('pvit.receive-secret');
