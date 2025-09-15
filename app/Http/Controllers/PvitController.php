@@ -202,8 +202,6 @@ class PvitController extends Controller
     /** ENDPOINT : réception de la nouvelle clé (appel MyPVit) */
     public function receiveSecret(Request $request)
     {
-        // Désactive la vérification CSRF pour cette requête
-        $request->request->remove('_token');
         // Debug: Log the request
         \Log::info('PVIT RECEIVE-SECRET Endpoint Hit', [
             'method' => $request->method(),
