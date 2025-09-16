@@ -22,7 +22,7 @@
                         <tr>
                             <td>{{ $e->id }}</td>
                             <td><code>{{ $e->secret_key ?? '—' }}</code></td>
-                            <td>{{ $e->expires_in ? $e->expires_in . ' s' : '—' }}</td>
+                            <td>{{ $e->expires_in?->format('d/m/Y H:i') : '—' }}</td>
                             <td>{{ $e->merchant_operation_account_code ?? '—' }}</td>
                             <td>{{ $e->created_at->format('d/m/Y H:i') }}</td>
                         </tr>
