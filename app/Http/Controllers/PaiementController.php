@@ -26,12 +26,18 @@ class PaiementController extends Controller
         // Générer une référence unique
         $reference = 'NEM-' . time() . '-' . Str::random(6);
         
-        // Configuration PVit (à déplacer dans config/services.php en production)
+        // Configuration PVit
         $pvitConfig = [
-            'base_url' => 'https://api.mypvit.pro/' . env('PVIT_CODE_URL') . '/rest',
-            'secret_key' => env('PVIT_SECRET_KEY'),
-            'merchant_account' => env('PVIT_MERCHANT_ACCOUNT'),
-            'callback_code' => env('PVIT_CALLBACK_CODE')
+            'base_url' => 'https://api.mypvit.pro/MR_1756801656/rest',
+            'secret_key' => 'sk_test_ba60defe-e26d-49d6-97fa-a66c9c88f2a4',
+            'merchant_account' => 'MR_1756801656',
+            'callback_code' => 'GP7VJ',
+            'success_redirect' => 'https://nehemie-international.com/paiement/succes',
+            'fail_redirect' => 'https://nehemie-international.com/paiement/echec',
+            'receive_secret_url' => 'https://nehemie-international.com/api/pvit/receive-secret',
+            'api_base_url' => 'https://api.mypvit.pro',
+            'slug_marchand' => 'MR_1756801656',
+            'api_key' => 'ACC_68B6AA786474B'
         ];
 
         // Préparation des données pour PVit

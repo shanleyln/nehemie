@@ -18,10 +18,16 @@ class PVitController extends Controller
     protected function getConfig()
     {
         return [
-            'base_url' => 'https://api.mypvit.pro/' . env('PVIT_CODE_URL') . '/rest',
-            'secret_key' => env('PVIT_SECRET_KEY'),
-            'merchant_account' => env('PVIT_MERCHANT_ACCOUNT'),
-            'callback_code' => env('PVIT_CALLBACK_CODE')
+            'base_url' => 'https://api.mypvit.pro/MR_1756801656/rest',
+            'secret_key' => 'sk_test_ba60defe-e26d-49d6-97fa-a66c9c88f2a4',
+            'merchant_account' => 'MR_1756801656',
+            'callback_code' => 'GP7VJ', // Code de callback pour l'URL de notification
+            'success_redirect' => 'https://nehemie-international.com/paiement/succes',
+            'fail_redirect' => 'https://nehemie-international.com/paiement/echec',
+            'receive_secret_url' => 'https://nehemie-international.com/api/pvit/receive-secret',
+            'api_base_url' => 'https://api.mypvit.pro',
+            'slug_marchand' => 'MR_1756801656',
+            'api_key' => 'ACC_68B6AA786474B' // Clé API de test
         ];
     }
 
@@ -47,13 +53,13 @@ class PVitController extends Controller
 
         $validated = $validator->validated();
         $pvitConfig = $this->getConfig();
-        
+
         // Nettoyer le numéro de téléphone
         $telephone = preg_replace('/^(\+241|00241|0)/', '241', $validated['telephone']);
-        
+
         // Générer une référence unique
         $reference = 'NEM-' . time() . '-' . Str::random(6);
-        
+
         // Préparation des données pour PVit
         $requestData = [
             'amount' => (float) $validated['montant'],
@@ -85,7 +91,7 @@ class PVitController extends Controller
                 'Accept: application/json'
             ]);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-            
+
             $response = curl_exec($ch);
             $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $error = curl_error($ch);
@@ -106,7 +112,7 @@ class PVitController extends Controller
             }
 
             $responseData = json_decode($response, true);
-            
+
             if (!isset($responseData['status']) || $responseData['status'] !== 'PENDING') {
                 Log::error('Échec PVit', [
                     'response' => $responseData,
@@ -145,14 +151,14 @@ class PVitController extends Controller
                 'trace' => $e->getTraceAsString(),
                 'request' => $request->all()
             ]);
-            
+
             return response()->json([
                 'success' => false,
                 'message' => 'Une erreur inattendue est survenue: ' . $e->getMessage()
             ], 500);
         }
     }
-    
+
     /**
      * Gestion du callback PVit
      */
@@ -168,7 +174,7 @@ class PVitController extends Controller
         $transaction = Transaction::where('reference', $data['merchantReferenceId'] ?? null)
             ->orWhere('operator_reference', $data['transactionId'] ?? null)
             ->first();
-        
+
         if ($transaction) {
             $transaction->update([
                 'status' => strtolower($data['status'] ?? 'inconnu'),
@@ -213,7 +219,7 @@ class PVitController extends Controller
         $transaction = Transaction::where('reference', $reference)
             ->orWhere('operator_reference', $reference)
             ->firstOrFail();
-        
+
         return response()->json([
             'success' => true,
             'data' => [
@@ -233,7 +239,7 @@ class PVitController extends Controller
         $transaction = Transaction::where('reference', $reference)
             ->orWhere('operator_reference', $reference)
             ->firstOrFail();
-            
+
         return view('paiement.resultat', [
             'transaction' => $transaction,
             'message' => 'Paiement effectué avec succès',
@@ -249,7 +255,7 @@ class PVitController extends Controller
         $transaction = Transaction::where('reference', $reference)
             ->orWhere('operator_reference', $reference)
             ->firstOrFail();
-            
+
         return view('paiement.resultat', [
             'transaction' => $transaction,
             'message' => 'Le paiement a échoué',
