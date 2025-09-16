@@ -266,8 +266,8 @@
                                 <p>Former et équiper des leaders de gouvernance éthique et sage, influencer les systèmes
                                     politiques avec des principes bibliques, et développer des systèmes éducatifs qui
                                     intègrent sagesse et connaissance pour transformer la société.</p>
-                                <a href="{{ route('route_nos_programmes') }}#programme-salomon"
-                                    class="btn btn-secondary">En
+                                <a href="{{ route('route_nos_programmes', ['tab' => 'salomon']) }}"
+                                    class="btn btn-secondary" wire:navigate>En
                                     savoir plus</a>
                             </div>
                         </div>
@@ -287,8 +287,8 @@
                                     un
                                     impact social positif.</p>
 
-                                <a href="{{ route('route_nos_programmes') }}#programme-joseph"
-                                    class="btn btn-secondary">En
+                                <a href="{{ route('route_nos_programmes', ['tab' => 'joseph']) }}"
+                                    class="btn btn-secondary" wire:navigate>En
                                     savoir plus</a>
                             </div>
                         </div>
@@ -308,8 +308,8 @@
                                     les sphères des arts, du divertissement et des médias avec des contenus qui élèvent
                                     l'esprit et reflètent les valeurs du Royaume.</p>
 
-                                <a href="{{ route('route_nos_programmes') }}#programme-david"
-                                    class="btn btn-secondary">En
+                                <a href="{{ route('route_nos_programmes', ['tab' => 'david']) }}"
+                                    class="btn btn-secondary" wire:navigate>En
                                     savoir plus</a>
                             </div>
                         </div>
@@ -329,8 +329,8 @@
                                     séculiers, en particulier gouvernementaux, tout en étant des témoins vivants de leur
                                     foi.</p>
 
-                                <a href="{{ route('route_nos_programmes') }}#programme-daniel"
-                                    class="btn btn-secondary">En
+                                <a href="{{ route('route_nos_programmes', ['tab' => 'daniel']) }}"
+                                    class="btn btn-secondary" wire:navigate>En
                                     savoir plus</a>
                             </div>
                         </div>
@@ -355,8 +355,8 @@
                                     personnes et
                                     familles vulnérables.</p>
 
-                                <a href="{{ route('route_nos_programmes') }}#programme-priscille"
-                                    class="btn btn-secondary">En
+                                <a href="{{ route('route_nos_programmes', ['tab' => 'priscille']) }}"
+                                    class="btn btn-secondary" wire:navigate>En
                                     savoir plus</a>
                             </div>
                         </div>

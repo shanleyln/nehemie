@@ -912,5 +912,99 @@
 </div> <!-- Fin de .container -->
 </section>
 </main>
+
+@push('scripts')
+<script>
+    document.addEventListener('livewire:initialized', () => {
+        // Fonction pour faire défiler jusqu'à une section spécifique
+        const scrollToSection = (tabName) => {
+            const section = document.getElementById(`program-${tabName}`);
+            if (!section) return;
+            
+            // Calculer la position avec un offset pour le header fixe
+            const header = document.querySelector('header');
+            const headerHeight = header ? header.offsetHeight : 100;
+            const sectionRect = section.getBoundingClientRect();
+            const offsetPosition = window.pageYOffset + sectionRect.top - headerHeight - 20;
+            
+            // Utiliser smooth scroll avec une animation personnalisée
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+            
+            // S'assurer que la section est bien visible après l'animation
+            setTimeout(() => {
+                const currentScroll = window.pageYOffset;
+                const targetScroll = offsetPosition;
+                const distance = Math.abs(currentScroll - targetScroll);
+                
+                // Si le défilement n'a pas atteint sa cible, forcer le défilement
+                if (distance > 10) {
+                    window.scrollTo(0, offsetPosition);
+                }
+            }, 500);
+        };
+
+        // Fonction pour gérer le changement d'onglet
+        const handleTabChange = (tab) => {
+            // Mettre à jour l'URL avec l'historique
+            const newUrl = `${window.location.pathname}?tab=${tab}`;
+            window.history.pushState({ tab }, '', newUrl);
+            
+            // Faire défiler jusqu'à la section
+            requestAnimationFrame(() => {
+                scrollToSection(tab);
+            });
+        };
+
+        // Écouter l'événement tabChanged pour le défilement
+        Livewire.on('tabChanged', ({ tab }) => {
+            handleTabChange(tab);
+        });
+
+        // Gérer la mise à jour de l'URL depuis le serveur
+        Livewire.on('updateUrl', ({ url }) => {
+            if (window.location.href !== url) {
+                window.history.pushState({ path: url }, '', url);
+            }
+        });
+
+        // Gérer le chargement initial avec un paramètre d'URL
+        const initializeTab = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tabParam = urlParams.get('tab');
+            
+            if (tabParam && ['salomon', 'joseph', 'david', 'daniel', 'priscille'].includes(tabParam)) {
+                // Si un onglet est spécifié dans l'URL, on l'active
+                window.Livewire.dispatch('changeTab', { tab: tabParam });
+                // Forcer le défilement après un court délai pour s'assurer que le DOM est prêt
+                setTimeout(() => scrollToSection(tabParam), 300);
+            }
+        };
+
+        // Initialiser l'onglet au chargement
+        initializeTab();
+
+        // Gérer le bouton retour/avant du navigateur
+        window.addEventListener('popstate', (event) => {
+            // Utiliser setTimeout pour s'assurer que Livewire a mis à jour le DOM
+            setTimeout(() => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const tabParam = urlParams.get('tab');
+                
+                if (tabParam && ['salomon', 'joseph', 'david', 'daniel', 'priscille'].includes(tabParam)) {
+                    window.Livewire.dispatch('changeTab', { tab: tabParam });
+                    scrollToSection(tabParam);
+                } else {
+                    // Si pas d'onglet spécifié, on active le premier onglet
+                    window.Livewire.dispatch('changeTab', { tab: 'salomon' });
+                    scrollToSection('salomon');
+                }
+            }, 100);
+        });
+    });
+</script>
+@endpush
 </body>
 </div>

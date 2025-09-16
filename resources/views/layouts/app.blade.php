@@ -272,9 +272,9 @@
     @livewireScripts
 
     <!-- Scripts personnalisés -->
-    <script src="{{ asset('js/script.js') }}" defer></script>
+    <script src="{{ asset('js/script.js') }}"></script>
     @if (file_exists(public_path('js/priere.js')))
-        <script src="{{ asset('js/priere.js') }}" defer></script>
+        <script src="{{ asset('js/priere.js') }}"></script>
     @endif
 
     <!-- Script pour le popup mobile money -->
@@ -296,6 +296,10 @@
             );
         }
     </script>
+    
+    <!-- Pile de scripts pour les composants -->
+    @stack('scripts')
+</body>
 
     <!-- Initialisation de Plyr -->
     <script>
