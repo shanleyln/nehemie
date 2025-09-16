@@ -78,67 +78,67 @@ class PvitController extends Controller
     /** ==================== WEBHOOK: RÉCEPTION DE LA CLÉ ==================== */
 
     // $code est optionnel pour accepter .../receive-secret ET .../receive-secret/{code}
-    public function receiveSecret(Request $request, ?string $code = null)
+    public function receiveSecret(Request $request, string $code)
     {
-        $s = PvitSetting::one();
+        $s = \App\Models\PvitSetting::one();
 
-        // Récup payload (JSON prioritaire, sinon x-www-form-urlencoded)
+        // 1) Vérifier que le code reçu dans l'URL correspond à celui stocké
+        if (! $s->secret_reception_code) {
+            \Log::warning('[PVit] secret_reception_code is not set in settings');
+            return response()->json(['message' => 'Reception code not configured'], 500);
+        }
+        if (strcasecmp($code, $s->secret_reception_code) !== 0) {
+            \Log::warning('[PVit] Reception code mismatch', ['expected' => $s->secret_reception_code, 'got' => $code]);
+            return response()->json(['message' => 'Invalid reception code'], 403);
+        }
+
+        // 2) Récup payload (JSON prioritaire, fallback form-urlencoded)
         $payload = $request->json()->all();
         if (empty($payload)) {
             $payload = $request->all();
         }
 
-        // Log debug complet
-        Log::info('[PVit] receive-secret raw', [
-            'route_code_param' => $code,
-            'headers'          => $request->headers->all(),
-            'raw'              => $request->getContent(),
-            'parsed'           => $payload,
-            'ip'               => $request->ip(),
+        // 3) Log debug utile
+        \Log::info('[PVit] receive-secret raw', [
+            'url_code' => $code,
+            'headers'  => $request->headers->all(),
+            'raw'      => $request->getContent(),
+            'parsed'   => $payload,
+            'ip'       => $request->ip(),
         ]);
 
-        // Vérif souple du code (si configuré)
-        $configured = $s->secret_reception_code;
-        $incoming   = $code
-                   ?? $request->header('X-Url-Code')
-                   ?? ($payload['reception_url_code'] ?? $payload['receptionUrlCode'] ?? null);
-
-        if ($configured && $incoming && strcasecmp($incoming, $configured) !== 0) {
-            Log::warning('[PVit] Reception code mismatch', ['expected' => $configured, 'got' => $incoming]);
-            return response()->json(['message' => 'Invalid reception code'], 403);
-        }
-
-        // Normalisation
+        // 4) Normalise les clés
         $operationAccountCode = $payload['operation_account_code'] ?? $payload['operationAccountCode'] ?? null;
         $secretKey            = $payload['secret_key']            ?? $payload['secretKey']            ?? null;
         $expiresIn            = $payload['expires_in']            ?? $payload['expiresIn']            ?? null;
 
-        // Persist event (trace complète)
-        $evt = PvitSecretEvent::create([
+        // 5) Trace en base
+        $evt = \App\Models\PvitSecretEvent::create([
             'operation_account_code' => $operationAccountCode,
             'secret_key'             => $secretKey,
-            'expires_in'             => $expiresIn ? intval($expiresIn) : null,
+            'expires_in'             => $expiresIn ? (int) $expiresIn : null,
             'raw_payload'            => $payload,
         ]);
 
-        // Mise à jour du secret courant
-        if (!empty($secretKey)) {
+        // 6) Met à jour le secret courant
+        if ($secretKey) {
             $s->current_secret = $secretKey;
-            if (!empty($expiresIn)) {
-                $s->secret_expires_at = Carbon::now()->addSeconds((int) $expiresIn);
+            if ($expiresIn) {
+                $s->secret_expires_at = \Illuminate\Support\Carbon::now()->addSeconds((int) $expiresIn);
             }
             $s->save();
         } else {
-            Log::warning('[PVit] receive-secret without secret_key', ['event_id' => $evt->id]);
+            \Log::warning('[PVit] receive-secret without secret_key', ['event_id' => $evt->id]);
         }
 
-        // Accusé de réception requis
+        // 7) Accusé de réception (obligatoire)
         return response()->json([
             'responseCode'  => 200,
             'transactionId' => 'RENEW_SECRET',
             'event_id'      => $evt->id,
         ], 200);
     }
+
 
     /** ==================== JOURNAL (vue) ==================== */
 
