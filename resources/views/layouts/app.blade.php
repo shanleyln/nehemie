@@ -280,8 +280,8 @@
     <!-- Script pour le popup mobile money -->
     <script>
         function openMobileMoneyPopup() {
-            const url = "{{ route('index') }}";
-            const width = 450;
+            const url = "{{ route('paiement.form') }}";
+            const width = 550;
             const height = 550;
 
             // Calcul de la position centrée
@@ -296,42 +296,42 @@
             );
         }
     </script>
-    
+
     <!-- Pile de scripts pour les composants -->
     @stack('scripts')
 </body>
 
-    <!-- Initialisation de Plyr -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const players = Plyr.setup('.js-player');
+<!-- Initialisation de Plyr -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const players = Plyr.setup('.js-player');
 
-            // Initialisation des tooltips Bootstrap
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl);
-            });
+        // Initialisation des tooltips Bootstrap
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
         });
-    </script>
-    {{-- Script pour le service worker popup d'intallation --}}
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js');
-        }
+    });
+</script>
+{{-- Script pour le service worker popup d'intallation --}}
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js');
+    }
 
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
 
-            const btn = document.createElement('button');
-            btn.textContent = '📲 Installer l’appli mobile ';
-            btn.id = 'installBtn';
-            document.body.appendChild(btn);
+        const btn = document.createElement('button');
+        btn.textContent = '📲 Installer l’appli mobile ';
+        btn.id = 'installBtn';
+        document.body.appendChild(btn);
 
-            // Appliquer les styles et animations
-            const style = document.createElement('style');
-            style.innerHTML = `
+        // Appliquer les styles et animations
+        const style = document.createElement('style');
+        style.innerHTML = `
                 #installBtn {
                     position: fixed;
                     bottom: 20px;
@@ -367,22 +367,22 @@
                     }
                 }
             `;
-            document.head.appendChild(style);
+        document.head.appendChild(style);
 
-            // Action au clic
-            btn.addEventListener('click', () => {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then(choice => {
-                    if (choice.outcome === 'accepted') {
-                        btn.remove();
-                        console.log("✅ L'application NÉHÉMIE International a été installée !");
-                    } else {
-                        console.log("❌ Installation refusée.");
-                    }
-                });
+        // Action au clic
+        btn.addEventListener('click', () => {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then(choice => {
+                if (choice.outcome === 'accepted') {
+                    btn.remove();
+                    console.log("✅ L'application NÉHÉMIE International a été installée !");
+                } else {
+                    console.log("❌ Installation refusée.");
+                }
             });
         });
-    </script>
+    });
+</script>
 
 
 
@@ -427,11 +427,16 @@
                 <div class="footer-links-column">
                     <h4>Nos programmes</h4>
                     <ul>
-                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'salomon']) }}" wire:navigate>Salomon</a></li>
-                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'joseph']) }}" wire:navigate>Joseph</a></li>
-                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'david']) }}" wire:navigate>David</a></li>
-                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'daniel']) }}" wire:navigate>Daniel</a></li>
-                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'priscille']) }}" wire:navigate>Priscille</a></li>
+                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'salomon']) }}"
+                                wire:navigate>Salomon</a></li>
+                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'joseph']) }}"
+                                wire:navigate>Joseph</a></li>
+                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'david']) }}" wire:navigate>David</a>
+                        </li>
+                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'daniel']) }}"
+                                wire:navigate>Daniel</a></li>
+                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'priscille']) }}"
+                                wire:navigate>Priscille</a></li>
                     </ul>
                 </div>
 

@@ -4,145 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class PaiementController extends Controller
 {
-    /**
-     * Initialise un nouveau paiement via PVit
-     */
-    public function initierPaiement(Request $request)
-    {
-        $request->validate([
-            'montant' => ['required', 'numeric', 'min:150', 'max:1000000'],
-            'telephone' => ['required', 'string', 'regex:/^(\+241|00241|0)?[0-9]{8,9}$/']
-        ]);
-
-        // Nettoyer le numéro de téléphone
-        $telephone = preg_replace('/^(\+241|00241|0)/', '241', $request->telephone);
-        
-        // Générer une référence unique
-        $reference = 'NEM-' . time() . '-' . Str::random(6);
-        
-        // Configuration PVit (à déplacer dans config/services.php en production)
-        $pvitConfig = [
-            'base_url' => 'https://api.mypvit.pro/' . env('PVIT_CODE_URL') . '/rest',
-            'secret_key' => env('PVIT_SECRET_KEY'),
-            'merchant_account' => env('PVIT_MERCHANT_ACCOUNT'),
-            'callback_code' => env('PVIT_CALLBACK_CODE')
-        ];
-
-        // Préparation des données pour PVit
-        $requestData = [
-            'amount' => (float) $request->montant,
-            'reference' => $reference,
-            'service' => 'RESTFUL',
-            'callback_url_code' => $pvitConfig['callback_code'],
-            'customer_account_number' => $telephone,
-            'merchant_operation_account_code' => $pvitConfig['merchant_account'],
-            'transaction_type' => 'PAYMENT',
-            'owner_charge' => 'CUSTOMER',
-            'operator_owner_charge' => 'MERCHANT',
-            'product' => 'DON_NEMIE',
-            'description' => 'Don à l\'ONG Nehemie',
-            'customer_name' => 'Donateur anonyme',
-            'customer_email' => 'don@nehemie.org',
-            'customer_phone_number' => $telephone
-        ];
-
-        try {
-            // Initialisation de cURL pour PVit
-            $ch = curl_init($pvitConfig['base_url']);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($requestData));
-            curl_setopt($ch, CURLOPT_HTTPHEADER, [
-                'X-Secret: ' . $pvitConfig['secret_key'],
-                'X-Callback-MediaType: application/json',
-                'Content-Type: application/json',
-                'Accept: application/json'
-            ]);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-            
-            $response = curl_exec($ch);
-            $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            $error = curl_error($ch);
-            curl_close($ch);
-
-            // Vérification de la réponse
-            if ($http_code !== 200 || !$response) {
-                Log::error('Erreur PVit', [
-                    'code' => $http_code,
-                    'error' => $error,
-                    'response' => $response
-                ]);
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Erreur lors de la communication avec le service de paiement. Veuillez réessayer.'
-                ], 500);
-            }
-
-            $data = json_decode($response, true);
-            
-            if (!isset($data['status']) || $data['status'] !== 'PENDING') {
-                Log::error('Échec PVit', ['response' => $data]);
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Échec de l\'initialisation du paiement: ' . ($data['message'] ?? 'Erreur inconnue')
-                ], 400);
-            }
-
-            // Enregistrement de la transaction
-            $transaction = new Transaction();
-            $transaction->id = (string) Str::uuid();
-            $transaction->reference = $reference;
-            $transaction->montant = $request->montant;
-            $transaction->telephone = $telephone;
-            $transaction->status = 'en_attente';
-            $transaction->operator_reference = $data['reference_id'] ?? null;
-            $transaction->save();
-
-            return response()->json([
-                'success' => true,
-                'message' => 'Paiement initialisé avec succès',
-                'data' => [
-                    'reference' => $reference,
-                    'status_url' => route('paiement.verifier', $reference)
-                ]
-            ]);
-
-        } catch (\Exception $e) {
-            Log::error('Exception PVit', [
-                'error' => $e->getMessage(),
-                'trace' => $e->getTraceAsString()
-            ]);
-            
-            return response()->json([
-                'success' => false,
-                'message' => 'Une erreur inattendue est survenue: ' . $e->getMessage()
-            ], 500);
-        }
-    }
-    
-    /**
-     * Vérifie le statut d'un paiement
-     */
-    public function verifierStatut($reference)
-    {
-        $transaction = Transaction::where('reference', $reference)->firstOrFail();
-        
-        return response()->json([
-            'success' => true,
-            'data' => [
-                'reference' => $transaction->reference,
-                'status' => $transaction->status,
-                'montant' => $transaction->montant,
-                'date' => $transaction->updated_at->format('d/m/Y H:i')
-            ]
-        ]);
-    }
+    //
 
 
     public function valider(Request $request)
@@ -162,7 +30,7 @@ class PaiementController extends Controller
     public function confirmer($token)
     {
 
-        $montant = Crypt::decrypt($token); // Déchiffrer le montant
+        $montant = Crypt::decrypt($token); // 🔓 Déchiffrer le montant
 
 
 
@@ -267,8 +135,11 @@ class PaiementController extends Controller
         $Transaction->operator_reference = $data['reference_id'] ?? null;
         $Transaction->save();
 
-        // Redirection vers la page de résultat
-        return redirect()->route('paiement.succes', $reference);
+        // Affichage dans la vue
+        return view('confirme_payment', [
+            'montant' => $montant,
+            'reference' => $reference,
+        ]);
     }
     /**
      * Gestion du callback PVit
@@ -305,12 +176,9 @@ class PaiementController extends Controller
         ]);
     }
 
-    public function finaliser($ref = null, $reference = null)
+    public function finaliser($ref)
     {
-        // Handle both parameter names for backward compatibility
-        $reference = $reference ?? $ref;
-        
-        $transaction = Transaction::where('reference', $reference)->firstOrFail();
+        $transaction = Transaction::where('reference', $ref)->firstOrFail();
         return view('paiement.resultat', [
             'transaction' => $transaction,
             'message' => 'Paiement effectué avec succès',
@@ -318,12 +186,9 @@ class PaiementController extends Controller
         ]);
     }
 
-    public function echouer($ref = null, $reference = null)
+    public function echouer($ref)
     {
-        // Handle both parameter names for backward compatibility
-        $reference = $reference ?? $ref;
-        
-        $transaction = Transaction::where('reference', $reference)->firstOrFail();
+        $transaction = Transaction::where('reference', $ref)->firstOrFail();
         return view('paiement.resultat', [
             'transaction' => $transaction,
             'message' => 'Le paiement a échoué',

@@ -2,22 +2,260 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator; // + validation API
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 use App\Models\PvitSecret;
 
-class PvitController extends Controller
+class PVitController extends Controller
 {
-    // === Paramètres vus sur tes captures ===
-    private const PVIT_BASE        = 'https://api.mypvit.pro';
-    private const RENEW_CODEURL    = 'UGCEAAFRYROGTXPH';   // /UGCEAAFRYROGTXPH/renew-secret
-    private const ACCOUNT_CODE     = 'ACC_68B6AA786474B';
-    private const RECEPTION_CODE   = 'GH8CQ';              // URL: /api/pvit/receive-secret
+    /**
+     * Configuration PVit (à déplacer dans config/services.php en production)
+     */
+    protected function getConfig()
+    {
+        return [
+            'base_url' => 'https://api.mypvit.pro/' . env('PVIT_CODE_URL') . '/rest',
+            'secret_key' => env('PVIT_SECRET_KEY'),
+            'merchant_account' => env('PVIT_MERCHANT_ACCOUNT'),
+            'callback_code' => env('PVIT_CALLBACK_CODE')
+        ];
+    }
+
+    /**
+     * Initialise un nouveau paiement via PVit
+     */
+    public function initierPaiement(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'montant' => ['required', 'numeric', 'min:150', 'max:1000000'],
+            'telephone' => ['required', 'string', 'regex:/^(\+241|00241|0)?[0-9]{8,9}$/'],
+            'email' => ['nullable', 'email'],
+            'nom' => ['nullable', 'string', 'max:100']
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation échouée',
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $validated = $validator->validated();
+        $pvitConfig = $this->getConfig();
+        
+        // Nettoyer le numéro de téléphone
+        $telephone = preg_replace('/^(\+241|00241|0)/', '241', $validated['telephone']);
+        
+        // Générer une référence unique
+        $reference = 'NEM-' . time() . '-' . Str::random(6);
+        
+        // Préparation des données pour PVit
+        $requestData = [
+            'amount' => (float) $validated['montant'],
+            'reference' => $reference,
+            'service' => 'RESTFUL',
+            'callback_url_code' => $pvitConfig['callback_code'],
+            'customer_account_number' => $telephone,
+            'merchant_operation_account_code' => $pvitConfig['merchant_account'],
+            'transaction_type' => 'PAYMENT',
+            'owner_charge' => 'CUSTOMER',
+            'operator_owner_charge' => 'MERCHANT',
+            'product' => 'DON_NEMIE',
+            'description' => 'Don à l\'ONG Nehemie',
+            'customer_name' => $validated['nom'] ?? 'Donateur anonyme',
+            'customer_email' => $validated['email'] ?? 'don@nehemie.org',
+            'customer_phone_number' => $telephone
+        ];
+
+        try {
+            // Initialisation de cURL pour PVit
+            $ch = curl_init($pvitConfig['base_url']);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($requestData));
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                'X-Secret: ' . $pvitConfig['secret_key'],
+                'X-Callback-MediaType: application/json',
+                'Content-Type: application/json',
+                'Accept: application/json'
+            ]);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+            
+            $response = curl_exec($ch);
+            $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $error = curl_error($ch);
+            curl_close($ch);
+
+            // Vérification de la réponse
+            if ($http_code !== 200 || !$response) {
+                Log::error('Erreur PVit', [
+                    'code' => $http_code,
+                    'error' => $error,
+                    'response' => $response,
+                    'request' => $requestData
+                ]);
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Erreur lors de la communication avec le service de paiement. Veuillez réessayer.'
+                ], 500);
+            }
+
+            $responseData = json_decode($response, true);
+            
+            if (!isset($responseData['status']) || $responseData['status'] !== 'PENDING') {
+                Log::error('Échec PVit', [
+                    'response' => $responseData,
+                    'request' => $requestData
+                ]);
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Échec de l\'initialisation du paiement: ' . ($responseData['message'] ?? 'Erreur inconnue')
+                ], 400);
+            }
+
+            // Enregistrement de la transaction
+            $transaction = new Transaction();
+            $transaction->id = (string) Str::uuid();
+            $transaction->reference = $reference;
+            $transaction->montant = $validated['montant'];
+            $transaction->telephone = $telephone;
+            $transaction->email = $validated['email'] ?? null;
+            $transaction->nom = $validated['nom'] ?? null;
+            $transaction->status = 'en_attente';
+            $transaction->operator_reference = $responseData['reference_id'] ?? null;
+            $transaction->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Paiement initialisé avec succès',
+                'data' => [
+                    'reference' => $reference,
+                    'status_url' => route('api.pvit.verifier', $reference)
+                ]
+            ]);
+
+        } catch (\Exception $e) {
+            Log::error('Exception PVit', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'request' => $request->all()
+            ]);
+            
+            return response()->json([
+                'success' => false,
+                'message' => 'Une erreur inattendue est survenue: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+    
+    /**
+     * Gestion du callback PVit
+     */
+    public function handleCallback(Request $request)
+    {
+        $data = $request->all();
+        Log::info('Callback PVit reçu:', $data);
+
+        // Valider la signature si nécessaire
+        // À implémenter selon la documentation PVit
+
+        // Mettre à jour la transaction
+        $transaction = Transaction::where('reference', $data['merchantReferenceId'] ?? null)
+            ->orWhere('operator_reference', $data['transactionId'] ?? null)
+            ->first();
+        
+        if ($transaction) {
+            $transaction->update([
+                'status' => strtolower($data['status'] ?? 'inconnu'),
+                'frais' => $data['fees'] ?? 0,
+                'operator' => $data['operator'] ?? null,
+                'operator_reference' => $data['transactionId'] ?? $transaction->operator_reference,
+                'updated_at' => now()
+            ]);
+
+            // Envoyer un email de confirmation si le paiement est réussi
+            if (strtolower($data['status'] ?? '') === 'success') {
+                // À implémenter : Envoyer un email de confirmation
+                // Mail::to($transaction->email)->send(new PaymentConfirmation($transaction));
+            }
+
+            Log::info('Transaction mise à jour', [
+                'reference' => $transaction->reference,
+                'status' => $transaction->status,
+                'data' => $data
+            ]);
+        } else {
+            Log::warning('Transaction non trouvée pour le callback', [
+                'merchantReferenceId' => $data['merchantReferenceId'] ?? null,
+                'transactionId' => $data['transactionId'] ?? null,
+                'data' => $data
+            ]);
+        }
+
+        // Répondre à PVit
+        return response()->json([
+            'responseCode' => 200,
+            'responseMessage' => 'Notification reçue avec succès',
+            'transactionId' => $data['transactionId'] ?? null
+        ]);
+    }
+
+    /**
+     * Vérifie le statut d'un paiement
+     */
+    public function verifierStatut($reference)
+    {
+        $transaction = Transaction::where('reference', $reference)
+            ->orWhere('operator_reference', $reference)
+            ->firstOrFail();
+        
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'reference' => $transaction->reference,
+                'status' => $transaction->status,
+                'montant' => $transaction->montant,
+                'date' => $transaction->updated_at->format('d/m/Y H:i')
+            ]
+        ]);
+    }
+
+    /**
+     * Page de succès du paiement
+     */
+    public function success($reference)
+    {
+        $transaction = Transaction::where('reference', $reference)
+            ->orWhere('operator_reference', $reference)
+            ->firstOrFail();
+            
+        return view('paiement.resultat', [
+            'transaction' => $transaction,
+            'message' => 'Paiement effectué avec succès',
+            'type' => 'success'
+        ]);
+    }
+
+    /**
+     * Page d'échec du paiement
+     */
+    public function echec($reference)
+    {
+        $transaction = Transaction::where('reference', $reference)
+            ->orWhere('operator_reference', $reference)
+            ->firstOrFail();
+            
+        return view('paiement.resultat', [
+            'transaction' => $transaction,
+            'message' => 'Le paiement a échoué',
+            'type' => 'error'
+        ]);
+    }
 
     // --- Écrire la clé en base (chiffrée) ---
     private function storeSecret(string $secret, ?int $expiresIn = null, ?string $sourceIp = null): void

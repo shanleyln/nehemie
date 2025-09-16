@@ -231,84 +231,167 @@
             color: #1976d2;
         }
 
-        /* Styles pour les onglets */
+        /* Styles modernes pour les onglets */
         .tabs-navigation {
-            margin: 30px 0 20px;
-            text-align: left;
+            margin: 1.5rem 0;
             position: relative;
-        }
-
-        .tabs-navigation:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
             width: 100%;
-            height: 2px;
-            background: #f0f0f0;
-            z-index: 1;
+            background: #fff;
+            border-radius: 8px;
+            padding: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .tabs-header {
-            display: inline-flex;
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 5px;
-            margin-bottom: 0;
+            display: flex;
+            background: transparent;
+            border-bottom: 2px solid #f0f2f5;
+            margin: 0;
+            padding: 0 0 1px 0;
             position: relative;
-            z-index: 2;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e9ecef;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            border-radius: 0;
+            box-shadow: none;
+            border: none;
+        }
+
+        .tabs-header::-webkit-scrollbar {
+            display: none;
         }
 
         .tab-btn {
-            padding: 10px 25px;
+            padding: 0.75rem 1.25rem;
             border: none;
             background: transparent;
-            cursor: pointer;
+            color: #6c757d;
             font-size: 0.95rem;
             font-weight: 600;
-            color: #6c757d;
-            border-radius: 6px;
-            transition: all 0.3s ease;
+            cursor: pointer;
             position: relative;
-            margin: 0 3px;
+            white-space: nowrap;
+            transition: all 0.25s ease;
+            margin: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 100px;
+            text-align: center;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn i {
+            font-size: 1.1em;
+            transition: all 0.2s ease;
+            margin-right: 6px;
         }
 
         .tab-btn:hover {
-            color: #4a90e2;
-            background: rgba(74, 144, 226, 0.1);
-            transform: translateY(-1px);
+            color: #2c5282;
+            background: rgba(0, 0, 0, 0.02);
         }
 
         .tab-btn.active {
-            background: #4a90e2;
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.2);
+            color: #2c5282;
+            border-bottom-color: #2c5282;
+            font-weight: 700;
         }
 
-        .tab-btn.active:after {
-            content: '';
+        .tab-btn.active i {
+            color: #2c5282;
+        }
+
+        .tab-btn.active i {
+            color: #fff;
+        }
+
+        .tabs-navigation {
+            position: relative;
+            margin: 1.5rem 0;
+            width: 100%;
+        }
+
+        .tabs-header {
+            display: flex;
+            position: relative;
+            border-bottom: 2px solid #f0f2f5;
+            padding: 0;
+            margin: 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .tabs-header::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background: transparent;
+            color: #6c757d;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            white-space: nowrap;
+            transition: all 0.25s ease;
+            margin: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+            text-align: center;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn:hover {
+            color: #2c5282;
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        .tab-btn.active {
+            color: #2c5282;
+            border-bottom-color: #2c5282;
+            font-weight: 700;
+        }
+
+        .tab-indicator {
             position: absolute;
-            bottom: -7px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-bottom: 8px solid #f8f9fa;
-            z-index: 3;
-            transition: all 0.3s ease;
+            bottom: -2px;
+            left: 0;
+            height: 3px;
+            background: #3a7bd5;
+            border-radius: 3px 3px 0 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+            will-change: transform, width;
+        }
+
+        .tabs-content {
+            position: relative;
+            min-height: 200px;
         }
 
         .tab-pane {
             display: none;
-            animation: fadeIn 0.5s ease;
-            padding: 25px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem 0;
+            background: transparent;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .tab-pane.active {
@@ -718,7 +801,10 @@
                     `<div class="gallery-grid">${event.images.map(image => `<a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-src="${image.src}" data-img-alt="${image.alt}"><div class="gallery-item"><img src="${image.src}" alt="${image.alt}"></div></a>`).join('')}</div>`
                 );
 
-                initializeTabs();
+                // Initialiser les onglets après un court délai pour s'assurer que le DOM est mis à jour
+                setTimeout(() => {
+                    initializeTabs();
+                }, 10);
             }
 
             function switchTab(tabName, event = null) {
@@ -729,18 +815,15 @@
                     '.tabs-navigation');
                 if (!tabContainer) return;
 
+                // Mettre à jour l'indicateur d'onglet
+                updateTabIndicator(tabContainer, event ? event.target : document.querySelector(
+                    `.tab-btn[data-tab="${tabName}"]`));
+
                 // Cacher tous les onglets dans ce conteneur
                 const tabPanes = tabContainer.parentElement ? tabContainer.parentElement.querySelectorAll('.tab-pane') : [];
                 tabPanes.forEach(pane => {
                     pane.classList.remove('active');
                     pane.style.display = 'none';
-                });
-
-                // Désactiver tous les boutons d'onglet dans ce conteneur
-                const tabButtons = tabContainer.querySelectorAll('.tab-btn');
-                tabButtons.forEach(btn => {
-                    btn.classList.remove('active');
-                    btn.setAttribute('aria-selected', 'false');
                 });
 
                 // Activer l'onglet sélectionné avec une animation
@@ -779,12 +862,59 @@
                 return false;
             }
 
+            function updateTabIndicator(container, activeButton) {
+                let indicator = container.querySelector('.tab-indicator');
+                if (!indicator) {
+                    indicator = document.createElement('div');
+                    indicator.className = 'tab-indicator';
+                    container.appendChild(indicator);
+                }
+
+                const btnRect = activeButton.getBoundingClientRect();
+                const containerRect = container.getBoundingClientRect();
+
+                indicator.style.width = `${btnRect.width}px`;
+                indicator.style.transform = `translateX(${btnRect.left - containerRect.left}px)`;
+            }
+
+            function handleTabClick(e) {
+                e.preventDefault();
+                const tabName = this.getAttribute('data-tab');
+                switchTab(tabName, e);
+            }
+
             function initializeTabs() {
-                const tabButtons = document.querySelectorAll('#event-tabs-header .tab-btn');
+                const tabsHeader = document.getElementById('event-tabs-header');
+                if (!tabsHeader) return;
+
+                // Supprimer les anciens écouteurs
+                const oldButtons = tabsHeader.querySelectorAll('.tab-btn');
+                oldButtons.forEach(btn => {
+                    btn.removeEventListener('click', handleTabClick);
+                });
+
+                // Ajouter les nouveaux écouteurs
+                const tabButtons = tabsHeader.querySelectorAll('.tab-btn');
                 tabButtons.forEach(button => {
-                    button.addEventListener('click', (e) => {
-                        switchTab(button.getAttribute('data-tab'), e);
-                    });
+                    button.addEventListener('click', handleTabClick);
+                });
+
+                // Initialiser l'indicateur d'onglet
+                const activeTab = tabsHeader.querySelector('.tab-btn.active') || tabsHeader.querySelector('.tab-btn');
+                if (activeTab) {
+                    updateTabIndicator(tabsHeader, activeTab);
+                }
+
+                // Gérer le redimensionnement de la fenêtre
+                let resizeTimer;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(() => {
+                        const activeBtn = tabsHeader.querySelector('.tab-btn.active');
+                        if (activeBtn) {
+                            updateTabIndicator(tabsHeader, activeBtn);
+                        }
+                    }, 250);
                 });
             }
 

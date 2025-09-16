@@ -38,18 +38,13 @@ Route::get('/paiement', function () {
     return view('index');
 })->name('paiement.form');
 
-// Routes pour l'API PVit
-Route::prefix('api/pvit')->group(function () {
-    Route::post('/initier', [PVitController::class, 'initierPaiement'])->name('api.pvit.initier');
-    Route::post('/callback', [PVitController::class, 'handleCallback'])->name('api.pvit.callback');
-    Route::get('/verifier/{reference}', [PVitController::class, 'verifierStatut'])->name('api.pvit.verifier');
-});
-
 // Routes pour le suivi du paiement
 Route::get('/paiement/succes/{reference}', [PaiementController::class, 'finaliser'])->name('paiement.succes');
 Route::get('/paiement/echec/{reference}', [PaiementController::class, 'echouer'])->name('paiement.echec');
 Route::get('/paiement/verifier/{reference}', [PaiementController::class, 'verifierStatut'])->name('paiement.verifier');
+
 Route::get('/paiement/finaliser/{ref}', [PaiementController::class, 'finaliser'])->name('paiement.confirme.finaliser');
+Route::get('/paiement/echouer/{ref}', [PaiementController::class, 'echouer'])->name('paiement.echouer');
 
 
 
