@@ -95,7 +95,7 @@
                 </form>
 
                 {{-- Formulaire distinct pour "Renouveler la clé" --}}
-                <form method="post" action="{{ route('pvit.renewSecret') }}" class="mt-3">
+                <form method="post" action="{{ route('pvit.receiveSecret.withCode') }}" class="mt-3">
                     @csrf
                     <button type="submit" class="btn btn-outline-dark">
                         Renouveler la clé maintenant
