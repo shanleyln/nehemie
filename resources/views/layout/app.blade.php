@@ -47,7 +47,7 @@
 
     <!-- header end -->
     <!-- Main content -->
-    <div class="main-content" style="margin-top: 300px;">
+    <div style="margin-top: 300px;">
         @yield('content')
     </div>
 
