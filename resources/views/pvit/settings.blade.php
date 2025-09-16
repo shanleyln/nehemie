@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="container py-4 m-5">
+    <div class="container py-4">
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
