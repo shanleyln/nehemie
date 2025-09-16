@@ -1,21 +1,12 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PvitController; // Assurez-vous d'importer votre contrôleur
+use App\Http\Controllers\PvitController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+// Réception de la nouvelle clé (appel PVit) — pas de CSRF sur api.php
+Route::post('/pvit/receive-secret/{code}', [PvitController::class, 'receiveSecret'])
+    ->name('pvit.receiveSecret');
 
-
-// === VOTRE ROUTE ===
-// Ajoutez ce bloc de code
-Route::post('/pvit/receive-secret', [PvitController::class, 'receiveSecret'])->name('pvit.receiveSecret.api');
+// (facultatif) un GET pour vérifier vite fait depuis le navigateur
+Route::get('/pvit/secrets-log', [PvitController::class, 'secretsLog'])
+    ->name('pvit.secretsLog.api');
