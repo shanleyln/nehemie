@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use App\Livewire\Accueil;
 use App\Livewire\QuiSommesNous;
 use App\Livewire\NosProgrammes;
@@ -8,12 +11,8 @@ use App\Livewire\NosActionsEtProjets;
 use App\Livewire\Actualites;
 use App\Livewire\DonnezLeurVousMemes;
 use App\Http\Controllers\PriereController;
-use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\PrayerRequestController;
 use App\Http\Controllers\PvitController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 
 // Routes principales
 Route::get('/accueil', Accueil::class)->name('route_accueil');
@@ -33,23 +32,10 @@ Route::get('/conditions-dutilisation', function () {
 })->name('route_conditions_dutilisation');
 
 
-// Routes de paiement PVit
-Route::get('/paiement', function () {
+// Routes index pour les don avec payement en ligne
+Route::get('/index', function () {
     return view('index');
-})->name('paiement.form');
-
-// Routes pour l'API PVit
-Route::prefix('api/pvit')->group(function () {
-    Route::post('/initier', [PVitController::class, 'initierPaiement'])->name('api.pvit.initier');
-    Route::post('/callback', [PVitController::class, 'handleCallback'])->name('api.pvit.callback');
-    Route::get('/verifier/{reference}', [PVitController::class, 'verifierStatut'])->name('api.pvit.verifier');
-});
-
-// Routes pour le suivi du paiement
-Route::get('/paiement/succes/{reference}', [PaiementController::class, 'finaliser'])->name('paiement.succes');
-Route::get('/paiement/echec/{reference}', [PaiementController::class, 'echouer'])->name('paiement.echec');
-Route::get('/paiement/verifier/{reference}', [PaiementController::class, 'verifierStatut'])->name('paiement.verifier');
-Route::get('/paiement/finaliser/{ref}', [PaiementController::class, 'finaliser'])->name('paiement.confirme.finaliser');
+})->name('index');
 
 
 
@@ -59,13 +45,18 @@ Route::get('/demande-de-priere', [PrayerRequestController::class, 'create'])->na
 // Cette route traite les données quand le formulaire est envoyé
 Route::post('/demande-de-priere', [PrayerRequestController::class, 'store'])->name('prayer.store');
 
-Route::post('/paiement/initier', [PaiementController::class, 'initierPaiement']);
-Route::post('/paiement/callback', [PaiementController::class, 'handleCallback']);
 
-// Page admin (afficher/générer la clé)
-Route::get('/admin/pvit/secret', [PvitController::class, 'secretPage'])
-    ->name('pvit.secret');
+Route::prefix('pvit')->group(function () {
+    // Admin UI
+    Route::get('/settings', [PvitController::class, 'settingsForm'])->name('pvit.settings');
+    Route::post('/settings', [PvitController::class, 'settingsSave'])->name('pvit.settings.save');
 
-// Bouton "Générer la clé" (POST du form de la page)
-Route::post('/admin/pvit/renew-secret', [PvitController::class, 'renewSecretProxy'])
-    ->name('pvit.renew');
+    // Renew Secret (action manuelle)
+    Route::post('/renew-secret', [PvitController::class, 'renewSecret'])->name('pvit.renewSecret');
+
+    // Journal des secrets reçus
+    Route::get('/secrets-log', [PvitController::class, 'secretsLog'])->name('pvit.secretsLog');
+
+    // Webhook réception de clé: /pvit/receive-secret/{code}
+    Route::post('/receive-secret/{code}', [PvitController::class, 'receiveSecret'])->name('pvit.receiveSecret');
+});
