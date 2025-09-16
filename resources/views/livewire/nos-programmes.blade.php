@@ -218,23 +218,28 @@
 
                     <div class="programs-tabs">
                         <div class="programs-tabs-nav">
-                            <button class="program-tab active" data-program="salomon">
+                            <button wire:click="changeTab('salomon')"
+                                class="program-tab {{ $activeTab === 'salomon' ? 'active' : '' }}">
                                 <i class="fas fa-graduation-cap"></i>
                                 <span>SALOMON</span>
                             </button>
-                            <button class="program-tab" data-program="joseph">
+                            <button wire:click="changeTab('joseph')"
+                                class="program-tab {{ $activeTab === 'joseph' ? 'active' : '' }}">
                                 <i class="fas fa-bullhorn"></i>
                                 <span>JOSEPH</span>
                             </button>
-                            <button class="program-tab" data-program="david">
+                            <button wire:click="changeTab('david')"
+                                class="program-tab {{ $activeTab === 'david' ? 'active' : '' }}">
                                 <i class="fas fa-hand-holding-heart"></i>
                                 <span>DAVID</span>
                             </button>
-                            <button class="program-tab" data-program="daniel">
+                            <button wire:click="changeTab('daniel')"
+                                class="program-tab {{ $activeTab === 'daniel' ? 'active' : '' }}">
                                 <i class="fas fa-users"></i>
                                 <span>DANIEL</span>
                             </button>
-                            <button class="program-tab" data-program="priscille">
+                            <button wire:click="changeTab('priscille')"
+                                class="program-tab {{ $activeTab === 'priscille' ? 'active' : '' }}">
                                 <i class="fas fa-pray"></i>
                                 <span>PRISCILLE & AQUILA</span>
                             </button>
@@ -242,7 +247,8 @@
 
                         <div class="programs-tabs-content">
                             {{-- Programme salomon --}}
-                            <div class="program-content active" id="program-salomon">
+                            <div class="program-content {{ $activeTab === 'salomon' ? 'active' : '' }}"
+                                id="program-salomon">
                                 <!-- Programme SALOMON -->
                                 <section id="programme-salomon" class="mb-16 bg-white rounded-xl overflow-hidden">
                                     <div class="bg-secondary text-white p-8">
@@ -368,7 +374,8 @@
                                 </section>
                             </div>
                             {{-- Programme joseph --}}
-                            <div class="program-content" id="program-joseph">
+                            <div class="program-content {{ $activeTab === 'joseph' ? 'active' : '' }}"
+                                id="program-joseph">
                                 <!-- Programme JOSEPH -->
                                 <section id="programme-joseph" class="mb-16 bg-white rounded-xl overflow-hidden">
                                     <div class="bg-secondary text-white p-8">
@@ -497,7 +504,8 @@
                                 </section>
                             </div>
                             {{-- Programme DAVID --}}
-                            <div class="program-content" id="program-david">
+                            <div class="program-content {{ $activeTab === 'david' ? 'active' : '' }}"
+                                id="program-david">
 
                                 <!-- Programme DAVID -->
                                 <section id="programme-david" class="mb-16 bg-white rounded-xl  overflow-hidden">
@@ -614,7 +622,8 @@
 
                             </div>
                             {{-- Programme DANIEL --}}
-                            <div class="program-content" id="program-daniel">
+                            <div class="program-content {{ $activeTab === 'daniel' ? 'active' : '' }}"
+                                id="program-daniel">
                                 <!-- Programme DANIEL -->
                                 <section id="programme-daniel" class="mb-16 bg-white rounded-xl  overflow-hidden">
                                     <div class="bg-secondary text-white p-8"> <!-- Changed to violet/burgundy -->
@@ -735,7 +744,8 @@
 
                             </div>
                             {{-- Programme PRISCILLE & AQUILA --}}
-                            <div class="program-content" id="program-priscille">
+                            <div class="program-content {{ $activeTab === 'priscille' ? 'active' : '' }}"
+                                id="program-priscille">
 
                                 <!-- Programme PRISCILLE & AQUILA -->
                                 <section id="programme-priscille" class="mb-16 bg-white rounded-xl  overflow-hidden">
@@ -902,80 +912,5 @@
 </div> <!-- Fin de .container -->
 </section>
 </main>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Fonction pour activer un onglet spécifique
-        function activateTab(programId) {
-            console.log('Activation de l\'onglet:', programId);
-            // Désactiver tous les onglets
-            document.querySelectorAll('.program-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.program-content').forEach(content => {
-                content.classList.remove('active');
-            });
-
-            // Activer l'onglet et le contenu correspondants
-            const tab = document.querySelector(`.program-tab[data-program="${programId}"]`);
-            const content = document.getElementById(`program-${programId}`);
-
-            if (tab && content) {
-                tab.classList.add('active');
-                content.classList.add('active');
-
-                // Faire défiler jusqu'à la section
-                content.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        }
-
-
-        // Gestion du clic sur les onglets
-        document.querySelectorAll('.program-tab').forEach(tab => {
-            tab.addEventListener('click', function(e) {
-                e.preventDefault();
-                const programId = this.getAttribute('data-program');
-                // Mettre à jour l'URL sans recharger la page
-                history.pushState(null, null, `#programme-${programId}`);
-                activateTab(programId);
-            });
-        });
-
-        // Gestion du chargement de la page avec une ancre
-        if (window.location.hash) {
-            const hash = window.location.hash.substring(1); // Enlever le #
-            // Vérifier si le hash correspond à un programme
-            const programMatch = hash.match(/^programme-(salomon|joseph|david|daniel|priscille)$/);
-            if (programMatch) {
-                const programId = programMatch[1];
-                // Petit délai pour s'assurer que le DOM est complètement chargé
-                setTimeout(() => activateTab(programId), 100);
-            }
-        } else {
-            // Si pas de hash, activer le premier onglet
-            setTimeout(() => activateTab('salomon'), 100);
-        }
-
-        // Gestion du bouton de retour
-        window.addEventListener('popstate', function() {
-            if (window.location.hash) {
-                const hash = window.location.hash.substring(1);
-                const programMatch = hash.match(/^programme-(salomon|joseph|david|daniel|priscille)$/);
-                if (programMatch) {
-                    const programId = programMatch[1];
-                    activateTab(programId);
-                }
-            } else {
-                // Si pas de hash, activer le premier onglet
-                activateTab('salomon');
-            }
-        });
-    });
-</script>
-
-
 </body>
 </div>

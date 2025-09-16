@@ -33,8 +33,3 @@ function debounce(func, wait) {
     };
 }
 
-// Gestion des erreurs globales
-window.addEventListener('error', function(event) {
-    console.error('Erreur JavaScript non gérée:', event.error);
-    // Vous pourriez ajouter ici un envoi d'erreur à un service de suivi comme Sentry
-});

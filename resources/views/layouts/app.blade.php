@@ -180,8 +180,7 @@
 </div>
 
 <body>
-    @include('modules/chatbot')
-
+    @include('modules.chatbot')
     @include('modales.modale_priere')
     @include('modales.modale_appel')
     @include('modales.modale_prayer-form')
@@ -194,7 +193,7 @@
 
     <!-- Scripts -->
     <!-- jQuery (important avant Bootstrap JS) -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- AOS Animation -->
@@ -205,8 +204,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
 
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
 
     <!-- Bootstrap Core JS -->
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}" type="975494c0d05ce29815c81f40-text/javascript"></script>
@@ -269,14 +267,14 @@
             });
         });
     </script>
-    
+
     <!-- Scripts Livewire -->
     @livewireScripts
-    
+
     <!-- Scripts personnalisés -->
     <script src="{{ asset('js/script.js') }}" defer></script>
-    @if(file_exists(public_path('js/priere.js')))
-    <script src="{{ asset('js/priere.js') }}" defer></script>
+    @if (file_exists(public_path('js/priere.js')))
+        <script src="{{ asset('js/priere.js') }}" defer></script>
     @endif
 
     <!-- Script pour le popup mobile money -->

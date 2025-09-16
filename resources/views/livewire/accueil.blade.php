@@ -232,30 +232,30 @@
 
             <div class="programs-tabs">
                 <div class="programs-tabs-nav">
-                    <button class="program-tab active" data-program="salomon">
+                    <button wire:click="changeTab('salomon')" class="program-tab {{ $activeTab === 'salomon' ? 'active' : '' }}">
                         <i class="fas fa-graduation-cap"></i>
                         <span>SALOMON</span>
                     </button>
-                    <button class="program-tab" data-program="joseph">
+                    <button wire:click="changeTab('joseph')" class="program-tab {{ $activeTab === 'joseph' ? 'active' : '' }}">
                         <i class="fas fa-bullhorn"></i>
                         <span>JOSEPH</span>
                     </button>
-                    <button class="program-tab" data-program="david">
+                    <button wire:click="changeTab('david')" class="program-tab {{ $activeTab === 'david' ? 'active' : '' }}">
                         <i class="fas fa-hand-holding-heart"></i>
                         <span>DAVID</span>
                     </button>
-                    <button class="program-tab" data-program="daniel">
+                    <button wire:click="changeTab('daniel')" class="program-tab {{ $activeTab === 'daniel' ? 'active' : '' }}">
                         <i class="fas fa-users"></i>
                         <span>DANIEL</span>
                     </button>
-                    <button class="program-tab" data-program="priscille">
+                    <button wire:click="changeTab('priscille')" class="program-tab {{ $activeTab === 'priscille' ? 'active' : '' }}">
                         <i class="fas fa-pray"></i>
                         <span>PRISCILLE & AQUILA</span>
                     </button>
                 </div>
 
                 <div class="programs-tabs-content">
-                    <div class="program-content active" id="program-salomon">
+                    <div class="program-content {{ $activeTab === 'salomon' ? 'active' : '' }}" id="program-salomon">
                         <div class="program-content-inner">
                             <div class="program-image">
                                 <img src="{{ asset('images/programme/salomon.png') }}" alt="Programme SALOMON">
@@ -273,7 +273,7 @@
                         </div>
                     </div>
 
-                    <div class="program-content" id="program-joseph">
+                    <div class="program-content {{ $activeTab === 'joseph' ? 'active' : '' }}" id="program-joseph">
                         <div class="program-content-inner">
                             <div class="program-image">
                                 <img src="{{ asset('images/programme/joseph.png') }}" alt="Programme JOSEPH">
@@ -294,7 +294,7 @@
                         </div>
                     </div>
 
-                    <div class="program-content" id="program-david">
+                    <div class="program-content {{ $activeTab === 'david' ? 'active' : '' }}" id="program-david">
                         <div class="program-content-inner">
                             <div class="program-image">
                                 <img src="{{ asset('images/programme/david.png') }}" alt="Programme DAVID">
@@ -315,7 +315,7 @@
                         </div>
                     </div>
 
-                    <div class="program-content" id="program-daniel">
+                    <div class="program-content {{ $activeTab === 'daniel' ? 'active' : '' }}" id="program-daniel">
                         <div class="program-content-inner">
                             <div class="program-image">
                                 <img src="{{ asset('images/programme/daniel.png') }}" alt="Programme DANIEL">
@@ -336,7 +336,7 @@
                         </div>
                     </div>
 
-                    <div class="program-content" id="program-priscille">
+                    <div class="program-content {{ $activeTab === 'priscille' ? 'active' : '' }}" id="program-priscille">
                         <div class="program-content-inner">
                             <div class="program-image">
                                 <img src="{{ asset('images/programme/priscille.png') }}"

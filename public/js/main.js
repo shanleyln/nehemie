@@ -357,4 +357,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     window.addEventListener('scroll', updateActiveLinks);
     updateActiveLinks(); // Vérifier au chargement initial
+
+
 });
