@@ -47,7 +47,7 @@
 
     <!-- header end -->
     <!-- Main content -->
-    <div class="main-content mt-4">
+    <div class="main-content">
         @yield('content')
     </div>
 
