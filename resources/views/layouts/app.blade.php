@@ -427,16 +427,11 @@
                 <div class="footer-links-column">
                     <h4>Nos programmes</h4>
                     <ul>
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-salomon" wire:navigate>Salomon</a>
-                        </li>
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-joseph" wire:navigate>Joseph</a>
-                        </li>
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-david" wire:navigate>David</a></li>
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-daniel" wire:navigate>Daniel</a>
-                        </li>
-                        <li><a href="{{ route('route_nos_programmes') }}#programme-priscille"
-                                wire:navigate>Priscille</a>
-                        </li>
+                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'salomon']) }}" wire:navigate>Salomon</a></li>
+                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'joseph']) }}" wire:navigate>Joseph</a></li>
+                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'david']) }}" wire:navigate>David</a></li>
+                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'daniel']) }}" wire:navigate>Daniel</a></li>
+                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'priscille']) }}" wire:navigate>Priscille</a></li>
                     </ul>
                 </div>
 

@@ -66,7 +66,224 @@
 
     @push('styles')
         <style>
-            /* ... (Collez ici l'intégralité de vos styles CSS. Ils sont corrects et n'ont pas besoin de changer) ... */
+            /* Styles pour la liste d'événements dans l'offcanvas */
+            .event-list-container {
+                /* Le body de l'offcanvas gère le scroll */
+            }
+
+            .event-list-item {
+                padding: 15px;
+                border-bottom: 1px solid #e0e0e0;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .event-list-item:hover {
+                background-color: #f5f5f5;
+            }
+
+            .event-list-item {
+                padding: 15px;
+                border-bottom: 1px solid #e0e0e0;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .event-list-item:hover {
+                background-color: #f5f5f5;
+            }
+
+            /* La classe 'active' peut être utilisée si vous voulez garder une trace visuelle */
+            .event-list-item.active {
+                background-color: #e3f2fd;
+                border-left: 4px solid #4a90e2;
+            }
+
+            .event-list-item h5 {
+                margin-bottom: 5px;
+                font-size: 1rem;
+                font-weight: 600;
+            }
+
+            .event-list-item p {
+                margin-bottom: 0;
+                font-size: 0.85rem;
+                color: #6c757d;
+            }
+
+            /* Styles existants pour les onglets et galeries (légèrement ajustés) */
+            .tabs-navigation {
+                margin: 20px 0;
+                text-align: left;
+            }
+
+            .tabs-header {
+                display: inline-flex;
+                background: #f5f5f5;
+                border-radius: 50px;
+                padding: 5px;
+                margin-bottom: 20px;
+            }
+
+            .tab-btn {
+                padding: 10px 20px;
+                border: none;
+                background: transparent;
+                cursor: pointer;
+                font-size: 15px;
+                font-weight: 600;
+                color: #555;
+                border-radius: 50px;
+                transition: all 0.3s ease;
+            }
+
+            .tab-btn.active {
+                background: #4a90e2;
+                color: #fff;
+                box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+            }
+
+            .tab-pane {
+                display: none;
+                animation: fadeIn 0.5s ease;
+            }
+
+            .tab-pane.active {
+                display: block;
+            }
+
+            .videos-grid,
+            .gallery-grid,
+            .documents-list {
+                margin-top: 20px;
+            }
+
+            .videos-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 20px;
+            }
+
+            .video-item {
+                background: #fff;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            }
+
+            .video-wrapper {
+                position: relative;
+                padding-bottom: 56.25%;
+                height: 0;
+            }
+
+            .video-wrapper iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            .gallery-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .gallery-item {
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .gallery-item img {
+                width: 100%;
+                height: 150px;
+                object-fit: cover;
+                display: block;
+                transition: transform 0.3s ease;
+            }
+
+            .gallery-grid a {
+                text-decoration: none;
+                display: block;
+                overflow: hidden;
+                border-radius: 10px;
+            }
+
+            .gallery-grid a:hover img {
+                transform: scale(1.05);
+            }
+
+            .document-item {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 15px;
+                background-color: #fff;
+                border: 1px solid #eee;
+                border-radius: 8px;
+                margin-bottom: 10px;
+                transition: box-shadow 0.3s ease;
+            }
+
+            .document-item:hover {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+
+            .document-item i {
+                font-size: 24px;
+                color: #4a90e2;
+                margin-right: 15px;
+            }
+
+            .document-item a {
+                text-decoration: none;
+                color: #333;
+                font-weight: 600;
+            }
+
+            .pdf-view-link {
+                text-decoration: underline;
+                cursor: pointer;
+            }
+
+            .document-item small {
+                color: #6c757d;
+            }
+
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                }
+
+                to {
+                    opacity: 1;
+                }
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .tabs-header {
+                    flex-direction: column;
+                    width: 100%;
+                    border-radius: 10px;
+                    padding: 5px;
+                }
+
+                .tab-btn {
+                    width: 100%;
+                    border-radius: 5px;
+                    margin-bottom: 5px;
+                }
+
+                .videos-grid,
+                .gallery-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
         </style>
     @endpush
 
