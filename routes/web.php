@@ -47,16 +47,13 @@ Route::post('/demande-de-priere', [PrayerRequestController::class, 'store'])->na
 
 
 Route::prefix('pvit')->group(function () {
-    // Admin UI
+    // UI paramètres
     Route::get('/settings', [PvitController::class, 'settingsForm'])->name('pvit.settings');
     Route::post('/settings', [PvitController::class, 'settingsSave'])->name('pvit.settings.save');
 
-    // Renew Secret (action manuelle)
+    // Action admin (POST depuis ta page) — garde en "web" (CSRF OK)
     Route::post('/renew-secret', [PvitController::class, 'renewSecret'])->name('pvit.renewSecret');
 
-    // Journal des secrets reçus
+    // Journal HTML des clés reçues (vue)
     Route::get('/secrets-log', [PvitController::class, 'secretsLog'])->name('pvit.secretsLog');
-
-    // Webhook réception de clé: /pvit/receive-secret/{code}
-    Route::post('/receive-secret/{code}', [PvitController::class, 'receiveSecret'])->name('pvit.receiveSecret');
 });

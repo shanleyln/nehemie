@@ -1,10 +1,9 @@
-@php use Illuminate\Support\Str; @endphp
-
-
 @extends('layout.app')
 
+@php use Illuminate\Support\Str; @endphp
+
 @section('content')
-    <div class="py-4">
+    <div class="container py-4">
         <h4 class="mb-3">Journal des clés reçues</h4>
 
         <div class="table-responsive">

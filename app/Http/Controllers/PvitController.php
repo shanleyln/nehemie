@@ -7,14 +7,14 @@ use App\Models\PvitSecretEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class PvitController extends Controller
 {
     private string $baseUrl = 'https://api.mypvit.pro';
 
-    /** ====== VUES ====== */
+    /** ==================== VUES ==================== */
 
-    // Page paramètres + actions
     public function settingsForm()
     {
         $s = PvitSetting::one();
@@ -24,90 +24,97 @@ class PvitController extends Controller
     public function settingsSave(Request $request)
     {
         $data = $request->validate([
-            'merchant_slug' => 'nullable|string',
-            'operation_account_code' => 'required|string',
-            'renew_password' => 'required|string',
-            'codeurl_renew' => 'required|string',
-            'codeurl_rest' => 'nullable|string',
-            'codeurl_link' => 'nullable|string',
-            'codeurl_balance' => 'nullable|string',
-            'codeurl_status' => 'nullable|string',
-            'callback_url_code' => 'nullable|string',
-            'success_redirect_code' => 'nullable|string',
-            'failed_redirect_code' => 'nullable|string',
-            'secret_reception_code' => 'required|string',
+            'merchant_slug'            => 'nullable|string',
+            'operation_account_code'   => 'required|string',
+            'renew_password'           => 'required|string',
+            'codeurl_renew'            => 'required|string',
+            'codeurl_rest'             => 'nullable|string',
+            'codeurl_link'             => 'nullable|string',
+            'codeurl_balance'          => 'nullable|string',
+            'codeurl_status'           => 'nullable|string',
+            'callback_url_code'        => 'nullable|string',
+            'success_redirect_code'    => 'nullable|string',
+            'failed_redirect_code'     => 'nullable|string',
+            'secret_reception_code'    => 'required|string',
         ]);
 
         PvitSetting::one()->update($data);
+
         return back()->with('success', 'Paramètres PVit enregistrés.');
     }
 
-    /** ====== RENEW SECRET ====== */
+    /** ==================== RENEW SECRET (depuis UI) ==================== */
 
     public function renewSecret(Request $request)
     {
         $s = PvitSetting::one();
 
-        // Construction endpoint & payload (form-urlencoded)
-        $endpoint = "{$this->baseUrl}/{$s->codeurl_renew}/renew-secret";
+        // Garde-fous : éviter un renew sans infos minimales
+        foreach (['operation_account_code','codeurl_renew','renew_password','secret_reception_code'] as $k) {
+            if (empty($s->{$k})) {
+                return back()->with('error', "Paramètre manquant: {$k}. Enregistre d'abord les paramètres.");
+            }
+        }
 
+        Log::info('[PVit] renew-secret clicked from settings');
+
+        $endpoint = "{$this->baseUrl}/{$s->codeurl_renew}/renew-secret";
         $payload = [
             'operationAccountCode' => $s->operation_account_code,
             'receptionUrlCode'     => $s->secret_reception_code,
             'password'             => $s->renew_password,
         ];
 
-        $res = Http::asForm()
-            ->acceptJson()
-            ->post($endpoint, $payload);
+        $res = Http::asForm()->acceptJson()->post($endpoint, $payload);
 
         if ($res->successful()) {
             $json = $res->json();
-            // Ex: { "status_code":"200", "message":"Secret key generated and sent successfully" }
             return back()->with('success', $json['message'] ?? 'Renouvellement demandé. La nouvelle clé sera envoyée à l’URL de réception.');
         }
 
         return back()->with('error', "Erreur Renew Secret ({$res->status()}): ".$res->body());
     }
 
-    /** ====== WEBHOOK: RÉCEPTION DE LA NOUVELLE CLÉ ====== */
+    /** ==================== WEBHOOK: RÉCEPTION DE LA CLÉ ==================== */
+
+    // $code est optionnel pour accepter .../receive-secret ET .../receive-secret/{code}
     public function receiveSecret(Request $request, ?string $code = null)
     {
-        $s = \App\Models\PvitSetting::one();
+        $s = PvitSetting::one();
 
-        // Récup payload (JSON ou x-www-form-urlencoded)
+        // Récup payload (JSON prioritaire, sinon x-www-form-urlencoded)
         $payload = $request->json()->all();
         if (empty($payload)) {
-            $payload = $request->all(); // fallback si PVit envoie du form
+            $payload = $request->all();
         }
 
-        // Journalisation complète pour debug
-        \Log::info('[PVit] receive-secret raw', [
+        // Log debug complet
+        Log::info('[PVit] receive-secret raw', [
             'route_code_param' => $code,
-            'headers' => $request->headers->all(),
-            'raw'     => $request->getContent(),
-            'parsed'  => $payload,
-            'ip'      => $request->ip(),
+            'headers'          => $request->headers->all(),
+            'raw'              => $request->getContent(),
+            'parsed'           => $payload,
+            'ip'               => $request->ip(),
         ]);
 
-        // Vérif souple du code (si tu en as configuré un dans PvitSetting)
+        // Vérif souple du code (si configuré)
         $configured = $s->secret_reception_code;
         $incoming   = $code
                    ?? $request->header('X-Url-Code')
                    ?? ($payload['reception_url_code'] ?? $payload['receptionUrlCode'] ?? null);
 
         if ($configured && $incoming && strcasecmp($incoming, $configured) !== 0) {
-            \Log::warning('[PVit] Reception code mismatch', ['expected' => $configured, 'got' => $incoming]);
+            Log::warning('[PVit] Reception code mismatch', ['expected' => $configured, 'got' => $incoming]);
             return response()->json(['message' => 'Invalid reception code'], 403);
         }
 
-        // Normalisation des champs
+        // Normalisation
         $operationAccountCode = $payload['operation_account_code'] ?? $payload['operationAccountCode'] ?? null;
         $secretKey            = $payload['secret_key']            ?? $payload['secretKey']            ?? null;
         $expiresIn            = $payload['expires_in']            ?? $payload['expiresIn']            ?? null;
 
-        // Sauvegarde event
-        $evt = \App\Models\PvitSecretEvent::create([
+        // Persist event (trace complète)
+        $evt = PvitSecretEvent::create([
             'operation_account_code' => $operationAccountCode,
             'secret_key'             => $secretKey,
             'expires_in'             => $expiresIn ? intval($expiresIn) : null,
@@ -118,14 +125,14 @@ class PvitController extends Controller
         if (!empty($secretKey)) {
             $s->current_secret = $secretKey;
             if (!empty($expiresIn)) {
-                $s->secret_expires_at = \Illuminate\Support\Carbon::now()->addSeconds((int)$expiresIn);
+                $s->secret_expires_at = Carbon::now()->addSeconds((int) $expiresIn);
             }
             $s->save();
         } else {
-            \Log::warning('[PVit] receive-secret without secret_key', ['event_id' => $evt->id]);
+            Log::warning('[PVit] receive-secret without secret_key', ['event_id' => $evt->id]);
         }
 
-        // Accusé de réception (200 requis)
+        // Accusé de réception requis
         return response()->json([
             'responseCode'  => 200,
             'transactionId' => 'RENEW_SECRET',
@@ -133,8 +140,8 @@ class PvitController extends Controller
         ], 200);
     }
 
+    /** ==================== JOURNAL (vue) ==================== */
 
-    /** ====== LISTE DES SECRETS REÇUS (vue simple) ====== */
     public function secretsLog()
     {
         $events = PvitSecretEvent::latest()->paginate(15);

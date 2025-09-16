@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="py-4">
+    <div class="container py-4">
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
@@ -34,6 +34,7 @@
                         <div class="col-12">
                             <hr>
                         </div>
+
                         <div class="col-md-3">
                             <label class="form-label">CodeURL Renew *</label>
                             <input name="codeurl_renew" class="form-control" required
@@ -63,6 +64,7 @@
                         <div class="col-12">
                             <hr>
                         </div>
+
                         <div class="col-md-3">
                             <label class="form-label">Callback URL Code</label>
                             <input name="callback_url_code" class="form-control"
@@ -85,16 +87,19 @@
                         </div>
                     </div>
 
-                    <div class="mt-4 d-flex gap-2">
-                        <button class="btn btn-primary">Enregistrer</button>
-                        <form method="post" action="{{ route('pvit.renewSecret') }}" class="d-inline">
-                            @csrf
-                            <button class="btn btn-outline-dark" formaction="{{ route('pvit.renewSecret') }}">Renouveler la
-                                clé maintenant</button>
-                        </form>
-                        <a class="btn btn-outline-secondary" href="{{ route('pvit.secretsLog') }}">Journal des clés
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        <a class="btn btn-outline-secondary ms-2" href="{{ route('pvit.secretsLog') }}">Journal des clés
                             reçues</a>
                     </div>
+                </form>
+
+                {{-- Formulaire distinct pour "Renouveler la clé" --}}
+                <form method="post" action="{{ route('pvit.renewSecret') }}" class="mt-3">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-dark">
+                        Renouveler la clé maintenant
+                    </button>
                 </form>
             </div>
         </div>
