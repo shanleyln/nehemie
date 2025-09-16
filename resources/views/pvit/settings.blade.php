@@ -109,7 +109,7 @@
             <div class="card-header fw-bold">Clé actuelle</div>
             <div class="card-body">
                 <div>Secret actuel:
-                    <code>{{ $s->current_secret ? \Illuminate\Support\Str::limit($s->current_secret, 24) : '—' }}</code>
+                    <code>{{ $s->current_secret ?? '—' }}</code>
                 </div>
                 <div>Expire le:
                     <strong>{{ $s->secret_expires_at?->format('d/m/Y H:i') ?? '—' }}</strong>
