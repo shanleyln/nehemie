@@ -281,8 +281,8 @@
     <script>
         function openMobileMoneyPopup() {
             const url = "{{ route('paiement.form') }}";
-            const width = 550;
-            const height = 550;
+            const width = 750;
+            const height = 650;
 
             // Calcul de la position centrée
             const left = (window.screen.width / 2) - (width / 2);
