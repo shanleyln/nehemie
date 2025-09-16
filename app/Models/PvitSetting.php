@@ -8,7 +8,7 @@ class PvitSetting extends Model
 {
     protected $fillable = [
         'merchant_slug',
-        'operation_account_code',
+        'merchant_operation_account_code',
         'renew_password',
         'codeurl_renew','codeurl_rest','codeurl_link','codeurl_balance','codeurl_status',
         'callback_url_code','success_redirect_code','failed_redirect_code','secret_reception_code',

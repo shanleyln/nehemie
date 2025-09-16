@@ -25,7 +25,7 @@ class PvitController extends Controller
     {
         $data = $request->validate([
             'merchant_slug'            => 'nullable|string',
-            'operation_account_code'   => 'required|string',
+            'merchant_operation_account_code'   => 'required|string',
             'renew_password'           => 'required|string',
             'codeurl_renew'            => 'required|string',
             'codeurl_rest'             => 'nullable|string',
@@ -50,7 +50,7 @@ class PvitController extends Controller
         $s = PvitSetting::one();
 
         // Garde-fous : éviter un renew sans infos minimales
-        foreach (['operation_account_code','codeurl_renew','renew_password','secret_reception_code'] as $k) {
+        foreach (['merchant_operation_account_code','codeurl_renew','renew_password','secret_reception_code'] as $k) {
             if (empty($s->{$k})) {
                 return back()->with('error', "Paramètre manquant: {$k}. Enregistre d'abord les paramètres.");
             }
@@ -60,7 +60,7 @@ class PvitController extends Controller
 
         $endpoint = "{$this->baseUrl}/{$s->codeurl_renew}/renew-secret";
         $payload = [
-            'operationAccountCode' => $s->operation_account_code,
+            'operationAccountCode' => $s->merchant_operation_account_code,
             'receptionUrlCode'     => $s->secret_reception_code,
             'password'             => $s->renew_password,
         ];
@@ -108,13 +108,13 @@ class PvitController extends Controller
         ]);
 
         // 4) Normalise les clés
-        $operationAccountCode = $payload['operation_account_code'] ?? $payload['operationAccountCode'] ?? null;
+        $operationAccountCode = $payload['merchant_operation_account_code'] ?? $payload['operationAccountCode'] ?? null;
         $secretKey            = $payload['secret_key']            ?? $payload['secretKey']            ?? null;
         $expiresIn            = $payload['expires_in']            ?? $payload['expiresIn']            ?? null;
 
         // 5) Trace en base
         $evt = \App\Models\PvitSecretEvent::create([
-            'operation_account_code' => $operationAccountCode,
+            'merchant_operation_account_code' => $operationAccountCode,
             'secret_key'             => $secretKey,
             'expires_in'             => $expiresIn ? (int) $expiresIn : null,
             'raw_payload'            => $payload,

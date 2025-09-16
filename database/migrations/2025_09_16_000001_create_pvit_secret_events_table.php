@@ -9,7 +9,7 @@ return new class () extends Migration {
     {
         Schema::create('pvit_secret_events', function (Blueprint $table) {
             $table->id();
-            $table->string('operation_account_code')->nullable();
+            $table->string('merchant_operation_account_code')->nullable();
             $table->string('secret_key')->nullable(); // sk_live_xxx (on garde en clair si tu veux – sinon chiffrer)
             $table->integer('expires_in')->nullable(); // secondes
             $table->json('raw_payload')->nullable();   // trace complète

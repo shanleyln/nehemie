@@ -22,8 +22,8 @@
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Operation Account Code *</label>
-                            <input name="operation_account_code" class="form-control" required
-                                value="{{ old('operation_account_code', $s->operation_account_code) }}">
+                            <input name="merchant_operation_account_code" class="form-control" required
+                                value="{{ old('merchant_operation_account_code', $s->merchant_operation_account_code) }}">
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Renew Password *</label>
