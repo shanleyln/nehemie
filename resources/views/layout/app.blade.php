@@ -47,7 +47,9 @@
 
     <!-- header end -->
     <!-- Main content -->
-    @yield('content')
+    <div class="main-content">
+        @yield('content')
+    </div>
 
     <!-- Scripts -->
     <script src="{{ asset('src/assets/js/password-show.js') }}"></script>
