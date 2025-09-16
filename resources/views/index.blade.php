@@ -114,6 +114,12 @@
                 <div class="tab-pane fade show active" id="morale-pane" role="tabpanel" aria-labelledby="morale-tab">
                     <div id="moralTableBodyContainer">
 
+                        {{-- indisponible --}}
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            Votre paiement en ligne est indisponible pour le moment. Veuillez réessayer plus tard.
+                        </div>
+                        {{-- 
                         <form id="paymentForm">
                             @csrf
                             <div class="form-group mb-3">
@@ -159,7 +165,7 @@
                                 <i class="fas fa-info-circle me-2"></i>
                                 Vous recevrez une demande de confirmation sur votre téléphone pour valider le paiement.
                             </div>
-                        </form>
+                        </form> --}}
 
                         <!-- Modal d'erreur -->
                         <div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true">
