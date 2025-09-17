@@ -122,7 +122,7 @@
             {{-- Formulaire 2 : Renouveler la clé maintenant --}}
             <form method="POST" action="{{ route('pvit.renewSecret') }}" class="mt-3">
                 @csrf
-                <button type="submit" class="btn btn-outline-dark">
+                <button type="submit" class="btn btn-primary">
                     Renouveler la clé maintenant
                 </button>
             </form>
