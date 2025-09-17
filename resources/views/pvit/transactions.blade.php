@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 @php
     $respLink = session('pvit_link_response');
     $respStat = session('pvit_status_response');
