@@ -46,7 +46,7 @@
                             placeholder="Requis pour VISA/RESTLINK">
                         <div class="form-text">Tu peux vérifier via KYC avant de générer.</div>
                     </div>
-                    <div class="col-md-2 d-flex align-items-end">
+                    <div class="col-md-4 d-flex align-items-end">
                         <button type="submit" formaction="{{ route('pvit.kyc.check') }}" formmethod="POST"
                             class="btn btn-outline-secondary">
                             Vérifier KYC
