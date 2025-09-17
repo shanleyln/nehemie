@@ -78,7 +78,7 @@
                     <div class="col-12 d-flex gap-2">
                         <button class="btn btn-primary">Générer</button>
                         <button type="submit" formaction="{{ route('pvit.kyc.check') }}" formmethod="POST"
-                            class="btn btn-outline-secondary">
+                            class="btn btn-primary">
                             Vérifier KYC
                         </button>
                     </div>
