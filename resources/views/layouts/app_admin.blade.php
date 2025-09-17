@@ -185,7 +185,7 @@
     @include('modales.modale_appel')
     @include('modales.modale_prayer-form')
     <div id="main-content">
-        {{ $slot }}
+        @yield('content')
     </div>
 
 

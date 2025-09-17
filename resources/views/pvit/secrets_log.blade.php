@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_admin')
 
 @php use Illuminate\Support\Str; @endphp
 

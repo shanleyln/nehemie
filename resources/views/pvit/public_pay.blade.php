@@ -1,50 +1,91 @@
-@extends('layout.app')
-@php
-    // Réponse renvoyée par linkInit() après POST (redirige "back" sur cette page)
-    $resp = session('pvit_link_response');
-@endphp
+<!DOCTYPE html>
+<html lang="fr">
 
-@section('title2', 'Bienvenue !')
+<head>
+    <meta charset="UTF-8">
+    <title>@yield('title', 'Nehemie')</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Icône du site -->
+    <link rel="icon" href="{{ asset('images/logo2.png') }}" type="image/x-icon">
+    <!-- Assets -->
+    <link rel="stylesheet" href="{{ asset('src/assets/css/vendors/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('src/assets/css/vendors/iconsax.css') }}">
+    <link rel="stylesheet" href="{{ asset('src/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/toast_pwa.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<style>
+    .nav-tabs .nav-link {
+        border: none;
+        color: #555;
+        font-weight: 500;
+        transition: background-color 0.3s, color 0.3s;
+    }
 
-@section('content')
-    <style>
-        .nav-tabs .nav-link {
-            border: none;
-            color: #555;
-            font-weight: 500;
-            transition: background-color 0.3s, color 0.3s;
-        }
+    .nav-tabs .nav-link:hover {
+        background-color: #f8f9fa;
+        color: #F57C00;
+    }
 
-        .nav-tabs .nav-link:hover {
-            background-color: #f8f9fa;
-            color: #F57C00;
-        }
+    .nav-tabs .nav-link.active {
+        background-color: #F57C00;
+        color: #fff;
+        border-radius: .5rem;
+        font-weight: 600;
+    }
 
-        .nav-tabs .nav-link.active {
-            background-color: #F57C00;
-            color: #fff;
-            border-radius: .5rem;
-            font-weight: 600;
-        }
+    .nav-tabs {
+        border: none;
+    }
 
-        .nav-tabs {
-            border: none;
-        }
+    .bg-icon {
+        width: 40px;
+        height: 40px;
+        background-color: #F57C00;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+</style>
 
-        .bg-icon {
-            width: 40px;
-            height: 40px;
-            background-color: #F57C00;
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+<body>
+    <!-- header starts -->
+    <header class="main-header">
+        <div class="custom-container">
+            <div class="header-panel d-flex justify-content-between align-items-center">
+                @if (!request()->routeIs('index'))
+                    <a onclick="history.back();" class="me-3">
+                        <i class="iconsax icon-btn" data-icon="chevron-left"></i>
+                    </a>
+                @else
+                    <div>
+                        {{-- LOGO --}}
+                        <img src="{{ asset('images/logo2.png') }}" alt="Logo" class="logo" style="width: 60px;">
+                    </div>
+                @endif
+
+                <h1 class="fw-bold mb-0 flex-grow-1 text-center" style="margin-left: -50px;">
+                    @yield('title2')
+                </h1>
+
+                <a href="#" class="text-decoration-none ms-3" title="Retour au site"
+                    onclick="returnToMainSite();">
+                    <i class="fas fa-home icon-btn text-black"></i>
+                </a>
 
 
+            </div>
+        </div>
+    </header>
+
+    @php
+        // Réponse renvoyée par linkInit() après POST (redirige "back" sur cette page)
+        $resp = session('pvit_link_response');
+    @endphp
+    <!-- header end -->
     <section class="section-lg-t-space section-b-space">
         <div class="custom-container">
 
@@ -69,9 +110,9 @@
 
                 <!-- Onglet Virement Bancaire -->
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link  d-flex align-items-center justify-content-center gap-2 py-3" id="physique-tab"
-                        data-bs-toggle="tab" data-bs-target="#physique-pane" type="button" role="tab"
-                        aria-controls="physique-pane" aria-selected="true">
+                    <button class="nav-link  d-flex align-items-center justify-content-center gap-2 py-3"
+                        id="physique-tab" data-bs-toggle="tab" data-bs-target="#physique-pane" type="button"
+                        role="tab" aria-controls="physique-pane" aria-selected="true">
                         <i class="fas fa-university"></i>
                         <span>Virement Bancaire</span>
                     </button>
@@ -137,7 +178,8 @@
                             <div class="card shadow-sm border-0">
                                 <div class="card-body p-4">
                                     <h3 class="mb-1">Paiement sécurisé</h3>
-                                    <div class="text-muted mb-4">Saisissez le montant puis choisissez Mobile Money ou Carte.
+                                    <div class="text-muted mb-4">Saisissez le montant puis choisissez Mobile Money ou
+                                        Carte.
                                     </div>
 
                                     {{-- Sélecteur d'onglets --}}
@@ -163,20 +205,21 @@
                                         {{-- === Onglet Mobile Money (RESTLINK) === --}}
                                         <div class="tab-pane fade show active" id="pane-mobile" role="tabpanel"
                                             aria-labelledby="tab-mobile" tabindex="0">
-                                            <form method="POST" action="{{ route('pvit.link.init') }}" class="row gy-3"
-                                                id="form-mobile">
+                                            <form method="POST" action="{{ route('pvit.link.init') }}"
+                                                class="row gy-3" id="form-mobile">
                                                 @csrf
                                                 {{-- Champs visibles --}}
                                                 <div class="col-12">
                                                     <label class="form-label">Montant (XAF) *</label>
-                                                    <input type="number" min="150" step="1" name="amount"
-                                                        class="form-control" required>
+                                                    <input type="number" min="150" step="1"
+                                                        name="amount" class="form-control" required>
                                                     <div class="form-text">Minimum 150 XAF.</div>
                                                 </div>
                                                 <div class="col-12">
                                                     <label class="form-label">Numéro de téléphone *</label>
-                                                    <input type="text" maxlength="20" name="customer_account_number"
-                                                        class="form-control" required placeholder="Ex: 066820866">
+                                                    <input type="text" maxlength="20"
+                                                        name="customer_account_number" class="form-control" required
+                                                        placeholder="Ex: 066820866">
                                                     <div class="form-text">Ce numéro recevra le prompt (sandbox:
                                                         auto-validation possible).</div>
                                                 </div>
@@ -192,7 +235,8 @@
                                                 <input type="hidden" name="free_info" value="">
 
                                                 <div class="col-12 d-grid">
-                                                    <button class="btn btn-primary btn-lg">Payer par Mobile Money</button>
+                                                    <button class="btn btn-primary btn-lg">Payer par Mobile
+                                                        Money</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -200,18 +244,18 @@
                                         {{-- === Onglet Carte (VISA_MASTERCARD) === --}}
                                         <div class="tab-pane fade" id="pane-card" role="tabpanel"
                                             aria-labelledby="tab-card" tabindex="0">
-                                            <form method="POST" action="{{ route('pvit.link.init') }}" class="row gy-3"
-                                                id="form-card">
+                                            <form method="POST" action="{{ route('pvit.link.init') }}"
+                                                class="row gy-3" id="form-card">
                                                 @csrf
                                                 <div class="col-12">
                                                     <label class="form-label">Montant (XAF) *</label>
-                                                    <input type="number" min="150" step="1" name="amount"
-                                                        class="form-control" required>
+                                                    <input type="number" min="150" step="1"
+                                                        name="amount" class="form-control" required>
                                                 </div>
                                                 <div class="col-12">
                                                     <label class="form-label">Numéro de carte / Identifiant *</label>
-                                                    <input type="text" maxlength="20" name="customer_account_number"
-                                                        class="form-control" required
+                                                    <input type="text" maxlength="20"
+                                                        name="customer_account_number" class="form-control" required
                                                         placeholder="Ex: 4111 1111 1111 1111">
                                                     <div class="form-text">En PROD, vous serez redirigé vers la page de
                                                         paiement carte de PVit.</div>
@@ -242,7 +286,8 @@
                                         {{-- Affiche la référence marchande utilisée (auto-générée chez nous) --}}
                                         @if (!empty($resp['_merchant_reference']))
                                             <div class="alert alert-info">
-                                                <strong>Référence :</strong> <code>{{ $resp['_merchant_reference'] }}</code>
+                                                <strong>Référence :</strong>
+                                                <code>{{ $resp['_merchant_reference'] }}</code>
                                                 <div class="small text-muted">Conservez-la pour suivi.</div>
                                             </div>
                                         @endif
@@ -280,7 +325,8 @@
 
                             {{-- Lien retour admin (optionnel) --}}
                             <div class="text-center mt-3">
-                                <a href="{{ route('pvit.settings') }}" class="text-muted small">Administration PVit</a>
+                                <a href="{{ route('pvit.settings') }}" class="text-muted small">Administration
+                                    PVit</a>
                             </div>
 
                         </div>
@@ -293,4 +339,38 @@
         </div>
     </section>
 
-@endsection
+
+    <!-- Scripts -->
+    <script src="{{ asset('src/assets/js/password-show.js') }}"></script>
+    <script src="{{ asset('src/assets/js/iconsax.js') }}"></script>
+    <script src="{{ asset('src/assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('src/assets/js/template-setting.js') }}"></script>
+    <script src="{{ asset('src/assets/js/script.js') }}"></script>
+    <script>
+        function returnToMainSite() {
+            if (window.opener && !window.opener.closed) {
+                window.opener.location.href = "{{ route('route_accueil') }}"; // Redirige l'onglet principal
+                window.close(); // Ferme cette fenêtre popup
+            } else {
+                window.location.href = "{{ route('route_accueil') }}"; // Fallback si ouvert dans l’onglet principal
+            }
+        }
+    </script>
+
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker
+                    .register('/pvit/sw.js', {
+                        scope: '/pvit/'
+                    })
+                    .then(reg => console.log('SW registered:', reg.scope))
+                    .catch(err => console.error('SW registration failed:', err));
+            });
+        }
+    </script>
+
+</body>
+
+</html>
