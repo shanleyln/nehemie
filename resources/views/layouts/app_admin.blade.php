@@ -89,17 +89,17 @@
                         class="nav-link {{ $isAccueil ? 'active' : '' }}">Aller sur le site</a>
                 </li>
                 <li>
-                    <a href="{{ route('route_qui_sommes_nous') }}" wire:navigate
+                    <a href="{{ route('pvit.settings') }}" wire:navigate
                         class="nav-link {{ $isParametresPVIT ? 'active' : '' }}">Paramètres PVIT</a>
                 </li>
                 <li>
-                    <a href="{{ route('route_nos_programmes') }}"
+                    <a href="{{ route('pvit.secretsLog') }}"
                         class="nav-link {{ $isHistoriqueDesClesSecrètes ? 'active' : '' }}" wire:navigate>Historique
                         des clés
                         secrètes</a>
                 </li>
                 <li>
-                    <a href="{{ route('route_nos_actions_et_projets') }}"
+                    <a href="{{ route('pvit.transactions') }}"
                         class="nav-link {{ $isFormulaireDeTestDeTransaction ? 'active' : '' }}"
                         wire:navigate>Formulaire de test de transaction</a>
                 </li>
