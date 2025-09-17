@@ -427,119 +427,92 @@ class PvitController extends Controller
         ], 200);
     }
 
-    // ===== Helpers KYC =====
+    // --- Appel KYC (essaie plusieurs formats de paramètres) ---
     private function callKyc(string $msisdn): array
     {
         $s = \App\Models\PvitSetting::one();
         if (empty($s->codeurl_kyc)) {
             throw new \RuntimeException("codeurl_kyc manquant dans les paramètres PVit.");
         }
-        $secret = $this->mustHaveSecret();
+        $secret   = $this->mustHaveSecret();
         $endpoint = "{$this->baseUrl}/{$s->codeurl_kyc}/kyc";
 
-        // 1) Essai en GET (query) — X-Secret + JSON attendu
-        $res = \Illuminate\Support\Facades\Http::withHeaders(['X-Secret' => $secret])
-            ->acceptJson()
-            ->get($endpoint, [
-                'customerAccountNumber' => $msisdn,
-                'accountOperationCode'  => $s->operation_account_code,
-            ]);
+        $headers = ['X-Secret' => $secret];
+        $tries = [
+            // GET avec camelCase
+            ['m' => 'GET',  'q' => ['customerAccountNumber' => $msisdn, 'accountOperationCode' => $s->operation_account_code]],
+            // GET avec snake_case
+            ['m' => 'GET',  'q' => ['customer_account_number' => $msisdn, 'accountOperationCode' => $s->operation_account_code]],
+            // POST JSON camelCase
+            ['m' => 'POST', 'j' => ['customerAccountNumber' => $msisdn, 'accountOperationCode' => $s->operation_account_code]],
+            // POST JSON snake_case
+            ['m' => 'POST', 'j' => ['customer_account_number' => $msisdn, 'accountOperationCode' => $s->operation_account_code]],
+            // POST form-urlencoded
+            ['m' => 'POST_FORM', 'f' => ['customerAccountNumber' => $msisdn, 'accountOperationCode' => $s->operation_account_code]],
+        ];
 
-        // 2) Si pas OK, essai POST JSON
-        if (!$res->ok()) {
-            $res = \Illuminate\Support\Facades\Http::withHeaders(['X-Secret' => $secret])
-                ->acceptJson()
-                ->post($endpoint, [
-                    'customer_account_number' => $msisdn,
-                    'accountOperationCode'    => $s->operation_account_code,
-                ]);
-        }
-
-        // 3) Si encore KO, essai POST form-urlencoded
-        if (!$res->ok()) {
-            $res = \Illuminate\Support\Facades\Http::asForm()
-                ->withHeaders(['X-Secret' => $secret])
-                ->acceptJson()
-                ->post($endpoint, [
-                    'customerAccountNumber'   => $msisdn,
-                    'accountOperationCode'    => $s->operation_account_code,
-                ]);
+        $res = null;
+        foreach ($tries as $t) {
+            if ($t['m'] === 'GET') {
+                $res = \Illuminate\Support\Facades\Http::withHeaders($headers)->acceptJson()->get($endpoint, $t['q']);
+            } elseif ($t['m'] === 'POST') {
+                $res = \Illuminate\Support\Facades\Http::withHeaders($headers)->acceptJson()->post($endpoint, $t['j']);
+            } else {
+                $res = \Illuminate\Support\Facades\Http::asForm()->withHeaders($headers)->acceptJson()->post($endpoint, $t['f']);
+            }
+            if ($res->ok() || $res->status() >= 400) {
+                break;
+            } // on sort dès qu'on a une réponse claire
         }
 
         \Log::info('[PVit] KYC response', [
             'endpoint' => $endpoint,
             'msisdn'   => $msisdn,
-            'status'   => $res->status(),
-            'body'     => $res->body(),
+            'status'   => $res?->status(),
+            'body'     => $res?->body(),
         ]);
 
         return [
-            'http_status' => $res->status(),
-            'json'        => $res->json() ?? [],
-            'ok'          => $res->ok(),
+            'http_status' => $res?->status() ?? 0,
+            'json'        => $res?->json() ?? [],
+            'ok'          => $res?->ok() ?? false,
         ];
     }
 
+    // --- Interprétation KYC en mode STRICT ---
+    // => true UNIQUEMENT si on voit un marqueur explicite d’activation
     private function interpretKyc(array $r): array
     {
         $j = $r['json'] ?? [];
-        // On accepte plusieurs schémas possibles :
-        $active = null;
+        $upper = static fn ($v) => is_string($v) ? strtoupper($v) : $v;
 
-        // Cas 1: { active: true/false }
-        if (array_key_exists('active', $j)) {
-            $active = (bool)$j['active'];
-        }
+        // Marqueurs “actif”
+        $isActive =
+            (isset($j['active']) && $j['active'] === true) ||
+            (isset($j['wallet_exists']) && $j['wallet_exists'] === true) ||
+            (isset($j['status']) && in_array($upper($j['status']), ['ACTIVE','OK','VALID','ENROLLED'], true)) ||
+            // Option “code 200” uniquement si on a un indice de wallet/KYC présent
+            (isset($j['code']) && (int)$j['code'] === 200 && (isset($j['wallet']) || isset($j['kyc']) || isset($j['exists']) || isset($j['wallet_exists'])));
 
-        // Cas 2: { wallet_exists: true/false }
-        if ($active === null && array_key_exists('wallet_exists', $j)) {
-            $active = (bool)$j['wallet_exists'];
-        }
+        // Marqueurs “inactif”
+        $isInactive =
+            (isset($j['active']) && $j['active'] === false) ||
+            (isset($j['wallet_exists']) && $j['wallet_exists'] === false) ||
+            (isset($j['status']) && in_array($upper($j['status']), ['INACTIVE','UNKNOWN','NOT_FOUND','INVALID'], true)) ||
+            (isset($j['code']) && in_array((int)$j['code'], [400,401,403,404], true));
 
-        // Cas 3: { status: "ACTIVE"|"INACTIVE" }
-        if ($active === null && isset($j['status'])) {
-            $active = (strtoupper((string)$j['status']) === 'ACTIVE');
-        }
+        // Décision STRICTE : par défaut => KO si aucun marqueur explicite
+        $active = $isActive ? true : ($isInactive ? false : false);
 
-        // Cas 4: { code: 200 } ~ OK
-        if ($active === null && isset($j['code'])) {
-            $active = ((int)$j['code'] === 200);
-        }
-
-        // Fallback: si HTTP 200 sans indices contraires -> true
-        if ($active === null) {
-            $active = ($r['ok'] === true);
-        }
-
-        return [
-            'active' => $active,
-            'raw'    => $j,
-        ];
+        return ['active' => $active, 'raw' => $j];
     }
 
     private function ensureKycOk(string $msisdn): array
     {
         $resp = $this->callKyc($msisdn);
-        $ik = $this->interpretKyc($resp);
+        $ik   = $this->interpretKyc($resp);
         return $ik + ['http_status' => $resp['http_status']];
     }
 
-    // ===== Action UI : vérifier KYC manuellement =====
-    public function kycCheck(\Illuminate\Http\Request $request)
-    {
-        $data = $request->validate([
-            'customer_account_number' => 'required|string|max:20',
-        ]);
-        $msisdn = $data['customer_account_number'];
-
-        try {
-            $result = $this->ensureKycOk($msisdn);
-            $msg = $result['active'] ? 'KYC OK: compte client actif.' : 'KYC KO: compte invalide/inactif.';
-            return back()->with('success', $msg)->with('pvit_kyc_response', $result);
-        } catch (\Throwable $e) {
-            \Log::error('[PVit] KYC error', ['e' => $e->getMessage()]);
-            return back()->with('error', 'Erreur KYC: '.$e->getMessage());
-        }
-    }
 
 }
