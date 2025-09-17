@@ -75,11 +75,14 @@ class PvitController extends Controller
             'codeurl_link'             => 'nullable|string',
             'codeurl_balance'          => 'nullable|string',
             'codeurl_status'           => 'nullable|string',
+            'codeurl_kyc'              => 'nullable|string',
+            'enforce_kyc'              => 'nullable|boolean',
             'callback_url_code'        => 'nullable|string',
             'success_redirect_code'    => 'nullable|string',
             'failed_redirect_code'     => 'nullable|string',
             'secret_reception_code'    => 'required|string',
         ]);
+        $data['enforce_kyc'] = isset($data['enforce_kyc']) ? 1 : 0;
 
         PvitSetting::one()->update($data);
 
