@@ -115,137 +115,13 @@
                     <div id="moralTableBodyContainer">
 
                         {{-- indisponible --}}
-                        {{-- <div class="alert alert-danger">
+                        <div class="alert alert-danger">
                             <i class="fas fa-exclamation-triangle me-2"></i>
                             Votre paiement en ligne est indisponible pour le moment. Veuillez réessayer plus tard.
-                        </div> --}}
-
-                        <form id="paymentForm">
-                            @csrf
-                            <div class="form-group mb-3">
-                                <label for="nom" class="form-label">Votre nom (optionnel)</label>
-                                <input type="text" class="form-control" id="nom" name="nom"
-                                    placeholder="Votre nom">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="email" class="form-label">Votre email (optionnel)</label>
-                                <input type="email" class="form-control" id="email" name="email"
-                                    placeholder="votre@email.com">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="telephone" class="form-label">Numéro de téléphone <span
-                                        class="text-danger">*</span></label>
-                                <div class="input-group">
-                                    <span class="input-group-text">+241</span>
-                                    <input type="tel" class="form-control" id="telephone" name="telephone"
-                                        placeholder="060102030" pattern="[0-9]{8,9}" required>
-                                </div>
-                                <small class="form-text text-muted">Format: 060102030 (sans espace, 8 ou 9 chiffres)</small>
-                            </div>
-                            <div class="form-group mb-4">
-                                <label for="montant" class="form-label">Montant (FCFA) <span
-                                        class="text-danger">*</span></label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" id="montant" name="montant" min="150"
-                                        step="50" value="1000" required>
-                                    <span class="input-group-text">FCFA</span>
-                                </div>
-                                <small class="form-text text-muted">Montant minimum: 150 FCFA</small>
-                            </div>
-
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
-                                    <span class="spinner-border spinner-border-sm d-none" role="status"
-                                        aria-hidden="true" id="spinner"></span>
-                                    <span id="btnText">Payer avec Mobile Money</span>
-                                </button>
-                            </div>
-
-                            <div class="alert alert-info mt-3 mb-0">
-                                <i class="fas fa-info-circle me-2"></i>
-                                Vous recevrez une demande de confirmation sur votre téléphone pour valider le paiement.
-                            </div>
-                        </form>
-
-                        <!-- Modal d'erreur -->
-                        <div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header bg-danger text-white">
-                                        <h5 class="modal-title">Erreur de paiement</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Fermer"></button>
-                                    </div>
-                                    <div class="modal-body" id="errorMessage">
-                                        Une erreur est survenue lors du traitement de votre demande.
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Fermer</button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
-                        @push('scripts')
-                            <script>
-                                document.addEventListener('DOMContentLoaded', function() {
-                                    const form = document.getElementById('paymentForm');
-                                    const submitBtn = document.getElementById('submitBtn');
-                                    const spinner = document.getElementById('spinner');
-                                    const btnText = document.getElementById('btnText');
-                                    const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
-                                    const errorMessage = document.getElementById('errorMessage');
 
-                                    form.addEventListener('submit', async function(e) {
-                                        e.preventDefault();
 
-                                        // Désactiver le bouton et afficher le spinner
-                                        submitBtn.disabled = true;
-                                        spinner.classList.remove('d-none');
-                                        btnText.textContent = 'Traitement en cours...';
-
-                                        try {
-                                            const formData = new FormData(this);
-                                            const response = await fetch('{{ route('api.pvit.initier') }}', {
-                                                method: 'POST',
-                                                headers: {
-                                                    'Accept': 'application/json',
-                                                    'X-Requested-With': 'XMLHttpRequest',
-                                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-                                                        .content
-                                                },
-                                                body: formData
-                                            });
-
-                                            const result = await response.json();
-
-                                            if (!response.ok) {
-                                                throw new Error(result.message || 'Erreur lors de la requête');
-                                            }
-
-                                            if (result.success) {
-                                                // Rediriger vers la page de succès avec la référence
-                                                const reference = encodeURIComponent(result.data.reference);
-                                                window.location.href = '/paiement/succes/' + reference;
-                                            } else {
-                                                throw new Error(result.message || 'Erreur inconnue');
-                                            }
-                                        } catch (error) {
-                                            console.error('Erreur:', error);
-                                            errorMessage.textContent = error.message ||
-                                                'Une erreur est survenue lors du traitement de votre demande.';
-                                            errorModal.show();
-
-                                            // Réactiver le bouton
-                                            submitBtn.disabled = false;
-                                            spinner.classList.add('d-none');
-                                            btnText.textContent = 'Payer avec Mobile Money';
-                                        }
-                                    });
-                                });
-                            </script>
-                        @endpush
                     </div>
                 </div>
             </div>

@@ -33,9 +33,9 @@ Route::get('/conditions-dutilisation', function () {
 
 
 // Routes index pour les don avec payement en ligne
-Route::get('/index', function () {
+Route::get('/index.index', function () {
     return view('index');
-})->name('index');
+})->name('index.index');
 
 
 

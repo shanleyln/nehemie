@@ -280,7 +280,7 @@
     <!-- Script pour le popup mobile money -->
     <script>
         function openMobileMoneyPopup() {
-            const url = "{{ route('index') }}";
+            const url = "{{ route('index.index') }}";
             const width = 750;
             const height = 650;
 
