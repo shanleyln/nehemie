@@ -244,7 +244,7 @@ class PvitController extends Controller
           'service'                      => $data['service'],
           'callback_url_code'            => $s->callback_url_code,
           'customer_account_number'      => $data['customer_account_number'] ?? null,
-          'merchant_operation_account_code' => $s->operation_account_code,
+          'merchant_operation_account_code' => $s->merchant_operation_account_code,
           'transaction_type'             => 'PAYMENT',
           'owner_charge'                 => $data['owner_charge'],
           'operator_owner_charge'        => $data['operator_owner_charge'] ?? null,
@@ -270,7 +270,7 @@ class PvitController extends Controller
           'customer_account_number' => $data['customer_account_number'] ?? null,
           'owner_charge'  => $data['owner_charge'],
           'operator_owner_charge' => $data['operator_owner_charge'] ?? null,
-          'merchant_operation_account_code' => $s->operation_account_code,
+          'merchant_operation_account_code' => $s->merchant_operation_account_code,
           'request_payload' => $payload,
           'response_payload' => $res->json(),
           'status'        => $res->json('status'),
@@ -301,7 +301,7 @@ class PvitController extends Controller
         $endpoint = "{$this->baseUrl}/{$s->codeurl_status}/status";
         $query = [
           'transactionId'       => $data['transactionId'],
-          'accountOperationCode' => $s->operation_account_code,
+          'accountOperationCode' => $s->merchant_operation_account_code,
           'transactionOperation' => $data['transactionOperation'],
         ];
 
@@ -325,11 +325,11 @@ class PvitController extends Controller
         if (empty($s->codeurl_balance)) {
             return back()->with('error', 'CodeURL Balance manquant. Renseigne-le dans /pvit/settings.');
         }
-        if (empty($s->operation_account_code)) {
+        if (empty($s->merchant_operation_account_code)) {
             return back()->with('error', 'Operation Account Code manquant. Renseigne ACC_xxx dans /pvit/settings.');
         }
 
-        $query = ['accountOperationCode' => $s->operation_account_code];
+        $query = ['accountOperationCode' => $s->merchant_operation_account_code];
 
         // Construit explicitement l’URL avec le query string
         $url = "{$this->baseUrl}/{$s->codeurl_balance}/balance?" . http_build_query($query);
