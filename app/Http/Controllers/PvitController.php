@@ -514,5 +514,21 @@ class PvitController extends Controller
         return $ik + ['http_status' => $resp['http_status']];
     }
 
+    // ===== Action UI : vérifier KYC manuellement =====
+    public function kycCheck(\Illuminate\Http\Request $request)
+    {
+        $data = $request->validate([
+            'customer_account_number' => 'required|string|max:20',
+        ]);
+        $msisdn = $data['customer_account_number'];
 
+        try {
+            $result = $this->ensureKycOk($msisdn);
+            $msg = $result['active'] ? 'KYC OK: compte client actif.' : 'KYC KO: compte invalide/inactif.';
+            return back()->with('success', $msg)->with('pvit_kyc_response', $result);
+        } catch (\Throwable $e) {
+            \Log::error('[PVit] KYC error', ['e' => $e->getMessage()]);
+            return back()->with('error', 'Erreur KYC: '.$e->getMessage());
+        }
+    }
 }
