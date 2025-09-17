@@ -52,7 +52,6 @@ Route::prefix('pvit')->group(function () {
     Route::get('/transactions', [PvitController::class, 'transactionsForm'])->name('pvit.transactions');
 
     // Actions
-    Route::post('/rest', [PvitController::class, 'restInit'])->name('pvit.rest.init');
     Route::post('/link', [PvitController::class, 'linkInit'])->name('pvit.link.init');
     Route::post('/status', [PvitController::class, 'statusCheck'])->name('pvit.status.check');
     Route::post('/balance', [PvitController::class, 'balanceCheck'])->name('pvit.balance.check');

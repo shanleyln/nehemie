@@ -1,6 +1,5 @@
 @extends('layout.app')
 @php
-    $respRest = session('pvit_rest_response');
     $respLink = session('pvit_link_response');
     $respStat = session('pvit_status_response');
     $respBal = session('pvit_balance_response');
@@ -16,86 +15,20 @@
             <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
 
-        <h4 class="mb-3">PVit — Transactions</h4>
-
-        {{-- ==== REST PAYMENT / GIVE_CHANGE ==== --}}
-        <div class="card mb-4">
-            <div class="card-header fw-bold">REST API (Payment / Give Change)</div>
-            <div class="card-body">
-                <form method="post" action="{{ route('pvit.rest.init') }}" class="row gy-3">
-                    @csrf
-                    <div class="col-md-3">
-                        <label class="form-label">Transaction type *</label>
-                        <select name="transaction_type" class="form-select" required>
-                            <option value="PAYMENT">PAYMENT</option>
-                            <option value="GIVE_CHANGE">GIVE_CHANGE</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">Amount (XAF) *</label>
-                        <input name="amount" type="number" min="150" step="1" class="form-control" required>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">Reference (<=15) *</label>
-                                <input name="reference" maxlength="15" class="form-control" required>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">Customer account *</label>
-                        <input name="customer_account_number" maxlength="20" class="form-control" required>
-                    </div>
-
-                    <div class="col-md-3">
-                        <label class="form-label">Owner charge *</label>
-                        <select name="owner_charge" class="form-select" required>
-                            <option value="CUSTOMER">CUSTOMER</option>
-                            <option value="MERCHANT">MERCHANT</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">Operator owner charge</label>
-                        <select name="operator_owner_charge" class="form-select">
-                            <option value="">(défaut: MERCHANT)</option>
-                            <option value="MERCHANT">MERCHANT</option>
-                            <option value="CUSTOMER">CUSTOMER</option>
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">Agent</label>
-                        <input name="agent" class="form-control">
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label">Product</label>
-                        <input name="product" class="form-control">
-                    </div>
-                    <div class="col-12">
-                        <label class="form-label">Free info</label>
-                        <input name="free_info" class="form-control">
-                    </div>
-
-                    <div class="col-12 d-flex gap-2">
-                        <button class="btn btn-primary">Initier REST</button>
-                        <a class="btn btn-outline-secondary" href="{{ route('pvit.settings') }}">Paramètres</a>
-                    </div>
-                </form>
-
-                @if ($respRest)
-                    <pre class="mt-3 bg-light p-3 border rounded small">{{ json_encode($respRest, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) }}</pre>
-                @endif
-            </div>
-        </div>
+        <h4 class="mb-3">PVit — Paiements (LINK), Statut & Solde</h4>
 
         {{-- ==== LINK (WEB / VISA_MASTERCARD / RESTLINK) ==== --}}
         <div class="card mb-4">
-            <div class="card-header fw-bold">LINK API (générer un lien / prompt USSD)</div>
+            <div class="card-header fw-bold">LINK API (générer un lien ou un prompt USSD)</div>
             <div class="card-body">
                 <form method="post" action="{{ route('pvit.link.init') }}" class="row gy-3">
                     @csrf
                     <div class="col-md-4">
                         <label class="form-label">Service *</label>
                         <select name="service" class="form-select" required>
-                            <option value="WEB">WEB</option>
+                            <option value="WEB">WEB (page PVit)</option>
                             <option value="VISA_MASTERCARD">VISA_MASTERCARD</option>
-                            <option value="RESTLINK">RESTLINK</option>
+                            <option value="RESTLINK">RESTLINK (prompt USSD direct)</option>
                         </select>
                     </div>
                     <div class="col-md-4">
@@ -103,8 +36,8 @@
                         <input name="amount" type="number" min="150" step="1" class="form-control" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Reference (<=15) *</label>
-                                <input name="reference" maxlength="15" class="form-control" required>
+                        <label class="form-label">Reference (≤15) *</label>
+                        <input name="reference" maxlength="15" class="form-control" required>
                     </div>
 
                     <div class="col-md-4">
@@ -115,8 +48,8 @@
                     <div class="col-md-4">
                         <label class="form-label">Owner charge *</label>
                         <select name="owner_charge" class="form-select" required>
-                            <option value="CUSTOMER">CUSTOMER</option>
-                            <option value="MERCHANT">MERCHANT</option>
+                            <option value="CUSTOMER">CUSTOMER (client paie frais PVit)</option>
+                            <option value="MERCHANT">MERCHANT (marchand paie frais PVit)</option>
                         </select>
                     </div>
                     <div class="col-md-4">
@@ -142,7 +75,7 @@
                     </div>
 
                     <div class="col-12 d-flex gap-2">
-                        <button class="btn btn-primary">Générer le lien</button>
+                        <button class="btn btn-primary">Générer</button>
                         <a class="btn btn-outline-secondary" href="{{ route('pvit.settings') }}">Paramètres</a>
                     </div>
                 </form>
