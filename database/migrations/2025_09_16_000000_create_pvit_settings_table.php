@@ -19,6 +19,7 @@ return new class () extends Migration {
             $table->string('codeurl_link')->nullable();    // ex: FOSVZOX8OOCJELGS
             $table->string('codeurl_balance')->nullable(); // ex: 1ZM5Q15FPCM0FP61
             $table->string('codeurl_status')->nullable();  // ex: MCKN226GODJ6UPLU
+            $table->string('codeurl_kyc')->nullable();     // ex: OOFYUGBEW0H0TASC
 
             // Codes spéciaux configurés côté PVit
             $table->string('callback_url_code')->nullable();     // ex: GP7VJ
@@ -26,11 +27,14 @@ return new class () extends Migration {
             $table->string('failed_redirect_code')->nullable();  // ex: IHIU8
             $table->string('secret_reception_code')->nullable(); // ex: GH8CQ (pour /receive-secret)
 
+
+
             // Secret courant & méta
             $table->string('current_secret')->nullable();
             $table->timestamp('secret_expires_at')->nullable();
 
             // Divers
+            $table->boolean('enforce_kyc')->default(false);
             $table->json('meta')->nullable();
             $table->timestamps();
         });

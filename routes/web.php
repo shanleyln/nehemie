@@ -51,6 +51,12 @@ Route::prefix('pvit')->group(function () {
     // Écran unique (formulaires REST/LINK/STATUS/BALANCE)
     Route::get('/transactions', [PvitController::class, 'transactionsForm'])->name('pvit.transactions');
 
+    Route::prefix('pvit')->group(function () {
+        Route::post('/kyc', [\App\Http\Controllers\PvitController::class, 'kycCheck'])->name('pvit.kyc.check');
+        // (le reste inchangé : transactions, status, balance, settings…)
+    });
+
+
     // Actions
     Route::post('/link', [PvitController::class, 'linkInit'])->name('pvit.link.init');
     Route::post('/status', [PvitController::class, 'statusCheck'])->name('pvit.status.check');
