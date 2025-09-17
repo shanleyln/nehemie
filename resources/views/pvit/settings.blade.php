@@ -118,14 +118,15 @@
                 <div>Expire le:
                     <strong>{{ $s->secret_expires_at?->format('d/m/Y H:i') ?? '—' }}</strong>
                 </div>
+                {{-- Formulaire 2 : Renouveler la clé maintenant --}}
+                <form method="POST" action="{{ route('pvit.renewSecret') }}" class="mt-3">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">
+                        Renouveler la clé maintenant
+                    </button>
+                </form>
             </div>
-            {{-- Formulaire 2 : Renouveler la clé maintenant --}}
-            <form method="POST" action="{{ route('pvit.renewSecret') }}" class="mt-3">
-                @csrf
-                <button type="submit" class="btn btn-primary">
-                    Renouveler la clé maintenant
-                </button>
-            </form>
+
         </div>
     </div>
 @endsection
