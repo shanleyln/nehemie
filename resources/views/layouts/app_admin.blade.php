@@ -78,49 +78,30 @@
             <ul class="nav-list">
                 @php
                     $currentRoute = request()->route() ? request()->route()->getName() : '';
-                    $isQuiSommesNous = $currentRoute === 'route_qui_sommes_nous';
-                    $isNosProgrammes = $currentRoute === 'route_nos_programmes';
-                    $isNosActions = $currentRoute === 'route_nos_actions_et_projets';
-                    $isActualites = $currentRoute === 'route_actualites';
+                    $isParametresPVIT = $currentRoute === 'pvit.settings';
+                    $isHistoriqueDesClesSecrètes = $currentRoute === 'pvit.secretsLog';
+                    $isFormulaireDeTestDeTransaction = $currentRoute === 'pvit.transactions';
                     $isAccueil = $currentRoute === 'route_accueil';
                 @endphp
 
                 <li>
                     <a href="{{ route('route_accueil') }}" wire:navigate
-                        class="nav-link {{ $isAccueil ? 'active' : '' }}">Accueil</a>
+                        class="nav-link {{ $isAccueil ? 'active' : '' }}">Aller sur le site</a>
                 </li>
                 <li>
                     <a href="{{ route('route_qui_sommes_nous') }}" wire:navigate
-                        class="nav-link {{ $isQuiSommesNous ? 'active' : '' }}">Qui sommes-nous</a>
+                        class="nav-link {{ $isParametresPVIT ? 'active' : '' }}">Paramètres PVIT</a>
                 </li>
                 <li>
                     <a href="{{ route('route_nos_programmes') }}"
-                        class="nav-link {{ $isNosProgrammes ? 'active' : '' }}" wire:navigate>Nos programmes</a>
+                        class="nav-link {{ $isHistoriqueDesClesSecrètes ? 'active' : '' }}" wire:navigate>Historique
+                        des clés
+                        secrètes</a>
                 </li>
                 <li>
                     <a href="{{ route('route_nos_actions_et_projets') }}"
-                        class="nav-link {{ $isNosActions ? 'active' : '' }}" wire:navigate>Nos actions</a>
-                </li>
-
-                <li>
-                    <a href="{{ route('route_actualites') }}" class="nav-link {{ $isActualites ? 'active' : '' }}"
-                        wire:navigate>Actualités</a>
-                </li>
-                <li class="dropdown">
-                    <span class="nav-link" style="cursor: default;">SOS Prière <i
-                            class="fas fa-chevron-down"></i></span>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#prayerModal">
-                                <i class="fas fa-praying-hands me-2"></i>Demande de prière
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#appelModal">
-                                <i class="fas fa-phone-alt me-2"></i>Nous appeler
-                            </a>
-                        </li>
-                    </ul>
+                        class="nav-link {{ $isFormulaireDeTestDeTransaction ? 'active' : '' }}"
+                        wire:navigate>Formulaire de test de transaction</a>
                 </li>
             </ul>
         </nav>
