@@ -39,7 +39,6 @@
                         <label class="form-label">Reference</label>
                         <input type="text" class="form-control" value="Générée automatiquement" readonly>
                         <input type="hidden" name="reference" value="">
-                        <div class="form-text">La référence est générée automatiquement.</div>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Customer account</label>
