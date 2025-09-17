@@ -289,16 +289,6 @@
 
 </body>
 
-<footer class="footer">
-    <div class="container">
-
-
-        <div class="footer-bottom">
-            <p>&copy; 2025 NÉHÉMIE International. Tous droits réservés.</p>
-
-        </div>
-    </div>
-</footer>
 
 
 </html>
