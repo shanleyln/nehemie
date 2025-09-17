@@ -46,13 +46,6 @@
                             placeholder="Requis pour VISA/RESTLINK">
                         <div class="form-text">Tu peux vérifier via KYC avant de générer.</div>
                     </div>
-                    <div class="col-md-4 d-flex align-items-end">
-                        <button type="submit" formaction="{{ route('pvit.kyc.check') }}" formmethod="POST"
-                            class="btn btn-outline-secondary">
-                            Vérifier KYC
-                        </button>
-                    </div>
-
                     <div class="col-md-4">
                         <label class="form-label">Owner charge *</label>
                         <select name="owner_charge" class="form-select" required>
@@ -84,7 +77,10 @@
 
                     <div class="col-12 d-flex gap-2">
                         <button class="btn btn-primary">Générer</button>
-                        <a class="btn btn-outline-secondary" href="{{ route('pvit.settings') }}">Paramètres</a>
+                        <button type="submit" formaction="{{ route('pvit.kyc.check') }}" formmethod="POST"
+                            class="btn btn-outline-secondary">
+                            Vérifier KYC
+                        </button>
                     </div>
                 </form>
 
