@@ -36,9 +36,10 @@
                         <input name="amount" type="number" min="150" step="1" class="form-control" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Reference (≤15)</label>
-                        <input name="reference" maxlength="15" class="form-control" placeholder="Laisse vide pour auto">
-                        <div class="form-text">Laisse vide : on génère une référence unique.</div>
+                        <label class="form-label">Reference</label>
+                        <input type="text" class="form-control" value="Générée automatiquement" readonly>
+                        <input type="hidden" name="reference" value="">
+                        <div class="form-text">La référence est générée automatiquement.</div>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Customer account</label>
