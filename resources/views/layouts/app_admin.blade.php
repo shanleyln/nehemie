@@ -310,38 +310,11 @@
 
 <footer class="footer">
     <div class="container">
-        <div class="footer-top">
-            <div class="footer-logo">
-                <img src="<?= asset('images/logo2.png') ?>" alt="Logo NÉHÉMIE International">
-                <h3>NÉHÉMIE International</h3>
-                <p>"Levons-nous et bâtissons!"</p>
-                <!-- Section Carte -->
-                <section class="map-section" style="max-width: 1000px; margin: 0 auto;">
-                    <div class="map-container">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.951512393891!2d9.484083!3d0.420667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMMKwMjUnMTQuNCJOIDnCsDI5JzAyLjciRQ!5e0!3m2!1sfr!2sfr!5m1!1s0x0%3A0x0!8m2!3d0.420667!4d9.484083!15sCjQwJzI1JzE0LjQiTiA5wrAyOScwMi43IkqIAQh0cmFuc2l0X3N0YXRpb26aASNDaFpEU1VoTk1HOW5TMFZKUTBGblNVTmhZbXhmVlRZNVJSQULgAQE!16s%2Fg%2F11b8v4z4x9!5m2!1sfr!2sfr&z=12"
-                            width="100%" height="150"
-                            style="border:0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"
-                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                            title="Localisation de NÉHÉMIE International">
-                        </iframe>
-                    </div>
-                </section>
-            </div>
 
-        </div>
 
         <div class="footer-bottom">
             <p>&copy; 2025 NÉHÉMIE International. Tous droits réservés.</p>
-            <div class="footer-social">
-                <a href="https://www.facebook.com/NehemieInternational" target="_blank" rel="noopener noreferrer"
-                    aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/internationalnehemie?igsh=djl1N29lbGkyb3c3"
-                    aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                {{-- <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a> --}}
-                <a href="http://www.youtube.com/@nehemieinternational" target="_blank" aria-label="YouTube"><i
-                        class="fab fa-youtube"></i></a>
-            </div>
+
         </div>
     </div>
 </footer>
