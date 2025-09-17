@@ -89,7 +89,6 @@
                             <label class="form-label">CodeURL KYC</label>
                             <input name="codeurl_kyc" class="form-control"
                                 value="{{ old('codeurl_kyc', $s->codeurl_kyc) }}">
-                            <div class="form-text">Ex: OOFYUGBEW0H0TASC</div>
                         </div>
                         <div class="col-md-3 d-flex align-items-end">
                             <div class="form-check">
