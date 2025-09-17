@@ -440,15 +440,15 @@ class PvitController extends Controller
         $headers = ['X-Secret' => $secret];
         $tries = [
             // GET avec camelCase
-            ['m' => 'GET',  'q' => ['customerAccountNumber' => $msisdn, 'accountOperationCode' => $s->operation_account_code]],
+            ['m' => 'GET',  'q' => ['customerAccountNumber' => $msisdn, 'accountOperationCode' => $s->merchant_operation_account_code]],
             // GET avec snake_case
-            ['m' => 'GET',  'q' => ['customer_account_number' => $msisdn, 'accountOperationCode' => $s->operation_account_code]],
+            ['m' => 'GET',  'q' => ['customer_account_number' => $msisdn, 'accountOperationCode' => $s->merchant_operation_account_code]],
             // POST JSON camelCase
-            ['m' => 'POST', 'j' => ['customerAccountNumber' => $msisdn, 'accountOperationCode' => $s->operation_account_code]],
+            ['m' => 'POST', 'j' => ['customerAccountNumber' => $msisdn, 'accountOperationCode' => $s->merchant_operation_account_code]],
             // POST JSON snake_case
-            ['m' => 'POST', 'j' => ['customer_account_number' => $msisdn, 'accountOperationCode' => $s->operation_account_code]],
+            ['m' => 'POST', 'j' => ['customer_account_number' => $msisdn, 'accountOperationCode' => $s->merchant_operation_account_code]],
             // POST form-urlencoded
-            ['m' => 'POST_FORM', 'f' => ['customerAccountNumber' => $msisdn, 'accountOperationCode' => $s->operation_account_code]],
+            ['m' => 'POST_FORM', 'f' => ['customerAccountNumber' => $msisdn, 'accountOperationCode' => $s->merchant_operation_account_code]],
         ];
 
         $res = null;
