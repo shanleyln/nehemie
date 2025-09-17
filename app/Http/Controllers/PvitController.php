@@ -15,6 +15,14 @@ class PvitController extends Controller
 {
     private string $baseUrl = 'https://api.mypvit.pro';
 
+
+    public function publicPayForm()
+    {
+        $s = \App\Models\PvitSetting::one();
+        return view('pvit.public_pay', compact('s'));
+    }
+
+
     // Génère une référence marchande unique (≤ 15 chars)
     private function generateMerchantReference(): string
     {
