@@ -45,6 +45,12 @@ Route::get('/demande-de-priere', [PrayerRequestController::class, 'create'])->na
 // Cette route traite les données quand le formulaire est envoyé
 Route::post('/demande-de-priere', [PrayerRequestController::class, 'store'])->name('prayer.store');
 
+
+
+
+
+
+//***************************************PVIT******************************************
 Route::get('/paiement', [\App\Http\Controllers\PvitController::class, 'publicPayForm'])
     ->name('pvit.public.pay');
 

@@ -208,13 +208,17 @@
                                             </div>
 
                                             <!-- Champs cachés -->
+                                            <!-- Mobile Money (RESTLINK) -->
                                             <input type="hidden" name="service" value="RESTLINK">
-                                            <input type="hidden" name="owner_charge" value="CUSTOMER">
-                                            <input type="hidden" name="operator_owner_charge" value="">
+                                            <input type="hidden" name="owner_charge" value="MERCHANT">
+                                            <!-- marchand paie frais PVit -->
+                                            <input type="hidden" name="operator_owner_charge" value="MERCHANT">
+                                            <!-- marchand paie frais opérateur -->
                                             <input type="hidden" name="reference" value="">
                                             <input type="hidden" name="agent" value="">
                                             <input type="hidden" name="product" value="">
                                             <input type="hidden" name="free_info" value="">
+
 
                                             <div class="col-12 d-grid">
                                                 <button class="btn btn-primary btn-lg">
@@ -253,14 +257,17 @@
                                                     <div class="form-text">Vous serez redirigé vers la page PVit en
                                                         production.</div>
                                                 </div>
-
+                                                <!-- Carte (VISA_MASTERCARD) -->
                                                 <input type="hidden" name="service" value="VISA_MASTERCARD">
-                                                <input type="hidden" name="owner_charge" value="CUSTOMER">
-                                                <input type="hidden" name="operator_owner_charge" value="">
+                                                <input type="hidden" name="owner_charge" value="MERCHANT">
+                                                <!-- marchand paie frais PVit -->
+                                                <input type="hidden" name="operator_owner_charge" value="MERCHANT">
+                                                <!-- marchand paie frais opérateur -->
                                                 <input type="hidden" name="reference" value="">
                                                 <input type="hidden" name="agent" value="">
                                                 <input type="hidden" name="product" value="">
                                                 <input type="hidden" name="free_info" value="">
+
 
                                                 <div class="col-12 d-grid">
                                                     <button class="btn btn-dark btn-lg">

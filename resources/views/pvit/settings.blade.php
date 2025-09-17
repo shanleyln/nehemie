@@ -60,6 +60,18 @@
                             <input name="codeurl_status" class="form-control"
                                 value="{{ old('codeurl_status', $s->codeurl_status) }}">
                         </div>
+                        <div class="col-md-3">
+                            <label class="form-label">CodeURL KYC</label>
+                            <input name="codeurl_kyc" class="form-control"
+                                value="{{ old('codeurl_kyc', $s->codeurl_kyc) }}">
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="enforce_kyc" value="1"
+                                    {{ $s->enforce_kyc ? 'checked' : '' }}>
+                                <label class="form-check-label">Bloquer LINK si KYC échoue</label>
+                            </div>
+                        </div>
 
                         <div class="col-12">
                             <hr>
@@ -84,18 +96,6 @@
                             <label class="form-label">Secret Reception Code *</label>
                             <input name="secret_reception_code" class="form-control" required
                                 value="{{ old('secret_reception_code', $s->secret_reception_code) }}">
-                        </div>
-                        <div class="col-md-3">
-                            <label class="form-label">CodeURL KYC</label>
-                            <input name="codeurl_kyc" class="form-control"
-                                value="{{ old('codeurl_kyc', $s->codeurl_kyc) }}">
-                        </div>
-                        <div class="col-md-3 d-flex align-items-end">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="enforce_kyc" value="1"
-                                    {{ $s->enforce_kyc ? 'checked' : '' }}>
-                                <label class="form-check-label">Bloquer LINK si KYC échoue</label>
-                            </div>
                         </div>
 
                     </div>
