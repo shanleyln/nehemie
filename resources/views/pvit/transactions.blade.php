@@ -140,7 +140,7 @@
                 <form method="post" action="{{ route('pvit.balance.check') }}">
                     @csrf
                     <button class="btn btn-primary">Consulter le solde
-                        ({{ $s->operation_account_code ?? 'ACC_...' }})</button>
+                        ({{ $s->merchant_operation_account_code ?? 'ACC_...' }})</button>
                 </form>
 
                 @if ($respBal)
