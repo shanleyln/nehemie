@@ -12,12 +12,13 @@ class PvitSetting extends Model
         'renew_password',
         'codeurl_renew','codeurl_rest','codeurl_link','codeurl_balance','codeurl_status',
         'callback_url_code','success_redirect_code','failed_redirect_code','secret_reception_code',
-        'current_secret','secret_expires_at','meta'
+        'current_secret','secret_expires_at','meta','enforce_kyc',
     ];
 
     protected $casts = [
         'secret_expires_at' => 'datetime',
         'meta' => 'array',
+        'enforce_kyc' => 'boolean',
     ];
 
     public static function one(): self
