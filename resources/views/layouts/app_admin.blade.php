@@ -139,51 +139,8 @@
 
 </header>
 
-<!-- Menu mobile -->
-<div class="mobile-menu">
-    <div class="container">
-        <ul class="mobile-nav-list mt-5">
-            <li><a href="{{ route('route_accueil') }}" wire:navigate class="mobile-nav-link">Accueil</a></li>
-            <li><a href="{{ route('route_qui_sommes_nous') }}" wire:navigate class="mobile-nav-link">Qui
-                    sommes-nous</a></li>
-
-            <li><a href="{{ route('route_nos_programmes') }}" wire:navigate class="mobile-nav-link">Nos
-                    programmes</a></li>
-
-            <li><a href="{{ route('route_actualites') }}" wire:navigate class="mobile-nav-link">Actualités</a></li>
-            <li><a href="{{ route('route_nos_actions_et_projets') }}" wire:navigate class="mobile-nav-link">Nos
-                    actions</a>
-            </li>
-
-            <!-- Menu déroulant SOS Prière -->
-            <li class="mobile-dropdown">
-                <span class="mobile-nav-link" style="cursor: default;">SOS Prière <i
-                        class="fas fa-chevron-down"></i></span>
-                <ul class="mobile-dropdown-menu">
-                    <li>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#prayerModal">
-                            Demande de prière
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#appelModal"
-                            data-bs-dismiss="offcanvas">
-                            <i class="fas fa-phone-alt me-2"></i>Nous appeler
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <a href="#" onclick="openMobileMoneyPopup()" class="btn btn-primary mt-4"
-                style="border: none; padding: 0.5em 1em;">Faire un don</a>
-        </ul>
-    </div>
-</div>
-
 <body>
-    @include('modules.chatbot')
-    @include('modales.modale_priere')
-    @include('modales.modale_appel')
-    @include('modales.modale_prayer-form')
+
     <div id="main-content">
         @yield('content')
     </div>
@@ -230,43 +187,6 @@
         data-cf-beacon='{"rayId":"954c67261d95cc00","version":"2025.6.2","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"token":"3ca157e612a14eccbb30cf6db6691c29","b":1}'
         crossorigin="anonymous"></script>
 
-
-    <!-- Script pour le menu déroulant mobile -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Gestion du menu déroulant
-            const dropdownElement = document.querySelector('.mobile-nav .dropdown');
-            const dropdownToggle = dropdownElement.querySelector('.dropdown-toggle');
-            const dropdownMenu = dropdownElement.querySelector('.dropdown-menu');
-
-            dropdownToggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-
-                // Fermer tous les autres menus déroulants
-                document.querySelectorAll('.mobile-nav .dropdown').forEach(function(dropdown) {
-                    if (dropdown !== dropdownElement) {
-                        dropdown.querySelector('.dropdown-menu').classList.remove('show');
-                    }
-                });
-
-                // Basculer le menu actuel
-                dropdownMenu.classList.toggle('show');
-            });
-
-            // Fermer le menu déroulant quand on clique ailleurs
-            document.addEventListener('click', function(e) {
-                if (!dropdownElement.contains(e.target)) {
-                    dropdownMenu.classList.remove('show');
-                }
-            });
-
-            // Empêcher la fermeture du menu quand on clique dessus
-            dropdownMenu.addEventListener('click', function(e) {
-                e.stopPropagation();
-            });
-        });
-    </script>
 
     <!-- Scripts Livewire -->
     @livewireScripts
@@ -407,47 +327,6 @@
                         </iframe>
                     </div>
                 </section>
-            </div>
-
-            <div class="footer-links " style="margin-left: 120px;">
-                <div class="footer-links-column">
-                    <h4>Navigation</h4>
-                    <ul>
-                        <li><a href="{{ route('route_accueil') }}" wire:navigate>Accueil</a></li>
-                        <li><a href="{{ route('route_qui_sommes_nous') }}" wire:navigate>Qui sommes-nous</a></li>
-                        <li><a href="{{ route('route_nos_programmes') }}" wire:navigate>Nos programmes</a></li>
-                        <li><a href="{{ route('route_nos_actions_et_projets') }}" wire:navigate
-                                class="{{ request()->routeIs('route_nos_actions_et_projets') ? 'active' : '' }}">Nos
-                                actions</a></li>
-                        <li><a href="{{ route('route_actualites') }}" wire:navigate
-                                class="{{ request()->routeIs('route_actualites') ? 'active' : '' }}">Actualités</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-links-column">
-                    <h4>Nos programmes</h4>
-                    <ul>
-                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'salomon']) }}"
-                                wire:navigate>Salomon</a></li>
-                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'joseph']) }}"
-                                wire:navigate>Joseph</a></li>
-                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'david']) }}" wire:navigate>David</a>
-                        </li>
-                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'daniel']) }}"
-                                wire:navigate>Daniel</a></li>
-                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'priscille']) }}"
-                                wire:navigate>Priscille</a></li>
-                    </ul>
-                </div>
-
-                {{-- <div class="footer-links-column">
-                    <h4>Légal</h4>
-                    <ul>
-                       
-                        <li><a href="#">Politique de confidentialité</a></li>
-                        <li><a href="#">Conditions d'utilisation</a></li>
-                    </ul>
-                </div> --}}
             </div>
 
         </div>
