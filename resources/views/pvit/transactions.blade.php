@@ -44,11 +44,6 @@
                         <label class="form-label">Customer account</label>
                         <input name="customer_account_number" maxlength="20" class="form-control"
                             placeholder="Requis pour VISA/RESTLINK">
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Customer account</label>
-                        <input name="customer_account_number" maxlength="20" class="form-control"
-                            placeholder="Requis pour VISA/RESTLINK">
                         <div class="form-text">Tu peux vérifier via KYC avant de générer.</div>
                     </div>
                     <div class="col-md-2 d-flex align-items-end">
