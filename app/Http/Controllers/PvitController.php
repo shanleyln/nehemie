@@ -15,6 +15,47 @@ class PvitController extends Controller
 {
     private string $baseUrl = 'https://api.mypvit.pro';
 
+    // Génère une référence marchande unique (≤ 15 chars)
+    private function generateMerchantReference(): string
+    {
+        // 1) Tentative: "REF" + ymdHis = 15 chars (ex: REF250917162530)
+        $base = now()->format('ymdHis'); // 12
+        $candidate = 'REF' . $base;      // 3 + 12 = 15
+        if (! $this->referenceExists($candidate)) {
+            return $candidate;
+        }
+
+        // 2) Tentative: "RE" + ymdHis + 1 hex = 15
+        $candidate = 'RE' . $base . dechex(random_int(0, 15));
+        if (! $this->referenceExists($candidate)) {
+            return strtoupper($candidate);
+        }
+
+        // 3) Tentative: "R" + ymdHis + 2 hex = 15
+        $candidate = 'R' . $base . dechex(random_int(0, 15)) . dechex(random_int(0, 15));
+        if (! $this->referenceExists($candidate)) {
+            return strtoupper($candidate);
+        }
+
+        // 4) Dernières tentatives (rare) : petite boucle avec jitter
+        for ($i = 0; $i < 5; $i++) {
+            usleep(200_000); // 200ms
+            $base = now()->format('ymdHis');
+            $candidate = 'R' . $base . dechex(random_int(0, 15)) . dechex(random_int(0, 15));
+            if (! $this->referenceExists($candidate)) {
+                return strtoupper($candidate);
+            }
+        }
+
+        throw new \RuntimeException('Impossible de générer une référence unique (15 chars).');
+    }
+
+    private function referenceExists(string $ref): bool
+    {
+        return \App\Models\PvitTransaction::where('reference', $ref)->exists();
+    }
+
+
     /** ==================== VUES ==================== */
 
     public function settingsForm()
@@ -179,7 +220,7 @@ class PvitController extends Controller
         $data = $request->validate([
           'service'                    => 'required|in:WEB,VISA_MASTERCARD,RESTLINK',
           'amount'                     => 'required|numeric|min:150',
-          'reference'                  => 'required|string|max:15',
+          'reference'                  => 'nullable|string|max:15',
           'customer_account_number'    => 'nullable|string|max:20', // requis pour VISA_MASTERCARD / RESTLINK
           'agent'                      => 'nullable|string|max:64',
           'product'                    => 'nullable|string|max:64',
@@ -187,6 +228,8 @@ class PvitController extends Controller
           'operator_owner_charge'      => 'nullable|in:MERCHANT,CUSTOMER',
           'free_info'                  => 'nullable|string|max:255',
         ]);
+        // Si pas de référence fournie, on en génère une
+        $reference = $data['reference'] ?: $this->generateMerchantReference();
 
         // Forcer le numéro client si VISA_MASTERCARD ou RESTLINK
         if (in_array($data['service'], ['VISA_MASTERCARD','RESTLINK']) && empty($data['customer_account_number'])) {
@@ -197,7 +240,7 @@ class PvitController extends Controller
           'agent'                        => $data['agent'] ?? null,
           'amount'                       => (float)$data['amount'],
           'product'                      => $data['product'] ?? null,
-          'reference'                    => $data['reference'],
+          'reference'                    => $reference,
           'service'                      => $data['service'],
           'callback_url_code'            => $s->callback_url_code,
           'customer_account_number'      => $data['customer_account_number'] ?? null,
@@ -222,7 +265,7 @@ class PvitController extends Controller
           'request_type'  => 'LINK',
           'service'       => $data['service'],
           'transaction_type' => 'PAYMENT',
-          'reference'     => $data['reference'],
+          'reference'     => $reference,
           'amount'        => $data['amount'],
           'customer_account_number' => $data['customer_account_number'] ?? null,
           'owner_charge'  => $data['owner_charge'],
@@ -238,8 +281,10 @@ class PvitController extends Controller
             return back()->with('error', '401 Unauthorized — Clé expirée. Renouvelle la clé et réessaie.');
         }
 
+        // On repasse la référence auto-générée à la vue pour faciliter le "STATUS"
         return back()->with('success', 'Lien de paiement généré.')
-                     ->with('pvit_link_response', $res->json());
+        ->with('pvit_link_response', ($res->json() ?? []) + ['_merchant_reference' => $reference]);
+
     }
 
     /** ==================== STATUS (GET) ==================== */

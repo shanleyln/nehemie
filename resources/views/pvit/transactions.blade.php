@@ -36,10 +36,10 @@
                         <input name="amount" type="number" min="150" step="1" class="form-control" required>
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label">Reference (≤15) *</label>
-                        <input name="reference" maxlength="15" class="form-control" required>
+                        <label class="form-label">Reference (≤15)</label>
+                        <input name="reference" maxlength="15" class="form-control" placeholder="Laisse vide pour auto">
+                        <div class="form-text">Laisse vide : on génère une référence unique.</div>
                     </div>
-
                     <div class="col-md-4">
                         <label class="form-label">Customer account</label>
                         <input name="customer_account_number" maxlength="20" class="form-control"
@@ -82,6 +82,15 @@
 
                 @if ($respLink)
                     <pre class="mt-3 bg-light p-3 border rounded small">{{ json_encode($respLink, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) }}</pre>
+
+                    @if (!empty($respLink['_merchant_reference']))
+                        <div class="alert alert-info mt-2">
+                            <strong>Référence marchande utilisée :</strong>
+                            <code>{{ $respLink['_merchant_reference'] }}</code>
+                            <div class="small text-muted">Utilise-la dans "GET STATUS" (champ transactionId).</div>
+                        </div>
+                    @endif
+
                     @if (!empty($respLink['url']))
                         <div class="mt-2">
                             <a class="btn btn-success" target="_blank" href="{{ $respLink['url'] }}">Ouvrir la page de
