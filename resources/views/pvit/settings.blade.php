@@ -101,12 +101,9 @@
                     </div>
 
                     <div class="mt-4">
-                        <button type="submit" class="btn btn-primary">Enregistrer</button>
-                        <a class="btn btn-outline-secondary ms-2" href="{{ route('pvit.secretsLog') }}">Journal des clés
-                            reçues</a>
+                        <button type="submit" class="btn btn-primary">Enregistrer/mettre à jour</button>
                     </div>
                 </form>
-
 
                 {{-- Formulaire 2 : Renouveler la clé maintenant --}}
                 <form method="POST" action="{{ route('pvit.renewSecret') }}" class="mt-3">
