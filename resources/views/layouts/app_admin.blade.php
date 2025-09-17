@@ -141,7 +141,7 @@
 
 <body>
 
-    <div id="main-content">
+    <div id="main-content" style="margin-top: 60px;">
         @yield('content')
     </div>
 
