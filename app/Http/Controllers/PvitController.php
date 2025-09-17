@@ -280,6 +280,16 @@ class PvitController extends Controller
         if ($res->status() === 401) {
             return back()->with('error', '401 Unauthorized — Clé expirée. Renouvelle la clé et réessaie.');
         }
+        if ($res->json('status_code') === 3004 || $res->json('error') === 'SERVICE_NOT_ACTIVE') {
+            $svc = $data['service'];
+            return back()->with(
+                'error',
+                "SERVICE_NOT_ACTIVE : le canal {$svc} n'est pas actif sur ton environnement. " .
+                "Vérifie dans le portail PVit que l'API LINK et le canal {$svc} sont activés " .
+                "(et que le codeURL LINK {$s->codeurl_link} correspond au bon environnement)."
+            )->with('pvit_link_response', $res->json());
+        }
+
 
         // On repasse la référence auto-générée à la vue pour faciliter le "STATUS"
         return back()->with('success', 'Lien de paiement généré.')
