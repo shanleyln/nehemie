@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\PvitSetting;
 use App\Models\PvitSecretEvent;
+use App\Models\PvitTransaction;
+use App\Models\PvitCallback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
@@ -146,5 +148,258 @@ class PvitController extends Controller
     {
         $events = PvitSecretEvent::latest()->paginate(15);
         return view('pvit.secrets_log', compact('events'));
+    }
+
+
+    //******************************************************************************************* */
+    // ==== Helpers privés ====
+    private function mustHaveSecret(): string
+    {
+        $s = PvitSetting::one();
+        if (empty($s->current_secret)) {
+            abort(400, "X-Secret absent : renouvelez d'abord la clé depuis /pvit/settings.");
+        }
+        return $s->current_secret;
+    }
+
+    /** ==================== UI : Formulaires ==================== */
+    public function transactionsForm()
+    {
+        $s = PvitSetting::one();
+        return view('pvit.transactions', compact('s'));
+    }
+
+    /** ==================== REST API (PAYMENT / GIVE_CHANGE) ==================== */
+    public function restInit(Request $request)
+    {
+        $s = PvitSetting::one();
+        $secret = $this->mustHaveSecret();
+
+        $data = $request->validate([
+          'transaction_type'          => 'required|in:PAYMENT,GIVE_CHANGE',
+          'amount'                    => 'required|numeric|min:150',
+          'reference'                 => 'required|string|max:15',
+          'customer_account_number'   => 'required|string|max:20',
+          'agent'                     => 'nullable|string|max:64',
+          'product'                   => 'nullable|string|max:64',
+          'owner_charge'              => 'required|in:MERCHANT,CUSTOMER',
+          'operator_owner_charge'     => 'nullable|in:MERCHANT,CUSTOMER',
+          'free_info'                 => 'nullable|string|max:255',
+        ]);
+
+        // payload JSON conforme spec
+        $payload = [
+          'agent'                        => $data['agent'] ?? null,
+          'amount'                       => (float)$data['amount'],
+          'product'                      => $data['product'] ?? null,
+          'reference'                    => $data['reference'],
+          'service'                      => 'RESTFUL',
+          'callback_url_code'            => $s->callback_url_code, // requis si PAYMENT
+          'customer_account_number'      => $data['customer_account_number'],
+          'merchant_operation_account_code' => $s->operation_account_code,
+          'transaction_type'             => $data['transaction_type'],
+          'owner_charge'                 => $data['owner_charge'],
+          'operator_owner_charge'        => $data['operator_owner_charge'] ?? null,
+          'free_info'                    => $data['free_info'] ?? null,
+        ];
+
+        // Si GIVE_CHANGE, callback_url_code peut ne pas être nécessaire (selon cas d’usage), on le laisse si présent.
+        $endpoint = "{$this->baseUrl}/{$s->codeurl_rest}/rest";
+
+        $http = Http::withHeaders([
+            'X-Secret' => $secret,
+            'X-Callback-MediaType' => 'application/json',
+          ])
+          ->acceptJson();
+
+        $res = $http->post($endpoint, $payload);
+
+        // Log transaction
+        $tx = PvitTransaction::create([
+          'request_type'  => 'REST',
+          'service'       => 'RESTFUL',
+          'transaction_type' => $data['transaction_type'],
+          'reference'     => $data['reference'],
+          'amount'        => $data['amount'],
+          'customer_account_number' => $data['customer_account_number'],
+          'owner_charge'  => $data['owner_charge'],
+          'operator_owner_charge' => $data['operator_owner_charge'] ?? null,
+          'merchant_operation_account_code' => $s->operation_account_code,
+          'request_payload' => $payload,
+          'response_payload' => $res->json(),
+          'status'        => $res->json('status'),
+          'operator'      => $res->json('operator'),
+          'reference_id'  => $res->json('reference_id'),
+        ]);
+
+        if ($res->status() === 401) {
+            return back()->with('error', '401 Unauthorized — Clé expirée. Renouvelle la clé et réessaie.');
+        }
+
+        return back()->with('success', 'Transaction REST initiée.')
+                     ->with('pvit_rest_response', $res->json());
+    }
+
+    /** ==================== LINK API (WEB / VISA_MASTERCARD / RESTLINK) ==================== */
+    public function linkInit(Request $request)
+    {
+        $s = PvitSetting::one();
+        $secret = $this->mustHaveSecret();
+
+        $data = $request->validate([
+          'service'                    => 'required|in:WEB,VISA_MASTERCARD,RESTLINK',
+          'amount'                     => 'required|numeric|min:150',
+          'reference'                  => 'required|string|max:15',
+          'customer_account_number'    => 'nullable|string|max:20', // requis pour VISA_MASTERCARD / RESTLINK
+          'agent'                      => 'nullable|string|max:64',
+          'product'                    => 'nullable|string|max:64',
+          'owner_charge'               => 'required|in:MERCHANT,CUSTOMER',
+          'operator_owner_charge'      => 'nullable|in:MERCHANT,CUSTOMER',
+          'free_info'                  => 'nullable|string|max:255',
+        ]);
+
+        // Forcer le numéro client si VISA_MASTERCARD ou RESTLINK
+        if (in_array($data['service'], ['VISA_MASTERCARD','RESTLINK']) && empty($data['customer_account_number'])) {
+            return back()->with('error', 'customer_account_number est requis pour VISA_MASTERCARD et RESTLINK.');
+        }
+
+        $payload = [
+          'agent'                        => $data['agent'] ?? null,
+          'amount'                       => (float)$data['amount'],
+          'product'                      => $data['product'] ?? null,
+          'reference'                    => $data['reference'],
+          'service'                      => $data['service'],
+          'callback_url_code'            => $s->callback_url_code,
+          'customer_account_number'      => $data['customer_account_number'] ?? null,
+          'merchant_operation_account_code' => $s->operation_account_code,
+          'transaction_type'             => 'PAYMENT',
+          'owner_charge'                 => $data['owner_charge'],
+          'operator_owner_charge'        => $data['operator_owner_charge'] ?? null,
+          'free_info'                    => $data['free_info'] ?? null,
+          'failed_redirection_url_code'  => $s->failed_redirect_code,
+          'success_redirection_url_code' => $s->success_redirect_code,
+        ];
+
+        $endpoint = "{$this->baseUrl}/{$s->codeurl_link}/link";
+
+        $res = Http::withHeaders([
+                'X-Secret' => $secret,
+                'X-Callback-MediaType' => 'application/json',
+              ])->acceptJson()
+              ->post($endpoint, $payload);
+
+        PvitTransaction::create([
+          'request_type'  => 'LINK',
+          'service'       => $data['service'],
+          'transaction_type' => 'PAYMENT',
+          'reference'     => $data['reference'],
+          'amount'        => $data['amount'],
+          'customer_account_number' => $data['customer_account_number'] ?? null,
+          'owner_charge'  => $data['owner_charge'],
+          'operator_owner_charge' => $data['operator_owner_charge'] ?? null,
+          'merchant_operation_account_code' => $s->operation_account_code,
+          'request_payload' => $payload,
+          'response_payload' => $res->json(),
+          'status'        => $res->json('status'),
+          'reference_id'  => $res->json('merchant_reference_id'),
+        ]);
+
+        if ($res->status() === 401) {
+            return back()->with('error', '401 Unauthorized — Clé expirée. Renouvelle la clé et réessaie.');
+        }
+
+        return back()->with('success', 'Lien de paiement généré.')
+                     ->with('pvit_link_response', $res->json());
+    }
+
+    /** ==================== STATUS (GET) ==================== */
+    public function statusCheck(Request $request)
+    {
+        $s = PvitSetting::one();
+        $secret = $this->mustHaveSecret();
+
+        $data = $request->validate([
+          'transactionId'         => 'required|string|max:32', // ta référence (ex: REF13090141)
+          'transactionOperation'  => 'required|in:PAYMENT,GIVE_CHANGE',
+        ]);
+
+        $endpoint = "{$this->baseUrl}/{$s->codeurl_status}/status";
+        $query = [
+          'transactionId'       => $data['transactionId'],
+          'accountOperationCode' => $s->operation_account_code,
+          'transactionOperation' => $data['transactionOperation'],
+        ];
+
+        $res = Http::withHeaders(['X-Secret' => $secret])->acceptJson()->get($endpoint, $query);
+
+        if ($res->status() === 401) {
+            return back()->with('error', '401 Unauthorized — Clé expirée. Renouvelle la clé et réessaie.');
+        }
+
+        return back()->with('success', 'Statut récupéré.')
+                     ->with('pvit_status_response', $res->json());
+    }
+
+    /** ==================== BALANCE (GET) ==================== */
+    public function balanceCheck(Request $request)
+    {
+        $s = PvitSetting::one();
+        $secret = $this->mustHaveSecret();
+
+        $endpoint = "{$this->baseUrl}/{$s->codeurl_balance}/balance";
+        $query = ['accountOperationCode' => $s->operation_account_code];
+
+        $res = Http::withHeaders(['X-Secret' => $secret])->acceptJson()->get($endpoint, $query);
+
+        if ($res->status() === 401) {
+            return back()->with('error', '401 Unauthorized — Clé expirée. Renouvelle la clé et réessaie.');
+        }
+
+        return back()->with('success', 'Solde récupéré.')
+                     ->with('pvit_balance_response', $res->json());
+    }
+
+    /** ==================== CALLBACK Paiement (obligatoire) ==================== */
+    public function paymentCallback(Request $request)
+    {
+        // PVit envoie un JSON:
+        // {
+        //   "transactionId": "...",
+        //   "merchantReferenceId": "REF123456",
+        //   "status": "SUCCESS",
+        //   "amount": 200.0,
+        //   "customerID": "066820866",
+        //   "fees": 5.0,
+        //   "chargeOwner": "CUSTOMER",
+        //   "transactionOperation": "PAYMENT",
+        //   "operator": "MOOV_MONEY",
+        //   "code": 200
+        // }
+        $payload = $request->json()->all() ?: $request->all();
+
+        \Log::info('[PVit] payment-callback raw', [
+          'headers' => $request->headers->all(),
+          'raw'     => $request->getContent(),
+          'parsed'  => $payload,
+          'ip'      => $request->ip(),
+        ]);
+
+        PvitCallback::create([
+          'transaction_id'         => $payload['transactionId'] ?? null,
+          'merchant_reference_id'  => $payload['merchantReferenceId'] ?? null,
+          'status'                 => $payload['status'] ?? null,
+          'amount'                 => $payload['amount'] ?? null,
+          'fees'                   => $payload['fees'] ?? null,
+          'charge_owner'           => $payload['chargeOwner'] ?? null,
+          'transaction_operation'  => $payload['transactionOperation'] ?? null,
+          'operator'               => $payload['operator'] ?? null,
+          'raw_payload'            => $payload,
+        ]);
+
+        // Accusé de réception requis
+        return response()->json([
+          'responseCode'  => (int)($payload['code'] ?? 200),
+          'transactionId' => $payload['transactionId'] ?? null,
+        ], 200);
     }
 }

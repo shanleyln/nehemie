@@ -47,6 +47,16 @@ Route::post('/demande-de-priere', [PrayerRequestController::class, 'store'])->na
 
 
 Route::prefix('pvit')->group(function () {
+
+    // Écran unique (formulaires REST/LINK/STATUS/BALANCE)
+    Route::get('/transactions', [PvitController::class, 'transactionsForm'])->name('pvit.transactions');
+
+    // Actions
+    Route::post('/rest', [PvitController::class, 'restInit'])->name('pvit.rest.init');
+    Route::post('/link', [PvitController::class, 'linkInit'])->name('pvit.link.init');
+    Route::post('/status', [PvitController::class, 'statusCheck'])->name('pvit.status.check');
+    Route::post('/balance', [PvitController::class, 'balanceCheck'])->name('pvit.balance.check');
+
     // UI paramètres
     Route::get('/settings', [PvitController::class, 'settingsForm'])->name('pvit.settings');
     Route::post('/settings', [PvitController::class, 'settingsSave'])->name('pvit.settings.save');
