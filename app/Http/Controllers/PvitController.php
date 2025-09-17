@@ -343,21 +343,44 @@ class PvitController extends Controller
     /** ==================== BALANCE (GET) ==================== */
     public function balanceCheck(Request $request)
     {
-        $s = PvitSetting::one();
+        $s = \App\Models\PvitSetting::one();
         $secret = $this->mustHaveSecret();
 
-        $endpoint = "{$this->baseUrl}/{$s->codeurl_balance}/balance";
+        // Garde-fous : évite un appel incomplet
+        if (empty($s->codeurl_balance)) {
+            return back()->with('error', 'CodeURL Balance manquant. Renseigne-le dans /pvit/settings.');
+        }
+        if (empty($s->operation_account_code)) {
+            return back()->with('error', 'Operation Account Code manquant. Renseigne ACC_xxx dans /pvit/settings.');
+        }
+
         $query = ['accountOperationCode' => $s->operation_account_code];
 
-        $res = Http::withHeaders(['X-Secret' => $secret])->acceptJson()->get($endpoint, $query);
+        // Construit explicitement l’URL avec le query string
+        $url = "{$this->baseUrl}/{$s->codeurl_balance}/balance?" . http_build_query($query);
+
+        \Log::info('[PVit] BALANCE request', [
+            'url'   => $url,
+            'query' => $query,
+            'secret_set' => !empty($secret),
+        ]);
+
+        // Envoie la requête GET sur l’URL finalisée
+        $res = \Illuminate\Support\Facades\Http::withHeaders([
+                'X-Secret' => $secret,
+            ])->acceptJson()->get($url);
 
         if ($res->status() === 401) {
-            return back()->with('error', '401 Unauthorized — Clé expirée. Renouvelle la clé et réessaie.');
+            return back()->with('error', '401 Unauthorized — Clé expirée. Renouvelle la clé puis réessaie.');
         }
+
+        // Trace la réponse pour debug si besoin
+        \Log::info('[PVit] BALANCE response', ['status' => $res->status(), 'body' => $res->json()]);
 
         return back()->with('success', 'Solde récupéré.')
                      ->with('pvit_balance_response', $res->json());
     }
+
 
     /** ==================== CALLBACK Paiement (obligatoire) ==================== */
     public function paymentCallback(Request $request)
