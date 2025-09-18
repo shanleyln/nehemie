@@ -154,12 +154,13 @@
                     actions</a>
             </li>
             <li>
-                <a href="#" data-bs-toggle="modal" data-bs-target="#prayerModal">
+                <a href="#" data-bs-toggle="modal" class="mobile-nav-link" data-bs-target="#prayerModal">
                     Demande de prière
                 </a>
             </li>
             <li>
-                <a href="#" data-bs-toggle="modal" data-bs-target="#appelModal" data-bs-dismiss="offcanvas">
+                <a href="#" data-bs-toggle="modal" class="mobile-nav-link" data-bs-target="#appelModal"
+                    data-bs-dismiss="offcanvas">
                     <i class="fas fa-phone-alt me-2"></i>Nous appeler
                 </a>
             </li>
