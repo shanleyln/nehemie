@@ -86,20 +86,19 @@
                 @endphp
 
                 <li>
-                    <a href="{{ route('route_accueil') }}" wire:navigate
-                        class="nav-link {{ $isAccueil ? 'active' : '' }}">Accueil</a>
+                    <a href="{{ route('route_accueil') }}" class="nav-link {{ $isAccueil ? 'active' : '' }}">Accueil</a>
                 </li>
                 <li>
-                    <a href="{{ route('route_qui_sommes_nous') }}" wire:navigate
+                    <a href="{{ route('route_qui_sommes_nous') }}"
                         class="nav-link {{ $isQuiSommesNous ? 'active' : '' }}">Qui sommes-nous</a>
                 </li>
                 <li>
                     <a href="{{ route('route_nos_programmes') }}"
-                        class="nav-link {{ $isNosProgrammes ? 'active' : '' }}" wire:navigate>Nos programmes</a>
+                        class="nav-link {{ $isNosProgrammes ? 'active' : '' }}">Nos programmes</a>
                 </li>
                 <li>
                     <a href="{{ route('route_nos_actions_et_projets') }}"
-                        class="nav-link {{ $isNosActions ? 'active' : '' }}" wire:navigate>Nos actions</a>
+                        class="nav-link {{ $isNosActions ? 'active' : '' }}">Nos actions</a>
                 </li>
 
                 <li>
