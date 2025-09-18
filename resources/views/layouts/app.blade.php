@@ -142,15 +142,15 @@
 <div class="mobile-menu">
     <div class="container">
         <ul class="mobile-nav-list mt-5">
-            <li><a href="{{ route('route_accueil') }}" wire:navigate class="mobile-nav-link">Accueil</a></li>
-            <li><a href="{{ route('route_qui_sommes_nous') }}" wire:navigate class="mobile-nav-link">Qui
+            <li><a href="{{ route('route_accueil') }}" class="mobile-nav-link">Accueil</a></li>
+            <li><a href="{{ route('route_qui_sommes_nous') }}" class="mobile-nav-link">Qui
                     sommes-nous</a></li>
 
-            <li><a href="{{ route('route_nos_programmes') }}" wire:navigate class="mobile-nav-link">Nos
+            <li><a href="{{ route('route_nos_programmes') }}" class="mobile-nav-link">Nos
                     programmes</a></li>
 
-            <li><a href="{{ route('route_actualites') }}" wire:navigate class="mobile-nav-link">Actualités</a></li>
-            <li><a href="{{ route('route_nos_actions_et_projets') }}" wire:navigate class="mobile-nav-link">Nos
+            <li><a href="{{ route('route_actualites') }}" class="mobile-nav-link">Actualités</a></li>
+            <li><a href="{{ route('route_nos_actions_et_projets') }}" class="mobile-nav-link">Nos
                     actions</a>
             </li>
 
@@ -270,7 +270,169 @@
     <!-- Scripts Livewire -->
     @livewireScripts
 
+    <style>
+        /* Styles pour le bouton menu mobile */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1000;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: var(--color-primary);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        /* Styles pour le menu mobile */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 400px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            padding: 80px 20px 40px;
+            transition: right 0.3s ease;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-nav-list li {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .mobile-nav-link {
+            display: block;
+            padding: 12px 0;
+            color: var(--color-gray-800);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-nav-link:hover {
+            color: var(--color-accent);
+        }
+
+        /* Overlay pour le menu mobile */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 998;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 991px) {
+            .menu-toggle {
+                display: flex;
+            }
+        }
+    </style>
+
     <!-- Scripts personnalisés -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sélection des éléments
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileMenuOverlay = document.createElement('div');
+            mobileMenuOverlay.className = 'mobile-menu-overlay';
+            document.body.appendChild(mobileMenuOverlay);
+
+            // Fonction pour ouvrir/fermer le menu
+            function toggleMenu() {
+                menuToggle.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                mobileMenuOverlay.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+            }
+
+            // Événement de clic sur le bouton menu
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleMenu();
+                });
+            }
+
+            // Fermer le menu en cliquant sur l'overlay
+            mobileMenuOverlay.addEventListener('click', function() {
+                toggleMenu();
+            });
+
+            // Fermer le menu en cliquant sur un lien
+            const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    toggleMenu();
+                });
+            });
+
+            // Empêcher la propagation des événements de clic dans le menu
+            mobileMenu.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+
+            // Fermer le menu lors du redimensionnement de la fenêtre
+            let resizeTimer;
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 991) {
+                    menuToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                }
+            });
+        });
+    </script>
     <script src="{{ asset('js/script.js') }}"></script>
     @if (file_exists(public_path('js/priere.js')))
         <script src="{{ asset('js/priere.js') }}"></script>
@@ -412,13 +574,13 @@
                 <div class="footer-links-column">
                     <h4>Navigation</h4>
                     <ul>
-                        <li><a href="{{ route('route_accueil') }}" wire:navigate>Accueil</a></li>
-                        <li><a href="{{ route('route_qui_sommes_nous') }}" wire:navigate>Qui sommes-nous</a></li>
-                        <li><a href="{{ route('route_nos_programmes') }}" wire:navigate>Nos programmes</a></li>
-                        <li><a href="{{ route('route_nos_actions_et_projets') }}" wire:navigate
+                        <li><a href="{{ route('route_accueil') }}">Accueil</a></li>
+                        <li><a href="{{ route('route_qui_sommes_nous') }}">Qui sommes-nous</a></li>
+                        <li><a href="{{ route('route_nos_programmes') }}">Nos programmes</a></li>
+                        <li><a href="{{ route('route_nos_actions_et_projets') }}"
                                 class="{{ request()->routeIs('route_nos_actions_et_projets') ? 'active' : '' }}">Nos
                                 actions</a></li>
-                        <li><a href="{{ route('route_actualites') }}" wire:navigate
+                        <li><a href="{{ route('route_actualites') }}"
                                 class="{{ request()->routeIs('route_actualites') ? 'active' : '' }}">Actualités</a>
                         </li>
                     </ul>
@@ -426,16 +588,12 @@
                 <div class="footer-links-column">
                     <h4>Nos programmes</h4>
                     <ul>
-                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'salomon']) }}"
-                                wire:navigate>Salomon</a></li>
-                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'joseph']) }}"
-                                wire:navigate>Joseph</a></li>
-                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'david']) }}" wire:navigate>David</a>
+                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'salomon']) }}">Salomon</a></li>
+                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'joseph']) }}">Joseph</a></li>
+                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'david']) }}">David</a>
                         </li>
-                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'daniel']) }}"
-                                wire:navigate>Daniel</a></li>
-                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'priscille']) }}"
-                                wire:navigate>Priscille</a></li>
+                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'daniel']) }}">Daniel</a></li>
+                        <li><a href="{{ route('route_nos_programmes', ['tab' => 'priscille']) }}">Priscille</a></li>
                     </ul>
                 </div>
 
