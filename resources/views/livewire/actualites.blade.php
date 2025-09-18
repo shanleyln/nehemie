@@ -9,7 +9,7 @@
         </div>
     </section>
 
-    <div class="container py-5">
+    {{-- <div class="container py-5">
         <div class="section-heading text-center">
             <h2>Dernières actualités</h2>
             <div class="heading-line center"></div>
@@ -141,10 +141,10 @@
                 @endforelse
             </div>
         @endif
-    </div>
+    </div> --}}
 
     <!-- Modal Livewire pour afficher l'actualité complète -->
-    <div class="modal" tabindex="-1"
+    {{-- <div class="modal" tabindex="-1"
         style="display: {{ $showModal ? 'block' : 'none' }}; background-color: rgba(0,0,0,0.5);">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
@@ -176,7 +176,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="container">
         <div class="taggbox" style="width:100%;height:100%;overflow:auto;" data-widget-id="300959" data-website="1">
