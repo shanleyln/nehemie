@@ -153,25 +153,17 @@
             <li><a href="{{ route('route_nos_actions_et_projets') }}" class="mobile-nav-link">Nos
                     actions</a>
             </li>
-
-            <!-- Menu déroulant SOS Prière -->
-            <li class="mobile-dropdown">
-                <span class="mobile-nav-link" style="cursor: default;">SOS Prière <i
-                        class="fas fa-chevron-down"></i></span>
-                <ul class="mobile-dropdown-menu">
-                    <li>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#prayerModal">
-                            Demande de prière
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#appelModal"
-                            data-bs-dismiss="offcanvas">
-                            <i class="fas fa-phone-alt me-2"></i>Nous appeler
-                        </a>
-                    </li>
-                </ul>
+            <li>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#prayerModal">
+                    Demande de prière
+                </a>
             </li>
+            <li>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#appelModal" data-bs-dismiss="offcanvas">
+                    <i class="fas fa-phone-alt me-2"></i>Nous appeler
+                </a>
+            </li>
+
             <a href="#" onclick="openMobileMoneyPopup()" class="btn btn-primary mt-4"
                 style="border: none; padding: 0.5em 1em;">Faire un don</a>
         </ul>
