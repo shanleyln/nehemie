@@ -103,8 +103,8 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('route_actualites') }}" class="nav-link {{ $isActualites ? 'active' : '' }}"
-                        wire:navigate>Actualités</a>
+                    <a href="{{ route('route_actualites') }}"
+                        class="nav-link {{ $isActualites ? 'active' : '' }}">Actualités</a>
                 </li>
                 <li class="dropdown">
                     <span class="nav-link" style="cursor: default;">SOS Prière <i
