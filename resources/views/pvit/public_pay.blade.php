@@ -82,9 +82,7 @@
 
 
 
-    <section class="section-lg-t-space section-b-space"> <a onclick="history.back();" class="me-3">
-            <i class="iconsax icon-btn" data-icon="chevron-left"></i>
-        </a>
+    <section class="section-lg-t-space section-b-space">
         <div class="custom-container">
 
             <!-- Onglets principaux -->
