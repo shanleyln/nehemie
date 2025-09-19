@@ -19,7 +19,7 @@
 
 
     {{-- Bottom nav --}}
-    <nav class="bottom-nav">
+    <nav class="bottom-nav mb-5">
         @php $tabs = [['id' => 'actualites', 'icon' => 'fa-newspaper', 'label' => 'Actualités'], ['id' => 'don', 'icon' => 'fa-heart', 'label' => 'Faire un don'], ['id' => 'membre', 'icon' => 'fa-user', 'label' => 'Espace membre'], ['id' => 'contact', 'icon' => 'fa-phone', 'label' => 'Contact'], ['id' => 'menu', 'icon' => 'fa-bars', 'label' => 'Menu']]; @endphp
 
         @foreach ($tabs as $t)
