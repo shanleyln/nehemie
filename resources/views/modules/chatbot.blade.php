@@ -1,94 +1,95 @@
-<div>
-    <!-- pour les images il faut le dossier public/imageschatbot -->
-    <!-- il y a deja le bouton retour pour scroll est deja dedans -->
+<!-- pour les images il faut le dossier public/imageschatbot -->
+<!-- il y a deja le bouton retour pour scroll est deja dedans -->
 
-    <!-- =================================================================
+<!-- =================================================================
      NOUVELLE STRUCTURE HTML POUR LE BOUTON RETOUR EN HAUT
      ================================================================= -->
-    {{-- <button id="backToTop" aria-label="Retour en haut">
+{{-- <button id="backToTop" aria-label="Retour en haut">
     <i class="fas fa-chevron-up"></i>
 </button> --}}
 
-    <!-- =================================================================
+<!-- =================================================================
      NOUVELLE STRUCTURE HTML POUR LE CHATBOT
      ================================================================= -->
-    <div id="chat-floating-container">
-        <!-- Chat Box (adapté du template DreamsChat) -->
-        <div id="chat-box" class="chat chat-messages hidden">
-            <!-- Chat Header -->
-            <div id="chat-header" class="chat-header">
-                <!-- Le header sera injecté par JavaScript -->
-            </div>
+<div id="chat-floating-container">
+    <!-- Chat Box (adapté du template DreamsChat) -->
+    <div id="chat-box" class="chat chat-messages hidden">
+        <!-- Chat Header -->
+        <div id="chat-header" class="chat-header">
+            <!-- Le header sera injecté par JavaScript -->
+        </div>
 
-            <!-- Chat Body -->
-            <div id="chat-messages" class="chat-body chat-page-group slimscroll">
-                <div class="messages">
-                    <!-- Message d’accueil -->
-                    <div class="chats">
-                        <div class="chat-avatar">
-                            <img src="<?= asset('imageschatbot/gabriel.jpeg') ?>" class="rounded-circle" alt="Gabriel">
-                        </div>
-                        <div class="chat-content">
-                            <div class="chat-profile-name">
-                                <h6>Gabriel<i class="ti ti-circle-filled fs-7 mx-2"></i><span
-                                        class="chat-time">Maintenant</span>
-                                </h6>
-                            </div>
-                            <div class="chat-info">
-                                <div class="message-content">
-                                    Bienvenue, je suis Gabriel. Comment puis-je vous aider aujourd'hui ?
-                                </div>
-                            </div>
-                        </div>
+        <!-- Chat Body -->
+        <div id="chat-messages" class="chat-body chat-page-group slimscroll">
+            <div class="messages">
+                <!-- Message d’accueil -->
+                <div class="chats">
+                    <div class="chat-avatar">
+                        <img src="<?= asset('imageschatbot/gabriel.jpeg') ?>" class="rounded-circle" alt="Gabriel">
                     </div>
-
-                    <!-- Boutons rapides -->
-                    <div id="quick-buttons" class="quick-buttons-container">
-                        <button class="quick-btn">Découvrir notre mission</button>
-                        <button class="quick-btn">Découvrir nos programmes</button>
-                        <button class="quick-btn">Actualités</button>
-                        <button class="quick-btn">Témoignages</button>
-                        <button class="quick-btn">Contact</button>
+                    <div class="chat-content">
+                        <div class="chat-profile-name">
+                            <h6>Gabriel<i class="ti ti-circle-filled fs-7 mx-2"></i><span
+                                    class="chat-time">Maintenant</span>
+                            </h6>
+                        </div>
+                        <div class="chat-info">
+                            <div class="message-content">
+                                Bienvenue, je suis Gabriel. Comment puis-je vous aider aujourd'hui ?
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Chat Footer (Input Area) -->
-            <div class="chat-footer">
-                <div class="chat-footer-wrap">
-                    <div class="form-wrap">
-                        <textarea id="user-message" class="form-control auto-expand" placeholder="Tapez votre message..." rows="1"
-                            data-min-rows="1" data-max-rows="4"></textarea>
-                    </div>
-                    <div class="form-btn">
-                        <button id="send-btn" class="btn btn-primary" type="button">
-                            <i class="ti ti-send"></i>
-                        </button>
-                    </div>
+                <!-- Boutons rapides -->
+                <div id="quick-buttons" class="quick-buttons-container">
+                    <button class="quick-btn">Découvrir notre mission</button>
+                    <button class="quick-btn">Découvrir nos programmes</button>
+                    <button class="quick-btn">Actualités</button>
+                    <button class="quick-btn">Témoignages</button>
+                    <button class="quick-btn">Contact</button>
                 </div>
             </div>
         </div>
 
-        <!-- Bulle flottante (Launcher) -->
-        <div id="chat-launcher" class="chat-bubble">
-            <div class="chat-bubble-content">
-                <img id="chat-launcher-icon" src="<?= asset('imageschatbot/gabriel.jpeg') ?>" alt="Gabriel"
-                    class="chat-icon-image">
+        <!-- Chat Footer (Input Area) -->
+        <div class="chat-footer">
+            <div class="chat-footer-wrap">
+                <div class="form-wrap">
+                    <textarea id="user-message" class="form-control auto-expand" placeholder="Tapez votre message..." rows="1"
+                        data-min-rows="1" data-max-rows="4"></textarea>
+                </div>
+                <div class="form-btn">
+                    <button id="send-btn" class="btn btn-primary" type="button">
+                        <i class="ti ti-send"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- =================================================================
-     FIN DE LA NOUVELLE STRUCTURE
-     ================================================================= -->
-
+    <!-- Bulle flottante (Launcher) -->
+    <div id="chat-launcher" class="chat-bubble">
+        <div class="chat-bubble-content">
+            <img id="chat-launcher-icon" src="<?= asset('imageschatbot/gabriel.jpeg') ?>" alt="Gabriel"
+                class="chat-icon-image">
+        </div>
+    </div>
     <!-- Vos balises audio restent inchangées -->
     <audio id="sound-open" src="<?= asset('sounds/open.mp3') ?>"></audio>
     <audio id="sound-close" src="<?= asset('sounds/close.mp3') ?>"></audio>
     <audio id="sound-receive" src="<?= asset('sounds/message-received.mp3') ?>"></audio>
     <audio id="sound-send" src="<?= asset('sounds/message-sent.mp3') ?>"></audio>
     <audio id="sound-hint" src="<?= asset('sounds/hint-popup.mp3') ?>"></audio>
+
 </div>
+
+<!-- =================================================================
+     FIN DE LA NOUVELLE STRUCTURE
+     ================================================================= -->
+
+
+
 @push('scripts')
     <script>
         // Gérer le système de navigation SPA (inchangé)
