@@ -80,7 +80,7 @@
 
     <div class="custom-container">
         <div class="header-panel d-flex justify-content-between align-items-center">
-            @if (!request()->routeIs('index'))
+            @if (!request()->routeIs('pvit.public_pay'))
                 <a onclick="history.back();" class="me-3">
                     <i class="iconsax icon-btn" data-icon="chevron-left"></i>
                 </a>
@@ -92,21 +92,12 @@
             <h1 class="fw-bold mb-0 flex-grow-1 text-center" style="margin-left:-50px;">
                 @yield('title2', 'Paiement')
             </h1>
-
-            <a href="#" class="text-decoration-none ms-3" title="Retour au site" onclick="returnToMainSite();">
-                <i class="fas fa-home icon-btn text-black"></i>
-            </a>
         </div>
     </div>
 
 
     <section class="section-lg-t-space section-b-space">
         <div class="custom-container">
-            <div class="text-center mt-2">
-                <img src="{{ asset('src/assets/images/logo/paiement.png') }}" alt="Paiement" class="img-fluid"
-                    style="max-width:180px;">
-            </div>
-
             <!-- Onglets principaux -->
             <ul class="nav nav-tabs nav-justified mb-3 shadow-sm rounded bg-white" id="beneficiaireTabs" role="tablist">
                 <li class="nav-item" role="presentation">
