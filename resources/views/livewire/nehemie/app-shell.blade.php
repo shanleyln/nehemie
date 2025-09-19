@@ -34,7 +34,12 @@
 
         @foreach ($tabs as $t)
             <a wire:navigate href="{{ route('nehemie.app', ['tab' => $t['id']]) }}"
-                class="nav-item {{ $page === $t['id'] ? 'active text-blue-700' : 'text-gray-700' }} mb-5">
+                class=" {{ $page === $t['id'] ? 'active text-blue-700' : 'text-gray-700' }} mb-5"
+                style="display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: .75rem;
+            padding: .5rem">
                 <i class="fas {{ $t['icon'] }}"></i>
                 <span>{{ $t['label'] }}</span>
             </a>

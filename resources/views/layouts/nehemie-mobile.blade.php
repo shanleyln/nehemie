@@ -45,16 +45,6 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, .1)
         }
 
-
-
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: .75rem;
-            padding: .5rem
-        }
-
         .nav-item.active {
             color: var(--primary-blue)
         }
@@ -78,7 +68,7 @@
 
     {{-- Header commun --}}
     <header
-        style="background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+        style="background: linear-gradient(135deg, #825f45,#c78a44);
             color: #fff;
             padding: 1rem;
             position: fixed;
