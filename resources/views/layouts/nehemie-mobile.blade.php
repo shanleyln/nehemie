@@ -121,6 +121,7 @@ background:linear-gradient(90deg,#1e40af,#3b82f6);z-index:2000;">
     </div>
 
     <main class="content px-3">
+        @livewire('nehemie.chat-assistant')
 
         {{ $slot }}
     </main>
