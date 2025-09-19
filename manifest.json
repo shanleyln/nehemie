@@ -1,7 +1,7 @@
 {
   "name": "Nehemie International",
   "short_name": "Nehemie International",
-  "start_url": "./accueil",
+  "start_url": "./nehemie",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#0077cc",
