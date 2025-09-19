@@ -13,6 +13,9 @@ use App\Livewire\DonnezLeurVousMemes;
 use App\Http\Controllers\PriereController;
 use App\Http\Controllers\PrayerRequestController;
 use App\Http\Controllers\PvitController;
+use App\Livewire\Nehemie\AppShell;
+
+//***************************************Site******************************************
 
 // Routes principales
 Route::get('/accueil', Accueil::class)->name('route_accueil');
@@ -31,14 +34,6 @@ Route::get('/conditions-dutilisation', function () {
     return redirect()->route('route_accueil');
 })->name('route_conditions_dutilisation');
 
-
-// Routes index pour les don avec payement en ligne
-Route::get('/index.index', function () {
-    return view('index');
-})->name('index.index');
-
-
-
 // Cette route affiche le formulaire quand on va sur l'URL /demande-de-priere
 Route::get('/demande-de-priere', [PrayerRequestController::class, 'create'])->name('prayer.create');
 
@@ -47,12 +42,14 @@ Route::post('/demande-de-priere', [PrayerRequestController::class, 'store'])->na
 
 
 
-
-
-
 //***************************************PVIT******************************************
 Route::get('/paiement', [\App\Http\Controllers\PvitController::class, 'publicPayForm'])
     ->name('pvit.public.pay');
+
+// Routes index pour les don avec payement en ligne
+Route::get('/index.index', function () {
+    return view('index');
+})->name('index.index');
 
 
 
@@ -82,3 +79,9 @@ Route::prefix('pvit')->group(function () {
     // Journal HTML des clés reçues (vue)
     Route::get('/secrets-log', [PvitController::class, 'secretsLog'])->name('pvit.secretsLog');
 });
+
+
+
+
+//***************************************Mobile******************************************
+Route::get('/nehemie', AppShell::class)->name('nehemie.app');
