@@ -329,11 +329,6 @@
 
                             </div>
                         </div>
-
-                        <div class="text-center mt-3">
-                            <a href="{{ route('pvit.settings') }}" class="text-muted small">Administration PVit</a>
-                        </div>
-
                     </div>
                 </div>
             </div>
