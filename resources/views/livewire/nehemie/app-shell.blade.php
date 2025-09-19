@@ -17,8 +17,6 @@
         @livewire('nehemie.page-menu')
     @endif
 
-    {{-- Assistant flottant --}}
-    @livewire('nehemie.chat-assistant')
 
     {{-- Bottom nav --}}
     <nav class="bottom-nav">
