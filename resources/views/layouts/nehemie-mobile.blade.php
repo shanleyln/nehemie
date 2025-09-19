@@ -113,7 +113,7 @@
         style="position:fixed;top:0;left:0;height:3px;width:0;
 background:linear-gradient(90deg,#1e40af,#3b82f6);z-index:2000;">
     </div>
-
+    @include('modules.chatbot')
     <main class="content px-3">
         {{ $slot }}
     </main>
