@@ -11,7 +11,7 @@ use Livewire\Component;
 class AppShell extends Component
 {
     #[Url(as: 'tab')]
-    public string $page = 'actualites'; // actualites|don|membre|contact|menu
+    public string $page = 'don'; // actualites|don|membre|contact|menu
 
     public function setPage(string $page): void
     {
