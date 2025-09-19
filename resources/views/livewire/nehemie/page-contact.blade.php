@@ -1,5 +1,55 @@
 {{-- resources/views/livewire/nehemie/page-contact.blade.php --}}
 <div class="space-y-4">
+    <style>
+        .contact-option {
+            transition: all 0.3s ease;
+            border: 1px solid #e8d9c5;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .contact-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.1);
+            border-color: #8B4513;
+        }
+
+        .contact-option .icon-wrapper {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #FFF8F0;
+            transition: all 0.3s ease;
+        }
+
+        .contact-option:hover .icon-wrapper {
+            background-color: #8B4513;
+        }
+
+        .contact-option:hover .icon-wrapper i {
+            color: white !important;
+        }
+
+        .contact-option .text-primary {
+            color: #8B4513 !important;
+            transition: all 0.3s ease;
+        }
+
+        .contact-option:hover .text-primary {
+            color: #8B4513 !important;
+        }
+
+        .contact-option .text-muted {
+            transition: all 0.3s ease;
+        }
+
+        .contact-option:hover .text-muted {
+            color: #8B4513 !important;
+        }
+    </style>
     <h2 class="text-xl font-bold text-center">Nous Contacter</h2>
 
     <div class="card">
