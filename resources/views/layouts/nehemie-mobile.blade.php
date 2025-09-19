@@ -120,7 +120,7 @@
 background:linear-gradient(90deg,#1e40af,#3b82f6);z-index:2000;">
     </div>
 
-    <main class="content px-3">
+    <main class="content px-3 py-5">
         @livewire('nehemie.chat-assistant')
 
         {{ $slot }}
