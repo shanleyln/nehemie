@@ -3,22 +3,27 @@
     {{-- Pages --}}
     @if ($page === 'actualites')
         @livewire('nehemie.page-actualites')
+        @livewire('nehemie.chat-assistant')
     @endif
     @if ($page === 'don')
         @livewire('nehemie.page-don')
+        @livewire('nehemie.chat-assistant')
     @endif
     @if ($page === 'membre')
         @livewire('nehemie.page-membre')
+        @livewire('nehemie.chat-assistant')
     @endif
     @if ($page === 'contact')
         @livewire('nehemie.page-contact')
+        @livewire('nehemie.chat-assistant')
     @endif
     @if ($page === 'menu')
         @livewire('nehemie.page-menu')
+        @livewire('nehemie.chat-assistant')
     @endif
 
 
-    @livewire('nehemie.chat-assistant')
+
 
 
 
