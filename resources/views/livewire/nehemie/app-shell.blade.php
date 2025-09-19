@@ -3,7 +3,7 @@
     {{-- Pages --}}
     @if ($page === 'actualites')
         @livewire('nehemie.page-actualites')
-        @livewire('nehemie.chat-assistant')
+        {{-- @livewire('nehemie.chat-assistant') --}}
     @endif
     @if ($page === 'don')
         @livewire('nehemie.page-don')
