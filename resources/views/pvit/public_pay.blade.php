@@ -148,8 +148,8 @@
                                     </button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link {{ $visaActive ? '' : 'disabled' }}" id="tab-card"
-                                        data-bs-toggle="pill" data-bs-target="#pane-card" type="button" role="tab"
+                                    <button class="nav-link " id="tab-card" data-bs-toggle="pill"
+                                        data-bs-target="#pane-card" type="button" role="tab"
                                         aria-controls="pane-card" aria-selected="false">
                                         Visa / Mastercard
                                     </button>
