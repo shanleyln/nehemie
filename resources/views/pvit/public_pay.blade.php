@@ -78,7 +78,7 @@
 
 <body>
 
-    <div class="">
+    <div class="custom-container">
         <!-- Onglets principaux -->
         <ul class="nav nav-tabs nav-justified mb-3 shadow-sm rounded bg-white" id="beneficiaireTabs" role="tablist">
             <li class="nav-item" role="presentation">
