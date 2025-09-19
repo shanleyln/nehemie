@@ -76,7 +76,7 @@
         <div class="flex items-center justify-between">
             <div class="flex items-center">
                 <img src="{{ asset('images/logo2.png') }}" alt="" style="height: 40px; width: auto;">
-                <div>
+                <div style="margin-left: 1rem">
                     <h1 class="text-lg font-bold">NÉHÉMIE International</h1>
                     <p class="text-sm opacity-90">"Levons-nous et bâtissons!"</p>
                 </div>
