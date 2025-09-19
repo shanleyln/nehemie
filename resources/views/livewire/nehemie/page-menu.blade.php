@@ -6,10 +6,7 @@
             ['icon' => 'fa-info-circle', 'label' => 'À propos de NÉHÉMIE'],
             ['icon' => 'fa-project-diagram', 'label' => 'Nos Projets'],
             ['icon' => 'fa-hands-helping', 'label' => "S'engager"],
-            ['icon' => 'fa-question-circle', 'label' => 'FAQ'],
-            ['icon' => 'fa-newspaper', 'label' => 'Actualités complètes'],
             ['icon' => 'fa-calendar-alt', 'label' => 'Événements'],
-            ['icon' => 'fa-cog', 'label' => 'Paramètres'],
             ['icon' => 'fa-shield-alt', 'label' => 'Confidentialité'],
         ];
     @endphp
