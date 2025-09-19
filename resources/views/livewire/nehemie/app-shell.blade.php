@@ -19,7 +19,17 @@
 
 
     {{-- Bottom nav --}}
-    <nav class="bottom-nav ">
+    <nav
+        style="position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: .5rem 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, .1);
+            z-index: 1000">
         @php $tabs = [['id' => 'actualites', 'icon' => 'fa-newspaper', 'label' => 'Actualités'], ['id' => 'don', 'icon' => 'fa-heart', 'label' => 'Faire un don'], ['id' => 'membre', 'icon' => 'fa-user', 'label' => 'Espace membre'], ['id' => 'contact', 'icon' => 'fa-phone', 'label' => 'Contact'], ['id' => 'menu', 'icon' => 'fa-bars', 'label' => 'Menu']]; @endphp
 
         @foreach ($tabs as $t)
