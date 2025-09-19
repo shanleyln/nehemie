@@ -33,18 +33,6 @@
             padding-bottom: 80px
         }
 
-        .header {
-            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
-            color: #fff;
-            padding: 1rem;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, .1)
-        }
-
         .content {
             margin-top: 80px;
             min-height: calc(100vh - 160px)
@@ -100,7 +88,16 @@
 <body>
 
     {{-- Header commun --}}
-    <header>
+    <header
+        style="background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: #fff;
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .1)">
         <div class="flex items-center justify-between">
             <div class="flex items-center">
                 <i class="fas fa-church text-2xl mr-3"></i>
