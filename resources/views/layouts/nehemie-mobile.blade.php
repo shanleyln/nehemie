@@ -111,7 +111,7 @@
 
     <div id="nav-progress"
         style="position:fixed;top:0;left:0;height:3px;width:0;
-background:linear-gradient(90deg,#1e40af,#3b82f6);z-index:2000;">
+background:linear-gradient(90deg,#825f45,#c78a44);z-index:2000;">
     </div>
 
     <main class="content px-3 py-5">
