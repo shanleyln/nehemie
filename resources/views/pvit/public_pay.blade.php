@@ -80,7 +80,7 @@
 
     <div class="custom-container">
         <div class="header-panel d-flex justify-content-between align-items-center">
-            @if (request()->routeIs('paiement'))
+            @if (request()->routeIs('pvit.public.pay'))
                 <a onclick="history.back();" class="me-3">
                     <i class="iconsax icon-btn" data-icon="chevron-left"></i>
                 </a>
