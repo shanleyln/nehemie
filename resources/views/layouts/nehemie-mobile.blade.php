@@ -20,8 +20,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/chatbot.css') }}">
     <style>
         :root {
-            --primary-blue: #1e40af;
-            --secondary-blue: #3b82f6;
+            --primary-blue: #825f45;
+            --secondary-blue: #c78a44;
             --accent-gold: #f59e0b;
             --light-gray: #f8fafc;
             --dark-gray: #334155;
@@ -68,7 +68,7 @@
 
     {{-- Header commun --}}
     <header
-        style="background: linear-gradient(135deg, #825f45,#c78a44);
+        style="background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
             color: #fff;
             padding: 1rem;
             position: fixed;
@@ -90,7 +90,7 @@
 
     <div id="nav-progress"
         style="position:fixed;top:0;left:0;height:3px;width:0;
-background:linear-gradient(90deg,#825f45,#c78a44);z-index:2000;">
+background:linear-gradient(90deg,var(--primary-blue),var(--secondary-blue));z-index:2000;">
     </div>
 
     <main class="content px-3 py-5">
