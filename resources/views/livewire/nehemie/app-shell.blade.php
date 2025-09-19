@@ -25,11 +25,11 @@
         @php $tabs = [['id' => 'actualites', 'icon' => 'fa-newspaper', 'label' => 'Actualités'], ['id' => 'don', 'icon' => 'fa-heart', 'label' => 'Faire un don'], ['id' => 'membre', 'icon' => 'fa-user', 'label' => 'Espace membre'], ['id' => 'contact', 'icon' => 'fa-phone', 'label' => 'Contact'], ['id' => 'menu', 'icon' => 'fa-bars', 'label' => 'Menu']]; @endphp
 
         @foreach ($tabs as $t)
-            <button wire:click="setPage('{{ $t['id'] }}')"
+            <a href="{{ route('nehemie.app', ['tab' => $t['id']]) }}"
                 class="nav-item {{ $page === $t['id'] ? 'active text-blue-700' : 'text-gray-700' }}">
                 <i class="fas {{ $t['icon'] }}"></i>
                 <span>{{ $t['label'] }}</span>
-            </button>
+            </a>
         @endforeach
     </nav>
 

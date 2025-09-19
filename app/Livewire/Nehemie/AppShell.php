@@ -5,10 +5,12 @@
 namespace App\Livewire\Nehemie;
 
 use Livewire\Attributes\On;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 
 class AppShell extends Component
 {
+    #[Url(as: 'tab')]
     public string $page = 'actualites'; // actualites|don|membre|contact|menu
 
     public function setPage(string $page): void
