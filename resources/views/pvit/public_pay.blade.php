@@ -76,15 +76,31 @@
 @endphp
 
 <body>
-    <section class="section-lg-t-space section-b-space">
-        @if (!request()->routeIs('index'))
-            <a onclick="history.back();" class="me-3">
-                <i class="iconsax icon-btn" data-icon="chevron-left"></i>
+    <!-- Header -->
+
+    <div class="custom-container">
+        <div class="header-panel d-flex justify-content-between align-items-center">
+            @if (!request()->routeIs('index'))
+                <a onclick="history.back();" class="me-3">
+                    <i class="iconsax icon-btn" data-icon="chevron-left"></i>
+                </a>
+            @else
+                <div><img src="{{ asset('images/logo2.png') }}" alt="Logo" class="logo" style="width:60px;">
+                </div>
+            @endif
+
+            <h1 class="fw-bold mb-0 flex-grow-1 text-center" style="margin-left:-50px;">
+                @yield('title2', 'Paiement')
+            </h1>
+
+            <a href="#" class="text-decoration-none ms-3" title="Retour au site" onclick="returnToMainSite();">
+                <i class="fas fa-home icon-btn text-black"></i>
             </a>
-        @else
-            <div><img src="{{ asset('images/logo2.png') }}" alt="Logo" class="logo" style="width:60px;">
-            </div>
-        @endif
+        </div>
+    </div>
+
+
+    <section class="section-lg-t-space section-b-space">
         <div class="custom-container">
             <div class="text-center mt-2">
                 <img src="{{ asset('src/assets/images/logo/paiement.png') }}" alt="Paiement" class="img-fluid"
@@ -323,73 +339,74 @@
             </div>
         </div>
     </section>
+    @push('scripts')
+        <!-- Scripts -->
+        <script src="{{ asset('src/assets/js/password-show.js') }}"></script>
+        <script src="{{ asset('src/assets/js/iconsax.js') }}"></script>
+        <script src="{{ asset('src/assets/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('src/assets/js/template-setting.js') }}"></script>
+        <script src="{{ asset('src/assets/js/script.js') }}"></script>
 
-    <!-- Scripts -->
-    <script src="{{ asset('src/assets/js/password-show.js') }}"></script>
-    <script src="{{ asset('src/assets/js/iconsax.js') }}"></script>
-    <script src="{{ asset('src/assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('src/assets/js/template-setting.js') }}"></script>
-    <script src="{{ asset('src/assets/js/script.js') }}"></script>
-
-    <script>
-        function returnToMainSite() {
-            if (window.opener && !window.opener.closed) {
-                window.opener.location.href = "{{ route('route_accueil') }}";
-                window.close();
-            } else {
-                window.location.href = "{{ route('route_accueil') }}";
+        <script>
+            function returnToMainSite() {
+                if (window.opener && !window.opener.closed) {
+                    window.opener.location.href = "{{ route('route_accueil') }}";
+                    window.close();
+                } else {
+                    window.location.href = "{{ route('route_accueil') }}";
+                }
             }
-        }
-    </script>
+        </script>
 
-    <script>
-        // Empêche les doubles envois + validations rapides
-        function protectSubmit(form) {
-            const btn = form.querySelector('button[type="submit"]');
-            if (btn) {
-                btn.classList.add('loading');
-                btn.setAttribute('disabled', 'disabled');
-                setTimeout(() => btn.removeAttribute('disabled'), 8000);
+        <script>
+            // Empêche les doubles envois + validations rapides
+            function protectSubmit(form) {
+                const btn = form.querySelector('button[type="submit"]');
+                if (btn) {
+                    btn.classList.add('loading');
+                    btn.setAttribute('disabled', 'disabled');
+                    setTimeout(() => btn.removeAttribute('disabled'), 8000);
+                }
+                return true;
             }
-            return true;
-        }
 
-        document.getElementById('form-mobile')?.addEventListener('submit', function(e) {
-            const amt = this.amount.valueAsNumber || 0;
-            const num = (this.customer_account_number.value || '').replace(/\s+/g, '');
-            if (amt < 150 || !/^\d{8,20}$/.test(num)) {
-                e.preventDefault();
-                alert('Vérifiez le montant (≥150) et le numéro (8–20 chiffres).');
-                return;
-            }
-            protectSubmit(this);
-        });
-
-        document.getElementById('form-card')?.addEventListener('submit', function(e) {
-            const amt = this.amount.valueAsNumber || 0;
-            const num = (this.customer_account_number.value || '').replace(/\s+/g, '');
-            if (amt < 150 || !/^[\d ]{12,22}$/.test(num)) {
-                e.preventDefault();
-                alert('Vérifiez le montant (≥150) et le numéro de carte.');
-                return;
-            }
-            protectSubmit(this);
-        });
-    </script>
-
-    <script>
-        // Service worker (déjà en place côté /public/pvit/sw.js)
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker
-                    .register('/pvit/sw.js', {
-                        scope: '/pvit/'
-                    })
-                    .then(reg => console.log('SW registered:', reg.scope))
-                    .catch(err => console.error('SW registration failed:', err));
+            document.getElementById('form-mobile')?.addEventListener('submit', function(e) {
+                const amt = this.amount.valueAsNumber || 0;
+                const num = (this.customer_account_number.value || '').replace(/\s+/g, '');
+                if (amt < 150 || !/^\d{8,20}$/.test(num)) {
+                    e.preventDefault();
+                    alert('Vérifiez le montant (≥150) et le numéro (8–20 chiffres).');
+                    return;
+                }
+                protectSubmit(this);
             });
-        }
-    </script>
+
+            document.getElementById('form-card')?.addEventListener('submit', function(e) {
+                const amt = this.amount.valueAsNumber || 0;
+                const num = (this.customer_account_number.value || '').replace(/\s+/g, '');
+                if (amt < 150 || !/^[\d ]{12,22}$/.test(num)) {
+                    e.preventDefault();
+                    alert('Vérifiez le montant (≥150) et le numéro de carte.');
+                    return;
+                }
+                protectSubmit(this);
+            });
+        </script>
+
+        <script>
+            // Service worker (déjà en place côté /public/pvit/sw.js)
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker
+                        .register('/pvit/sw.js', {
+                            scope: '/pvit/'
+                        })
+                        .then(reg => console.log('SW registered:', reg.scope))
+                        .catch(err => console.error('SW registration failed:', err));
+                });
+            }
+        </script>
+    @endpush
 </body>
 
 </html>
