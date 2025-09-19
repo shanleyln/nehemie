@@ -76,19 +76,17 @@
 @endphp
 
 <body>
-    <!-- Header -->
-
-    <div class="custom-container">
-        <div class="header-panel d-flex justify-content-between align-items-center">
-            <a onclick="history.back();" class="me-3">
-                <i class="iconsax icon-btn" data-icon="chevron-left"></i>
-            </a>
-        </div>
-    </div>
 
 
-    <section class="section-lg-t-space section-b-space">
+
+
+
+
+    <section class="section-lg-t-space section-b-space"> <a onclick="history.back();" class="me-3">
+            <i class="iconsax icon-btn" data-icon="chevron-left"></i>
+        </a>
         <div class="custom-container">
+
             <!-- Onglets principaux -->
             <ul class="nav nav-tabs nav-justified mb-3 shadow-sm rounded bg-white" id="beneficiaireTabs" role="tablist">
                 <li class="nav-item" role="presentation">
