@@ -46,13 +46,6 @@ Route::post('/demande-de-priere', [PrayerRequestController::class, 'store'])->na
 Route::get('/paiement', [\App\Http\Controllers\PvitController::class, 'publicPayForm'])
     ->name('pvit.public.pay');
 
-// Routes index pour les don avec payement en ligne
-Route::get('/index.index', function () {
-    return view('index');
-})->name('index.index');
-
-
-
 Route::prefix('pvit')->group(function () {
 
     // Écran unique (formulaires REST/LINK/STATUS/BALANCE)

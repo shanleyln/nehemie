@@ -80,18 +80,11 @@
 
     <div class="custom-container">
         <div class="header-panel d-flex justify-content-between align-items-center">
-            @if (!request()->routeIs('pvit.public_pay'))
+            @if (!request()->routeIs('paiement'))
                 <a onclick="history.back();" class="me-3">
                     <i class="iconsax icon-btn" data-icon="chevron-left"></i>
                 </a>
-            @else
-                <div><img src="{{ asset('images/logo2.png') }}" alt="Logo" class="logo" style="width:60px;">
-                </div>
             @endif
-
-            <h1 class="fw-bold mb-0 flex-grow-1 text-center" style="margin-left:-50px;">
-                @yield('title2', 'Paiement')
-            </h1>
         </div>
     </div>
 
