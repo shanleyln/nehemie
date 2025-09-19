@@ -121,7 +121,7 @@
 
             <!-- Paiement en ligne -->
             <div class="tab-pane fade show active" id="morale-pane" role="tabpanel" aria-labelledby="morale-tab">
-                <div class="container py-5" style="max-width: 720px;">
+                <div class="" style="max-width: 720px;">
 
                     <div aria-live="polite">
                         @if (session('success'))
