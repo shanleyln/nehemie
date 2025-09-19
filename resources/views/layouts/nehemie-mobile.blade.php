@@ -120,7 +120,7 @@
 background:linear-gradient(90deg,#1e40af,#3b82f6);z-index:2000;">
     </div>
 
-    <div class="fixed bottom-5 right-5 z-50">
+    <div style="bottom: 30px;">
         @include('modules.chatbot')
     </div>
 
