@@ -17,7 +17,10 @@
         @livewire('nehemie.page-menu')
     @endif
 
-    @livewire('nehemie.chat-assistant')
+    <div>
+        @livewire('nehemie.chat-assistant')
+    </div>
+
 
 
     {{-- Bottom nav --}}
