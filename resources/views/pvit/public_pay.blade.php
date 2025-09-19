@@ -78,7 +78,7 @@
 
 <body>
 
-    <div class="custom-container">
+    <div class="">
         <!-- Onglets principaux -->
         <ul class="nav nav-tabs nav-justified mb-3 shadow-sm rounded bg-white" id="beneficiaireTabs" role="tablist">
             <li class="nav-item" role="presentation">
@@ -304,12 +304,11 @@
     </div>
 
     <!-- Scripts -->
-    {{-- <script src="{{ asset('src/assets/js/password-show.js') }}"></script>
+    <script src="{{ asset('src/assets/js/password-show.js') }}"></script>
     <script src="{{ asset('src/assets/js/iconsax.js') }}"></script>
     <script src="{{ asset('src/assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('src/assets/js/template-setting.js') }}"></script>
-    <script src="{{ asset('src/assets/js/script.js') }}"></script> --}}
-
+    <script src="{{ asset('src/assets/js/script.js') }}"></script>
 
 
     <script>
@@ -346,7 +345,6 @@
             protectSubmit(this);
         });
     </script>
-
 
     {{-- <script>
         // Service worker (déjà en place côté /public/pvit/sw.js)
