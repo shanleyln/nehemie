@@ -100,15 +100,12 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, .1)">
         <div class="flex items-center justify-between">
             <div class="flex items-center">
-                <i class="fas fa-church text-2xl mr-3"></i>
+                <img src="{{ asset('images/logo2.png') }}" alt="" style="height: 75px; width: auto;">
                 <div>
                     <h1 class="text-lg font-bold">NÉHÉMIE International</h1>
                     <p class="text-sm opacity-90">"Levons-nous et bâtissons!"</p>
                 </div>
             </div>
-            <button class="text-2xl">
-                <i class="fas fa-user-circle"></i>
-            </button>
         </div>
     </header>
 
