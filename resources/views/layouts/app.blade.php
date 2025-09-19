@@ -436,7 +436,7 @@
     <script>
         function openMobileMoneyPopup() {
             const url = "{{ route('pvit.public.pay') }}";
-            const width = 550;
+            const width = 450;
             const height = 550;
 
             // Calcul de la position centrée
