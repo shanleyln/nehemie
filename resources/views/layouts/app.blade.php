@@ -155,6 +155,7 @@
             </li>
             <li>
                 <a href="#" data-bs-toggle="modal" class="mobile-nav-link" data-bs-target="#prayerModal">
+                    <i class="fas fa-praying-hands me-2"></i>
                     Demande de prière
                 </a>
             </li>
