@@ -45,10 +45,6 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, .1)
         }
 
-        .nav-item.active {
-            color: var(--primary-blue)
-        }
-
         .badge {
             display: inline-block;
             padding: .25rem .75rem;
@@ -79,7 +75,7 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, .1)">
         <div class="flex items-center justify-between">
             <div class="flex items-center">
-                <img src="{{ asset('images/logo2.png') }}" alt="" style="height: 75px; width: auto;">
+                <img src="{{ asset('images/logo2.png') }}" alt="" style="height: 40px; width: auto;">
                 <div>
                     <h1 class="text-lg font-bold">NÉHÉMIE International</h1>
                     <p class="text-sm opacity-90">"Levons-nous et bâtissons!"</p>

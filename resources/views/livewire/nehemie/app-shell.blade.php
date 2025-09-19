@@ -33,13 +33,12 @@
         @php $tabs = [['id' => 'actualites', 'icon' => 'fa-newspaper', 'label' => 'Actualités'], ['id' => 'don', 'icon' => 'fa-heart', 'label' => 'Faire un don'], ['id' => 'membre', 'icon' => 'fa-user', 'label' => 'Espace membre'], ['id' => 'contact', 'icon' => 'fa-phone', 'label' => 'Contact'], ['id' => 'menu', 'icon' => 'fa-bars', 'label' => 'Menu']]; @endphp
 
         @foreach ($tabs as $t)
-            <a wire:navigate href="{{ route('nehemie.app', ['tab' => $t['id']]) }}"
-                class=" {{ $page === $t['id'] ? 'active text-blue-700' : 'text-gray-700' }} mb-5"
+            <a wire:navigate href="{{ route('nehemie.app', ['tab' => $t['id']]) }}" class="mb-5"
                 style="display: flex;
             flex-direction: column;
             align-items: center;
             font-size: .75rem;
-            padding: .5rem">
+            padding: .5rem; {{ $page === $t['id'] ? 'color: #825f45' : 'color: #334155' }}">
                 <i class="fas {{ $t['icon'] }}"></i>
                 <span>{{ $t['label'] }}</span>
             </a>
