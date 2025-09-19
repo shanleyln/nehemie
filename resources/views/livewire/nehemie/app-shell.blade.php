@@ -16,8 +16,9 @@
     @if ($page === 'menu')
         @livewire('nehemie.page-menu')
     @endif
-
-
+    @if ($page === 'chat')
+        @livewire('nehemie.chat-assistant')
+    @endif
 
 
 

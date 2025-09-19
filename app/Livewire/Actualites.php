@@ -14,7 +14,7 @@ class Actualites extends Component
     public $publications = [];
     public $error = null;
     public $isLoading = true;
-    
+
     // Propriétés pour la modale
     public $showModal = false;
     public $modalTitle = '';
@@ -53,12 +53,12 @@ class Actualites extends Component
 
             $responseData = $response->json();
             Log::debug('Réponse API brute:', $responseData);
-            
+
             // Vérifier si la réponse contient le tableau des publications
             if (!isset($responseData['publications']) || !is_array($responseData['publications'])) {
                 throw new \Exception('Format de réponse API invalide. Le tableau des publications est manquant.');
             }
-            
+
             $publicationsData = $responseData['publications'];
 
             $publications = collect($publicationsData)
@@ -157,12 +157,12 @@ class Actualites extends Component
         $this->modalAuthor = $data['author'] ?? '';
         $this->showModal = true;
     }
-    
+
     public function closeModal()
     {
         $this->showModal = false;
     }
-    
+
     public function render()
     {
         return view('livewire.actualites');
