@@ -66,6 +66,7 @@
             display: inline-block;
         }
     </style>
+
 </head>
 
 @php
@@ -350,7 +351,7 @@
         });
     </script>
 
-    <script>
+    {{-- <script>
         // Service worker (déjà en place côté /public/pvit/sw.js)
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -362,7 +363,7 @@
                     .catch(err => console.error('SW registration failed:', err));
             });
         }
-    </script>
+    </script> --}}
 </body>
 
 </html>
