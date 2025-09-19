@@ -18,7 +18,7 @@
     @endif
 
 
-    @livewire('nehemie.chat-assistant')
+    {{-- @livewire('nehemie.chat-assistant') --}}
 
 
 
