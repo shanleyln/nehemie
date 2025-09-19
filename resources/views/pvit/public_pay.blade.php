@@ -312,74 +312,64 @@
             </div>
         </div>
     </section>
-    @push('scripts')
-        <!-- Scripts -->
-        <script src="{{ asset('src/assets/js/password-show.js') }}"></script>
-        <script src="{{ asset('src/assets/js/iconsax.js') }}"></script>
-        <script src="{{ asset('src/assets/js/bootstrap.bundle.min.js') }}"></script>
-        <script src="{{ asset('src/assets/js/template-setting.js') }}"></script>
-        <script src="{{ asset('src/assets/js/script.js') }}"></script>
 
-        <script>
-            function returnToMainSite() {
-                if (window.opener && !window.opener.closed) {
-                    window.opener.location.href = "{{ route('route_accueil') }}";
-                    window.close();
-                } else {
-                    window.location.href = "{{ route('route_accueil') }}";
-                }
+    <!-- Scripts -->
+    <script src="{{ asset('src/assets/js/password-show.js') }}"></script>
+    <script src="{{ asset('src/assets/js/iconsax.js') }}"></script>
+    <script src="{{ asset('src/assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('src/assets/js/template-setting.js') }}"></script>
+    <script src="{{ asset('src/assets/js/script.js') }}"></script>
+
+
+
+    <script>
+        // Empêche les doubles envois + validations rapides
+        function protectSubmit(form) {
+            const btn = form.querySelector('button[type="submit"]');
+            if (btn) {
+                btn.classList.add('loading');
+                btn.setAttribute('disabled', 'disabled');
+                setTimeout(() => btn.removeAttribute('disabled'), 8000);
             }
-        </script>
+            return true;
+        }
 
-        <script>
-            // Empêche les doubles envois + validations rapides
-            function protectSubmit(form) {
-                const btn = form.querySelector('button[type="submit"]');
-                if (btn) {
-                    btn.classList.add('loading');
-                    btn.setAttribute('disabled', 'disabled');
-                    setTimeout(() => btn.removeAttribute('disabled'), 8000);
-                }
-                return true;
+        document.getElementById('form-mobile')?.addEventListener('submit', function(e) {
+            const amt = this.amount.valueAsNumber || 0;
+            const num = (this.customer_account_number.value || '').replace(/\s+/g, '');
+            if (amt < 150 || !/^\d{8,20}$/.test(num)) {
+                e.preventDefault();
+                alert('Vérifiez le montant (≥150) et le numéro (8–20 chiffres).');
+                return;
             }
+            protectSubmit(this);
+        });
 
-            document.getElementById('form-mobile')?.addEventListener('submit', function(e) {
-                const amt = this.amount.valueAsNumber || 0;
-                const num = (this.customer_account_number.value || '').replace(/\s+/g, '');
-                if (amt < 150 || !/^\d{8,20}$/.test(num)) {
-                    e.preventDefault();
-                    alert('Vérifiez le montant (≥150) et le numéro (8–20 chiffres).');
-                    return;
-                }
-                protectSubmit(this);
+        document.getElementById('form-card')?.addEventListener('submit', function(e) {
+            const amt = this.amount.valueAsNumber || 0;
+            const num = (this.customer_account_number.value || '').replace(/\s+/g, '');
+            if (amt < 150 || !/^[\d ]{12,22}$/.test(num)) {
+                e.preventDefault();
+                alert('Vérifiez le montant (≥150) et le numéro de carte.');
+                return;
+            }
+            protectSubmit(this);
+        });
+    </script>
+
+    <script>
+        // Service worker (déjà en place côté /public/pvit/sw.js)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker
+                    .register('/pvit/sw.js', {
+                        scope: '/pvit/'
+                    })
+                    .then(reg => console.log('SW registered:', reg.scope))
+                    .catch(err => console.error('SW registration failed:', err));
             });
-
-            document.getElementById('form-card')?.addEventListener('submit', function(e) {
-                const amt = this.amount.valueAsNumber || 0;
-                const num = (this.customer_account_number.value || '').replace(/\s+/g, '');
-                if (amt < 150 || !/^[\d ]{12,22}$/.test(num)) {
-                    e.preventDefault();
-                    alert('Vérifiez le montant (≥150) et le numéro de carte.');
-                    return;
-                }
-                protectSubmit(this);
-            });
-        </script>
-
-        <script>
-            // Service worker (déjà en place côté /public/pvit/sw.js)
-            if ('serviceWorker' in navigator) {
-                window.addEventListener('load', () => {
-                    navigator.serviceWorker
-                        .register('/pvit/sw.js', {
-                            scope: '/pvit/'
-                        })
-                        .then(reg => console.log('SW registered:', reg.scope))
-                        .catch(err => console.error('SW registration failed:', err));
-                });
-            }
-        </script>
-    @endpush
+        }
+    </script>
 </body>
 
 </html>
