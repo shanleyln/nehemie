@@ -4,23 +4,43 @@
 
     <div class="card">
         <h3 class="font-bold mb-4">Informations de contact</h3>
-        <div class="space-y-3">
-            <div class="flex items-center"><i class="fas fa-map-marker-alt text-blue-600 mr-3"></i>
-                <div>
-                    <div class="font-semibold">Adresse</div>
-                    <div class="text-gray-600">Libreville, Gabon</div>
-                </div>
+        <div class="modal-body p-4 pt-2">
+            <div class="d-grid gap-3">
+                <a href="tel:+24166609668" class="contact-option text-decoration-none p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-wrapper me-3">
+                            <i class="fas fa-phone text-marron"></i>
+                        </div>
+                        <div>
+                            <span class="d-block fw-medium text-primary">Nous appeler</span>
+                            <small class="text-muted">+241 66609668</small>
+                        </div>
+                        <div class="ms-auto">
+                            <i class="fas fa-chevron-right text-muted"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://wa.me/24166609668" target="_blank" class="contact-option text-decoration-none p-3">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-wrapper me-3">
+                            <i class="fab fa-whatsapp text-marron"></i>
+                        </div>
+                        <div>
+                            <span class="d-block fw-medium text-primary">Discuter sur WhatsApp</span>
+                            <small class="text-muted">Réponse rapide garantie</small>
+                        </div>
+                        <div class="ms-auto">
+                            <i class="fas fa-external-link-alt text-muted small"></i>
+                        </div>
+                    </div>
+                </a>
             </div>
-            <div class="flex items-center"><i class="fas fa-phone text-blue-600 mr-3"></i>
-                <div>
-                    <div class="font-semibold">Téléphone</div>
-                    <div class="text-gray-600">+241 XX XX XX XX</div>
-                </div>
-            </div>
-            <div class="flex items-center"><i class="fas fa-envelope text-blue-600 mr-3"></i>
-                <div>
-                    <div class="font-semibold">Email</div>
-                    <div class="text-gray-600">contact@nehemie-international.com</div>
+
+            <div class="mt-4 text-center">
+                <div class="d-inline-flex align-items-center px-3 py-2 rounded" style="background-color: #FFF8F0;">
+                    <i class="far fa-clock text-marron me-2"></i>
+                    <span class="small text-muted">Disponible du lundi au vendredi, de 8h à 17h</span>
                 </div>
             </div>
         </div>
