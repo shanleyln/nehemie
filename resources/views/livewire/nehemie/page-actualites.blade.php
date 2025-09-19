@@ -1,10 +1,6 @@
 {{-- resources/views/livewire/nehemie/page-actualites.blade.php --}}
 <div class="space-y-4">
-    <h2 class="text-xl font-bold text-center">Actualités NÉHÉMIE</h2>
-
-
-
-    <div class="bg-white rounded-xl shadow">
+    <div class="container py-5">
         <div id="taggbox-loading" class="text-center py-5">
             <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">Chargement...</span>
@@ -28,6 +24,4 @@
             });
         </script>
     </div>
-
-
 </div>
