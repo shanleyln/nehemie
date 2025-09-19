@@ -77,7 +77,6 @@
 @endphp
 
 <body>
-
     <div class="custom-container mt-5">
         <!-- Onglets principaux -->
         <ul class="nav nav-tabs nav-justified mb-3 shadow-sm rounded bg-white" id="beneficiaireTabs" role="tablist">

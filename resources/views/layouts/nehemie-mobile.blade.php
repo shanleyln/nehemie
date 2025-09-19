@@ -100,7 +100,7 @@
 <body>
 
     {{-- Header commun --}}
-    <header class="header">
+    <header>
         <div class="flex items-center justify-between">
             <div class="flex items-center">
                 <i class="fas fa-church text-2xl mr-3"></i>
@@ -122,7 +122,6 @@ background:linear-gradient(90deg,#1e40af,#3b82f6);z-index:2000;">
 
     <main class="content px-3 py-5">
         @livewire('nehemie.chat-assistant')
-
         {{ $slot }}
     </main>
 
