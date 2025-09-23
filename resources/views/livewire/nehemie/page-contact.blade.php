@@ -5,6 +5,13 @@
     <div class="rounded-2xl border border-amber-200 bg-white/80 backdrop-blur-sm shadow-sm">
         <div class="p-4 pt-2">
             <div class="grid gap-3">
+                {{-- Disponibilité --}}
+                <div class="mt-5 text-center">
+                    <div class="inline-flex items-center rounded-full bg-[#FFF8F0] px-3 py-2 ring-1 ring-amber-200">
+                        <i class="far fa-clock mr-2 text-[#8B4513]"></i>
+                        <span class="text-xs text-gray-600">Disponible du lundi au vendredi, de 8h à 17h</span>
+                    </div>
+                </div>
 
                 {{-- Appel --}}
                 <a href="tel:+24166609668"
@@ -42,7 +49,7 @@
                 </a>
 
                 {{-- Email (optionnel, garde si tu veux) --}}
-                <a href="mailto:contact@nehemie-international.com"
+                <a href="mailto:info@nehemie-international.com"
                     class="group flex items-center justify-between rounded-xl border border-amber-100 bg-white p-3 transition-all hover:-translate-y-0.5 hover:shadow-md hover:border-[#8B4513]">
                     <div class="flex items-center">
                         <div
@@ -52,7 +59,7 @@
                         <div>
                             <span class="block font-medium text-[#8B4513]">Envoyer un email</span>
                             <small
-                                class="text-gray-500 transition-colors group-hover:text-[#8B4513]">contact@nehemie-international.com</small>
+                                class="text-gray-500 transition-colors group-hover:text-[#8B4513]">info@nehemie-international.com</small>
                         </div>
                     </div>
                     <i class="fas fa-chevron-right text-gray-400 transition-colors group-hover:text-[#8B4513]"></i>
@@ -70,8 +77,8 @@
                         </div>
                         <div>
                             <span class="block font-medium text-[#8B4513]">Adresse</span>
-                            <small class="text-gray-500 transition-colors group-hover:text-[#8B4513]">Libreville,
-                                Gabon</small>
+                            <small class="text-gray-500 transition-colors group-hover:text-[#8B4513]">Nzeng ayong,
+                                derrière l'hôtel de can</small>
                         </div>
                     </div>
                     <i
@@ -79,13 +86,7 @@
                 </a>
             </div>
 
-            {{-- Disponibilité --}}
-            <div class="mt-5 text-center">
-                <div class="inline-flex items-center rounded-full bg-[#FFF8F0] px-3 py-2 ring-1 ring-amber-200">
-                    <i class="far fa-clock mr-2 text-[#8B4513]"></i>
-                    <span class="text-xs text-gray-600">Disponible du lundi au vendredi, de 8h à 17h</span>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
