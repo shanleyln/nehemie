@@ -65,25 +65,18 @@
                     <i class="fas fa-chevron-right text-gray-400 transition-colors group-hover:text-[#8B4513]"></i>
                 </a>
 
-                {{-- Adresse / Maps (optionnel) --}}
-                <a href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.951512393891!2d9.484083!3d0.420667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMMKwMjUnMTQuNCJOIDnCsDI5JzAyLjciRQ!5e0!3m2!1sfr!2sfr!5m1!1s0x0%3A0x0!8m2!3d0.420667!4d9.484083!15sCjQwJzI1JzE0LjQiTiA5wrAyOScwMi43IkqIAQh0cmFuc2l0X3N0YXRpb26aASNDaFpEU1VoTk1HOW5TMFZKUTBGblNVTmhZbXhmVlRZNVJSQULgAQE!16s%2Fg%2F11b8v4z4x9!5m2!1sfr!2sfr&z=12"
-                    target="_blank" rel="noopener"
-                    class="group flex items-center justify-between rounded-xl border border-amber-100 bg-white p-3 transition-all hover:-translate-y-0.5 hover:shadow-md hover:border-[#8B4513]">
-                    <div class="flex items-center">
-                        <div
-                            class="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-blue-50 ring-1 ring-blue-200 transition-all group-hover:bg-[#8B4513]">
-                            <i
-                                class="fas fa-map-marker-alt text-[#8B4513] transition-colors group-hover:text-white"></i>
-                        </div>
-                        <div>
-                            <span class="block font-medium text-[#8B4513]">Adresse</span>
-                            <small class="text-gray-500 transition-colors group-hover:text-[#8B4513]">Nzeng ayong,
-                                derrière l'hôtel de can</small>
-                        </div>
+                <!-- Section Carte -->
+                <section class="map-section" style="max-width: 1000px; margin: 0 auto;">
+                    <div class="map-container">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.951512393891!2d9.484083!3d0.420667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMMKwMjUnMTQuNCJOIDnCsDI5JzAyLjciRQ!5e0!3m2!1sfr!2sfr!5m1!1s0x0%3A0x0!8m2!3d0.420667!4d9.484083!15sCjQwJzI1JzE0LjQiTiA5wrAyOScwMi43IkqIAQh0cmFuc2l0X3N0YXRpb26aASNDaFpEU1VoTk1HOW5TMFZKUTBGblNVTmhZbXhmVlRZNVJSQULgAQE!16s%2Fg%2F11b8v4z4x9!5m2!1sfr!2sfr&z=12"
+                            width="100%" height="150"
+                            style="border:0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                            title="Localisation de NÉHÉMIE International">
+                        </iframe>
                     </div>
-                    <i
-                        class="fas fa-external-link-alt text-gray-400 text-xs transition-colors group-hover:text-[#8B4513]"></i>
-                </a>
+                </section>
             </div>
 
 
