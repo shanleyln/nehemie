@@ -66,7 +66,7 @@
                 </a>
 
                 <!-- Section Carte -->
-                <section class="map-section" style="max-width: 1000px; margin: 0 auto;">
+                <section class="map-section" style="max-width: 1200px; margin: 0 auto;">
                     <div class="map-container">
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.951512393891!2d9.484083!3d0.420667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMMKwMjUnMTQuNCJOIDnCsDI5JzAyLjciRQ!5e0!3m2!1sfr!2sfr!5m1!1s0x0%3A0x0!8m2!3d0.420667!4d9.484083!15sCjQwJzI1JzE0LjQiTiA5wrAyOScwMi43IkqIAQh0cmFuc2l0X3N0YXRpb26aASNDaFpEU1VoTk1HOW5TMFZKUTBGblNVTmhZbXhmVlRZNVJSQULgAQE!16s%2Fg%2F11b8v4z4x9!5m2!1sfr!2sfr&z=12"
