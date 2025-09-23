@@ -6,8 +6,6 @@
             ['icon' => 'fa-info-circle', 'label' => 'À propos de NÉHÉMIE'],
             ['icon' => 'fa-project-diagram', 'label' => 'Nos Projets'],
             ['icon' => 'fa-hands-helping', 'label' => "S'engager"],
-            ['icon' => 'fa-calendar-alt', 'label' => 'Événements'],
-            ['icon' => 'fa-shield-alt', 'label' => 'Confidentialité'],
         ];
     @endphp
     <div class="space-y-3">
