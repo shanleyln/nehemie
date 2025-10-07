@@ -74,6 +74,20 @@ Route::prefix('pvit')->group(function () {
 });
 
 
+// Routes de paiement
+Route::get('/paiement/succes', function (Request $request) {
+    return view('pvit.payment_success', [
+        'reference' => $request->query('reference')
+    ]);
+})->name('payment.success');
+
+Route::get('/paiement/echec', function (Request $request) {
+    return view('pvit.payment_failed', [
+        'reference' => $request->query('reference'),
+        'message' => $request->query('message', 'Une erreur inconnue est survenue.')
+    ]);
+})->name('payment.failed');
+
 
 
 //***************************************Mobile******************************************
