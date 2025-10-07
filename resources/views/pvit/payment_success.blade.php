@@ -174,7 +174,7 @@
                                         style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
                                     </div>
                                 </div>
-                                <p id="countdown-text" class="countdown-text">Fermeture automatique dans 2:00</p>
+                                <p id="countdown-text" class="countdown-text">Fermeture automatique dans 1:00</p>
 
                                 <button onclick="window.close()" class="btn btn-primary px-4 py-2 mt-3">
                                     <i class="fas fa-home me-2"></i>Retour à l'accueil
@@ -205,7 +205,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Configuration du minuteur
-        let timeLeft = 120; // 2 minutes en secondes
+        let timeLeft = 60; // 1 minute en secondes
         const countdownElement = document.getElementById('countdown-text');
         const progressBar = document.getElementById('countdown-progress');
 
@@ -214,7 +214,7 @@
             timeLeft--;
             const minutes = Math.floor(timeLeft / 60);
             const seconds = timeLeft % 60;
-            const progress = (timeLeft / 120) * 100;
+            const progress = (timeLeft / 60) * 100;
 
             // Mise à jour de l'affichage
             countdownElement.textContent =
@@ -233,15 +233,16 @@
 
             // Fermeture automatique
             if (timeLeft <= 0) {
-                clearInterval(countdownInterval);
-                window.close();
+                setTimeout(function() {
+                    clearInterval(countdownInterval);
+                    window.close();
+                }, 60000); // 1 minute en millisecondes
             }
         }, 1000);
 
         // Animation de la coche
         document.addEventListener('DOMContentLoaded', function() {
             const checkmark = document.querySelector('.checkmark');
-            setTimeout(() => {
                 checkmark.classList.add('draw');
             }, 300);
         });
