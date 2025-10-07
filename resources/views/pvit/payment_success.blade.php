@@ -18,21 +18,65 @@
                         </div>
                     @endif
 
-                    <div class="d-grid gap-3 d-md-flex justify-content-center mt-4">
+                    <div class="mt-4 text-center">
+                        <div class="mb-3">
+                            <div class="progress" style="height: 6px;">
+                                <div id="countdown-progress" class="progress-bar bg-success" role="progressbar" style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small class="text-muted" id="countdown-text">Fermeture automatique dans 2:00</small>
+                        </div>
                         <button onclick="window.close()" class="btn btn-primary px-4">
-                            <i class="fas fa-times me-2"></i>Retour à l'accueil
+                            <i class="fas fa-home me-2"></i>Retour à l'accueil maintenant
                         </button>
                     </div>
 
                     <script>
-                        // Essayer de fermer automatiquement après 2 minutes
+                        // Configuration du minuteur
+                        let timeLeft = 120; // 2 minutes en secondes
+                        const countdownElement = document.getElementById('countdown-text');
+                        const progressBar = document.getElementById('countdown-progress');
+                        
+                        // Mise à jour du minuteur chaque seconde
+                        const countdownInterval = setInterval(function() {
+                            timeLeft--;
+                            const minutes = Math.floor(timeLeft / 60);
+                            const seconds = timeLeft % 60;
+                            const progress = (timeLeft / 120) * 100;
+                            
+                            // Mise à jour de l'affichage
+                            countdownElement.textContent = `Fermeture automatique dans ${minutes}:${seconds.toString().padStart(2, '0')}`;
+                            progressBar.style.width = `${progress}%`;
+                            
+                            // Changement de couleur en fonction du temps restant
+                            if (timeLeft <= 30) {
+                                progressBar.classList.remove('bg-success');
+                                progressBar.classList.add('bg-warning');
+                            }
+                            if (timeLeft <= 10) {
+                                progressBar.classList.remove('bg-warning');
+                                progressBar.classList.add('bg-danger');
+                            }
+                            
+                            // Arrêt du minuteur et fermeture
+                            if (timeLeft <= 0) {
+                                clearInterval(countdownInterval);
+                                try {
+                                    window.close();
+                                } catch (e) {
+                                    console.log('La fenêtre ne peut pas être fermée automatiquement');
+                                }
+                            }
+                        }, 1000);
+                        
+                        // Fermeture après 2 minutes (sécurité)
                         setTimeout(function() {
+                            clearInterval(countdownInterval);
                             try {
                                 window.close();
                             } catch (e) {
                                 console.log('La fenêtre ne peut pas être fermée automatiquement');
                             }
-                        }, 120000); // 120000 ms = 2 minutes
+                        }, 120000); // 2 minutes
                     </script>
                 </div>
             </div>
