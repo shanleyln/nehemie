@@ -167,8 +167,11 @@
                                 </div>
                             @endif
 
-                            <!-- Bouton de retour -->
-                            <div class="mt-5">
+                            <!-- Boutons -->
+                            <div class="mt-5 d-flex justify-content-center gap-3">
+                                <a href="{{ route('invoice.download', ['reference' => $reference]) }}" class="btn btn-success px-4 py-2 download-invoice">
+                                    <i class="fas fa-download me-2"></i>Télécharger la facture
+                                </a>
                                 <button onclick="window.close()" class="btn btn-primary px-4 py-2">
                                     <i class="fas fa-home me-2"></i>Retour à l'accueil
                                 </button>
@@ -187,48 +190,24 @@
         function closeWindow() {
             window.close();
         }
-    </script>
-    <script>
-        // Configuration du minuteur
-        let timeLeft = 60; // 1 minute en secondes
-        const countdownElement = document.getElementById('countdown-text');
-        const progressBar = document.getElementById('countdown-progress');
-
-        // Mise à jour du minuteur chaque seconde
-        const countdownInterval = setInterval(function() {
-            timeLeft--;
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            const progress = (timeLeft / 60) * 100;
-
-            // Mise à jour de l'affichage
-            countdownElement.textContent =
-                `Fermeture automatique dans ${minutes}:${seconds.toString().padStart(2, '0')}`;
-            progressBar.style.width = `${progress}%`;
-
-            // Changement de couleur en fonction du temps restant
-            if (timeLeft <= 30) {
-                progressBar.classList.remove('bg-success');
-                progressBar.classList.add('bg-warning');
-            }
-            if (timeLeft <= 10) {
-                progressBar.classList.remove('bg-warning');
-                progressBar.classList.add('bg-danger');
-            }
-
-            // Fermeture automatique
-            if (timeLeft <= 0) {
-                clearInterval(countdownInterval);
-                window.close();
-            }
-        }, 1000);
 
         // Animation de la coche
         document.addEventListener('DOMContentLoaded', function() {
             const checkmark = document.querySelector('.checkmark');
-            setTimeout(() => {
-                checkmark.classList.add('draw');
-            }, 300);
+            if (checkmark) {
+                setTimeout(() => {
+                    checkmark.classList.add('draw');
+                }, 300);
+            }
+            
+            // Gestion du téléchargement de la facture
+            const downloadBtn = document.querySelector('.download-invoice');
+            if (downloadBtn) {
+                downloadBtn.addEventListener('click', function(e) {
+                    this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Génération...';
+                    this.disabled = true;
+                });
+            }
         });
     </script>
 </body>

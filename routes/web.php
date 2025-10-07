@@ -74,6 +74,10 @@ Route::prefix('pvit')->group(function () {
 });
 
 
+// Route pour le téléchargement des factures
+Route::get('/facture/{reference}', [\App\Http\Controllers\InvoiceController::class, 'generate'])
+    ->name('invoice.download');
+
 // Routes de paiement
 Route::get('/paiement/succes', function (Request $request) {
     return view('pvit.payment_success', [
