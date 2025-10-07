@@ -171,14 +171,14 @@
 
                             <!-- Boutons d'action -->
                             <div class="d-grid gap-3 d-md-flex justify-content-center mt-4">
-                                <button onclick="closeWindow()" class="btn btn-outline-secondary px-4 py-2">
-                                    <i class="fas fa-times me-2"></i>Fermer cette fenêtre
-                                </button>
+                                <a href="https://nehemie-international.com/paiement" class="btn btn-primary px-4 py-2">
+                                    <i class="fas fa-arrow-right me-2"></i>Retour au paiement
+                                </a>
                             </div>
                             <div class="mt-3">
                                 <p class="text-muted small mb-0">
-                                    <i class="fas fa-clock me-1"></i>
-                                    Fermeture automatique dans <span id="countdown">1:00</span>
+                                    <i class="fas fa-sync-alt me-1"></i>
+                                    Redirection automatique dans <span id="countdown" class="fw-bold">05</span>s
                                 </p>
                             </div>
                         </div>
@@ -191,30 +191,32 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Configuration du minuteur
-        let timeLeft = 60; // 1 minute en secondes
-        const countdownElement = document.getElementById('countdown');
+        document.addEventListener('DOMContentLoaded', function() {
+            let timeLeft = 5; // 5 secondes avant redirection
+            const countdownElement = document.getElementById('countdown');
+            const redirectUrl = 'https://nehemie-international.com/paiement';
+            let countdownInterval;
 
-        // Mise à jour du minuteur chaque seconde
-        const countdownInterval = setInterval(function() {
-            timeLeft--;
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-
-            // Mise à jour de l'affichage
-            countdownElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-
-            // Fermeture automatique
-            if (timeLeft <= 0) {
-                clearInterval(countdownInterval);
-                window.close();
+            // Mettre à jour l'affichage du compte à rebours
+            function updateCountdown() {
+                if (countdownElement) {
+                    countdownElement.textContent = timeLeft.toString().padStart(2, '0');
+                }
             }
-        }, 1000);
 
-        // Fonction pour fermer la fenêtre manuellement
-        function closeWindow() {
-            clearInterval(countdownInterval);
-            window.close();
-        }
+            // Démarrer le compte à rebours
+            updateCountdown(); // Afficher immédiatement
+            
+            countdownInterval = setInterval(function() {
+                timeLeft--;
+                updateCountdown();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    window.location.replace(redirectUrl);
+                }
+            }, 1000);
+        });
     </script>
 </body>
 
