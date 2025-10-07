@@ -252,47 +252,56 @@
 
                             {{-- Avertissement SERVICE_NOT_ACTIVE --}}
                             @if ($resp && (($resp['status_code'] ?? null) == 3004 || ($resp['error'] ?? '') === 'SERVICE_NOT_ACTIVE'))
-                                <div class="alert alert-warning mt-3">
-                                    Le service demandé n'est pas encore activé pour ce canal.
-                                    @if (($resp['service'] ?? null) === 'WEB')
-                                        Le paiement web sera disponible dès activation côté PVit.
-                                    @endif
+                                <div class="alert alert-warning">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    Service momentanément indisponible. Réessayez plus tard.
                                 </div>
                             @endif
 
                             {{-- Bloc de retour (après submit) --}}
                             @if ($resp)
-                                <hr class="my-4">
-                                <h5>Résultat</h5>
-
-                                @if (!empty($resp['_merchant_reference']))
-                                    <div class="alert alert-info">
-                                        <strong>Référence :</strong>
-                                        <code>{{ $resp['_merchant_reference'] }}</code>
-                                        <div class="small text-muted">Conservez-la pour suivi.</div>
+                                <div class="text-center py-3">
+                                    <div class="spinner-border text-primary mb-3" style="width: 2.5rem; height: 2.5rem;" role="status">
+                                        <span class="visually-hidden">Chargement...</span>
                                     </div>
-                                @endif
+                                    <h5 class="mb-3">Paiement en cours</h5>
+                                    
+                                    @if (!empty($resp['_merchant_reference']))
+                                        <div class="alert alert-info py-2 px-3 mb-3">
+                                            <i class="fas fa-receipt me-2"></i>
+                                            <strong>Réf :</strong> {{ $resp['_merchant_reference'] }}
+                                        </div>
+                                    @endif
 
-                                @if (!empty($resp['url']))
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a class="btn btn-success" href="{{ $resp['url'] }}"
-                                            target="_blank">Continuer vers le paiement</a>
-                                        <span class="text-muted small">Une nouvelle fenêtre s’ouvrira.</span>
-                                    </div>
-                                    {{-- Auto-redirect (si souhaité)
-                                        <script> window.location.href = @json($resp['url']); </script>
-                                        --}}
-                                @else
-                                    <div class="alert alert-secondary mt-2">
-                                        <div class="fw-semibold mb-1">Demande envoyée.</div>
-                                        <div class="small">En sandbox, la validation peut être automatique. En
-                                            production, un prompt s’affiche sur votre téléphone pour confirmer.
+                                    <div class="alert alert-warning py-2 px-3 mb-3">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-mobile-alt me-2"></i>
+                                            <div>
+                                                <div>Notification à venir sur votre téléphone</div>
+                                                <small class="text-muted">Temps d'attente : 1-2 min</small>
+                                            </div>
                                         </div>
                                     </div>
-                                @endif
 
-                                <details class="mt-3">
-                                    <summary>Voir la réponse technique</summary>
+                                    @if (!empty($resp['url']))
+                                        <div class="d-grid gap-2">
+                                            <a href="{{ $resp['url'] }}" class="btn btn-primary" target="_blank">
+                                                <i class="fas fa-external-link-alt me-2"></i>
+                                                Poursuivre le paiement
+                                            </a>
+                                            <small class="text-muted">Si aucune notification n'apparaît</small>
+                                        </div>
+                                    @else
+                                        <div class="alert alert-light py-2 px-3 mt-2 small">
+                                            <i class="fas fa-info-circle me-1"></i>
+                                            Pas de notification ? Vérifiez votre connexion et réessayez.
+                                        </div>
+                                    @endif
+                                </div>
+
+                                {{-- Section technique masquée --}}
+                                <details class="mt-4">
+                                    <summary class="small text-muted">Informations techniques (pour support)</summary>
                                     <pre class="mt-2 bg-light p-3 border rounded small">{{ json_encode($resp, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) }}</pre>
                                 </details>
                             @endif
@@ -313,12 +322,29 @@
 
 
     <script>
+        // Masquer le formulaire si une réponse est déjà présente
+        document.addEventListener('DOMContentLoaded', function() {
+            const responseSection = document.querySelector('div.text-center.py-4');
+            const forms = document.querySelectorAll('form[id^="form-"]');
+            
+            if (responseSection) {
+                forms.forEach(form => {
+                    form.style.display = 'none';
+                });
+            }
+        });
+
         // Empêche les doubles envois + validations rapides
         function protectSubmit(form) {
             const btn = form.querySelector('button[type="submit"]');
             if (btn) {
                 btn.classList.add('loading');
                 btn.setAttribute('disabled', 'disabled');
+                
+                // Masquer le formulaire après soumission
+                form.style.opacity = '0.6';
+                form.style.pointerEvents = 'none';
+                
                 setTimeout(() => btn.removeAttribute('disabled'), 8000);
             }
             return true;
