@@ -143,7 +143,8 @@
                                     <button class="nav-link active" id="tab-mobile" data-bs-toggle="pill"
                                         data-bs-target="#pane-mobile" type="button" role="tab"
                                         aria-controls="pane-mobile" aria-selected="true">
-                                        Mobile Money
+                                        Airte Money
+                                        <img src="assets/images/airtel_money.png" alt="">
                                     </button>
                                 </li>
                                 <li class="nav-item" role="presentation">
@@ -151,6 +152,7 @@
                                         data-bs-target="#pane-card" type="button" role="tab"
                                         aria-controls="pane-card" aria-selected="false">
                                         Visa / Mastercard
+                                        <img src="assets/images/visa_mastercard.png" alt="">
                                     </button>
                                 </li>
                             </ul>
