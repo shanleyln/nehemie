@@ -168,21 +168,28 @@
                             @endif
 
                             <!-- Boutons -->
-                            <div class="mt-5 d-flex justify-content-center gap-3">
-                                @if(!empty($reference))
+                            @if(!empty($reference))
+                                <div class="mt-5 d-flex justify-content-center gap-3">
                                     <a href="{{ url('/facture/' . $reference) }}" class="btn btn-success px-4 py-2 download-invoice">
                                         <i class="fas fa-download me-2"></i>Télécharger la facture
                                     </a>
-                                @else
-                                    <div class="alert alert-warning mb-0 d-flex align-items-center">
+                                    <button onclick="window.close()" class="btn btn-primary px-4 py-2">
+                                        <i class="fas fa-home me-2"></i>Retour à l'accueil
+                                    </button>
+                                </div>
+                            @else
+                                <div class="mt-4">
+                                    <div class="alert alert-warning d-flex align-items-center">
                                         <i class="fas fa-exclamation-triangle me-2"></i>
-                                        <span>Impossible de générer la facture (référence manquante)</span>
+                                        <span class="flex-grow-1">Impossible de générer la facture (référence manquante)</span>
                                     </div>
-                                @endif
-                                <button onclick="window.close()" class="btn btn-primary px-4 py-2">
-                                    <i class="fas fa-home me-2"></i>Retour à l'accueil
-                                </button>
-                            </div>
+                                    <div class="d-flex justify-content-center mt-3">
+                                        <button onclick="window.close()" class="btn btn-primary px-4 py-2">
+                                            <i class="fas fa-home me-2"></i>Retour à l'accueil
+                                        </button>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
 
