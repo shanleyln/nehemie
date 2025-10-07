@@ -260,18 +260,22 @@
                                 <div class="alert alert-warning mt-3">
                                     <i class="fas fa-exclamation-triangle me-2"></i>
                                     <strong>Service temporairement indisponible</strong>
-                                    <p class="mb-0 mt-2">Le service de paiement sélectionné n'est pas encore activé. Veuillez réessayer ultérieurement.</p>
+                                    <p class="mb-0 mt-2">Le service de paiement sélectionné n'est pas encore activé.
+                                        Veuillez réessayer ultérieurement.</p>
                                 </div>
                             @elseif ($resp && !empty($resp['url']))
                                 <div class="text-center my-5 py-5">
-                                    <div class="spinner-border text-primary mb-4" style="width: 3rem; height: 3rem;" role="status">
+                                    <div class="spinner-border text-primary mb-4" style="width: 3rem; height: 3rem;"
+                                        role="status">
                                         <span class="visually-hidden">Redirection en cours...</span>
                                     </div>
                                     <h4 class="mb-3">Redirection vers le paiement</h4>
-                                    <p class="text-muted mb-4">Veuillez patienter pendant que nous vous redirigeons vers la page de paiement sécurisé.</p>
-                                    
+                                    <p class="text-muted mb-4">Veuillez patienter pendant que nous vous redirigeons
+                                        vers la page de paiement sécurisé.</p>
+
                                     <div class="mt-4">
-                                        <a href="{{ $resp['url'] }}" class="btn btn-primary btn-lg" id="redirectButton">
+                                        <a href="{{ $resp['url'] }}" class="btn btn-primary btn-lg"
+                                            id="redirectButton">
                                             <i class="fas fa-external-link-alt me-2"></i>
                                             Accéder maintenant
                                         </a>
@@ -286,21 +290,23 @@
                                 </script>
                             @elseif ($resp)
                                 <div class="text-center my-5 py-5">
-                                    <div class="spinner-border text-primary mb-4" style="width: 3rem; height: 3rem;" role="status">
+                                    <div class="spinner-border text-primary mb-4" style="width: 3rem; height: 3rem;"
+                                        role="status">
                                         <span class="visually-hidden">Traitement en cours...</span>
                                     </div>
                                     <h4 class="mb-3">Traitement de votre paiement</h4>
-                                    <p class="text-muted">Veuillez patienter pendant que nous traitons votre demande.</p>
+                                    <p class="text-muted">Veuillez patienter pendant que nous traitons votre demande.
+                                    </p>
                                 </div>
                             @endif
-                                </div>
-                            @endif
-
                         </div>
+
+
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <!-- Scripts -->
