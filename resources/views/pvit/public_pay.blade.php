@@ -260,75 +260,39 @@
                                 <div class="alert alert-warning mt-3">
                                     <i class="fas fa-exclamation-triangle me-2"></i>
                                     <strong>Service temporairement indisponible</strong>
-                                    <p class="mb-0 mt-2">Le service de paiement sélectionné n'est pas encore activé.
-                                        Veuillez réessayer ultérieurement ou utiliser un autre moyen de paiement.</p>
+                                    <p class="mb-0 mt-2">Le service de paiement sélectionné n'est pas encore activé. Veuillez réessayer ultérieurement.</p>
                                 </div>
-                            @endif
+                            @elseif ($resp && !empty($resp['url']))
+                                <div class="text-center my-5 py-5">
+                                    <div class="spinner-border text-primary mb-4" style="width: 3rem; height: 3rem;" role="status">
+                                        <span class="visually-hidden">Redirection en cours...</span>
+                                    </div>
+                                    <h4 class="mb-3">Redirection vers le paiement</h4>
+                                    <p class="text-muted mb-4">Veuillez patienter pendant que nous vous redirigeons vers la page de paiement sécurisé.</p>
+                                    
+                                    <div class="mt-4">
+                                        <a href="{{ $resp['url'] }}" class="btn btn-primary btn-lg" id="redirectButton">
+                                            <i class="fas fa-external-link-alt me-2"></i>
+                                            Accéder maintenant
+                                        </a>
+                                    </div>
+                                </div>
 
-                            @if ($resp)
-                                <div class="text-center my-5 py-4">
-                                    <div class="spinner-border text-primary mb-4" style="width: 3rem; height: 3rem;"
-                                        role="status">
-                                        <span class="visually-hidden">Chargement...</span>
+                                <script>
+                                    // Redirection automatique après 2 secondes
+                                    setTimeout(function() {
+                                        window.location.href = "{{ $resp['url'] }}";
+                                    }, 2000);
+                                </script>
+                            @elseif ($resp)
+                                <div class="text-center my-5 py-5">
+                                    <div class="spinner-border text-primary mb-4" style="width: 3rem; height: 3rem;" role="status">
+                                        <span class="visually-hidden">Traitement en cours...</span>
                                     </div>
                                     <h4 class="mb-3">Traitement de votre paiement</h4>
-
-                                    @if (!empty($resp['_merchant_reference']))
-                                        <div class="alert alert-info d-inline-flex align-items-center mb-4">
-                                            <i class="fas fa-receipt me-2"></i>
-                                            <div>
-                                                <span class="d-block">Votre référence :</span>
-                                                <strong class="h5 mb-0">{{ $resp['_merchant_reference'] }}</strong>
-                                            </div>
-                                        </div>
-                                    @endif
-
-                                    <div class="alert alert-light border mb-4">
-                                        <div class="d-flex align-items-center justify-content-center">
-                                            <i class="fas fa-mobile-alt text-primary me-3"
-                                                style="font-size: 1.5rem;"></i>
-                                            <div class="text-start">
-                                                <p class="mb-1"><strong>Vérifiez votre téléphone</strong></p>
-                                                <p class="small text-muted mb-0">
-                                                    Vous allez recevoir une demande de confirmation sur votre téléphone
-                                                    dans les prochaines secondes.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    @if (!empty($resp['url']))
-                                        <div class="mt-4">
-                                            <a href="{{ $resp['url'] }}" class="btn btn-primary btn-lg"
-                                                target="_blank">
-                                                <i class="fas fa-external-link-alt me-2"></i>
-                                                Accéder à la page de paiement
-                                            </a>
-                                            <p class="text-muted small mt-2">
-                                                Si la redirection ne se fait pas automatiquement, cliquez sur ce bouton
-                                            </p>
-                                        </div>
-                                    @endif
-
-                                    <div class="alert alert-warning mt-4">
-                                        <div class="d-flex">
-                                            <i class="fas fa-info-circle mt-1 me-2"></i>
-                                            <div>
-                                                <strong>Conseil :</strong>
-                                                <p class="mb-0 small">Gardez cette page ouverte pendant la validation.
-                                                    Si vous ne recevez pas de notification, vérifiez votre connexion
-                                                    mobile ou actualisez la page.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    @if (app()->environment('local') || app()->environment('staging'))
-                                        <details class="mt-4">
-                                            <summary class="small text-muted">Informations techniques (débogage)
-                                            </summary>
-                                            <pre class="mt-2 bg-light p-3 border rounded small">{{ json_encode($resp, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) }}</pre>
-                                        </details>
-                                    @endif
+                                    <p class="text-muted">Veuillez patienter pendant que nous traitons votre demande.</p>
+                                </div>
+                            @endif
                                 </div>
                             @endif
 
