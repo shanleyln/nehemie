@@ -259,7 +259,25 @@
                             @endif
 
                             {{-- Bloc de retour (après submit) --}}
-                            @if ($resp)
+                            @if ($resp && !empty($resp['url']))
+                                {{-- Redirection automatique --}}
+                                <script>
+                                    window.onload = function() {
+                                        window.location.href = @json($resp['url']);
+                                    };
+                                </script>
+                                <div class="text-center py-3">
+                                    <div class="spinner-border text-primary mb-3" style="width: 2.5rem; height: 2.5rem;" role="status">
+                                        <span class="visually-hidden">Chargement...</span>
+                                    </div>
+                                    <h5 class="mb-3">Redirection en cours</h5>
+                                    <p class="mb-3">Vous allez être redirigé vers la page de paiement...</p>
+                                    <a href="{{ $resp['url'] }}" class="btn btn-primary">
+                                        <i class="fas fa-external-link-alt me-2"></i>
+                                        Cliquez ici si la redirection ne fonctionne pas
+                                    </a>
+                                </div>
+                            @elseif ($resp)
                                 <div class="text-center py-3">
                                     <div class="spinner-border text-primary mb-3" style="width: 2.5rem; height: 2.5rem;" role="status">
                                         <span class="visually-hidden">Chargement...</span>
