@@ -171,9 +171,6 @@
 
                             <!-- Boutons d'action -->
                             <div class="d-grid gap-3 d-md-flex justify-content-center mt-4">
-                                <a href="{{ route('route_donnez_leur_vous_memes') }}" class="btn btn-primary px-4 py-2">
-                                    <i class="fas fa-credit-card me-2"></i>Réessayer le paiement
-                                </a>
                                 <button onclick="closeWindow()" class="btn btn-outline-secondary px-4 py-2">
                                     <i class="fas fa-times me-2"></i>Fermer cette fenêtre
                                 </button>
