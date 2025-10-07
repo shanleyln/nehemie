@@ -167,26 +167,11 @@
                                 </div>
                             @endif
 
-                            <!-- Compte à rebours et bouton -->
-                            <div class="mt-4">
-                                <div class="progress">
-                                    <div id="countdown-progress" class="progress-bar bg-success" role="progressbar"
-                                        style="width: 100%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
-                                    </div>
-                                </div>
-                                <p id="countdown-text" class="countdown-text">Fermeture automatique dans 1:00</p>
-
-                                <button onclick="window.close()" class="btn btn-primary px-4 py-2 mt-3">
+                            <!-- Bouton de retour -->
+                            <div class="mt-5">
+                                <button onclick="window.close()" class="btn btn-primary px-4 py-2">
                                     <i class="fas fa-home me-2"></i>Retour à l'accueil
                                 </button>
-                            </div>
-
-                            <!-- Informations supplémentaires -->
-                            <div class="mt-4 pt-3 border-top">
-                                <p class="text-muted small mb-0">
-                                    <i class="fas fa-info-circle me-1"></i>
-                                    Vous serez redirigé automatiquement vers la page d'accueil dans quelques secondes.
-                                </p>
                             </div>
                         </div>
                     </div>
@@ -197,6 +182,12 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Fonction pour fermer la fenêtre
+        function closeWindow() {
+            window.close();
+        }
+    </script>
     <script>
         // Configuration du minuteur
         let timeLeft = 60; // 1 minute en secondes

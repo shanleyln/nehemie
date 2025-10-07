@@ -178,7 +178,7 @@
                             <div class="mt-3">
                                 <p class="text-muted small mb-0">
                                     <i class="fas fa-sync-alt me-1"></i>
-                                    Redirection automatique dans <span id="countdown" class="fw-bold">05</span>s
+                                    Redirection automatique dans <span id="countdown" class="fw-bold">10</span>s
                                 </p>
                             </div>
                         </div>
@@ -192,7 +192,7 @@
     <script>
         // Configuration du minuteur
         document.addEventListener('DOMContentLoaded', function() {
-            let timeLeft = 5; // 5 secondes avant redirection
+            let timeLeft = 10; // 10 secondes avant redirection
             const countdownElement = document.getElementById('countdown');
             const redirectUrl = 'https://nehemie-international.com/paiement';
             let countdownInterval;
