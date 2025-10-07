@@ -175,7 +175,7 @@
                                             <input type="tel" inputmode="numeric" pattern="[0-9]{8,20}"
                                                 maxlength="20" name="customer_account_number" class="form-control"
                                                 required placeholder="Ex: 074573960" autocomplete="tel">
-                                            <div class="form-text">8–20 chiffres, sans espaces.</div>
+                                            <div class="form-text">9 chiffres, sans espaces.</div>
                                         </div>
 
                                         <!-- Champs cachés -->
