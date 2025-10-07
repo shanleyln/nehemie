@@ -250,51 +250,72 @@
                                 </div>
                             </div>
 
-                            {{-- Avertissement SERVICE_NOT_ACTIVE --}}
                             @if ($resp && (($resp['status_code'] ?? null) == 3004 || ($resp['error'] ?? '') === 'SERVICE_NOT_ACTIVE'))
                                 <div class="alert alert-warning mt-3">
-                                    Le service demandé n'est pas encore activé pour ce canal.
-                                    @if (($resp['service'] ?? null) === 'WEB')
-                                        Le paiement web sera disponible dès activation côté PVit.
-                                    @endif
+                                    <i class="fas fa-exclamation-triangle me-2"></i>
+                                    <strong>Service temporairement indisponible</strong>
+                                    <p class="mb-0 mt-2">Le service de paiement sélectionné n'est pas encore activé. Veuillez réessayer ultérieurement ou utiliser un autre moyen de paiement.</p>
                                 </div>
                             @endif
 
-                            {{-- Bloc de retour (après submit) --}}
                             @if ($resp)
-                                <hr class="my-4">
-                                <h5>Résultat</h5>
-
-                                @if (!empty($resp['_merchant_reference']))
-                                    <div class="alert alert-info">
-                                        <strong>Référence :</strong>
-                                        <code>{{ $resp['_merchant_reference'] }}</code>
-                                        <div class="small text-muted">Conservez-la pour suivi.</div>
+                                <div class="text-center my-5 py-4">
+                                    <div class="spinner-border text-primary mb-4" style="width: 3rem; height: 3rem;" role="status">
+                                        <span class="visually-hidden">Chargement...</span>
                                     </div>
-                                @endif
+                                    <h4 class="mb-3">Traitement de votre paiement</h4>
+                                    
+                                    @if (!empty($resp['_merchant_reference']))
+                                        <div class="alert alert-info d-inline-flex align-items-center mb-4">
+                                            <i class="fas fa-receipt me-2"></i>
+                                            <div>
+                                                <span class="d-block">Votre référence :</span>
+                                                <strong class="h5 mb-0">{{ $resp['_merchant_reference'] }}</strong>
+                                            </div>
+                                        </div>
+                                    @endif
 
-                                @if (!empty($resp['url']))
-                                    <div class="d-flex align-items-center gap-2">
-                                        <a class="btn btn-success" href="{{ $resp['url'] }}"
-                                            target="_blank">Continuer vers le paiement</a>
-                                        <span class="text-muted small">Une nouvelle fenêtre s’ouvrira.</span>
-                                    </div>
-                                    {{-- Auto-redirect (si souhaité)
-                                        <script> window.location.href = @json($resp['url']); </script>
-                                        --}}
-                                @else
-                                    <div class="alert alert-secondary mt-2">
-                                        <div class="fw-semibold mb-1">Demande envoyée.</div>
-                                        <div class="small">En sandbox, la validation peut être automatique. En
-                                            production, un prompt s’affiche sur votre téléphone pour confirmer.
+                                    <div class="alert alert-light border mb-4">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <i class="fas fa-mobile-alt text-primary me-3" style="font-size: 1.5rem;"></i>
+                                            <div class="text-start">
+                                                <p class="mb-1"><strong>Vérifiez votre téléphone</strong></p>
+                                                <p class="small text-muted mb-0">
+                                                    Vous allez recevoir une demande de confirmation sur votre téléphone dans les prochaines secondes.
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                @endif
 
-                                <details class="mt-3">
-                                    <summary>Voir la réponse technique</summary>
-                                    <pre class="mt-2 bg-light p-3 border rounded small">{{ json_encode($resp, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) }}</pre>
-                                </details>
+                                    @if (!empty($resp['url']))
+                                        <div class="mt-4">
+                                            <a href="{{ $resp['url'] }}" class="btn btn-primary btn-lg" target="_blank">
+                                                <i class="fas fa-external-link-alt me-2"></i>
+                                                Accéder à la page de paiement
+                                            </a>
+                                            <p class="text-muted small mt-2">
+                                                Si la redirection ne se fait pas automatiquement, cliquez sur ce bouton
+                                            </p>
+                                        </div>
+                                    @endif
+
+                                    <div class="alert alert-warning mt-4">
+                                        <div class="d-flex">
+                                            <i class="fas fa-info-circle mt-1 me-2"></i>
+                                            <div>
+                                                <strong>Conseil :</strong>
+                                                <p class="mb-0 small">Gardez cette page ouverte pendant la validation. Si vous ne recevez pas de notification, vérifiez votre connexion mobile ou actualisez la page.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @if (app()->environment('local') || app()->environment('staging'))
+                                        <details class="mt-4">
+                                            <summary class="small text-muted">Informations techniques (débogage)</summary>
+                                            <pre class="mt-2 bg-light p-3 border rounded small">{{ json_encode($resp, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) }}</pre>
+                                        </details>
+                                    @endif
+                                </div>
                             @endif
 
                         </div>
