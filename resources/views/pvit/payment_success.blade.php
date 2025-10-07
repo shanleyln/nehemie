@@ -49,28 +49,29 @@
             background: var(--success-color);
             position: absolute;
             opacity: 0.1;
+            top: 0;
+            left: 0;
         }
 
         .checkmark-circle .checkmark {
-            border-radius: 5px;
+            position: relative;
+            width: 100%;
+            height: 100%;
         }
 
-        .checkmark-circle .checkmark.draw:after {
-            animation-duration: 1.2s;
-            animation-timing-function: ease;
-            animation-name: checkmark;
-            transform: scaleX(-1) rotate(135deg);
-            opacity: 1;
+        .checkmark-circle .checkmark:after {
             content: '';
             display: block;
             position: absolute;
-            width: 30px;
-            height: 60px;
-            border: solid var(--success-color);
-            border-width: 0 6px 6px 0;
             left: 50%;
             top: 50%;
-            margin: -40px 0 0 -12px;
+            width: 25px;
+            height: 50px;
+            border: solid var(--success-color);
+            border-width: 0 6px 6px 0;
+            transform: translate(-50%, -50%) rotate(45deg);
+            opacity: 0;
+            animation: checkmark 0.6s ease-in-out 0.4s forwards;
         }
 
         @keyframes checkmark {
@@ -82,19 +83,19 @@
 
             20% {
                 height: 0;
-                width: 30px;
+                width: 25px;
                 opacity: 1;
             }
 
             40% {
-                height: 60px;
-                width: 30px;
+                height: 50px;
+                width: 25px;
                 opacity: 1;
             }
 
             100% {
-                height: 60px;
-                width: 30px;
+                height: 50px;
+                width: 25px;
                 opacity: 1;
             }
         }
@@ -143,7 +144,7 @@
                             <div class="mb-4">
                                 <div class="checkmark-circle">
                                     <div class="background"></div>
-                                    <div class="checkmark draw"></div>
+                                    <div class="checkmark"></div>
                                 </div>
                             </div>
 
