@@ -300,10 +300,16 @@
                                 </div>
 
                                 {{-- Section technique masquée --}}
-                                <details class="mt-4">
-                                    <summary class="small text-muted">Informations techniques (pour support)</summary>
-                                    <pre class="mt-2 bg-light p-3 border rounded small">{{ json_encode($resp, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) }}</pre>
-                                </details>
+                                <div class="text-center mt-3">
+                                    <button class="btn btn-sm btn-link text-muted" type="button" data-bs-toggle="collapse" data-bs-target="#techDetails" aria-expanded="false" aria-controls="techDetails">
+                                        <i class="fas fa-cog me-1"></i> Afficher les détails techniques
+                                    </button>
+                                    <div class="collapse mt-2" id="techDetails">
+                                        <div class="card card-body small p-2 bg-light">
+                                            <pre class="mb-0">{{ json_encode($resp, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) }}</pre>
+                                        </div>
+                                    </div>
+                                </div>
                             @endif
 
                         </div>
