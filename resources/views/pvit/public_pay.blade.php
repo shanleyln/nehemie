@@ -165,16 +165,16 @@
                                         id="form-mobile">
                                         @csrf
                                         <div class="col-12">
-                                            <label class="form-label">Montant (XAF) *</label>
+                                            <label class="form-label">Montant (FCFA) *</label>
                                             <input type="number" min="150" step="1" inputmode="numeric"
                                                 name="amount" class="form-control" required>
-                                            <div class="form-text">Minimum 150 XAF.</div>
+                                            <div class="form-text">Minimum 150 FCFA.</div>
                                         </div>
                                         <div class="col-12">
                                             <label class="form-label">Numéro de téléphone *</label>
                                             <input type="tel" inputmode="numeric" pattern="[0-9]{8,20}"
                                                 maxlength="20" name="customer_account_number" class="form-control"
-                                                required placeholder="Ex: 066820866" autocomplete="tel">
+                                                required placeholder="Ex: 074573960" autocomplete="tel">
                                             <div class="form-text">8–20 chiffres, sans espaces.</div>
                                         </div>
 
