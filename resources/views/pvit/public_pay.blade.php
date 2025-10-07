@@ -374,15 +374,23 @@
     <script>
         // Masquer le formulaire si une réponse est déjà présente
         document.addEventListener('DOMContentLoaded', function() {
-            const responseSection = document.querySelector('div.text-center.py-4');
+            const responseSection = document.querySelector('div.text-center.py-3');
             const forms = document.querySelectorAll('form[id^="form-"]');
             
             if (responseSection) {
                 forms.forEach(form => {
                     form.style.display = 'none';
                 });
+                
+                // Vérifier si on a une réponse de paiement
+                const responseData = @json($resp ?? null);
+                if (responseData && responseData.status === 'SUCCESS' && responseData.reference) {
+                    // Redirection vers la page de succès après 3 secondes
+                    setTimeout(() => {
+                        window.location.href = '{{ route("payment.success") }}?reference=' + encodeURIComponent(responseData.reference);
+                    }, 3000);
+                }
             }
-        });
 
         // Empêche les doubles envois + validations rapides
         function protectSubmit(form) {
