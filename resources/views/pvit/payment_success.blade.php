@@ -191,12 +191,6 @@
                         </div>
                     </div>
 
-                    <div class="text-center mt-4">
-                        <p class="text-muted small">
-                            Besoin d'aide ? <a href="mailto:support@nehemie.org" class="text-decoration-none">Contactez
-                                notre support</a>
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
