@@ -233,16 +233,15 @@
 
             // Fermeture automatique
             if (timeLeft <= 0) {
-                setTimeout(function() {
-                    clearInterval(countdownInterval);
-                    window.close();
-                }, 60000); // 1 minute en millisecondes
+                clearInterval(countdownInterval);
+                window.close();
             }
         }, 1000);
 
         // Animation de la coche
         document.addEventListener('DOMContentLoaded', function() {
             const checkmark = document.querySelector('.checkmark');
+            setTimeout(() => {
                 checkmark.classList.add('draw');
             }, 300);
         });
