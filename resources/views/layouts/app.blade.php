@@ -436,40 +436,19 @@
     <script>
         function openMobileMoneyPopup() {
             const url = "{{ route('pvit.public.pay') }}";
-            // Taille responsive en fonction de l'appareil
-            const isMobile = window.innerWidth <= 768;
-            const width = isMobile ? window.screen.width * 0.95 : 450;
-            const height = isMobile ? window.screen.height * 0.85 : 700;
+            const width = 450;
+            const height = 550;
 
             // Calcul de la position centrée
             const left = (window.screen.width / 2) - (width / 2);
             const top = (window.screen.height / 2) - (height / 2);
 
-            // Options de la fenêtre
-            const options = [
-                `width=${Math.min(width, window.screen.availWidth - 20)}`,
-                `height=${Math.min(height, window.screen.availHeight - 20)}`,
-                `top=${Math.max(10, top)}`,
-                `left=${Math.max(10, left)}`,
-                'scrollbars=yes',
-                'resizable=no',
-                'location=no',
-                'status=no',
-                'menubar=no',
-                'toolbar=no'
-            ];
-
             // Ouverture de la fenêtre centrée
-            const popup = window.open(
+            window.open(
                 url,
                 'mobileMoneyPopup',
-                options.join(',')
+                `width=${width},height=${height},top=${top},left=${left},scrollbars=yes,resizable=no`
             );
-
-            // Ajustement de la taille après le chargement si nécessaire
-            if (popup) {
-                popup.focus();
-            }
         }
     </script>
 
