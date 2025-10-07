@@ -81,14 +81,14 @@ Route::get('/facture/{reference}', [\App\Http\Controllers\InvoiceController::cla
 // Routes de paiement
 Route::get('/paiement/succes', function (Request $request) {
     $reference = $request->query('reference');
-    
+
     if (empty($reference)) {
         // If no reference is provided, redirect back with an error
         return redirect()->route('pvit.public.pay')->with('error', 'Référence de paiement manquante');
     }
-    
+
     return view('pvit.payment_success', [
-        'reference' => $reference
+        'reference' => $request->query('reference')
     ]);
 })->name('payment.success');
 
