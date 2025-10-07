@@ -19,10 +19,21 @@
                     @endif
 
                     <div class="d-grid gap-3 d-md-flex justify-content-center mt-4">
-                        <a href="{{ route('route_accueil') }}" class="btn btn-primary px-4">
-                            <i class="fas fa-home me-2"></i>Retour à l'accueil
-                        </a>
+                        <button onclick="window.close()" class="btn btn-primary px-4">
+                            <i class="fas fa-times me-2"></i>Fermer cette fenêtre
+                        </button>
                     </div>
+
+                    <script>
+                        // Essayer de fermer automatiquement après 3 secondes
+                        setTimeout(function() {
+                            try {
+                                window.close();
+                            } catch (e) {
+                                console.log('La fenêtre ne peut pas être fermée automatiquement');
+                            }
+                        }, 3000);
+                    </script>
                 </div>
             </div>
         </div>
