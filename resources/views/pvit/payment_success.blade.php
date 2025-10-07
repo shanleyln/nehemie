@@ -169,9 +169,15 @@
 
                             <!-- Boutons -->
                             <div class="mt-5 d-flex justify-content-center gap-3">
-                                <a href="{{ route('invoice.download', ['reference' => $reference]) }}" class="btn btn-success px-4 py-2 download-invoice">
-                                    <i class="fas fa-download me-2"></i>Télécharger la facture
-                                </a>
+                                @if(!empty($reference))
+                                    <a href="{{ url('/facture/' . $reference) }}" class="btn btn-success px-4 py-2 download-invoice">
+                                        <i class="fas fa-download me-2"></i>Télécharger la facture
+                                    </a>
+                                @else
+                                    <button class="btn btn-secondary px-4 py-2" disabled>
+                                        <i class="fas fa-exclamation-triangle me-2"></i>Référence manquante
+                                    </button>
+                                @endif
                                 <button onclick="window.close()" class="btn btn-primary px-4 py-2">
                                     <i class="fas fa-home me-2"></i>Retour à l'accueil
                                 </button>
