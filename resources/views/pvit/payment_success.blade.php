@@ -174,9 +174,10 @@
                                         <i class="fas fa-download me-2"></i>Télécharger la facture
                                     </a>
                                 @else
-                                    <button class="btn btn-secondary px-4 py-2" disabled>
-                                        <i class="fas fa-exclamation-triangle me-2"></i>Référence manquante
-                                    </button>
+                                    <div class="alert alert-warning mb-0 d-flex align-items-center">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                        <span>Impossible de générer la facture (référence manquante)</span>
+                                    </div>
                                 @endif
                                 <button onclick="window.close()" class="btn btn-primary px-4 py-2">
                                     <i class="fas fa-home me-2"></i>Retour à l'accueil
