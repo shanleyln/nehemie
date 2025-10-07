@@ -20,19 +20,19 @@
 
                     <div class="d-grid gap-3 d-md-flex justify-content-center mt-4">
                         <button onclick="window.close()" class="btn btn-primary px-4">
-                            <i class="fas fa-times me-2"></i>Fermer cette fenêtre
+                            <i class="fas fa-times me-2"></i>Retour à l'accueil
                         </button>
                     </div>
 
                     <script>
-                        // Essayer de fermer automatiquement après 3 secondes
+                        // Essayer de fermer automatiquement après 2 minutes
                         setTimeout(function() {
                             try {
                                 window.close();
                             } catch (e) {
                                 console.log('La fenêtre ne peut pas être fermée automatiquement');
                             }
-                        }, 3000);
+                        }, 120000); // 120000 ms = 2 minutes
                     </script>
                 </div>
             </div>
