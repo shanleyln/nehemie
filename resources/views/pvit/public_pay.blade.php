@@ -261,39 +261,14 @@
                             {{-- Bloc de retour (après submit) --}}
                             @if ($resp && !empty($resp['url']))
                                 {{-- Redirection automatique --}}
-                                <script>
-                                    document.addEventListener('DOMContentLoaded', function() {
-                                        // Afficher un message de statut
-                                        const statusEl = document.getElementById('redirect-status');
-                                        const url = @json($resp['url']);
-                                        
-                                        // Fonction pour effectuer la redirection
-                                        function redirectToPayment() {
-                                            statusEl.textContent = 'Redirection en cours...';
-                                            window.location.replace(url);
-                                            
-                                            // Si la redirection échoue après 3 secondes
-                                            setTimeout(function() {
-                                                if (document.hasFocus()) {
-                                                    statusEl.textContent = 'La redirection automatique a échoué. Veuillez cliquer sur le bouton ci-dessous.';
-                                                }
-                                            }, 3000);
-                                        }
-                                        
-                                        // Démarrer la redirection après un court délai
-                                        statusEl.textContent = 'Préparation de la redirection...';
-                                        setTimeout(redirectToPayment, 1000);
-                                    });
-                                </script>
-                                
                                 <div class="text-center py-5">
                                     <div class="spinner-border text-primary mb-4" style="width: 3rem; height: 3rem;" role="status">
                                         <span class="visually-hidden">Chargement...</span>
                                     </div>
                                     <h4 class="mb-3">Préparation du paiement</h4>
-                                    <p id="redirect-status" class="mb-4">Veuillez patienter...</p>
+                                    <p id="redirect-status" class="mb-4">Redirection en cours, veuillez patienter...</p>
                                     <div class="d-grid gap-3" style="max-width: 400px; margin: 0 auto;">
-                                        <a href="{{ $resp['url'] }}" class="btn btn-primary btn-lg">
+                                        <a href="{{ $resp['url'] }}" class="btn btn-primary btn-lg" id="manual-redirect">
                                             <i class="fas fa-external-link-alt me-2"></i>
                                             Accéder au paiement
                                         </a>
@@ -303,6 +278,37 @@
                                         </a>
                                     </div>
                                 </div>
+
+                                <script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        const url = @json($resp['url']);
+                                        const statusEl = document.getElementById('redirect-status');
+                                        const manualBtn = document.getElementById('manual-redirect');
+                                        
+                                        // Fonction de redirection
+                                        function redirect() {
+                                            // Essayer d'abord avec window.location.href
+                                            window.location.href = url;
+                                            
+                                            // Si la redirection échoue après 2 secondes
+                                            setTimeout(function() {
+                                                if (document.hasFocus()) {
+                                                    statusEl.textContent = 'La redirection automatique a échoué. Cliquez sur le bouton ci-dessus.';
+                                                    manualBtn.focus();
+                                                }
+                                            }, 2000);
+                                        }
+                                        
+                                        // Démarrer la redirection immédiatement
+                                        redirect();
+                                        
+                                        // Rediriger également au clic sur le bouton manuel
+                                        manualBtn.addEventListener('click', function(e) {
+                                            e.preventDefault();
+                                            window.location.href = url;
+                                        });
+                                    });
+                                </script>
                             @elseif ($resp)
                                 <div class="text-center py-3">
                                     <div class="spinner-border text-primary mb-3" style="width: 2.5rem; height: 2.5rem;" role="status">
