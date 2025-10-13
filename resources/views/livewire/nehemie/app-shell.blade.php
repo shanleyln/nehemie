@@ -1,4 +1,11 @@
 {{-- resources/views/livewire/nehemie/app-shell.blade.php --}}
+
+@php
+    // pour surligner "Menu" quand on est sur une sous-page du menu
+    $menuChildren = ['about', 'projects', 'engage'];
+    $active = in_array($page, $menuChildren) ? 'menu' : $page;
+@endphp
+
 <div>
     {{-- Pages --}}
     @if ($page === 'actualites')
@@ -15,6 +22,16 @@
     @endif
     @if ($page === 'menu')
         @livewire('nehemie.page-menu')
+    @endif
+    {{-- NOUVELLES pages --}}
+    @if ($page === 'about')
+        @livewire('nehemie.page-about')
+    @endif
+    @if ($page === 'projects')
+        @livewire('nehemie.page-projects')
+    @endif
+    @if ($page === 'engage')
+        @livewire('nehemie.page-engage')
     @endif
 
 

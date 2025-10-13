@@ -168,9 +168,10 @@
                             @endif
 
                             <!-- Boutons -->
-                            @if(!empty($reference))
+                            @if (!empty($reference))
                                 <div class="mt-5 d-flex justify-content-center gap-3">
-                                    <a href="{{ url('/facture/' . $reference) }}" class="btn btn-success px-4 py-2 download-invoice">
+                                    <a href="{{ url('/facture/' . $reference) }}"
+                                        class="btn btn-success px-4 py-2 download-invoice">
                                         <i class="fas fa-download me-2"></i>Télécharger la facture
                                     </a>
                                     <button onclick="window.close()" class="btn btn-primary px-4 py-2">
@@ -179,10 +180,10 @@
                                 </div>
                             @else
                                 <div class="mt-4">
-                                    <div class="alert alert-warning d-flex align-items-center">
+                                    {{-- <div class="alert alert-warning d-flex align-items-center">
                                         <i class="fas fa-exclamation-triangle me-2"></i>
                                         <span class="flex-grow-1">Impossible de générer la facture (référence manquante)</span>
-                                    </div>
+                                    </div> --}}
                                     <div class="d-flex justify-content-center mt-3">
                                         <button onclick="window.close()" class="btn btn-primary px-4 py-2">
                                             <i class="fas fa-home me-2"></i>Retour à l'accueil
@@ -213,12 +214,13 @@
                     checkmark.classList.add('draw');
                 }, 300);
             }
-            
+
             // Gestion du téléchargement de la facture
             const downloadBtn = document.querySelector('.download-invoice');
             if (downloadBtn) {
                 downloadBtn.addEventListener('click', function(e) {
-                    this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Génération...';
+                    this.innerHTML =
+                        '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Génération...';
                     this.disabled = true;
                 });
             }
