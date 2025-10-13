@@ -3,7 +3,7 @@
 @php
     // pour surligner "Menu" quand on est sur une sous-page du menu
     $menuChildren = ['about', 'projects', 'engage'];
-    $active = in_array($page, $menuChildren) ? 'menu' : $page;
+    $tabs = in_array($page, $menuChildren) ? 'menu' : $page;
 @endphp
 
 <div>
