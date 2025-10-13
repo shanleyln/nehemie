@@ -1,3 +1,3 @@
-<div class="space-y-4">
+<div class="">
     @livewire('qui-sommes-nous')
 </div>
